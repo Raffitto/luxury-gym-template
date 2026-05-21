@@ -8,10 +8,13 @@ import FilmGrain from '../atmosphere/FilmGrain'
 import ScrollProgress from '../atmosphere/ScrollProgress'
 import { transition } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useIsMobile } from '../../hooks/useIsMobile'
 
 export default function Shell() {
   const location = useLocation()
   const reduced = useReducedMotion()
+  const mobile = useIsMobile()
+  const lite = reduced || mobile
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -19,16 +22,16 @@ export default function Shell() {
 
   return (
     <div className="env-void min-h-screen">
-      <FilmGrain />
-      <ScrollProgress />
+      {!mobile ? <FilmGrain /> : null}
+      {!mobile ? <ScrollProgress /> : null}
       <Navigation />
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}
-          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+          initial={{ opacity: 0, y: lite ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: reduced ? 0 : -10 }}
-          transition={transition.weight(reduced ? 0.35 : 0.7)}
+          exit={{ opacity: 0 }}
+          transition={transition.reveal(lite ? 0.25 : 0.45)}
           className="page-with-sticky min-h-screen"
         >
           <Outlet />

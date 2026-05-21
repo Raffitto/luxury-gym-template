@@ -14,7 +14,7 @@ export default function LocationsPage() {
         align="left"
       />
 
-      <section className="chamber-inner chamber !pt-0 pb-32">
+      <section className="page-body chamber-inner">
         <div className="grid gap-8">
           {aetherisConfig.locations.map((loc, i) => (
             <motion.article

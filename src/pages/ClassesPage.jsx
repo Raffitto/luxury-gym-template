@@ -17,7 +17,7 @@ export default function ClassesPage() {
         align="left"
       />
 
-      <section className="chamber-inner chamber !pt-0">
+      <section className="page-body chamber-inner">
         <div className="space-y-4">
           {aetherisConfig.classes.map((cls, i) => (
             <motion.article

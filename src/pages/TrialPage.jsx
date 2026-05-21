@@ -25,7 +25,7 @@ export default function TrialPage() {
         align="left"
       />
 
-      <section className="chamber-inner chamber-tight pb-32">
+      <section className="page-body chamber-inner">
         {submitted ? (
           <motion.div
             className="mx-auto max-w-xl glass-layer edge-lit p-12 text-center md:p-16"

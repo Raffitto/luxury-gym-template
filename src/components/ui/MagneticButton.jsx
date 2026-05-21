@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useIsMobile } from '../../hooks/useIsMobile'
 import { magneticHover, transition } from '../../motion/choreography'
 
 export default function MagneticButton({
@@ -15,12 +16,13 @@ export default function MagneticButton({
   icon: Icon,
 }) {
   const reduced = useReducedMotion()
+  const mobile = useIsMobile()
   const base =
     variant === 'ghost'
       ? 'btn-magnetic btn-magnetic-ghost'
       : 'btn-magnetic'
 
-  const motionProps = magneticHover(reduced)
+  const motionProps = mobile || reduced ? {} : magneticHover(reduced)
 
   const content = (
     <>
@@ -34,7 +36,7 @@ export default function MagneticButton({
   if (to) {
     return (
       <motion.div {...motionProps} className={wrapClass}>
-        <Link to={to} className={`${base} ${fullWidth ? 'w-full' : ''} ${className}`}>
+        <Link to={to} className={`${base} ${fullWidth ? 'w-full' : ''} ${className}`} onClick={onClick}>
           {content}
         </Link>
       </motion.div>
@@ -47,7 +49,7 @@ export default function MagneticButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${base} ${className}`}
+        className={`${base} ${fullWidth ? 'w-full' : ''} ${className}`}
         {...motionProps}
         transition={transition.reveal(0.35)}
       >

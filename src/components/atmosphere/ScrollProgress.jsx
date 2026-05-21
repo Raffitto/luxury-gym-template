@@ -1,13 +1,16 @@
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
+import { useIsMobile } from '../../hooks/useIsMobile'
 
 export default function ScrollProgress() {
+  const mobile = useIsMobile()
   const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+
+  if (mobile) return null
 
   return (
     <motion.div
       className="fixed top-0 right-0 left-0 z-[60] h-px origin-left bg-[var(--accent)]"
-      style={{ scaleX }}
+      style={{ scaleX: scrollYProgress }}
       aria-hidden
     />
   )

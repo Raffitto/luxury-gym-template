@@ -13,7 +13,7 @@ export default function TrainersPage() {
         align="center"
       />
 
-      <section className="chamber-inner chamber !pt-0">
+      <section className="page-body chamber-inner">
         {aetherisConfig.architects.map((architect, i) => (
           <motion.article
             key={architect.name}

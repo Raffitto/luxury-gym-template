@@ -17,7 +17,7 @@ export default function ContactPage() {
         align="center"
       />
 
-      <section className="chamber-inner chamber !pt-0 pb-32">
+      <section className="page-body chamber-inner">
         <motion.div
           className="mx-auto max-w-lg glass-layer edge-lit p-12 text-center"
           initial={{ opacity: 0, y: 24 }}

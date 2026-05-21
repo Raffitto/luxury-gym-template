@@ -15,14 +15,14 @@ export default function AboutPage() {
         align="left"
       />
 
-      <section className="chamber-inner chamber !pt-0">
+      <section className="page-body chamber-inner">
         <ChamberReveal>
-          <p className="max-w-3xl font-display text-2xl leading-relaxed text-[var(--platinum)] md:text-3xl">
+          <p className="max-w-3xl font-display text-xl leading-relaxed text-[var(--platinum)] md:text-2xl">
             {about.origin}
           </p>
         </ChamberReveal>
 
-        <div className="mt-24 grid gap-px bg-[var(--edge)] md:grid-cols-2">
+        <div className="mt-12 grid gap-px bg-[var(--edge)] md:mt-16 md:grid-cols-2">
           {about.principles.map((p, i) => (
             <motion.div
               key={p}
@@ -41,7 +41,7 @@ export default function AboutPage() {
         </div>
 
         <motion.div
-          className="mt-32 border-t border-[var(--edge)] pt-16"
+          className="mt-16 border-t border-[var(--edge)] pt-10 md:mt-20 md:pt-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={viewportOnce()}

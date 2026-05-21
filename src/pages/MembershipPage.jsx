@@ -20,7 +20,7 @@ export default function MembershipPage() {
       />
 
       {sovereign ? (
-        <section className="chamber-inner chamber !pt-0">
+        <section className="page-body chamber-inner !pt-0">
           <motion.article
             className="relative overflow-hidden border border-[var(--accent)]/25 bg-[var(--depth)]"
             initial={{ opacity: 0, y: 32 }}
@@ -50,7 +50,7 @@ export default function MembershipPage() {
       ) : null}
 
       <section className="env-depth">
-        <div className="chamber-inner chamber">
+        <div className="page-body chamber-inner">
           {others.map((tier, i) => (
             <motion.article
               key={tier.name}
