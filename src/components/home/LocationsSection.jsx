@@ -33,7 +33,8 @@ export default function LocationsSection() {
                 alt={loc.image.alt}
                 preset="card"
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                fill
+                className="transition duration-700 group-hover:[&_.cinematic-img]:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-[var(--void)]/35 to-transparent" />
               <div className="absolute right-0 bottom-0 left-0 p-6">

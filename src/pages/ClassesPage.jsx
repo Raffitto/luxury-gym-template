@@ -38,7 +38,7 @@ export default function ClassesPage() {
                   alt={cls.image.alt}
                   preset="card"
                   sizes="220px"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  fill
                 />
                 <div className="absolute inset-0 bg-[var(--void)]/25" />
               </div>

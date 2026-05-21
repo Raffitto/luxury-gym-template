@@ -29,13 +29,14 @@ export default function TrainersPage() {
             viewport={viewportOnce('-8%')}
             transition={transition.cinematic(1)}
           >
-            <div className="aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden">
               <CinematicImage
                 image={architect.image}
                 alt={architect.image.alt}
                 preset="portrait"
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="h-full w-full object-cover object-top grayscale contrast-[1.06] hover:grayscale-[0.2] transition duration-1000"
+                fill
+                className="grayscale contrast-[1.06] transition duration-1000 hover:grayscale-[0.2] [&_.cinematic-img]:object-top"
               />
             </div>
             <div className={i % 2 === 1 ? 'lg:pr-12' : 'lg:pl-12'}>

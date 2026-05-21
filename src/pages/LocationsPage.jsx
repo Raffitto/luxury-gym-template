@@ -34,7 +34,8 @@ export default function LocationsPage() {
                 alt={loc.image.alt}
                 preset="section"
                 sizes="100vw"
-                className="absolute inset-0 h-full w-full object-cover transition duration-1000 group-hover:scale-[1.02]"
+                fill
+                className="transition duration-1000 group-hover:[&_.cinematic-img]:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--void)]/95 via-[var(--void)]/55 to-[var(--void)]/75" />
               <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-end p-10 md:p-16">

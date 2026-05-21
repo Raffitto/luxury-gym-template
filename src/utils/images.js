@@ -1,68 +1,96 @@
-const UNSPLASH_BASE = 'https://images.unsplash.com'
+/** Local static assets — production-safe, no remote CDN dependency */
+export const ASSET_ROOT = '/aetheris'
 
-/** Dark luxury athletic photography — Unsplash photo IDs */
+export const imageAssets = {
+  hero: `${ASSET_ROOT}/hero.jpg`,
+  hero960: `${ASSET_ROOT}/hero-960.jpg`,
+  hero640: `${ASSET_ROOT}/hero-640.jpg`,
+  performance: `${ASSET_ROOT}/performance.jpg`,
+  combat: `${ASSET_ROOT}/combat.jpg`,
+  recovery: `${ASSET_ROOT}/recovery.jpg`,
+  sprint: `${ASSET_ROOT}/sprint.jpg`,
+  metabolic: `${ASSET_ROOT}/metabolic.jpg`,
+  luxuryGym: `${ASSET_ROOT}/luxury-gym.jpg`,
+  darkGym: `${ASSET_ROOT}/dark-gym.jpg`,
+  strengthFloor: `${ASSET_ROOT}/strength-floor.jpg`,
+  chamberTokyo: `${ASSET_ROOT}/chamber-tokyo.jpg`,
+  architectCoach: `${ASSET_ROOT}/architect-coach.jpg`,
+  architectFemale: `${ASSET_ROOT}/architect-female.jpg`,
+  architectMale: `${ASSET_ROOT}/architect-male.jpg`,
+  fallback: `${ASSET_ROOT}/fallback.jpg`,
+}
+
+/** @deprecated Use imageAssets keys in config */
 export const photos = {
-  hero: 'photo-1571902943202-507ec2618e8f',
-  performance: 'photo-1517836357463-d25dfeac3438',
-  recovery: 'photo-1574680096145-06deb3a03063',
-  strengthFloor: 'photo-1534438327276-14e5300c3a48',
-  luxuryGym: 'photo-1540497077202-7c8a3999166f',
-  darkGym: 'photo-1593079831268-3381b0de6f93',
-  combat: 'photo-1581001835019-54888a290ca0',
-  sprint: 'photo-1476480862126-209bfaa8fbaa',
-  metabolic: 'photo-1541534741688-6078c6afa925',
-  architectMale: 'photo-1594736797933-d0401ba99888',
-  architectFemale: 'photo-1571019613454-1cb2f99b2d8b',
-  architectCoach: 'photo-1583454110551-8461caebae3f',
-  cryo: 'photo-1544367507-0f4fcb009e34',
-  chamberTokyo: 'photo-1549060276-afa531f72c29',
+  hero: 'hero',
+  performance: 'performance',
+  recovery: 'recovery',
+  strengthFloor: 'strengthFloor',
+  luxuryGym: 'luxuryGym',
+  darkGym: 'darkGym',
+  combat: 'combat',
+  sprint: 'sprint',
+  metabolic: 'metabolic',
+  architectMale: 'architectMale',
+  architectFemale: 'architectFemale',
+  architectCoach: 'architectCoach',
+  chamberTokyo: 'chamberTokyo',
 }
 
-const DEFAULT_WIDTHS = {
-  hero: [640, 960, 1280, 1600, 1920],
-  section: [480, 768, 1024, 1280],
-  card: [400, 600, 800],
-  portrait: [400, 600, 800],
+const PRESET_WIDTHS = {
+  hero: [
+    { w: 640, src: imageAssets.hero640 },
+    { w: 960, src: imageAssets.hero960 },
+    { w: 1920, src: imageAssets.hero },
+  ],
+  section: [{ w: 1280, src: null }],
+  card: [{ w: 800, src: null }],
+  portrait: [{ w: 800, src: null }],
 }
+
+export const FALLBACK_SRC = imageAssets.fallback
 
 /**
- * Unsplash CDN URL — auto=format serves WebP/AVIF where supported.
- * @param {string} photoId - e.g. photo-1571902943202-507ec2618e8f
+ * Resolve image src from config shape:
+ * { src, alt } | { id: assetKey, alt } | assetKey string | absolute path
  */
-export function unsplashUrl(photoId, { w = 1280, q = 75, crop = 'entropy', sharp = 10 } = {}) {
-  const id = photoId.replace(/^https?:\/\/images\.unsplash\.com\//, '').split('?')[0]
-  const params = new URLSearchParams({
-    w: String(w),
-    q: String(q),
-    auto: 'format',
-    fit: 'crop',
-    crop,
-    sharp: String(sharp),
-  })
-  return `${UNSPLASH_BASE}/${id}?${params}`
-}
-
-export function unsplashSrcSet(photoId, widths, q = 75) {
-  return widths.map((w) => `${unsplashUrl(photoId, { w, q })} ${w}w`).join(', ')
-}
-
-export function getWidths(preset = 'section') {
-  return DEFAULT_WIDTHS[preset] || DEFAULT_WIDTHS.section
-}
-
-/** @param {{ id?: string, alt?: string } | string} image */
-export function resolvePhotoId(image) {
+export function resolveImageSrc(image) {
   if (!image) return null
+
   if (typeof image === 'string') {
-    if (image.startsWith('photo-')) return image
-    const match = image.match(/photo-[\w-]+/)
-    return match ? match[0] : null
+    if (image.startsWith('/') || image.startsWith('http')) return image
+    return imageAssets[image] || null
   }
-  return image.id || null
+
+  if (image.src) return image.src
+
+  if (image.id) {
+    if (image.id.startsWith('/') || image.id.startsWith('http')) return image.id
+    return imageAssets[image.id] || null
+  }
+
+  return null
 }
 
 export function resolveAlt(image, fallback = '') {
   if (!image) return fallback
   if (typeof image === 'object' && image.alt) return image.alt
   return fallback
+}
+
+export function buildSrcSet(image, preset = 'section') {
+  const primary = resolveImageSrc(image)
+  if (!primary) return { src: FALLBACK_SRC, srcSet: undefined }
+
+  if (preset === 'hero') {
+    const parts = PRESET_WIDTHS.hero.map(({ w, src }) => `${src} ${w}w`)
+    return { src: imageAssets.hero, srcSet: parts.join(', ') }
+  }
+
+  return { src: primary, srcSet: undefined }
+}
+
+export function getWidths(preset = 'section') {
+  const map = { hero: [640, 960, 1920], section: [1280], card: [800], portrait: [800] }
+  return map[preset] || map.section
 }

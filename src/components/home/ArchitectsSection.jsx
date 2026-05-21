@@ -36,13 +36,14 @@ export default function ArchitectsSection() {
               transition={transition.cinematic(0.8)}
               className="group relative overflow-hidden"
             >
-              <div className="aspect-[3/4] overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <CinematicImage
                   image={architect.image}
                   alt={architect.image.alt}
                   preset="portrait"
                   sizes="(max-width: 768px) 90vw, 30vw"
-                  className="h-full w-full object-cover object-top grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-[0.15]"
+                  fill
+                  className="grayscale transition duration-700 group-hover:grayscale-[0.15] [&_.cinematic-img]:object-top group-hover:[&_.cinematic-img]:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-[var(--void)]/20 to-transparent" />
               </div>

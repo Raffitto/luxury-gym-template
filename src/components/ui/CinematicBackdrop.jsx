@@ -1,8 +1,8 @@
 import CinematicImage from './CinematicImage'
-import { resolvePhotoId } from '../../utils/images'
+import { resolveImageSrc } from '../../utils/images'
 
 /**
- * Full-bleed cinematic background with scrim — replaces CSS background-image.
+ * Full-bleed cinematic background with scrim and gradient fallback.
  */
 export default function CinematicBackdrop({
   image,
@@ -11,10 +11,9 @@ export default function CinematicBackdrop({
   preset = 'hero',
   scrim = 'default',
   className = '',
-  imageClassName = 'opacity-35 md:opacity-30',
+  imageClassName = '',
 }) {
-  const photoId = resolvePhotoId(image)
-  if (!photoId) return null
+  if (!resolveImageSrc(image)) return <div className="cinematic-img-fallback-bg absolute inset-0" aria-hidden />
 
   const scrims = {
     default:
@@ -30,12 +29,13 @@ export default function CinematicBackdrop({
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden>
       <CinematicImage
-        image={photoId}
+        image={image}
         alt={alt}
         priority={priority}
         preset={preset}
         sizes="100vw"
-        className={`absolute inset-0 h-full w-full object-cover ${imageClassName}`}
+        fill
+        className={imageClassName}
       />
       <div className={scrims[scrim] || scrims.default} />
     </div>

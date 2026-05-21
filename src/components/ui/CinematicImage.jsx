@@ -1,13 +1,14 @@
-import { unsplashUrl, unsplashSrcSet, resolvePhotoId, getWidths } from '../../utils/images'
+import { useState, useCallback } from 'react'
+import {
+  resolveImageSrc,
+  resolveAlt,
+  buildSrcSet,
+  FALLBACK_SRC,
+  getWidths,
+} from '../../utils/images'
 
 /**
- * Responsive, lazy-loaded performance imagery.
- * @param {object} props
- * @param {{ id: string, alt?: string } | string} props.image - photo id or image object
- * @param {'hero'|'section'|'card'|'portrait'} [props.preset]
- * @param {string} [props.sizes]
- * @param {boolean} [props.priority] - LCP / above-fold
- * @param {string} [props.className]
+ * Local static imagery with gradient fallback — never shows broken icon.
  */
 export default function CinematicImage({
   image,
@@ -16,29 +17,48 @@ export default function CinematicImage({
   sizes = '(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1200px',
   priority = false,
   className = '',
-  widths: customWidths,
+  fill = false,
 }) {
-  const photoId = resolvePhotoId(image)
-  if (!photoId) return null
+  const primarySrc = resolveImageSrc(image) || FALLBACK_SRC
+  const { src, srcSet } = buildSrcSet(image, preset)
+  const displayPrimary = src || primarySrc
+
+  const [currentSrc, setCurrentSrc] = useState(displayPrimary)
+  const [errored, setErrored] = useState(false)
 
   const label = alt || resolveAlt(image, '')
-  const widths = customWidths || getWidths(preset)
+  const widths = getWidths(preset)
   const maxW = widths[widths.length - 1]
-  const src = unsplashUrl(photoId, { w: maxW, q: priority ? 80 : 75 })
-  const srcSet = unsplashSrcSet(photoId, widths, priority ? 80 : 75)
+
+  const handleError = useCallback(() => {
+    if (currentSrc !== FALLBACK_SRC) {
+      setCurrentSrc(FALLBACK_SRC)
+      return
+    }
+    setErrored(true)
+  }, [currentSrc])
 
   return (
-    <img
-      src={src}
-      srcSet={srcSet}
-      sizes={sizes}
-      alt={label}
-      width={maxW}
-      height={Math.round(maxW * 0.625)}
-      loading={priority ? 'eager' : 'lazy'}
-      decoding="async"
-      fetchPriority={priority ? 'high' : 'auto'}
-      className={`cinematic-img ${className}`.trim()}
-    />
+    <div
+      className={`cinematic-img-wrap ${fill ? 'absolute inset-0' : 'h-full w-full'} ${className}`.trim()}
+      data-errored={errored || undefined}
+    >
+      <div className="cinematic-img-fallback-bg" aria-hidden />
+      {!errored ? (
+        <img
+          src={currentSrc}
+          srcSet={srcSet}
+          sizes={srcSet ? sizes : undefined}
+          alt={label}
+          width={maxW}
+          height={Math.round(maxW * 0.625)}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
+          onError={handleError}
+          className="cinematic-img"
+        />
+      ) : null}
+    </div>
   )
 }

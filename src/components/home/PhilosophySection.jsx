@@ -25,7 +25,7 @@ export default function PhilosophySection() {
           </ChamberReveal>
 
           <motion.div
-            className="relative aspect-[4/5] overflow-hidden lg:aspect-[3/4]"
+            className="relative aspect-[4/5] overflow-hidden lg:aspect-[3/4] [&_.cinematic-img]:grayscale-[0.35] [&_.cinematic-img]:contrast-[1.08]"
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-8%' }}
@@ -36,7 +36,7 @@ export default function PhilosophySection() {
               alt={philosophy.image.alt}
               preset="portrait"
               sizes="(max-width: 1024px) 90vw, 40vw"
-              className="absolute inset-0 h-full w-full object-cover grayscale-[0.35] contrast-[1.08]"
+              fill
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-transparent to-[var(--void)]/30" />
           </motion.div>

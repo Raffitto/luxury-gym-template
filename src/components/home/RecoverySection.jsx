@@ -22,7 +22,7 @@ export default function RecoverySection() {
           </ChamberReveal>
 
           <motion.div
-            className="relative aspect-[4/3] overflow-hidden"
+            className="relative aspect-[4/3] overflow-hidden [&_.cinematic-img]:contrast-[1.05]"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={viewportOnce()}
@@ -33,7 +33,7 @@ export default function RecoverySection() {
               alt={recovery.image.alt}
               preset="section"
               sizes="(max-width: 1024px) 100vw, 45vw"
-              className="absolute inset-0 h-full w-full object-cover contrast-[1.05]"
+              fill
             />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[var(--void)]/40" />
           </motion.div>
