@@ -1,48 +1,38 @@
 import { useEffect } from 'react'
-import { activeConfig } from './data/activeConfig'
-import { applyBrandTheme } from './utils/theme'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import OfferSection from './components/OfferSection'
-import Services from './components/Services'
-import Memberships from './components/Memberships'
-import Transformations from './components/Transformations'
-import Trainers from './components/Trainers'
-import Gallery from './components/Gallery'
-import Reviews from './components/Reviews'
-import Location from './components/Location'
-import FAQ from './components/FAQ'
-import FinalCTA from './components/FinalCTA'
-import StickyMobileCTA from './components/StickyMobileCTA'
-import Footer from './components/Footer'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { aetherisConfig } from './data/aetherisConfig'
+import { routes } from './design-system/tokens'
+import Shell from './components/layout/Shell'
+import HomePage from './pages/HomePage'
+import ClassesPage from './pages/ClassesPage'
+import TrainersPage from './pages/TrainersPage'
+import MembershipPage from './pages/MembershipPage'
+import LocationsPage from './pages/LocationsPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import TrialPage from './pages/TrialPage'
 
 export default function App() {
   useEffect(() => {
-    applyBrandTheme(activeConfig.colors)
-    document.title = activeConfig.seo.title
-
+    document.title = aetherisConfig.seo.title
     const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', activeConfig.seo.description)
+    if (meta) meta.setAttribute('content', aetherisConfig.seo.description)
   }, [])
 
   return (
-    <div className="min-h-screen w-full min-w-0 overflow-x-clip bg-[var(--color-black)] text-[var(--color-white)]">
-      <Header />
-      <main className="page-main w-full min-w-0">
-        <Hero />
-        <OfferSection />
-        <Services />
-        <Memberships />
-        <Transformations />
-        <Trainers />
-        <Gallery />
-        <Reviews />
-        <Location />
-        <FAQ />
-        <FinalCTA />
-      </main>
-      <Footer />
-      <StickyMobileCTA />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Shell />}>
+          <Route path={routes.home} element={<HomePage />} />
+          <Route path={routes.classes} element={<ClassesPage />} />
+          <Route path={routes.trainers} element={<TrainersPage />} />
+          <Route path={routes.membership} element={<MembershipPage />} />
+          <Route path={routes.locations} element={<LocationsPage />} />
+          <Route path={routes.about} element={<AboutPage />} />
+          <Route path={routes.contact} element={<ContactPage />} />
+          <Route path={routes.trial} element={<TrialPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }

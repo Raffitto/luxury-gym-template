@@ -1,17 +1,8 @@
 /**
- * Active client config — switch the export below to change the live site.
- *
- * UFG (current):
- *   export { ufgConfig as activeConfig } from './clients/ufgConfig'
- *
- * Generic template demo:
- *   export { templateConfig as activeConfig } from './templateConfig'
- *
- * New client:
- *   1. Copy templateConfig.js → clients/yourGymConfig.js
- *   2. Edit values and assets
- *   3. Export yourGymConfig here
+ * Active experience config.
+ * AETHERIS — cinematic luxury performance continuum (showcase).
  */
-export { ufgConfig as activeConfig } from './clients/ufgConfig'
+export { aetherisConfig as activeConfig } from './aetherisConfig'
 
-// export { templateConfig as activeConfig } from './templateConfig'
+// Legacy gym template:
+// export { ufgConfig as activeConfig } from './clients/ufgConfig'

@@ -1,0 +1,344 @@
+/* Atmospheric design system — lit environments, not flat color */
+
+:root {
+  --void: #020202;
+  --depth: #080808;
+  --surface: #0e0e0e;
+  --elevated: #141414;
+  --platinum: #e8e4dc;
+  --silver: #9a968e;
+  --ash: #5c5a56;
+  --accent: #c4b59a;
+  --accent-glow: rgba(196, 181, 154, 0.14);
+  --edge: rgba(232, 228, 220, 0.07);
+  --edge-bright: rgba(232, 228, 220, 0.14);
+
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-ritual: "IBM Plex Mono", monospace;
+
+  --header-h: 4rem;
+  --chamber-pad: clamp(4rem, 12vh, 8rem);
+  --chamber-pad-tight: clamp(2.5rem, 7vh, 4.5rem);
+  --page-gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --max-chamber: 90rem;
+  --mobile-sticky-h: 4.25rem;
+
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --shadow-volumetric: 0 40px 120px rgba(0, 0, 0, 0.7);
+  --shadow-edge: 0 0 0 1px var(--edge), 0 24px 80px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 80px var(--accent-glow);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  overflow-x: clip;
+  background: var(--void);
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--void);
+  color: var(--platinum);
+  overflow-x: clip;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+
+.font-ritual {
+  font-family: var(--font-ritual);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+/* Cinematic headline scale */
+.headline-mythic {
+  font-size: clamp(2.75rem, 11vw, 7.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+}
+
+.headline-chamber {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  line-height: 0.92;
+}
+
+.headline-section {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 0.95;
+}
+
+.body-measured {
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  line-height: 1.65;
+  color: var(--silver);
+  font-weight: 300;
+}
+
+/* Environmental lighting layers */
+.env-void {
+  background: var(--void);
+}
+
+.env-depth {
+  background: linear-gradient(180deg, var(--void) 0%, var(--depth) 50%, var(--void) 100%);
+}
+
+.env-chamber {
+  position: relative;
+  isolation: isolate;
+}
+
+.env-chamber::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(196, 181, 154, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255, 255, 255, 0.02), transparent 50%);
+  z-index: 0;
+}
+
+/* Volumetric glass */
+.glass-layer {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  border: 1px solid var(--edge);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-edge);
+}
+
+.glass-layer-deep {
+  background: linear-gradient(
+    160deg,
+    rgba(20, 20, 20, 0.9) 0%,
+    rgba(8, 8, 8, 0.95) 100%
+  );
+  border: 1px solid var(--edge);
+  box-shadow: var(--shadow-volumetric);
+}
+
+/* Cinematic grain overlay */
+.film-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Edge-lit surfaces */
+.edge-lit {
+  position: relative;
+}
+
+.edge-lit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(232, 228, 220, 0.15) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(196, 181, 154, 0.08) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Magnetic button base */
+a.btn-magnetic {
+  text-decoration: none;
+}
+
+.btn-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 2rem;
+  font-family: var(--font-ritual);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--void);
+  background: var(--platinum);
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.5s var(--ease-cinematic), transform 0.4s var(--ease-cinematic);
+  touch-action: manipulation;
+}
+
+.btn-magnetic:hover {
+  box-shadow: 0 0 60px rgba(232, 228, 220, 0.25), var(--shadow-volumetric);
+}
+
+.btn-magnetic-ghost {
+  color: var(--platinum);
+  background: transparent;
+  border: 1px solid var(--edge-bright);
+  box-shadow: none;
+}
+
+.btn-magnetic-ghost:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px var(--accent-glow);
+  color: var(--platinum);
+}
+
+.chamber {
+  padding: var(--chamber-pad) var(--page-gutter);
+}
+
+.chamber-tight {
+  padding-top: var(--chamber-pad-tight);
+  padding-bottom: var(--chamber-pad);
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+}
+
+/* Ritual form controls */
+.ritual-input,
+.ritual-select {
+  width: 100%;
+  border: 1px solid var(--edge);
+  background: var(--surface);
+  padding: 1rem 1.125rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--platinum);
+  outline: none;
+  transition: border-color 0.45s var(--ease-cinematic), box-shadow 0.45s var(--ease-cinematic);
+}
+
+.ritual-input:focus,
+.ritual-select:focus {
+  border-color: rgba(196, 181, 154, 0.45);
+  box-shadow: 0 0 0 1px rgba(196, 181, 154, 0.12);
+}
+
+.ritual-select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ash) 50%),
+    linear-gradient(135deg, var(--ash) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% + 2px), calc(100% - 12px) calc(50% + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
+
+/* Mobile persistent access */
+.mobile-sticky-access {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 45;
+  display: flex;
+  padding: 0.625rem var(--page-gutter);
+  padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, transparent 0%, var(--void) 35%, var(--void) 100%);
+  border-top: 1px solid var(--edge);
+}
+
+@media (max-width: 1023px) {
+  .page-with-sticky {
+    padding-bottom: calc(var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px) + 0.5rem);
+  }
+}
+
+/* Fullscreen mobile navigation */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: var(--header-h) 0 0 0;
+  z-index: 40;
+  overflow-y: auto;
+  background: rgba(2, 2, 2, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.mobile-nav-link {
+  display: block;
+  min-height: 3rem;
+  padding: 0.75rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  color: var(--platinum);
+  text-decoration: none;
+  transition: color 0.4s var(--ease-cinematic);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link[aria-current="page"] {
+  color: var(--accent);
+}
+
+body.nav-locked {
+  overflow: hidden;
+}
+
+.chamber-inner {
+  width: 100%;
+  max-width: var(--max-chamber);
+  margin-inline: auto;
+}
+
+/* Scroll momentum line */
+.ritual-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--edge-bright), transparent);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .glass-layer {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
