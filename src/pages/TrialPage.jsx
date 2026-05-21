@@ -23,6 +23,7 @@ export default function TrialPage() {
         headline={trial.headline}
         subline={trial.subline}
         align="left"
+        image={aetherisConfig.pageHero.trial}
       />
 
       <section className="page-body chamber-inner">

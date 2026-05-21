@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
+import CinematicBackdrop from '../components/ui/CinematicBackdrop'
 import MagneticButton from '../components/ui/MagneticButton'
 import { aetherisConfig } from '../data/aetherisConfig'
 import { routes } from '../design-system/tokens'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function MembershipPage() {
-  const { membership } = aetherisConfig
+  const { membership, pageHero } = aetherisConfig
   const sovereign = membership.tiers.find((t) => t.featured)
   const others = membership.tiers.filter((t) => !t.featured)
 
@@ -17,6 +18,7 @@ export default function MembershipPage() {
         headline={membership.headline}
         subline="Access is not purchased. It is granted — after assessment, alignment, and proof of discipline."
         align="center"
+        image={pageHero.membership}
       />
 
       {sovereign ? (
@@ -28,7 +30,13 @@ export default function MembershipPage() {
             viewport={viewportOnce()}
             transition={transition.cinematic(1)}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_100%_0%,rgba(196,181,154,0.12),transparent)]" />
+            <CinematicBackdrop
+              image={membership.image}
+              alt={membership.image.alt}
+              preset="section"
+              scrim="lateral"
+              imageClassName="opacity-20"
+            />
             <div className="relative grid gap-10 p-10 md:grid-cols-[1fr_1.1fr] md:p-16 lg:p-20">
               <div>
                 <p className="font-ritual text-[var(--accent)]">Threshold II · {sovereign.note}</p>

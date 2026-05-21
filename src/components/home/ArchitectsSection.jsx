@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
+import CinematicImage from '../ui/CinematicImage'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal, { StaggerChamber } from '../ui/ChamberReveal'
 import { variants, transition } from '../../motion/choreography'
@@ -36,13 +37,14 @@ export default function ArchitectsSection() {
               className="group relative overflow-hidden"
             >
               <div className="aspect-[3/4] overflow-hidden">
-                <img
-                  src={architect.image}
-                  alt=""
-                  className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                  loading="lazy"
+                <CinematicImage
+                  image={architect.image}
+                  alt={architect.image.alt}
+                  preset="portrait"
+                  sizes="(max-width: 768px) 90vw, 30vw"
+                  className="h-full w-full object-cover object-top grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-[0.15]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-[var(--void)]/20 to-transparent" />
               </div>
               <div className="absolute right-0 bottom-0 left-0 p-6">
                 <p className="font-ritual text-[var(--accent)]">{architect.role}</p>

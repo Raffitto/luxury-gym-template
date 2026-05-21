@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
+import CinematicImage from '../ui/CinematicImage'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal from '../ui/ChamberReveal'
 import { transition, viewportOnce } from '../../motion/choreography'
@@ -13,7 +14,7 @@ export default function LocationsSection() {
         <ChamberReveal>
           <RitualLabel>Sequence 08 · Chambers</RitualLabel>
           <h2 className="headline-chamber font-display mt-6 text-[var(--platinum)]">
-            Global architectural presence.
+            Global performance chambers.
           </h2>
         </ChamberReveal>
 
@@ -27,13 +28,14 @@ export default function LocationsSection() {
               viewport={viewportOnce()}
               transition={transition.cinematic(0.8, i * 0.1)}
             >
-              <img
-                src={loc.image}
-                alt=""
+              <CinematicImage
+                image={loc.image}
+                alt={loc.image.alt}
+                preset="card"
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-[var(--void)]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--void)] via-[var(--void)]/35 to-transparent" />
               <div className="absolute right-0 bottom-0 left-0 p-6">
                 <p className="font-ritual text-[var(--accent)]">{loc.code}</p>
                 <h3 className="font-display text-3xl text-[var(--platinum)]">{loc.city}</h3>

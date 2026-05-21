@@ -3,6 +3,7 @@ import { ArrowDown } from 'lucide-react'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import AtmosphericCanvas from '../atmosphere/AtmosphericCanvas'
+import CinematicBackdrop from '../ui/CinematicBackdrop'
 import RitualLabel from '../ui/RitualLabel'
 import MagneticButton from '../ui/MagneticButton'
 import { transition } from '../../motion/choreography'
@@ -18,15 +19,14 @@ export default function HeroExperience() {
     <section className="hero-experience relative min-h-[100svh] overflow-hidden">
       <AtmosphericCanvas intensity="hero" />
 
-      <div className="hero-experience-bg absolute inset-0" aria-hidden>
-        <div
-          className="hero-experience-image absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${hero.image})`,
-          }}
-        />
-        <div className="hero-experience-scrim absolute inset-0" />
-      </div>
+      <CinematicBackdrop
+        image={hero.image}
+        alt={hero.image.alt}
+        priority
+        preset="hero"
+        scrim="default"
+        imageClassName="opacity-40 md:opacity-35"
+      />
 
       <div className="hero-experience-content relative z-10 flex min-h-[100svh] flex-col justify-end pb-8 pt-[calc(var(--header-h)+1rem)] md:pb-24 md:pt-[calc(var(--header-h)+2rem)]">
         <div className="chamber-inner px-[var(--page-gutter)]">

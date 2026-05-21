@@ -1,16 +1,34 @@
 import { motion } from 'framer-motion'
 import RitualLabel from '../ui/RitualLabel'
 import AtmosphericCanvas from '../atmosphere/AtmosphericCanvas'
+import CinematicBackdrop from '../ui/CinematicBackdrop'
 import { transition } from '../../motion/choreography'
 import { useIsMobile } from '../../hooks/useIsMobile'
 
-export default function PageHero({ ritual, headline, subline, align = 'left', children }) {
+export default function PageHero({
+  ritual,
+  headline,
+  subline,
+  align = 'left',
+  image,
+  children,
+}) {
   const mobile = useIsMobile()
 
   return (
     <section className={`page-hero env-chamber ${align === 'center' ? 'page-hero--center' : ''}`}>
-      {!mobile ? <AtmosphericCanvas intensity="subtle" /> : null}
-      <div className="page-hero-inner chamber-inner">
+      {image ? (
+        <CinematicBackdrop
+          image={image}
+          alt={image.alt}
+          preset="section"
+          scrim="lateral"
+          imageClassName="opacity-20"
+        />
+      ) : !mobile ? (
+        <AtmosphericCanvas intensity="subtle" />
+      ) : null}
+      <div className="page-hero-inner chamber-inner relative z-10">
         <RitualLabel>{ritual}</RitualLabel>
         <motion.h1
           className="headline-chamber font-display mt-4 max-w-4xl text-[var(--platinum)] md:mt-5"

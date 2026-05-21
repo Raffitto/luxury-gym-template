@@ -1,20 +1,22 @@
 import { motion } from 'framer-motion'
 import { aetherisConfig } from '../../data/aetherisConfig'
+import CinematicBackdrop from '../ui/CinematicBackdrop'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal from '../ui/ChamberReveal'
-import { variants, transition, viewportOnce } from '../../motion/choreography'
+import { transition, viewportOnce } from '../../motion/choreography'
 
 export default function PerformanceSection() {
   const { performance } = aetherisConfig
 
   return (
     <section className="relative overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url(${performance.image})` }}
-        aria-hidden
+      <CinematicBackdrop
+        image={performance.image}
+        alt={performance.image.alt}
+        preset="section"
+        scrim="performance"
+        imageClassName="opacity-30 md:opacity-25"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--void)] via-[var(--void)]/95 to-[var(--void)]/70" />
 
       <div className="relative z-10 chamber-inner chamber-tight">
         <ChamberReveal className="max-w-2xl">

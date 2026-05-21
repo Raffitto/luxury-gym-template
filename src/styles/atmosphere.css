@@ -437,43 +437,15 @@ body.nav-locked {
   padding: 0 var(--page-gutter) clamp(3rem, 8vh, 5rem);
 }
 
-/* Homepage hero — readable on mobile */
-.hero-experience-bg {
-  pointer-events: none;
-}
-
-.hero-experience-image {
-  opacity: 0.32;
-}
-
-@media (min-width: 768px) {
-  .hero-experience-image {
-    opacity: 0.22;
-  }
-}
-
-.hero-experience-scrim {
-  background: linear-gradient(
-    180deg,
-    rgba(2, 2, 2, 0.55) 0%,
-    rgba(2, 2, 2, 0.72) 45%,
-    rgba(2, 2, 2, 0.92) 100%
-  );
-}
-
-@media (min-width: 768px) {
-  .hero-experience-scrim {
-    background: linear-gradient(
-      180deg,
-      rgba(2, 2, 2, 0.45) 0%,
-      rgba(2, 2, 2, 0.78) 50%,
-      rgba(2, 2, 2, 0.95) 100%
-    );
-  }
-}
-
+/* Homepage hero — campaign readability over photography */
 .hero-experience-content {
-  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 2px 32px rgba(0, 0, 0, 0.55);
+}
+
+/* Performance imagery */
+.cinematic-img {
+  object-fit: cover;
+  object-position: center 25%;
 }
 
 .chamber-inner {

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import AtmosphericCanvas from '../atmosphere/AtmosphericCanvas'
+import CinematicBackdrop from '../ui/CinematicBackdrop'
 import RitualLabel from '../ui/RitualLabel'
 import MagneticButton from '../ui/MagneticButton'
 import { transition } from '../../motion/choreography'
@@ -12,6 +13,13 @@ export default function ClimaxSection() {
   return (
     <section className="relative min-h-[80svh] overflow-hidden">
       <AtmosphericCanvas />
+      <CinematicBackdrop
+        image={climax.image}
+        alt={climax.image.alt}
+        preset="section"
+        scrim="default"
+        imageClassName="opacity-25"
+      />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(196,181,154,0.1),transparent)]" />
 
       <div className="relative z-10 flex min-h-[80svh] flex-col items-center justify-center chamber text-center">

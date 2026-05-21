@@ -1,3 +1,5 @@
+import { photos } from '../utils/images'
+
 /** AETHERIS — fictional luxury performance continuum */
 export const aetherisConfig = {
   brand: {
@@ -37,13 +39,19 @@ export const aetherisConfig = {
       'A private order for those who treat the body as architecture and discipline as identity.',
     primaryCta: 'Request Access',
     secondaryCta: 'Enter the Doctrine',
-    image:
-      'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=1920&q=80&auto=format&fit=crop',
+    image: {
+      id: photos.hero,
+      alt: 'Elite athlete training under dramatic light in a dark performance chamber',
+    },
   },
 
   philosophy: {
     ritual: 'Sequence 02 · Doctrine',
     headline: 'Identity is engineered.',
+    image: {
+      id: photos.combat,
+      alt: 'Combat conditioning — controlled aggression in low light',
+    },
     pillars: [
       {
         index: 'I',
@@ -73,8 +81,10 @@ export const aetherisConfig = {
       { name: 'Metabolic Edge', metric: 'Threshold expansion' },
       { name: 'Combat Flow', metric: 'Kinetic chains' },
     ],
-    image:
-      'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80&auto=format&fit=crop',
+    image: {
+      id: photos.performance,
+      alt: 'Athlete under heavy structural load — barbell strength training',
+    },
   },
 
   architects: [
@@ -82,28 +92,38 @@ export const aetherisConfig = {
       name: 'Dr. Elias Venn',
       role: 'Neural Performance Architect',
       specialty: 'CNS · Longevity · Load Periodization',
-      image:
-        'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80&auto=format&fit=crop',
+      image: {
+        id: photos.architectCoach,
+        alt: 'Dr. Elias Venn — performance architect portrait',
+      },
     },
     {
       name: 'Maren Okoye',
       role: 'Kinetic Systems Director',
       specialty: 'Movement Architecture · Combat Flow',
-      image:
-        'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop',
+      image: {
+        id: photos.architectFemale,
+        alt: 'Maren Okoye — kinetic systems director',
+      },
     },
     {
       name: 'Lucien Ashford',
       role: 'Metabolic Continuum Lead',
       specialty: 'Threshold Science · Body Recomposition',
-      image:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80&auto=format&fit=crop',
+      image: {
+        id: photos.architectMale,
+        alt: 'Lucien Ashford — metabolic continuum lead',
+      },
     },
   ],
 
   membership: {
     ritual: 'Sequence 05 · Access',
     headline: 'Admission is a threshold.',
+    image: {
+      id: photos.luxuryGym,
+      alt: 'Premium strength floor — dark luxury training environment',
+    },
     tiers: [
       {
         code: 'I',
@@ -144,6 +164,10 @@ export const aetherisConfig = {
     ritual: 'Sequence 06 · Regeneration',
     headline: 'Recovery is warfare.',
     subline: 'Luxury wellness meets future health science. Optimization as elevated living.',
+    image: {
+      id: photos.recovery,
+      alt: 'Athlete in regeneration protocol — mobility and recovery discipline',
+    },
     modalities: [
       { name: 'Cryo Continuum', desc: 'Neural reset · Inflammation protocol' },
       { name: 'Hyperbaric Chamber', desc: 'Oxygen saturation · Cellular repair' },
@@ -167,23 +191,29 @@ export const aetherisConfig = {
     {
       city: 'Geneva',
       code: 'CH-GVA-01',
-      descriptor: 'Alpine Protocol Chamber',
-      image:
-        'https://images.unsplash.com/photo-1486406146926-c627a92fd1ab?w=800&q=80&auto=format&fit=crop',
+      descriptor: 'Strength & longevity chamber',
+      image: {
+        id: photos.luxuryGym,
+        alt: 'Geneva chamber — premium dark strength floor',
+      },
     },
     {
       city: 'Tokyo',
       code: 'JP-TYO-02',
-      descriptor: 'Neon Discipline Wing',
-      image:
-        'https://images.unsplash.com/photo-1540959733332-eab4dece0ebd?w=800&q=80&auto=format&fit=crop',
+      descriptor: 'Combat conditioning wing',
+      image: {
+        id: photos.chamberTokyo,
+        alt: 'Tokyo chamber — atmospheric training environment',
+      },
     },
     {
       city: 'Dubai',
       code: 'AE-DXB-03',
-      descriptor: 'Desert Sovereign Suite',
-      image:
-        'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80&auto=format&fit=crop',
+      descriptor: 'Performance sovereignty suite',
+      image: {
+        id: photos.strengthFloor,
+        alt: 'Dubai chamber — elite free-weight performance floor',
+      },
     },
   ],
 
@@ -214,6 +244,10 @@ export const aetherisConfig = {
     headline: ['The future version', 'of you is waiting.'],
     subline: 'Request a private assessment. Admission is selective. Transformation is not.',
     cta: 'Initiate Assessment',
+    image: {
+      id: photos.sprint,
+      alt: 'Athlete in explosive sprint motion — neural drive training',
+    },
   },
 
   classes: [
@@ -222,32 +256,64 @@ export const aetherisConfig = {
       duration: '75 min',
       intensity: 'Maximum load',
       desc: 'Force vectoring and compound architecture for elite strength development.',
+      image: { id: photos.performance, alt: 'Structural dominion — heavy barbell training' },
     },
     {
       name: 'Neural Surge',
       duration: '60 min',
       intensity: 'CNS peak',
       desc: 'Explosive power transfer and neurological drive optimization.',
+      image: { id: photos.sprint, alt: 'Neural surge — explosive athletic drive' },
     },
     {
       name: 'Threshold Ritual',
       duration: '50 min',
       intensity: 'Metabolic edge',
       desc: 'Controlled suffering. Threshold expansion through precision pacing.',
+      image: { id: photos.metabolic, alt: 'Threshold ritual — metabolic edge conditioning' },
     },
     {
       name: 'Combat Continuum',
       duration: '65 min',
       intensity: 'Kinetic flow',
       desc: 'Movement chains borrowed from combat disciplines. Flow as architecture.',
+      image: { id: photos.combat, alt: 'Combat continuum — striking and flow work' },
     },
     {
       name: 'Regeneration Protocol',
       duration: '45 min',
       intensity: 'Recovery',
       desc: 'Mobility, breath architecture, and parasympathetic recalibration.',
+      image: { id: photos.recovery, alt: 'Regeneration protocol — recovery and mobility' },
     },
   ],
+
+  pageHero: {
+    classes: {
+      id: photos.combat,
+      alt: 'Kinetic rituals — combat conditioning chamber',
+    },
+    trainers: {
+      id: photos.architectCoach,
+      alt: 'Performance architects — elite coaching',
+    },
+    membership: {
+      id: photos.darkGym,
+      alt: 'Access protocol — dark luxury training chamber',
+    },
+    locations: {
+      id: photos.luxuryGym,
+      alt: 'Global performance chambers',
+    },
+    about: {
+      id: photos.hero,
+      alt: 'AETHERIS doctrine — elite human performance',
+    },
+    trial: {
+      id: photos.sprint,
+      alt: 'Private assessment — athletic performance screening',
+    },
+  },
 
   about: {
     origin:

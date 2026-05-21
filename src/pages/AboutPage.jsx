@@ -13,6 +13,7 @@ export default function AboutPage() {
         ritual="Chamber · Doctrine"
         headline="Beyond the old category."
         align="left"
+        image={aetherisConfig.pageHero.about}
       />
 
       <section className="page-body chamber-inner">
