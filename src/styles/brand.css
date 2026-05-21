@@ -1,0 +1,195 @@
+:root {
+  --color-black: #050505;
+  --color-yellow: #ffe500;
+  --color-white: #f5f5f5;
+  --color-gray: #8a8a8a;
+  --color-surface: #121212;
+  --color-surface-elevated: #1a1a1a;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  --font-display: "Bebas Neue", "Arial Narrow", "Impact", sans-serif;
+  --font-body: "Barlow", "Segoe UI", Roboto, system-ui, sans-serif;
+
+  --radius-xl: 1.25rem;
+  --shadow-premium: 0 24px 80px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 40px rgba(255, 229, 0, 0.18);
+
+  /* Mobile layout — fixed values work on Android + iOS without safe-area */
+  --header-h: 3.5rem;
+  --mobile-sticky-inner: 3.5rem;
+  --mobile-sticky-pad: 0.5rem;
+  --mobile-sticky-offset: calc(var(--mobile-sticky-inner) + var(--mobile-sticky-pad) * 2 + 0.75rem);
+  --page-gutter: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 0.75rem);
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-black);
+  color: var(--color-white);
+  overflow-x: clip;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+}
+
+/* Hero headline scales on narrow Android widths (360–430) */
+.hero-title {
+  font-size: clamp(1.875rem, 8.5vw, 2.35rem);
+  line-height: 0.92;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 3rem;
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 4.5rem;
+  }
+}
+
+.glass-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-premium);
+}
+
+@media (max-width: 767px) {
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(145deg, rgba(26, 26, 26, 0.95), rgba(12, 12, 12, 0.98));
+  }
+}
+
+.yellow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.section-padding {
+  padding: 3.25rem var(--page-gutter);
+}
+
+.section-header-gap {
+  margin-bottom: 2rem;
+}
+
+/* Sticky CTA clearance — base padding for all mobile browsers */
+@media (max-width: 767px) {
+  .page-main,
+  .page-mobile-footer {
+    padding-bottom: var(--mobile-sticky-offset);
+  }
+}
+
+/* Extra inset on notched devices only (additive, not required) */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  @media (max-width: 767px) {
+    .page-main,
+    .page-mobile-footer {
+      padding-bottom: calc(var(--mobile-sticky-offset) + env(safe-area-inset-bottom, 0px));
+    }
+
+    .sticky-mobile-cta {
+      padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
+
+.sticky-mobile-cta {
+  padding-bottom: var(--mobile-sticky-pad);
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: 1.25rem;
+  }
+
+  .section-padding {
+    padding: 5rem 2rem;
+  }
+
+  .section-header-gap {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 6.5rem 2.5rem;
+  }
+
+  .section-header-gap {
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* 48px minimum tap targets on touch/mobile */
+.btn-touch {
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  touch-action: manipulation;
+}
+
+.tap-target {
+  min-height: 3rem;
+  min-width: 3rem;
+  touch-action: manipulation;
+}
+
+@media (min-width: 768px) {
+  .btn-touch {
+    min-height: 2.75rem;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
