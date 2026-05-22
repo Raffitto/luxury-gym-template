@@ -8,10 +8,13 @@ import CinematicImage from '../ui/CinematicImage'
 import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
 import { spring, variants, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useIsPhone } from '../../hooks/useIsPhone'
+import { transition } from '../../motion/choreography'
 
 export default function TransformationScene() {
   const { transformation } = landingConfig
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
 
   return (
     <FilmChapter id="journey" className="landing-scene--journey" depthIndex={3}>
@@ -42,7 +45,11 @@ export default function TransformationScene() {
               initial={reduced ? false : 'hidden'}
               whileInView={reduced ? undefined : 'visible'}
               viewport={viewportOnce()}
-              transition={{ ...spring.glide, delay: 0.1 + i * 0.07 }}
+              transition={
+                phone
+                  ? { ...transition.instant, delay: i * 0.02 }
+                  : { ...spring.glide, delay: 0.06 + i * 0.05 }
+              }
             >
               <div className="journey-phase-copy">
                 <span className="journey-phase-num font-ritual">{phase.phase}</span>
@@ -59,6 +66,7 @@ export default function TransformationScene() {
                       alt={phase.image.alt}
                       preset="card"
                       fill
+                      priority={phone && i < 2}
                     />
                   </div>
                 </ParallaxLayer>

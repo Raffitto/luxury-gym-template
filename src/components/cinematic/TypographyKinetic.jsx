@@ -27,7 +27,7 @@ export function KineticRitual({ children, className = '', sceneId, emotion }) {
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
-      variants={ritualVariants(e)}
+      variants={ritualVariants(e, sceneId, phone)}
     >
       {children}
     </motion.p>
@@ -46,8 +46,8 @@ export function KineticHeadline({ children, className = '', lines, sceneId, emot
   }
 
   if (lines) {
-    const pacing = headlineVariants(e, bias)
-    const lineStagger = phone ? 0.11 : 0.07
+    const pacing = headlineVariants(e, bias, sceneId, phone)
+    const lineStagger = phone ? 0.04 : 0.07
     return (
       <h2 className={className}>
         {lines.map((line, i) => (
@@ -76,7 +76,7 @@ export function KineticHeadline({ children, className = '', lines, sceneId, emot
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
-      variants={headlineVariants(e, bias)}
+      variants={headlineVariants(e, bias, sceneId, phone)}
     >
       {children}
     </motion.h2>
@@ -93,7 +93,7 @@ export function KineticCopy({ children, className = '', delay, sceneId, emotion 
     return <p className={className}>{children}</p>
   }
 
-  const variants = copyVariants(e, memory.transitionBias * 0.25)
+  const variants = copyVariants(e, memory.transitionBias * 0.25, sceneId, phone)
   const extraDelay = delay ?? 0
 
   return (
@@ -129,7 +129,7 @@ export function KineticBlock({ children, className = '', sceneId, emotion }) {
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
-      variants={copyVariants(e, 0.08)}
+      variants={copyVariants(e, 0.08, sceneId, phone)}
     >
       {children}
     </motion.div>

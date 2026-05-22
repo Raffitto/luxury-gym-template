@@ -114,6 +114,6 @@
   }
 
   .cinematic-img-wrap:not([data-revealed]) .cinematic-img {
-    transition-duration: 0.55s;
+    transition-duration: 0.15s;
   }
 }

@@ -14,6 +14,7 @@ export default function SceneCard({
   index,
   href,
   ctaLabel = 'Explore',
+  priority = false,
 }) {
   const reduced = useReducedMotion()
   const phone = useIsPhone()
@@ -21,7 +22,7 @@ export default function SceneCard({
   const content = (
     <article className="scene-card edge-lit">
       <div className="scene-card-media">
-        <CinematicImage image={image} alt={alt} preset="card" fill />
+        <CinematicImage image={image} alt={alt} preset="card" fill priority={priority} />
         <div className="scene-card-scrim" aria-hidden />
         {index != null ? (
           <span className="scene-card-index font-ritual">{String(index).padStart(2, '0')}</span>

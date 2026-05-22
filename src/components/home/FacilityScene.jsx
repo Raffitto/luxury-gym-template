@@ -12,11 +12,12 @@ import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
 import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
 import { spring, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useIsPhone } from '../../hooks/useIsPhone'
 
-function GallerySlide({ image, alt }) {
+function GallerySlide({ image, alt, priority = false }) {
   return (
     <div className="facility-gallery-slide">
-      <CinematicImage image={image} alt={alt} preset="section" fill />
+      <CinematicImage image={image} alt={alt} preset="section" fill priority={priority} />
       <div className="facility-gallery-scrim" aria-hidden />
     </div>
   )
@@ -25,6 +26,7 @@ function GallerySlide({ image, alt }) {
 export default function FacilityScene() {
   const { facility } = landingConfig
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
 
   return (
     <FilmChapter id="facility" className="landing-scene--facility" depthIndex={4} atmosphere="hero">
@@ -92,8 +94,8 @@ export default function FacilityScene() {
 
         <div className="swipeable-scenes-bleed mt-10 lg:hidden">
           <SwipeableSceneCards>
-            {facility.gallery.map((img) => (
-              <GallerySlide key={img.id} image={img} alt={img.alt} />
+            {facility.gallery.map((img, i) => (
+              <GallerySlide key={img.id} image={img} alt={img.alt} priority={phone && i === 0} />
             ))}
           </SwipeableSceneCards>
         </div>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { spring, viewportOnce } from '../../motion/choreography'
 
 export default function FilmFrame({
@@ -12,6 +13,7 @@ export default function FilmFrame({
 }) {
   const reduced = useReducedMotion()
   const mobile = useIsMobile()
+  const phone = useIsPhone()
   const useBleed = bleed && !mobile
   const aspectClass =
     aspect === 'cinematic'
@@ -29,7 +31,7 @@ export default function FilmFrame({
     </div>
   )
 
-  if (reduced) return frame
+  if (reduced || phone) return frame
 
   return (
     <motion.div

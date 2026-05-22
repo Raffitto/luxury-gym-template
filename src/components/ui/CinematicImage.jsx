@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useLayoutEffect } from 'react'
 import {
   resolveImageSrc,
   resolveAlt,
@@ -7,6 +7,10 @@ import {
   getWidths,
 } from '../../utils/images'
 import { isImageCached, markImageLoaded } from '../../utils/preload'
+
+function cachedForSrcs(...srcs) {
+  return srcs.some((s) => s && isImageCached(s))
+}
 
 /**
  * Local static imagery with gradient fallback — never shows broken icon.
@@ -28,21 +32,46 @@ export default function CinematicImage({
   const [currentSrc, setCurrentSrc] = useState(displayPrimary)
   const [errored, setErrored] = useState(false)
   const [revealed, setRevealed] = useState(
-    priority && (isImageCached(displayPrimary) || isImageCached(primarySrc) || isImageCached(src)),
+    () =>
+      priority &&
+      (cachedForSrcs(displayPrimary, primarySrc, src) ||
+        (typeof document !== 'undefined' &&
+          document.documentElement.classList.contains('cinematic-ready'))),
   )
 
   const label = alt || resolveAlt(image, '')
   const widths = getWidths(preset)
   const maxW = widths[widths.length - 1]
 
-  useEffect(() => {
-    if (priority && imgRef.current?.complete) setRevealed(true)
-  }, [priority, displayPrimary])
-
-  const handleLoad = useCallback(() => {
+  const revealNow = useCallback(() => {
     setRevealed(true)
     markImageLoaded(displayPrimary)
-  }, [displayPrimary])
+    if (src && src !== displayPrimary) markImageLoaded(src)
+  }, [displayPrimary, src])
+
+  useLayoutEffect(() => {
+    const el = imgRef.current
+    if (!el) return
+    if (cachedForSrcs(displayPrimary, primarySrc, src) || el.complete) {
+      if (el.decode) {
+        el.decode().then(revealNow).catch(revealNow)
+      } else {
+        revealNow()
+      }
+    }
+  }, [displayPrimary, primarySrc, src, revealNow])
+
+  const handleLoad = useCallback(
+    (e) => {
+      const el = e?.currentTarget ?? imgRef.current
+      if (el?.decode) {
+        el.decode().then(revealNow).catch(revealNow)
+      } else {
+        revealNow()
+      }
+    },
+    [revealNow],
+  )
 
   const handleError = useCallback(() => {
     if (currentSrc !== FALLBACK_SRC) {

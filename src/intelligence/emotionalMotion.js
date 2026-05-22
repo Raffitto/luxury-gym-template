@@ -1,4 +1,4 @@
-import { scenePacing } from './scenePacing'
+import { scenePacing, pacingForScene } from './scenePacing'
 
 function springFromPacing(pacing) {
   return {
@@ -9,8 +9,13 @@ function springFromPacing(pacing) {
   }
 }
 
-export function headlineVariants(emotion = 'exclusivity', bias = 0.15) {
-  const pacing = scenePacing[emotion] ?? scenePacing.exclusivity
+function resolvePacing(emotion, sceneId, handheld) {
+  if (handheld && sceneId) return pacingForScene(sceneId, { handheld: true })
+  return scenePacing[emotion] ?? scenePacing.exclusivity
+}
+
+export function headlineVariants(emotion = 'exclusivity', bias = 0.15, sceneId, handheld = false) {
+  const pacing = resolvePacing(emotion, sceneId, handheld)
   const y = pacing.revealY + bias * 2
   return {
     hidden: { opacity: 0, y },
@@ -22,8 +27,8 @@ export function headlineVariants(emotion = 'exclusivity', bias = 0.15) {
   }
 }
 
-export function ritualVariants(emotion = 'exclusivity') {
-  const pacing = scenePacing[emotion] ?? scenePacing.exclusivity
+export function ritualVariants(emotion = 'exclusivity', sceneId, handheld = false) {
+  const pacing = resolvePacing(emotion, sceneId, handheld)
   return {
     hidden: { opacity: 0, y: pacing.ritualY, letterSpacing: '0.24em' },
     visible: {
@@ -35,8 +40,8 @@ export function ritualVariants(emotion = 'exclusivity') {
   }
 }
 
-export function copyVariants(emotion = 'exclusivity', bias = 0.1) {
-  const pacing = scenePacing[emotion] ?? scenePacing.exclusivity
+export function copyVariants(emotion = 'exclusivity', bias = 0.1, sceneId, handheld = false) {
+  const pacing = resolvePacing(emotion, sceneId, handheld)
   return {
     hidden: { opacity: 0, y: 5 + bias * 2 },
     visible: {

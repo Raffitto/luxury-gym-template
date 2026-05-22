@@ -141,7 +141,7 @@ export function viewportOnce(margin = '-6%') {
 }
 
 export function viewportHandheld() {
-  return { once: true, margin: '-4%', amount: 0.08 }
+  return { once: true, margin: '0% 0px -2% 0px', amount: 0.04 }
 }
 
 export function magneticHover(reduced) {

@@ -101,7 +101,7 @@ html.cinematic-ready body::after {
 /* Image reveal — no pop-in */
 .cinematic-img {
   opacity: 0;
-  transition: opacity 0.28s cubic-bezier(0.22, 1, 0.32, 1);
+  transition: opacity 0.15s ease-out;
 }
 
 @media (max-width: 767px) {
@@ -109,7 +109,7 @@ html.cinematic-ready body::after {
   .hero-warm-active .cinematic-img,
   .cinematic-img-wrap[data-revealed] .cinematic-img {
     opacity: 1;
-    transition: opacity 0.2s ease-out;
+    transition: opacity 0.12s ease-out;
   }
 }
 

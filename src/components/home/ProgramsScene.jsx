@@ -44,6 +44,7 @@ export default function ProgramsScene() {
               <SceneCard
                 key={program.name}
                 index={i + 1}
+                priority={i < 2}
                 image={program.image}
                 alt={program.image.alt}
                 title={program.name}
@@ -63,6 +64,7 @@ export default function ProgramsScene() {
                   <FilmFrame aspect="cinematic">
                     <SceneCard
                       index={i + 1}
+                      priority={i === 0}
                       image={program.image}
                       alt={program.image.alt}
                       title={program.name}

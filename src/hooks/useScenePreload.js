@@ -1,35 +1,47 @@
 import { useEffect } from 'react'
-import { getScenePreloadMap, preloadImages } from '../utils/preload'
+import {
+  HOME_SCENE_ORDER,
+  getScenePreloadMap,
+  preloadImages,
+  preloadProgramsAfterHero,
+  preloadScenesAhead,
+} from '../utils/preload'
 
-const SECTION_IDS = ['programs', 'journey', 'facility', 'access']
-
-/** Predictive preload — scenes load before they enter the viewport. */
+/** Predictive preload — scenes ready before they enter the viewport. */
 export function useScenePreload() {
   useEffect(() => {
     const map = getScenePreloadMap()
-    const observed = new Set()
+    const warmed = new Set()
+
+    const warm = (key, urls) => {
+      if (!urls?.length || warmed.has(key)) return
+      warmed.add(key)
+      preloadImages(urls)
+    }
+
+    preloadProgramsAfterHero()
+    warm('journey-early', map.journey?.slice(0, 2))
+    warm('facility-hero', map.facility?.slice(0, 1))
+    preloadScenesAhead(0, 2)
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
           const id = entry.target.id
-          if (observed.has(id)) return
-          observed.add(id)
-          const urls = map[id]
-          if (urls?.length) preloadImages(urls)
+          const idx = HOME_SCENE_ORDER.indexOf(id)
+          if (idx < 0) return
+          warm(id, map[id])
+          preloadScenesAhead(idx, 2)
         })
       },
-      { rootMargin: '180% 0px 100% 0px', threshold: 0 },
+      { rootMargin: '220% 0px 120% 0px', threshold: 0 },
     )
 
-    SECTION_IDS.forEach((id) => {
+    HOME_SCENE_ORDER.forEach((id) => {
       const el = document.getElementById(id)
       if (el) observer.observe(el)
     })
-
-    const programs = document.getElementById('programs')
-    if (programs) preloadImages(map.programs)
 
     return () => observer.disconnect()
   }, [])

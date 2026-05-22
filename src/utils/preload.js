@@ -5,12 +5,21 @@ import { imageAssets, resolveImageSrc } from './images'
 const loaded = new Set()
 const inflight = new Map()
 
+export const HOME_SCENE_ORDER = ['programs', 'journey', 'facility', 'access']
+
 export function isImageCached(src) {
   return src ? loaded.has(src) : true
 }
 
 export function markImageLoaded(src) {
   if (src) loaded.add(src)
+}
+
+function decodeBitmap(img) {
+  if (img?.decode) {
+    return img.decode().catch(() => undefined)
+  }
+  return Promise.resolve()
 }
 
 export function preloadImage(src) {
@@ -22,15 +31,15 @@ export function preloadImage(src) {
   const promise = new Promise((resolve) => {
     const img = new Image()
     img.decoding = 'async'
+    const finish = (ok) => {
+      if (ok) loaded.add(src)
+      inflight.delete(src)
+      resolve(ok)
+    }
     img.onload = () => {
-      loaded.add(src)
-      inflight.delete(src)
-      resolve(true)
+      decodeBitmap(img).finally(() => finish(true))
     }
-    img.onerror = () => {
-      inflight.delete(src)
-      resolve(false)
-    }
+    img.onerror = () => finish(false)
     img.src = src
   })
 
@@ -65,18 +74,26 @@ function collectImagesFromConfig() {
   return [...keys]
 }
 
-/** Hero + first scene — mobile prioritizes smallest hero first */
+/** Hero + first visible scene assets */
 export function getCriticalPreloadUrls() {
   const phone = isHandheld()
   const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  const programs = getScenePreloadMap().programs ?? []
+  const journey = getScenePreloadMap().journey ?? []
 
-  if (phone) {
-    return [imageAssets.hero640, imageAssets.hero960, imageAssets.performance]
-  }
+  const heroStack = phone
+    ? [imageAssets.hero640, imageAssets.hero960]
+    : mobile
+      ? [imageAssets.hero640, imageAssets.hero960, imageAssets.hero]
+      : [imageAssets.hero960, imageAssets.hero]
 
-  return mobile
-    ? [imageAssets.hero640, imageAssets.hero960, imageAssets.performance, imageAssets.combat]
-    : [imageAssets.hero960, imageAssets.hero, imageAssets.performance, imageAssets.combat, imageAssets.darkGym]
+  return [
+    ...heroStack,
+    programs[0],
+    programs[1],
+    journey[0],
+    journey[1],
+  ].filter(Boolean)
 }
 
 /** Scene-id → URLs for progressive preload */
@@ -92,6 +109,22 @@ export function getScenePreloadMap() {
   }
 }
 
+/** Preload programs immediately after hero critical path */
+export function preloadProgramsAfterHero() {
+  return preloadImages(getScenePreloadMap().programs)
+}
+
+/** Preload current scene + next N scenes (inclusive of current) */
+export function preloadScenesAhead(fromIndex, count = 2) {
+  const map = getScenePreloadMap()
+  const urls = []
+  for (let i = 0; i <= count; i++) {
+    const id = HOME_SCENE_ORDER[fromIndex + i]
+    if (id && map[id]) urls.push(...map[id])
+  }
+  return preloadImages([...new Set(urls)])
+}
+
 export async function preloadCriticalAssets() {
   return preloadImages(getCriticalPreloadUrls())
 }
@@ -104,26 +137,42 @@ export function preloadSecondaryAssets() {
 }
 
 let lastScrollY = 0
+let scrollAheadIndex = 0
 
 export function attachScrollPrefetch() {
   if (typeof window === 'undefined') return () => {}
 
   const map = getScenePreloadMap()
-  const order = ['programs', 'journey', 'facility', 'access']
-  let prefetchIndex = 0
+  const order = HOME_SCENE_ORDER
+
+  const sectionEls = order
+    .map((id) => document.getElementById(id))
+    .filter(Boolean)
 
   const onScroll = () => {
     const y = window.scrollY
     const down = y >= lastScrollY
     lastScrollY = y
+    if (!down || !sectionEls.length) return
 
-    if (!down) return
+    const vh = window.innerHeight
+    let nearest = 0
+    let best = Infinity
 
-    const nextId = order[prefetchIndex]
-    if (nextId && map[nextId]) {
-      preloadImages(map[nextId])
-      prefetchIndex = Math.min(prefetchIndex + 1, order.length - 1)
-    }
+    sectionEls.forEach((el, i) => {
+      const dist = Math.abs(el.getBoundingClientRect().top - vh * 0.35)
+      if (dist < best) {
+        best = dist
+        nearest = i
+      }
+    })
+
+    const target = Math.max(nearest, scrollAheadIndex)
+    scrollAheadIndex = target
+    preloadScenesAhead(target, 2)
+
+    const tail = order[target + 3]
+    if (tail && map[tail]) preloadImages(map[tail])
   }
 
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -134,19 +183,17 @@ export function warmStart() {
   if (typeof document === 'undefined') return
   document.documentElement.classList.add('boot-warm')
   const phone = isHandheld()
-  const map = getScenePreloadMap()
 
   preloadCriticalAssets().then(() => {
     document.documentElement.classList.add('cinematic-ready')
     document.documentElement.classList.remove('boot-warm')
-    preloadImages(map.programs?.slice(0, phone ? 2 : 4) ?? [])
-    if (phone) {
-      preloadImages(map.journey?.slice(0, 1) ?? [])
-    }
+    preloadProgramsAfterHero()
+    preloadScenesAhead(0, phone ? 2 : 1)
   })
 
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 400 : 600))
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 280 : 500))
   idle(() => {
+    preloadScenesAhead(1, 2)
     preloadSecondaryAssets()
     attachScrollPrefetch()
   })

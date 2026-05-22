@@ -71,12 +71,17 @@
   }
 
   .cinematic-img {
-    transition-duration: 0.22s;
+    transition-duration: 0.12s;
+  }
+
+  .cinematic-img-wrap--priority .cinematic-img,
+  .cinematic-img-wrap[data-revealed] .cinematic-img {
+    transition-duration: 0.12s;
+    opacity: 1;
   }
 
   .cinematic-img-wrap--priority .cinematic-img {
     transition: none;
-    opacity: 1;
   }
 
   /* Hero — instant entrance */
