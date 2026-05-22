@@ -60,7 +60,20 @@ export const scenePacing = {
   },
 }
 
-export function pacingForScene(sceneId) {
+export function pacingForScene(sceneId, { handheld = false } = {}) {
   const emotion = SCENE_EMOTION[sceneId] ?? 'exclusivity'
-  return { emotion, ...scenePacing[emotion] }
+  const base = scenePacing[emotion]
+  if (!handheld) return { emotion, ...base }
+  return {
+    emotion,
+    ...base,
+    revealY: base.revealY * 0.7,
+    ritualY: base.ritualY * 0.75,
+    delay: base.delay * 1.3,
+    copyDelay: base.copyDelay * 1.25,
+    stiffness: Math.round(base.stiffness * 0.82),
+    damping: Math.round(base.damping * 1.1),
+    mass: base.mass * 1.08,
+    chapterDrift: base.chapterDrift * 0.55,
+  }
 }

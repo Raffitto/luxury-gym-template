@@ -1,12 +1,19 @@
-/* AETHERIS — handheld cinematic environment (iPhone-first) */
+/* AETHERIS — handheld cinematic environment (iPhone-first, ultra-premium) */
 
 @media (max-width: 767px) {
   :root {
     --page-gutter: clamp(1.125rem, 5vw, 1.5rem);
     --header-h: 3.5rem;
-    --mobile-sticky-h: 4.5rem;
-    --chamber-pad: clamp(3.5rem, 10vh, 5.5rem);
-    --chamber-pad-tight: clamp(2.75rem, 8vh, 4rem);
+    --mobile-sticky-h: 4.375rem;
+    --chamber-pad: clamp(4rem, 11vh, 6rem);
+    --chamber-pad-tight: clamp(3rem, 9vh, 4.5rem);
+    --void-deep: #010100;
+    --abyss: #030302;
+    --void: #050504;
+    --depth: #0a0908;
+    --shadow-warm: rgba(8, 7, 6, 0.85);
+    --glow-warm: rgba(186, 172, 148, 0.06);
+    --ease-touch: cubic-bezier(0.32, 0.72, 0.28, 1);
   }
 
   html {
@@ -17,126 +24,195 @@
   body.aetheris-handheld {
     overscroll-behavior-y: none;
     touch-action: pan-y;
+    background: var(--void-deep);
+    background-image: linear-gradient(
+      180deg,
+      var(--void-deep) 0%,
+      var(--abyss) 35%,
+      var(--void) 100%
+    );
   }
 
-  /* ── Continuous vertical film ── */
+  /* ── Vertical film — hypnotic scroll rhythm ── */
   .cinematic-landing--handheld {
-    background: linear-gradient(180deg, var(--void-deep) 0%, var(--abyss) 6%, var(--void) 100%);
+    background: transparent;
   }
 
   .cinematic-landing--handheld .scene-bridge--hero-exit {
-    height: clamp(7rem, 20vh, 11rem);
-    margin-top: clamp(-7rem, -15vh, -5rem);
+    height: clamp(8rem, 22vh, 12rem);
+    margin-top: clamp(-6.5rem, -13vh, -4.5rem);
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(2, 2, 2, 0.45) 30%,
-      var(--void-deep) 78%,
+      var(--shadow-warm) 28%,
+      var(--void-deep) 82%,
       var(--abyss) 100%
     );
   }
 
   .cinematic-landing--handheld .scene-bridge--flow {
-    height: clamp(5.5rem, 16vh, 9rem);
-    margin-top: clamp(-5.5rem, -11vh, -3.5rem);
+    height: clamp(6.5rem, 18vh, 10rem);
+    margin-top: clamp(-5rem, -10vh, -3rem);
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(4, 4, 5, 0.65) 38%,
-      var(--void-deep) 92%
+      rgba(3, 3, 3, 0.55) 42%,
+      var(--void-deep) 94%
     );
   }
 
   .cinematic-landing--handheld .film-chapter:not(.landing-scene--hero) {
-    margin-top: clamp(-3rem, -7vh, -1.5rem);
-    padding-top: clamp(5.5rem, 14vh, 8.5rem);
+    margin-top: clamp(-2.5rem, -5vh, -1rem);
+    padding-top: clamp(6rem, 15vh, 9rem);
   }
 
   .cinematic-landing--handheld .landing-scene--programs,
   .cinematic-landing--handheld .landing-scene--journey,
   .cinematic-landing--handheld .landing-scene--facility,
   .cinematic-landing--handheld .landing-scene--finale {
-    padding-bottom: clamp(4rem, 12vh, 6.5rem);
+    padding-bottom: clamp(4.5rem, 13vh, 7rem);
   }
 
-  /* ── Mobile dark luxury ── */
-  .cinematic-os--handheld .environmental-field {
+  .cinematic-landing--handheld .film-chapter-carry {
     opacity: 0.92;
+  }
+
+  /* ── Premium darkness & cinematic light ── */
+  .cinematic-os--handheld .environmental-field,
+  .cinematic-os--handheld .environmental-field--handheld-static {
+    opacity: 0.72;
   }
 
   .cinematic-os--handheld .env-fog {
     background: radial-gradient(
-      110% 70% at 50% 25%,
-      rgba(10, 11, 14, 0.4) 0%,
-      transparent 58%
+      105% 65% at 50% 22%,
+      rgba(14, 13, 12, 0.32) 0%,
+      transparent 56%
     );
   }
 
   .cinematic-os--handheld .env-bloom {
-    filter: blur(18px);
-    opacity: 0.65;
+    filter: blur(20px);
+    background: radial-gradient(
+      80% 50% at 50% 0%,
+      var(--glow-warm) 0%,
+      transparent 70%
+    );
+    opacity: 0.5;
   }
 
-  .cinematic-os--handheld .continuity-shadow-drift {
-    opacity: 0.7;
-    background: radial-gradient(
-      100% 50% at 50% 100%,
-      rgba(0, 0, 0, 0.62) 0%,
-      transparent 68%
+  .cinematic-os--handheld .env-wash {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(4, 4, 4, 0.18) 50%,
+      rgba(2, 2, 2, 0.32) 100%
     );
   }
 
-  /* ── Hero — trailer opening ── */
+  .cinematic-os--handheld .env-breathe--still {
+    background: radial-gradient(
+      70% 45% at 50% 55%,
+      rgba(18, 16, 14, 0.12) 0%,
+      transparent 72%
+    );
+  }
+
+  .cinematic-os--handheld .continuity-veil {
+    background: linear-gradient(
+      180deg,
+      rgba(1, 1, 0, 0.08) 0%,
+      rgba(6, 6, 5, 0.1) 50%,
+      rgba(1, 1, 0, 0.14) 100%
+    );
+  }
+
+  .cinematic-os--handheld .continuity-shadow-drift {
+    opacity: 0.58;
+    background: radial-gradient(
+      110% 48% at 50% 100%,
+      rgba(0, 0, 0, 0.58) 0%,
+      transparent 70%
+    );
+  }
+
+  .cinematic-os--handheld .continuity-spectrum {
+    opacity: 0.55;
+  }
+
+  /* ── Hero — alive in silence ── */
   .hero-experience--handheld {
     min-height: 100svh;
     min-height: 100dvh;
   }
 
   .hero-experience--handheld .hero-backdrop-img {
-    opacity: 0.62;
-    filter: brightness(1.05) contrast(1.04) saturate(0.98);
+    opacity: 0.58;
+    filter: brightness(1.02) contrast(1.03) saturate(0.96);
   }
 
   .hero-experience--handheld .hero-scrim {
     background:
-      linear-gradient(180deg, rgba(1, 1, 1, 0.5) 0%, transparent 28%),
-      linear-gradient(0deg, rgba(1, 1, 1, 0.88) 0%, rgba(1, 1, 1, 0.42) 42%, transparent 72%);
+      linear-gradient(180deg, rgba(1, 1, 0, 0.42) 0%, transparent 26%),
+      linear-gradient(
+        0deg,
+        rgba(1, 1, 0, 0.92) 0%,
+        rgba(4, 3, 2, 0.5) 44%,
+        transparent 74%
+      );
+  }
+
+  .hero-experience--handheld .hero-haze-band {
+    opacity: 0.14;
   }
 
   .hero-experience--handheld .hero-experience-content {
     justify-content: flex-end;
-    padding-top: calc(var(--header-h) + 0.25rem);
-    padding-bottom: calc(1rem + var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px));
+    padding-top: calc(var(--header-h) + 0.125rem);
+    padding-bottom: calc(1.125rem + var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px));
   }
 
   .hero-experience--handheld .hero-frame-panel {
-    padding: 1.35rem 1.25rem 1.5rem;
-    border-radius: 1rem;
+    padding: 1.5rem 1.25rem 1.625rem;
+    border-radius: 0.875rem;
+    background: linear-gradient(
+      158deg,
+      rgba(14, 13, 11, 0.9) 0%,
+      rgba(8, 7, 6, 0.86) 55%,
+      rgba(5, 5, 4, 0.82) 100%
+    );
+    border-color: rgba(186, 172, 148, 0.1);
+    box-shadow:
+      0 0 0 1px rgba(232, 226, 216, 0.03) inset,
+      0 20px 56px rgba(0, 0, 0, 0.62);
   }
 
   .hero-experience--handheld .hero-headline {
-    font-size: clamp(2.15rem, 11.5vw, 2.85rem);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.05rem, 10.8vw, 2.7rem);
+    line-height: 0.93;
+    letter-spacing: -0.032em;
+    font-weight: 600;
   }
 
   .hero-experience--handheld .hero-headline-line + .hero-headline-line {
-    margin-top: 0.06em;
+    margin-top: 0.08em;
   }
 
   .hero-experience--handheld .hero-subline {
-    font-size: 1.0625rem;
-    line-height: 1.65;
-    max-width: 22ch;
-    color: rgba(232, 228, 220, 0.9);
+    font-size: 1.03125rem;
+    line-height: 1.72;
+    max-width: 21ch;
+    color: rgba(220, 214, 204, 0.88);
+    margin-top: 1.375rem;
   }
 
   .hero-experience--handheld .hero-ritual-label {
-    letter-spacing: 0.26em;
+    letter-spacing: 0.28em;
+    color: rgba(154, 148, 138, 0.95);
   }
 
   .hero-experience--handheld .hero-cta-row {
-    margin-top: 1.75rem;
+    margin-top: 2rem;
   }
 
   .hero-experience--handheld .hero-cta-primary {
@@ -145,72 +221,78 @@
   }
 
   .hero-experience--handheld .hero-scroll-cue {
-    margin-top: 1.25rem;
-    opacity: 0.55;
+    margin-top: 1.5rem;
+    opacity: 0.42;
   }
 
   .hero-experience--handheld .hero-scroll-label {
     font-size: 0.5625rem;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.26em;
+    opacity: 0.7;
   }
 
   .hero-living-layer--handheld .hero-living-glow {
-    opacity: 0.42;
-    animation: hero-handheld-breathe 14s ease-in-out infinite;
+    opacity: 0.32;
+    animation: none;
+    background: radial-gradient(
+      75% 55% at 50% 35%,
+      rgba(186, 172, 148, 0.07) 0%,
+      transparent 68%
+    );
   }
 
   .hero-living-layer--handheld .hero-fog-breathe--static {
-    opacity: 0.28;
-  }
-
-  @keyframes hero-handheld-breathe {
-    0%,
-    100% {
-      opacity: 0.38;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.48;
-      transform: scale(1.02);
-    }
+    opacity: 0.18;
+    background: radial-gradient(
+      90% 60% at 50% 30%,
+      rgba(20, 18, 16, 0.2) 0%,
+      transparent 65%
+    );
   }
 
   .hero-experience--handheld .hero-horizontal-cue {
     display: none;
   }
 
-  /* ── Typographic cinema for phone ── */
+  /* ── Typographic cinema — directed, mythic ── */
   .cinematic-os--handheld .headline-chapter {
-    font-size: clamp(1.9rem, 8.5vw, 2.45rem);
-    line-height: 0.94;
-    letter-spacing: -0.026em;
-    max-width: 11ch;
+    font-size: clamp(1.85rem, 8.2vw, 2.35rem);
+    line-height: 0.95;
+    letter-spacing: -0.028em;
+    font-weight: 600;
+    max-width: 10.5ch;
   }
 
   .cinematic-os--handheld .headline-emotional {
-    font-size: clamp(2.2rem, 11vw, 2.9rem);
-    max-width: 12ch;
+    font-size: clamp(2.05rem, 10.5vw, 2.75rem);
+    line-height: 0.93;
+    max-width: 11ch;
   }
 
   .cinematic-os--handheld .copy-lead,
   .cinematic-os--handheld .copy-cinematic {
-    font-size: 1.0625rem;
-    line-height: 1.68;
-    max-width: 26ch;
-    color: rgba(210, 206, 198, 0.92);
+    font-size: 1.03125rem;
+    line-height: 1.74;
+    max-width: 24ch;
+    color: rgba(198, 192, 182, 0.9);
   }
 
   .cinematic-os--handheld .font-ritual {
-    font-size: 0.6rem;
-    letter-spacing: 0.26em;
+    font-size: 0.5625rem;
+    letter-spacing: 0.28em;
+    color: rgba(140, 136, 128, 0.95);
   }
 
   .cinematic-os--handheld .section-ritual-gap {
-    margin-bottom: 1.125rem;
+    margin-bottom: 1.25rem;
   }
 
   .cinematic-os--handheld .section-headline-gap {
-    margin-top: 0.875rem;
+    margin-top: 1rem;
+  }
+
+  .cinematic-os--handheld .kinetic-headline-line {
+    transform: none;
   }
 
   .cinematic-os--handheld .chamber,
@@ -219,32 +301,47 @@
     padding-right: var(--page-gutter);
   }
 
-  /* ── Thumb-first swipe ── */
+  .cinematic-os--handheld .landing-scene-inner {
+    gap: 0;
+  }
+
+  /* ── Tactile swipe & thumb flow ── */
   .swipeable-scenes--handheld {
     margin-inline: calc(var(--page-gutter) * -1);
     padding-inline: var(--page-gutter);
   }
 
   .swipeable-scenes--handheld .swipeable-scenes-track {
-    gap: 0.875rem;
-    padding-bottom: 0.25rem;
+    gap: 0.75rem;
+    padding-bottom: 0.125rem;
     scroll-padding-inline: var(--page-gutter);
+    -webkit-overflow-scrolling: touch;
   }
 
   .swipeable-scenes--handheld .scene-card-slot {
-    width: min(88vw, 22rem);
-    flex: 0 0 min(88vw, 22rem);
+    width: min(86vw, 21rem);
+    flex: 0 0 min(86vw, 21rem);
   }
 
   .swipeable-scenes--handheld .scene-card {
-    min-height: 22rem;
-    border-radius: 1rem;
+    min-height: 21rem;
+    border-radius: 0.875rem;
+    box-shadow:
+      0 0 0 1px rgba(232, 226, 216, 0.04),
+      0 14px 40px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.65s var(--ease-touch);
+  }
+
+  .swipeable-scenes--handheld .scene-card-slot--active .scene-card {
+    box-shadow:
+      0 0 0 1px rgba(196, 181, 154, 0.12),
+      0 18px 48px rgba(0, 0, 0, 0.55);
   }
 
   .swipeable-scenes--handheld .swipeable-scenes-controls {
-    margin-top: 1.5rem;
-    padding-bottom: 0.25rem;
-    gap: 1.25rem;
+    margin-top: 1.625rem;
+    padding-bottom: 0.125rem;
+    gap: 1.125rem;
   }
 
   .swipeable-scenes--handheld .scene-nav-btn {
@@ -253,55 +350,80 @@
     min-width: 48px;
     min-height: 48px;
     border-radius: 50%;
+    border-color: rgba(232, 226, 216, 0.08);
     -webkit-tap-highlight-color: transparent;
+    transition:
+      transform 0.55s var(--ease-touch),
+      border-color 0.5s ease,
+      opacity 0.4s ease;
+  }
+
+  .swipeable-scenes--handheld .scene-nav-btn:active:not(:disabled) {
+    transform: scale(0.96);
   }
 
   .swipeable-scenes--handheld .scene-dot {
-    width: 0.4375rem;
-    height: 0.4375rem;
-    min-width: 12px;
-    min-height: 12px;
-    padding: 6px;
+    width: 0.375rem;
+    height: 0.375rem;
+    min-width: 28px;
+    min-height: 28px;
+    padding: 10px;
     background-clip: content-box;
+    background-color: rgba(92, 90, 86, 0.8);
+    transition:
+      transform 0.55s var(--ease-touch),
+      background-color 0.5s ease;
   }
 
   .swipeable-scenes--handheld .scene-dot--active {
-    transform: scale(1.2);
-    background: var(--platinum);
+    transform: scale(1);
+    background-color: rgba(210, 204, 194, 0.85);
   }
 
-  /* ── Sticky thumb CTA ── */
+  /* ── Sticky CTA — soft emergence ── */
   .mobile-sticky-access {
-    padding: 0.625rem var(--page-gutter);
-    padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0px));
+    padding: 0.5rem var(--page-gutter);
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(1, 1, 1, 0.92) 18%,
+      rgba(1, 1, 0, 0.94) 22%,
       var(--void-deep) 100%
     );
-    border-top-color: rgba(232, 228, 220, 0.06);
-    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(232, 226, 216, 0.05);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
+    transition: transform 0.6s var(--ease-touch), opacity 0.55s var(--ease-touch);
   }
 
   .mobile-sticky-access .btn-magnetic {
-    min-height: 3.625rem;
+    min-height: 3.5rem;
     border-radius: 0;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     -webkit-tap-highlight-color: transparent;
+    transition:
+      box-shadow 0.6s var(--ease-touch),
+      transform 0.55s var(--ease-touch),
+      background 0.45s ease;
+  }
+
+  .mobile-sticky-access .btn-magnetic:active {
+    transform: scale(0.992);
+    box-shadow: 0 0 20px rgba(232, 226, 216, 0.08);
   }
 
   body.has-sticky-cta .page-with-sticky {
-    padding-bottom: calc(var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px) + 0.75rem);
+    padding-bottom: calc(var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px) + 0.875rem);
+    transition: padding-bottom 0.65s var(--ease-touch);
   }
 
-  /* ── Motion restraint on phone ── */
+  /* ── Luxury stillness — no restless motion ── */
   .cinematic-os--handheld .camera-rig-body,
   .cinematic-os--handheld .camera-rig-gyro {
     transform: none !important;
   }
 
-  .cinematic-os--handheld .env-sweep {
+  .cinematic-os--handheld .env-sweep,
+  .cinematic-os--handheld .env-breathe.gpu-layer {
     display: none;
   }
 
@@ -311,47 +433,89 @@
 
   .cinematic-os--handheld .scroll-progress--bar {
     height: 1px;
-    opacity: 0.35;
+    opacity: 0.22;
   }
 
-  /* Journey / facility legibility */
+  .cinematic-os--handheld .btn-magnetic {
+    transition:
+      box-shadow 0.6s var(--ease-touch),
+      transform 0.55s var(--ease-touch),
+      background 0.45s ease;
+  }
+
+  .cinematic-os--handheld .btn-magnetic:active {
+    transform: scale(0.994);
+  }
+
+  .cinematic-os--handheld .btn-magnetic-ghost:active {
+    transform: scale(0.996);
+  }
+
+  /* Scene legibility */
   .cinematic-os--handheld .journey-phase-title {
-    font-size: clamp(1.35rem, 5.5vw, 1.65rem);
-    line-height: 1.05;
+    font-size: clamp(1.3rem, 5.2vw, 1.55rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+
+  .cinematic-os--handheld .journey-phase-copy,
+  .cinematic-os--handheld .journey-timeline {
+    margin-top: 1.25rem;
   }
 
   .cinematic-os--handheld .facility-feature {
-    padding: 1rem 0;
+    padding: 1.125rem 0;
+    border-color: rgba(232, 226, 216, 0.04);
   }
 
   .cinematic-os--handheld .finale-frame-content--myth .headline-emotional {
-    max-width: 14ch;
+    max-width: 13ch;
     margin-inline: auto;
+    line-height: 0.94;
+  }
+
+  .cinematic-os--handheld .finale-glow-pulse {
+    opacity: 0.65;
+    filter: blur(40px);
   }
 
   .cinematic-os--handheld .myth-whisper {
-    font-size: 0.5625rem;
-    letter-spacing: 0.22em;
-    line-height: 1.6;
-    padding-inline: 1rem;
+    font-size: 0.53125rem;
+    letter-spacing: 0.24em;
+    line-height: 1.65;
+    padding-inline: 1.25rem;
+    color: rgba(140, 136, 128, 0.75);
+  }
+
+  .cinematic-os--handheld .scene-card-desc {
+    line-height: 1.62;
+    color: rgba(180, 174, 164, 0.92);
   }
 }
 
-/* Boot atmosphere — calmer on handheld */
+/* Boot — near-silent warm start */
 @media (max-width: 767px) {
   html.boot-warm body::before {
-    animation-duration: 9s;
-    opacity: 0.85;
+    animation-duration: 14s;
+    opacity: 0.65;
   }
 
   html.boot-warm body::after {
-    animation-duration: 14s;
-    opacity: 0.2;
+    display: none;
+  }
+
+  html.cinematic-ready.boot-warm body::before {
+    transition: opacity 0.85s var(--ease-touch, ease);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-living-layer--handheld .hero-living-glow {
     animation: none;
+  }
+
+  .mobile-sticky-access,
+  body.has-sticky-cta .page-with-sticky {
+    transition: none;
   }
 }

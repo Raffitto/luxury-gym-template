@@ -46,10 +46,10 @@ export default function MobileStickyAccess() {
           className="mobile-sticky-access lg:hidden"
           role="complementary"
           aria-label="Request access"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 12 }}
-          transition={spring.glide}
+          exit={{ opacity: 0, y: 8 }}
+          transition={{ type: 'spring', stiffness: 118, damping: 34, mass: 1.05 }}
         >
           <Link to={routes.trial} className="btn-magnetic w-full justify-center">
             {aetherisConfig.hero.primaryCta}

@@ -29,15 +29,25 @@ export const drag = {
   transition: { power: 0.14, timeConstant: 420 },
 }
 
-/** Thumb swipe — more resistance, liquid settle */
+/** Thumb swipe — soft resistance, weighted settle */
 export const dragThumb = {
-  elastic: 0.06,
-  momentum: 0.14,
-  transition: { power: 0.11, timeConstant: 500 },
+  elastic: 0.045,
+  momentum: 0.1,
+  transition: { power: 0.08, timeConstant: 580 },
 }
 
 export const springThumb = {
-  snap: { type: 'spring', stiffness: 165, damping: 32, mass: 1 },
+  snap: { type: 'spring', stiffness: 128, damping: 36, mass: 1.08 },
+  tap: { type: 'spring', stiffness: 220, damping: 32, mass: 0.85 },
+}
+
+export function magneticThumb(reduced) {
+  if (reduced) return {}
+  return {
+    whileHover: { scale: 1.002 },
+    whileTap: { scale: 0.996 },
+    transition: springThumb.tap,
+  }
 }
 
 export const transition = {

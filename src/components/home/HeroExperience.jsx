@@ -149,10 +149,10 @@ export default function HeroExperience() {
               transition={{
                 opacity: { ...spring.glide, delay: phone ? 0.35 : 0.4 },
                 y: {
-                  duration: phone ? 8 : 6,
+                  duration: phone ? 11 : 6,
                   repeat: Infinity,
-                  ease: [0.42, 0, 0.2, 1],
-                  delay: 0.5,
+                  ease: [0.38, 0, 0.18, 1],
+                  delay: 0.65,
                 },
               }}
             >

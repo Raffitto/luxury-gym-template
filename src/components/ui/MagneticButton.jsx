@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
-import { magneticHover, transition } from '../../motion/choreography'
+import { magneticHover, magneticThumb, transition } from '../../motion/choreography'
+import { useIsPhone } from '../../hooks/useIsPhone'
 
 export default function MagneticButton({
   children,
@@ -17,12 +18,13 @@ export default function MagneticButton({
 }) {
   const reduced = useReducedMotion()
   const mobile = useIsMobile()
+  const phone = useIsPhone()
   const base =
     variant === 'ghost'
       ? 'btn-magnetic btn-magnetic-ghost'
       : 'btn-magnetic'
 
-  const motionProps = mobile || reduced ? {} : magneticHover(reduced)
+  const motionProps = reduced ? {} : phone ? magneticThumb(reduced) : mobile ? {} : magneticHover(reduced)
 
   const content = (
     <>

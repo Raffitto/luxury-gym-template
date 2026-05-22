@@ -1,6 +1,7 @@
 import { forwardRef, useRef } from 'react'
 import { motion, useScroll } from 'framer-motion'
 import { useCinematicOS } from '../../context/CinematicOSContext'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { camera, chapterDepth } from '../../motion/camera'
 import { pacingForScene } from '../../intelligence/scenePacing'
 import { useLiquidScroll } from '../../motion/choreography'
@@ -19,7 +20,8 @@ const FilmChapter = forwardRef(function FilmChapter(
   const innerRef = useRef(null)
   const ref = forwardedRef || innerRef
   const { reduced } = useCinematicOS()
-  const pacing = pacingForScene(sceneId ?? id)
+  const phone = useIsPhone()
+  const pacing = pacingForScene(sceneId ?? id, { handheld: phone })
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
@@ -27,7 +29,8 @@ const FilmChapter = forwardRef(function FilmChapter(
 
   const driftEnd = camera.drift.chapterY[2] * chapterDepth(depthIndex) * pacing.chapterDrift
   const y = useLiquidScroll(scrollYProgress, [0, 1], [0, -driftEnd])
-  const opacity = useLiquidScroll(scrollYProgress, [0, 0.12, 0.88, 1], [0.82, 1, 1, 0.94])
+  const fadeIn = phone ? 0.88 : 0.82
+  const opacity = useLiquidScroll(scrollYProgress, [0, 0.14, 0.86, 1], [fadeIn, 1, 1, 0.96])
 
   return (
     <section

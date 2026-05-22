@@ -26,7 +26,7 @@ export function fuseAdaptiveEnergy({
       ? clamp(0.14 - velocity * 0.2 + memoryImmersion * 0.04, 0.06, 0.22)
       : 0
 
-  const energy = clamp(raw + idleBreath * 0.2, 0, 0.72)
+  const energy = clamp(raw + idleBreath * 0.16, 0, 0.58)
 
   return {
     energy,

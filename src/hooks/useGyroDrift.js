@@ -15,8 +15,8 @@ export function useGyroDrift() {
       const gamma = event.gamma ?? 0
       const beta = (event.beta ?? 0) - 50
       setDrift({
-        x: Math.max(-2, Math.min(2, gamma * 0.035)),
-        y: Math.max(-1.5, Math.min(1.5, beta * 0.025)),
+        x: Math.max(-1.2, Math.min(1.2, gamma * 0.022)),
+        y: Math.max(-0.8, Math.min(0.8, beta * 0.016)),
       })
     }
 

@@ -1,21 +1,37 @@
 import { motion, useTransform } from 'framer-motion'
 import { useCinematicOS } from '../../context/CinematicOSContext'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { camera } from '../../motion/camera'
 
-/** Restrained atmosphere — fewer layers, slower breath, no visual noise */
+/** Restrained atmosphere — static on handheld for luxury stillness */
 export default function EnvironmentalField() {
   const { energy, reduced, scrollYProgress, tierConfig, temporal, breathing } = useCinematicOS()
+  const phone = useIsPhone()
 
-  const washY = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '28%', '60%'])
+  const washY = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '24%', '52%'])
 
   if (reduced) return null
 
   const tier = tierConfig
-  const fog = (0.035 + energy * 0.06 + temporal.fogPhase * 0.02) * tier.fog
-  const grain = 0.012 * tier.grain
-  const bloom = (0.04 + energy * 0.06 + temporal.lightShift * 0.02) * tier.bloom
-  const breathDuration = temporal.breathDuration * (breathing ? 1.08 : 1)
-  const showSweep = tier.sweep > 0.2
+  const fog = (0.028 + energy * 0.04 + temporal.fogPhase * 0.012) * tier.fog
+  const grain = 0.008 * tier.grain
+  const bloom = (0.032 + energy * 0.04 + temporal.lightShift * 0.012) * tier.bloom
+  const breathDuration = temporal.breathDuration * (breathing ? 1.05 : 1)
+  const showSweep = tier.sweep > 0.2 && !phone
+
+  if (phone) {
+    return (
+      <div className="environmental-field environmental-field--handheld-static" aria-hidden>
+        <div className="env-layer env-fog" style={{ opacity: fog }} />
+        <div className="env-layer env-bloom" style={{ opacity: bloom * 0.85 }} />
+        <motion.div className="env-layer env-wash" style={{ y: washY }} />
+        {tier.grain > 0.2 ? (
+          <div className="env-layer env-grain env-grain--static" style={{ opacity: grain }} />
+        ) : null}
+        <div className="env-layer env-breathe env-breathe--still" style={{ opacity: 0.12 }} />
+      </div>
+    )
+  }
 
   return (
     <div className="environmental-field environmental-field--restrained" aria-hidden>
@@ -55,7 +71,7 @@ export default function EnvironmentalField() {
       ) : null}
       <motion.div
         className="env-layer env-breathe gpu-layer"
-        animate={{ opacity: breathing ? [0.18, 0.28, 0.2] : [0.14, 0.22, 0.16] }}
+        animate={{ opacity: breathing ? [0.14, 0.22, 0.16] : [0.1, 0.16, 0.12] }}
         transition={{
           duration: breathDuration,
           repeat: Infinity,

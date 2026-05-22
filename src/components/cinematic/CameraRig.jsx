@@ -18,7 +18,7 @@ export default function CameraRig({ children }) {
   }
 
   const gyroEnabled = tierConfig.gyro && gyro
-  const gyroScale = 0.35 * driftScale
+  const gyroScale = 0.22 * driftScale
 
   return (
     <div className="camera-rig camera-rig--restrained">
