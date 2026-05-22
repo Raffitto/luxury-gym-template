@@ -25,7 +25,7 @@ export default function MembershipFinale() {
     <section
       id="access"
       ref={ref}
-      className="landing-scene landing-scene--finale relative min-h-[88svh] overflow-hidden md:min-h-[100svh]"
+      className="landing-scene landing-scene--finale film-chapter relative min-h-[88svh] overflow-hidden md:min-h-[100svh]"
     >
       <CinematicAtmosphere intensity="climax" />
       <CinematicBackdrop
@@ -51,7 +51,7 @@ export default function MembershipFinale() {
               <RitualLabel>{climax.ritual}</RitualLabel>
 
               <motion.h2
-                className="headline-mythic font-display mt-8 text-[var(--platinum)]"
+                className="headline-emotional font-display mt-8 text-[var(--platinum)]"
                 style={reduced ? undefined : { y: headlineY }}
               >
                 {climax.headline.map((line, i) => (
@@ -69,7 +69,7 @@ export default function MembershipFinale() {
               </motion.h2>
 
               <motion.p
-                className="body-measured mx-auto mt-8 max-w-lg"
+                className="copy-cinematic mx-auto mt-8 max-w-lg text-center"
                 initial={reduced ? false : { opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}

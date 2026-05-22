@@ -16,21 +16,7 @@
   isolation: isolate;
 }
 
-.landing-scene--programs {
-  padding-bottom: clamp(3rem, 8vh, 5rem);
-}
-
-.landing-scene--journey {
-  padding-block: clamp(3.25rem, 9vh, 5.5rem);
-}
-
-.landing-scene--facility {
-  padding-bottom: clamp(3rem, 8vh, 5rem);
-}
-
-.landing-scene--finale {
-  padding-bottom: clamp(2.5rem, 6vh, 4rem);
-}
+/* Section rhythm handled by cinematic-immersion.css film-chapter */
 
 .landing-scene-inner {
   position: relative;
@@ -54,9 +40,9 @@
 }
 
 .scroll-progress--glow {
-  height: 6px;
+  height: 5px;
   background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
-  filter: blur(4px);
+  opacity: 0.5;
 }
 
 @media (max-width: 1023px) {
@@ -152,31 +138,6 @@
   background:
     linear-gradient(180deg, rgba(2, 2, 2, 0.35) 0%, transparent 32%),
     linear-gradient(0deg, rgba(2, 2, 2, 0.78) 0%, rgba(2, 2, 2, 0.28) 38%, transparent 68%);
-}
-
-.hero-accent-orb {
-  position: absolute;
-  top: 18%;
-  right: -8%;
-  z-index: 3;
-  width: min(55vw, 18rem);
-  height: min(55vw, 18rem);
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(196, 181, 154, 0.14), transparent 68%);
-  animation: hero-orb-pulse 4s ease-in-out infinite;
-}
-
-@keyframes hero-orb-pulse {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.08);
-  }
 }
 
 /* Living layer — beams, fog, immediate motion */
@@ -363,25 +324,9 @@
 
 .hero-frame-panel {
   padding: clamp(1.5rem, 5vw, 2.25rem);
-  background: linear-gradient(
-    155deg,
-    rgba(28, 26, 22, 0.78) 0%,
-    rgba(14, 13, 11, 0.72) 48%,
-    rgba(8, 8, 8, 0.65) 100%
-  );
-  border: 1px solid rgba(196, 181, 154, 0.18);
-  box-shadow:
-    0 0 0 1px rgba(232, 228, 220, 0.06) inset,
-    0 24px 64px rgba(0, 0, 0, 0.55),
-    0 0 48px rgba(196, 181, 154, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .hero-subline {
-  font-size: clamp(1rem, 2.8vw, 1.125rem);
-  line-height: 1.6;
-  color: var(--platinum);
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
 }
 
@@ -390,13 +335,6 @@
     0 0 0 1px rgba(232, 228, 220, 0.15),
     0 8px 32px rgba(0, 0, 0, 0.45),
     0 0 40px rgba(232, 228, 220, 0.15);
-}
-
-@media (max-width: 1023px) {
-  .hero-frame-panel {
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
 }
 
 .hero-parallax-bg {

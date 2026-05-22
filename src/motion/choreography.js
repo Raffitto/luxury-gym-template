@@ -24,9 +24,9 @@ export const spring = {
 }
 
 export const drag = {
-  elastic: 0.14,
-  momentum: 0.18,
-  transition: { power: 0.22, timeConstant: 320 },
+  elastic: 0.18,
+  momentum: 0.28,
+  transition: { power: 0.18, timeConstant: 380 },
 }
 
 export const transition = {

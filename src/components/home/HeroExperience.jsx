@@ -1,14 +1,17 @@
 import { useRef } from 'react'
-import { motion, useScroll } from 'framer-motion'
-import { spring, useLiquidScroll } from '../../motion/choreography'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
-import HeroLivingLayer, { HeroHorizontalCue } from '../cinematic/HeroLivingLayer'
+import DepthField from '../cinematic/DepthField'
+import HeroLivingLayer from '../cinematic/HeroLivingLayer'
+import HeroReflection from '../cinematic/HeroReflection'
+import { HeroHorizontalCue } from '../cinematic/HeroLivingLayer'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import FilmFrame from '../cinematic/FilmFrame'
 import MagneticButton from '../ui/MagneticButton'
+import { spring, useLiquidScroll } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
 
@@ -21,49 +24,51 @@ export default function HeroExperience() {
     target: ref,
     offset: ['start start', 'end start'],
   })
-  const bgScale = useLiquidScroll(scrollYProgress, [0, 1], [1, mobile ? 1.03 : 1.06])
-  const contentY = useLiquidScroll(scrollYProgress, [0, 1], [0, mobile ? 16 : 48])
+
+  const imageScale = useLiquidScroll(scrollYProgress, [0, 1], [1, mobile ? 1.06 : 1.1])
+  const imageY = useLiquidScroll(scrollYProgress, [0, 1], [0, mobile ? -36 : -72])
+  const contentY = useLiquidScroll(scrollYProgress, [0, 1], [0, mobile ? 28 : 56])
+  const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.92])
 
   return (
     <section
       ref={ref}
-      className="hero-experience landing-scene landing-scene--hero relative min-h-[100svh] overflow-hidden"
+      className="hero-experience landing-scene landing-scene--hero film-chapter relative min-h-[100svh] overflow-hidden"
     >
-      <CinematicAtmosphere intensity="hero" live />
+      <div className="hero-depth-stack">
+        <CinematicAtmosphere intensity="hero" live />
+        <DepthField scrollProgress={scrollYProgress} hero />
 
-      <motion.div
-        className={`hero-parallax-bg absolute inset-0 ${!reduced && mobile ? 'hero-parallax-bg--alive' : ''}`}
-        style={reduced || mobile ? undefined : { scale: bgScale }}
-        animate={
-          reduced || !mobile
-            ? undefined
-            : { scale: [1, 1.02, 1.01, 1] }
-        }
-        transition={
-          reduced || !mobile
-            ? undefined
-            : { duration: 18, repeat: Infinity, ease: [0.45, 0.05, 0.25, 1] }
-        }
-      >
-        <CinematicBackdrop
-          image={hero.image}
-          alt={hero.image.alt}
-          priority
-          preset="hero"
-          scrim="hero"
-          imageClassName="hero-backdrop-img"
-        />
-      </motion.div>
+        <motion.div
+          className="hero-parallax-bg hero-layer--far gpu-layer"
+          style={
+            reduced
+              ? undefined
+              : { scale: imageScale, y: imageY }
+          }
+        >
+          <CinematicBackdrop
+            image={hero.image}
+            alt={hero.image.alt}
+            priority
+            preset="hero"
+            scrim="hero"
+            imageClassName="hero-backdrop-img"
+          />
+        </motion.div>
 
-      <HeroLivingLayer />
-      <div className="hero-scrim" aria-hidden />
-      <div className="hero-accent-orb" aria-hidden />
+        <HeroLivingLayer />
+        <HeroReflection scrollYProgress={scrollYProgress} />
+      </div>
+
+      <div className="hero-scrim hero-layer--mid" aria-hidden />
+      <div className="hero-haze-band" aria-hidden />
       <div className="hero-letterbox hero-letterbox--top" aria-hidden />
       <div className="hero-letterbox hero-letterbox--bottom" aria-hidden />
 
       <motion.div
-        className="hero-experience-content relative z-10 flex min-h-[100svh] flex-col justify-between gap-6 pb-[calc(1.25rem+var(--mobile-sticky-h))] pt-[calc(var(--header-h)+0.5rem)] md:justify-end md:gap-0 md:pb-24 md:pt-[calc(var(--header-h)+2rem)]"
-        style={reduced ? undefined : { y: contentY }}
+        className="hero-experience-content hero-layer--near relative z-10 flex min-h-[100svh] flex-col justify-between gap-5 pb-[calc(1.25rem+var(--mobile-sticky-h))] pt-[calc(var(--header-h)+0.5rem)] md:justify-end md:gap-0 md:pb-24 md:pt-[calc(var(--header-h)+2rem)]"
+        style={reduced ? undefined : { y: contentY, opacity: panelOpacity }}
       >
         <HeroHorizontalCue />
 
@@ -79,12 +84,12 @@ export default function HeroExperience() {
                 {hero.ritual}
               </motion.p>
 
-              <h1 className="headline-mythic hero-headline font-display mt-4 text-[var(--platinum)] md:mt-6">
+              <h1 className="headline-mythic headline-emotional hero-headline font-display mt-3 md:mt-5">
                 {hero.headline.map((line, i) => (
                   <motion.span
                     key={line}
                     className="hero-headline-line block"
-                    initial={reduced ? false : { opacity: 0, y: mobile ? 14 : 28 }}
+                    initial={reduced ? false : { opacity: 0, y: mobile ? 12 : 22 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ ...spring.reveal, delay: i * 0.05 }}
                   >
@@ -94,7 +99,7 @@ export default function HeroExperience() {
               </h1>
 
               <motion.p
-                className="body-measured hero-subline mt-5 max-w-md md:mt-8 md:max-w-lg"
+                className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg"
                 initial={reduced ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ ...spring.liquid, delay: 0.15 }}
@@ -104,7 +109,7 @@ export default function HeroExperience() {
 
               <motion.div
                 id="hero-primary-cta"
-                className="hero-cta-row mt-7 sm:mt-10"
+                className="hero-cta-row mt-7 sm:mt-9"
                 initial={reduced ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...spring.liquid, delay: 0.25 }}
@@ -125,7 +130,7 @@ export default function HeroExperience() {
 
           {!reduced ? (
             <motion.div
-              className="hero-scroll-cue mt-6 flex items-center gap-2.5 text-[var(--silver)] md:mt-10"
+              className="hero-scroll-cue mt-6 flex items-center gap-2.5 md:mt-9"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, y: [0, 4, 0] }}
               transition={{
@@ -134,7 +139,7 @@ export default function HeroExperience() {
               }}
             >
               <ArrowDown className="h-4 w-4 shrink-0" strokeWidth={1} />
-              <span className="font-ritual hero-scroll-label">Scroll · swipe scenes below</span>
+              <span className="font-ritual hero-scroll-label">Enter the continuum</span>
             </motion.div>
           ) : null}
         </div>

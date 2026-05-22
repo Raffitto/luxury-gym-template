@@ -14,16 +14,16 @@ export default function TransformationScene() {
   const reduced = useReducedMotion()
 
   return (
-    <section id="journey" className="landing-scene landing-scene--journey relative overflow-hidden">
+    <section id="journey" className="landing-scene landing-scene--journey film-chapter relative overflow-hidden">
       <CinematicAtmosphere intensity="section" />
 
       <div className="landing-scene-inner chamber">
         <ChamberReveal className="max-w-2xl">
-          <RitualLabel>{transformation.ritual}</RitualLabel>
-          <h2 className="headline-chamber font-display mt-5 text-[var(--platinum)]">
+          <RitualLabel className="section-ritual-gap">{transformation.ritual}</RitualLabel>
+          <h2 className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
             {transformation.headline}
           </h2>
-          <p className="body-measured mt-5">{transformation.subline}</p>
+          <p className="copy-lead mt-6">{transformation.subline}</p>
         </ChamberReveal>
 
         <StaggerChamber className="journey-timeline mt-14">

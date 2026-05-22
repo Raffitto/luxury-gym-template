@@ -27,7 +27,7 @@ export default function FacilityScene() {
   const reduced = useReducedMotion()
 
   return (
-    <section id="facility" className="landing-scene landing-scene--facility relative overflow-hidden">
+    <section id="facility" className="landing-scene landing-scene--facility film-chapter relative overflow-hidden">
       <CinematicAtmosphere intensity="hero" />
       <CinematicBackdrop
         image={facility.image}
@@ -40,11 +40,11 @@ export default function FacilityScene() {
       <div className="relative z-10 landing-scene-inner chamber">
         <div className="facility-grid">
           <ChamberReveal className="facility-copy max-w-xl">
-            <RitualLabel>{facility.ritual}</RitualLabel>
-            <h2 className="headline-chamber font-display mt-5 text-[var(--platinum)]">
+            <RitualLabel className="section-ritual-gap">{facility.ritual}</RitualLabel>
+            <h2 className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
               {facility.headline}
             </h2>
-            <p className="body-measured mt-5">{facility.subline}</p>
+            <p className="copy-lead mt-6">{facility.subline}</p>
 
             <ul className="facility-features mt-10">
               {facility.features.map((f, i) => (
