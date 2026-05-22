@@ -298,7 +298,7 @@ a.btn-magnetic {
 @media (max-width: 1023px) {
   body.has-sticky-cta .page-with-sticky {
     padding-bottom: calc(var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px) + 0.5rem);
-    transition: padding-bottom 0.55s var(--ease-liquid);
+    transition: padding-bottom 0.14s ease-out;
   }
 }
 

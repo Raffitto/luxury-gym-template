@@ -1,6 +1,7 @@
 /* Performance rebalance — instant, lightweight, responsive */
 
-.page-instant {
+.page-instant,
+.page-native {
   opacity: 1;
 }
 
@@ -41,14 +42,70 @@
     filter: none;
   }
 
-  /* Offscreen scenes — skip paint until near viewport */
-  .cinematic-landing--handheld .film-chapter {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 100vh;
+  /* Native shell — stable, immediate */
+  html.aetheris-native,
+  body.aetheris-handheld {
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .cinematic-landing--handheld .landing-scene--hero {
-    content-visibility: visible;
+  .cinematic-os--handheld .kinetic-headline,
+  .cinematic-os--handheld .kinetic-copy,
+  .cinematic-os--handheld .kinetic-ritual,
+  .cinematic-os--handheld .kinetic-headline-line {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cinematic-img-wrap--native .cinematic-img,
+  .cinematic-os--handheld .cinematic-img {
+    opacity: 1;
+    transition: none;
+  }
+
+  .cinematic-img-wrap {
+    min-height: 1px;
+    background: linear-gradient(165deg, var(--depth) 0%, var(--void) 100%);
+  }
+
+  .scene-card-media {
+    min-height: 12.5rem;
+    contain: layout style paint;
+  }
+
+  .scene-card {
+    min-height: 21rem;
+    contain: layout style;
+  }
+
+  .journey-phase-visual {
+    min-height: 14rem;
+    aspect-ratio: 4 / 3;
+  }
+
+  .mobile-sticky-access {
+    transform: translate3d(0, 110%, 0);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.14s cubic-bezier(0.32, 0.72, 0.28, 1),
+      opacity 0.12s ease-out,
+      visibility 0.12s;
+  }
+
+  .mobile-sticky-access--visible {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-overlay {
+    transition: none;
+  }
+
+  .site-header {
+    transition: background 0.14s ease, border-color 0.14s ease;
   }
 
   /* Static atmosphere — no motion cost */
@@ -161,6 +218,18 @@
   .cinematic-os--handheld .cinematic-gradient-drift,
   .cinematic-os--handheld .cinematic-particle {
     animation: none !important;
+  }
+
+  .cinematic-landing--handheld .scene-bridge--flow {
+    height: clamp(4rem, 10vh, 6rem);
+  }
+
+  .cinematic-landing--handheld .scene-bridge--hero-exit {
+    height: clamp(3rem, 8vh, 5rem);
+  }
+
+  body.has-sticky-cta .page-with-sticky {
+    transition: padding-bottom 0.14s ease-out;
   }
 }
 

@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import { useIsMobile } from '../../hooks/useIsMobile'
-import { transition } from '../../motion/choreography'
 
 export default function MobileStickyAccess() {
   const { pathname } = useLocation()
@@ -26,7 +24,7 @@ export default function MobileStickyAccess() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(!entry.isIntersecting),
-      { root: null, threshold: 0, rootMargin: '0px 0px -15% 0px' },
+      { root: null, threshold: 0, rootMargin: '0px 0px -8% 0px' },
     )
 
     observer.observe(heroCta)
@@ -38,24 +36,18 @@ export default function MobileStickyAccess() {
     return () => document.body.classList.remove('has-sticky-cta')
   }, [visible])
 
+  if (!isMobile) return null
+
   return (
-    <AnimatePresence>
-      {visible && isMobile ? (
-        <motion.div
-          key="sticky-cta"
-          className="mobile-sticky-access lg:hidden"
-          role="complementary"
-          aria-label="Request access"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 3 }}
-          transition={transition.instant}
-        >
-          <Link to={routes.trial} className="btn-magnetic w-full justify-center">
-            {aetherisConfig.hero.primaryCta}
-          </Link>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
+    <div
+      className={`mobile-sticky-access lg:hidden ${visible ? 'mobile-sticky-access--visible' : ''}`}
+      role="complementary"
+      aria-label="Request access"
+      aria-hidden={!visible}
+    >
+      <Link to={routes.trial} className="btn-magnetic w-full justify-center">
+        {aetherisConfig.hero.primaryCta}
+      </Link>
+    </div>
   )
 }

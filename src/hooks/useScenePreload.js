@@ -35,7 +35,7 @@ export function useScenePreload() {
           preloadScenesAhead(idx, 2)
         })
       },
-      { rootMargin: '220% 0px 120% 0px', threshold: 0 },
+      { rootMargin: '300% 0px 160% 0px', threshold: 0 },
     )
 
     HOME_SCENE_ORDER.forEach((id) => {

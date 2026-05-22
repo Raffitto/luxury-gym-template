@@ -44,6 +44,123 @@ export default function HeroExperience() {
     if (el) el.classList.add('hero-warm-active')
   }, [])
 
+  const heroContentClass =
+    'hero-experience-content hero-layer--near relative z-10 flex min-h-[100svh] flex-col justify-between gap-5 pb-[calc(1.25rem+var(--mobile-sticky-h))] pt-[calc(var(--header-h)+0.5rem)] md:justify-end md:gap-0 md:pb-24 md:pt-[calc(var(--header-h)+2rem)]'
+
+  const heroInner = (
+    <>
+      <HeroHorizontalCue />
+      <div className="chamber-inner px-[var(--page-gutter)]">
+        <FilmFrame aspect="auto" bleed>
+          <div className="hero-frame-panel">
+            {reduced || phone ? (
+              <>
+                <p className="font-ritual hero-ritual-label">{hero.ritual}</p>
+                <h1 className="headline-mythic headline-emotional hero-headline font-display mt-3 md:mt-5">
+                  {hero.headline.map((line) => (
+                    <span key={line} className="hero-headline-line block">
+                      {line}
+                    </span>
+                  ))}
+                </h1>
+                <p className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg">
+                  {hero.subline}
+                </p>
+                <div id="hero-primary-cta" className="hero-cta-row mt-7 sm:mt-9">
+                  <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
+                    {hero.primaryCta}
+                  </MagneticButton>
+                  <MagneticButton
+                    to={routes.about}
+                    variant="ghost"
+                    className="hero-cta-secondary hidden sm:inline-flex"
+                  >
+                    {hero.secondaryCta}
+                  </MagneticButton>
+                </div>
+              </>
+            ) : (
+              <>
+                <motion.p
+                  className="font-ritual hero-ritual-label"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...heroEnter, delay: heroDelay(0.06) }}
+                >
+                  {hero.ritual}
+                </motion.p>
+                <h1 className="headline-mythic headline-emotional hero-headline font-display mt-3 md:mt-5">
+                  {hero.headline.map((line, i) => (
+                    <motion.span
+                      key={line}
+                      className="hero-headline-line block"
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ ...heroEnter, delay: heroDelay(0.08 + i * 0.04) }}
+                    >
+                      {line}
+                    </motion.span>
+                  ))}
+                </h1>
+                <motion.p
+                  className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ ...heroEnter, delay: heroDelay(0.1) }}
+                >
+                  {hero.subline}
+                </motion.p>
+                <motion.div
+                  id="hero-primary-cta"
+                  className="hero-cta-row mt-7 sm:mt-9"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...heroEnter, delay: heroDelay(0.12) }}
+                >
+                  <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
+                    {hero.primaryCta}
+                  </MagneticButton>
+                  <MagneticButton
+                    to={routes.about}
+                    variant="ghost"
+                    className="hero-cta-secondary hidden sm:inline-flex"
+                  >
+                    {hero.secondaryCta}
+                  </MagneticButton>
+                </motion.div>
+              </>
+            )}
+          </div>
+        </FilmFrame>
+        {!reduced && !phone ? (
+          <motion.div
+            className="hero-scroll-cue mt-6 flex items-center gap-2.5 md:mt-9"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: [0, 4, 0] }}
+            transition={{
+              opacity: { ...spring.glide, delay: 0.4 },
+              y: {
+                duration: 7,
+                repeat: Infinity,
+                ease: [0.38, 0, 0.18, 1],
+                delay: 0.7,
+              },
+            }}
+          >
+            <ArrowDown className="h-4 w-4 shrink-0" strokeWidth={1} />
+            <span className="font-ritual hero-scroll-label">Enter the continuum</span>
+          </motion.div>
+        ) : null}
+        {!reduced && phone ? (
+          <p className="hero-scroll-cue hero-scroll-cue--still mt-6 flex items-center gap-2.5 font-ritual">
+            <ArrowDown className="h-3.5 w-3.5 shrink-0 opacity-50" strokeWidth={1} />
+            <span className="hero-scroll-label">Enter the continuum</span>
+          </p>
+        ) : null}
+      </div>
+    </>
+  )
+
   return (
     <section
       ref={ref}
@@ -84,95 +201,16 @@ export default function HeroExperience() {
         </>
       ) : null}
 
-      <motion.div
-        className="hero-experience-content hero-layer--near relative z-10 flex min-h-[100svh] flex-col justify-between gap-5 pb-[calc(1.25rem+var(--mobile-sticky-h))] pt-[calc(var(--header-h)+0.5rem)] md:justify-end md:gap-0 md:pb-24 md:pt-[calc(var(--header-h)+2rem)]"
-        style={parallaxActive ? { y: contentY, opacity: panelOpacity } : undefined}
-      >
-        <HeroHorizontalCue />
-
-        <div className="chamber-inner px-[var(--page-gutter)]">
-          <FilmFrame aspect="auto" bleed>
-            <div className="hero-frame-panel">
-              <motion.p
-                className="font-ritual hero-ritual-label"
-                initial={reduced ? false : { opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...heroEnter, delay: heroDelay(0.06) }}
-              >
-                {hero.ritual}
-              </motion.p>
-
-              <h1 className="headline-mythic headline-emotional hero-headline font-display mt-3 md:mt-5">
-                {hero.headline.map((line, i) => (
-                  <motion.span
-                    key={line}
-                    className="hero-headline-line block"
-                    initial={reduced ? false : { opacity: 0, y: phone ? 6 : 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ ...heroEnter, delay: heroDelay(0.08 + i * 0.04) }}
-                  >
-                    {line}
-                  </motion.span>
-                ))}
-              </h1>
-
-              <motion.p
-                className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg"
-                initial={reduced ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ ...heroEnter, delay: heroDelay(0.1) }}
-              >
-                {hero.subline}
-              </motion.p>
-
-              <motion.div
-                id="hero-primary-cta"
-                className="hero-cta-row mt-7 sm:mt-9"
-                initial={reduced ? false : { opacity: 0, y: phone ? 6 : 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...heroEnter, delay: heroDelay(0.12) }}
-              >
-                <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
-                  {hero.primaryCta}
-                </MagneticButton>
-                <MagneticButton
-                  to={routes.about}
-                  variant="ghost"
-                  className="hero-cta-secondary hidden sm:inline-flex"
-                >
-                  {hero.secondaryCta}
-                </MagneticButton>
-              </motion.div>
-            </div>
-          </FilmFrame>
-
-          {!reduced && !phone ? (
-            <motion.div
-              className="hero-scroll-cue mt-6 flex items-center gap-2.5 md:mt-9"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, y: [0, 4, 0] }}
-              transition={{
-                opacity: { ...spring.glide, delay: 0.4 },
-                y: {
-                  duration: 7,
-                  repeat: Infinity,
-                  ease: [0.38, 0, 0.18, 1],
-                  delay: 0.7,
-                },
-              }}
-            >
-              <ArrowDown className="h-4 w-4 shrink-0" strokeWidth={1} />
-              <span className="font-ritual hero-scroll-label">Enter the continuum</span>
-            </motion.div>
-          ) : null}
-          {!reduced && phone ? (
-            <p className="hero-scroll-cue hero-scroll-cue--still mt-6 flex items-center gap-2.5 font-ritual">
-              <ArrowDown className="h-3.5 w-3.5 shrink-0 opacity-50" strokeWidth={1} />
-              <span className="hero-scroll-label">Enter the continuum</span>
-            </p>
-          ) : null}
-        </div>
-      </motion.div>
+      {phone ? (
+        <div className={heroContentClass}>{heroInner}</div>
+      ) : (
+        <motion.div
+          className={heroContentClass}
+          style={parallaxActive ? { y: contentY, opacity: panelOpacity } : undefined}
+        >
+          {heroInner}
+        </motion.div>
+      )}
     </section>
   )
 }

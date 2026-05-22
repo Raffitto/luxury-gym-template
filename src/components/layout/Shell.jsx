@@ -22,7 +22,10 @@ export default function Shell() {
       {!mobile && !reduced ? <FilmGrain /> : null}
       {!reduced && !mobile ? <ScrollProgress /> : null}
       <Navigation />
-      <main key={location.pathname} className="page-with-sticky min-h-screen page-instant">
+      <main
+        key={location.pathname}
+        className={`page-with-sticky min-h-screen page-instant ${mobile ? 'page-native' : ''}`}
+      >
         <Outlet />
       </main>
       <Footer />

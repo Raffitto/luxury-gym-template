@@ -193,9 +193,11 @@ export function warmStart() {
     document.documentElement.classList.remove('boot-warm')
   })
 
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 200 : 450))
+  preloadScenesAhead(1, phone ? 2 : 1)
+
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 80 : 350))
   idle(() => {
-    preloadScenesAhead(1, 2)
+    preloadScenesAhead(0, 3)
     preloadSecondaryAssets()
     attachScrollPrefetch()
   })

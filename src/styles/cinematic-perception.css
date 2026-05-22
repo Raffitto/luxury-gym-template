@@ -7,12 +7,8 @@
   }
 
   /* Scroll cadence — hypnotic, unhurried */
-  .cinematic-landing--handheld .scene-bridge--flow {
-    height: clamp(7rem, 19vh, 11rem);
-  }
-
   .cinematic-landing--handheld .film-chapter:not(.landing-scene--hero) {
-    padding-top: clamp(6.5rem, 16vh, 10rem);
+    padding-top: clamp(5rem, 12vh, 8rem);
   }
 
   .cinematic-landing--handheld .landing-scene-inner > * + * {

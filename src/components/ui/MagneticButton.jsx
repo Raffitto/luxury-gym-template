@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
-import { magneticHover, magneticThumb, transition } from '../../motion/choreography'
+import { magneticHover, magneticThumb } from '../../motion/choreography'
 import { useIsPhone } from '../../hooks/useIsPhone'
 
 export default function MagneticButton({
@@ -24,7 +24,8 @@ export default function MagneticButton({
       ? 'btn-magnetic btn-magnetic-ghost'
       : 'btn-magnetic'
 
-  const motionProps = reduced ? {} : phone ? magneticThumb(reduced) : mobile ? {} : magneticHover(reduced)
+  const motionProps = reduced || phone ? {} : mobile ? {} : magneticHover(reduced)
+  const tapProps = reduced || phone ? {} : mobile ? magneticThumb(reduced) : {}
 
   const content = (
     <>
@@ -34,11 +35,19 @@ export default function MagneticButton({
   )
 
   const wrapClass = fullWidth ? 'block w-full' : 'inline-block'
+  const linkClass = `${base} ${fullWidth ? 'w-full' : ''} ${className}`.trim()
 
   if (to) {
+    if (phone || reduced) {
+      return (
+        <Link to={to} className={`${wrapClass} ${linkClass}`} onClick={onClick}>
+          {content}
+        </Link>
+      )
+    }
     return (
-      <motion.div {...motionProps} className={wrapClass}>
-        <Link to={to} className={`${base} ${fullWidth ? 'w-full' : ''} ${className}`} onClick={onClick}>
+      <motion.div {...motionProps} {...tapProps} className={wrapClass}>
+        <Link to={to} className={linkClass} onClick={onClick}>
           {content}
         </Link>
       </motion.div>
@@ -46,17 +55,37 @@ export default function MagneticButton({
   }
 
   if (href) {
+    if (phone || reduced) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          {content}
+        </a>
+      )
+    }
     return (
       <motion.a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${base} ${fullWidth ? 'w-full' : ''} ${className}`}
+        className={linkClass}
         {...motionProps}
-        transition={transition.reveal(0.35)}
+        {...tapProps}
       >
         {content}
       </motion.a>
+    )
+  }
+
+  if (phone || reduced) {
+    return (
+      <button type={type} onClick={onClick} className={linkClass}>
+        {content}
+      </button>
     )
   }
 
@@ -64,9 +93,9 @@ export default function MagneticButton({
     <motion.button
       type={type}
       onClick={onClick}
-      className={`${base} ${fullWidth ? 'w-full' : ''} ${className}`}
+      className={linkClass}
       {...motionProps}
-      transition={transition.reveal(0.35)}
+      {...tapProps}
     >
       {content}
     </motion.button>

@@ -37,6 +37,7 @@ export default function CinematicImage({
   const [revealed, setRevealed] = useState(
     () =>
       cached ||
+      phone ||
       (priority &&
         typeof document !== 'undefined' &&
         document.documentElement.classList.contains('cinematic-ready')),
@@ -63,8 +64,8 @@ export default function CinematicImage({
       }
       return
     }
-    if (phone && priority) revealNow()
-  }, [displayPrimary, primarySrc, src, revealNow, cached, phone, priority])
+    if (phone) revealNow()
+  }, [displayPrimary, primarySrc, src, revealNow, cached, phone])
 
   const handleLoad = useCallback(
     (e) => {
@@ -88,7 +89,7 @@ export default function CinematicImage({
 
   return (
     <div
-      className={`cinematic-img-wrap ${fill ? 'absolute inset-0' : 'h-full w-full'} ${priority ? 'cinematic-img-wrap--priority' : ''} ${className}`.trim()}
+      className={`cinematic-img-wrap ${fill ? 'absolute inset-0' : 'h-full w-full'} ${priority ? 'cinematic-img-wrap--priority' : ''} ${phone ? 'cinematic-img-wrap--native' : ''} ${className}`.trim()}
       data-errored={errored || undefined}
       data-revealed={revealed || undefined}
     >

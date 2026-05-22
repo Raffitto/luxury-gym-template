@@ -16,7 +16,11 @@ export function CinematicOSProvider({ children }) {
 
   useEffect(() => {
     document.body.classList.toggle('aetheris-handheld', phone)
-    return () => document.body.classList.remove('aetheris-handheld')
+    document.documentElement.classList.toggle('aetheris-native', phone)
+    return () => {
+      document.body.classList.remove('aetheris-handheld')
+      document.documentElement.classList.remove('aetheris-native')
+    }
   }, [phone])
 
   const { scrollYProgress } = useScroll({
