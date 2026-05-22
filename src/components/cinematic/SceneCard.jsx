@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import CinematicImage from '../ui/CinematicImage'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
-import { transition, viewportOnce } from '../../motion/choreography'
+import { spring, viewportOnce } from '../../motion/choreography'
 
 export default function SceneCard({
   image,
@@ -48,12 +48,12 @@ export default function SceneCard({
 
   const wrapped = (
     <motion.div
-      className="scene-card-motion"
-      whileTap={{ scale: 0.985 }}
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportOnce('-4%')}
-      transition={transition.cinematic(0.65)}
+      className="scene-card-motion gpu-layer"
+      whileTap={{ scale: 0.992, transition: spring.tap }}
+      initial={{ opacity: 0, y: 12, scale: 0.992 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={viewportOnce('-3%')}
+      transition={spring.liquid}
     >
       {content}
     </motion.div>

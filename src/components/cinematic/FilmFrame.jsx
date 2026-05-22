@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
-import { transition, viewportOnce } from '../../motion/choreography'
+import { spring, viewportOnce } from '../../motion/choreography'
 
 export default function FilmFrame({
   children,
@@ -33,11 +33,11 @@ export default function FilmFrame({
 
   return (
     <motion.div
-      className={`film-frame-wrap ${useBleed ? 'film-frame-wrap--bleed' : ''}`}
-      initial={{ opacity: 0, y: mobile ? 20 : 32, scale: 0.99 }}
+      className={`film-frame-wrap gpu-layer ${useBleed ? 'film-frame-wrap--bleed' : ''}`}
+      initial={{ opacity: 0, y: 14, scale: 0.994 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={viewportOnce('-6%')}
-      transition={transition.cinematic(mobile ? 0.75 : 0.9, delay)}
+      viewport={viewportOnce('-5%')}
+      transition={{ ...spring.reveal, delay }}
     >
       {frame}
     </motion.div>

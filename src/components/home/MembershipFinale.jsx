@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
@@ -7,7 +7,7 @@ import CinematicBackdrop from '../ui/CinematicBackdrop'
 import FilmFrame from '../cinematic/FilmFrame'
 import RitualLabel from '../ui/RitualLabel'
 import MagneticButton from '../ui/MagneticButton'
-import { transition } from '../../motion/choreography'
+import { spring, useLiquidScroll } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 export default function MembershipFinale() {
@@ -18,8 +18,8 @@ export default function MembershipFinale() {
     target: ref,
     offset: ['start end', 'end end'],
   })
-  const headlineY = useTransform(scrollYProgress, [0, 1], [24, -12])
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.7, 1])
+  const headlineY = useLiquidScroll(scrollYProgress, [0, 1], [16, -8])
+  const glowOpacity = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [0.28, 0.55, 0.75])
 
   return (
     <section
@@ -38,7 +38,7 @@ export default function MembershipFinale() {
 
       {!reduced ? (
         <motion.div
-          className="finale-glow-pulse"
+          className="finale-glow-pulse gpu-layer"
           style={{ opacity: glowOpacity }}
           aria-hidden
         />
@@ -58,10 +58,10 @@ export default function MembershipFinale() {
                   <motion.span
                     key={line}
                     className="block"
-                    initial={reduced ? false : { opacity: 0, y: 36 }}
+                    initial={reduced ? false : { opacity: 0, y: 22 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-8%' }}
-                    transition={transition.cinematic(0.95, i * 0.12)}
+                    transition={{ ...spring.reveal, delay: i * 0.08 }}
                   >
                     {line}
                   </motion.span>
@@ -73,17 +73,17 @@ export default function MembershipFinale() {
                 initial={reduced ? false : { opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={transition.cinematic(0.75, 0.3)}
+                transition={{ ...spring.liquid, delay: 0.2 }}
               >
                 {climax.subline}
               </motion.p>
 
               <motion.div
                 className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-                initial={reduced ? false : { opacity: 0, y: 20 }}
+                initial={reduced ? false : { opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={transition.cinematic(0.7, 0.45)}
+                transition={{ ...spring.liquid, delay: 0.32 }}
               >
                 <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
                 <MagneticButton to={routes.membership} variant="ghost">

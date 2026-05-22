@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { variants, transition, viewportOnce } from '../../motion/choreography'
+import { variants, spring, viewportOnce } from '../../motion/choreography'
 
 export default function RitualLabel({ children, className = '' }) {
   return (
@@ -9,7 +9,7 @@ export default function RitualLabel({ children, className = '' }) {
       whileInView="visible"
       viewport={viewportOnce()}
       variants={variants.riseSubtle}
-      transition={transition.reveal(0.6)}
+      transition={spring.liquid}
     >
       {children}
     </motion.p>

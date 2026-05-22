@@ -26,6 +26,8 @@
 
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-liquid: cubic-bezier(0.25, 0.8, 0.35, 1);
+  --ease-drift: cubic-bezier(0.45, 0.05, 0.25, 1);
 
   --shadow-volumetric: 0 40px 120px rgba(0, 0, 0, 0.7);
   --shadow-edge: 0 0 0 1px var(--edge), 0 24px 80px rgba(0, 0, 0, 0.55);
@@ -294,6 +296,7 @@ a.btn-magnetic {
 @media (max-width: 1023px) {
   body.has-sticky-cta .page-with-sticky {
     padding-bottom: calc(var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px) + 0.5rem);
+    transition: padding-bottom 0.55s var(--ease-liquid);
   }
 }
 

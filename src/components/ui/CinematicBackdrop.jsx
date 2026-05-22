@@ -16,6 +16,8 @@ export default function CinematicBackdrop({
   if (!resolveImageSrc(image)) return <div className="cinematic-img-fallback-bg absolute inset-0" aria-hidden />
 
   const scrims = {
+    hero:
+      'absolute inset-0 bg-gradient-to-b from-[var(--void)]/25 via-[var(--void)]/45 to-[var(--void)]/82',
     default:
       'absolute inset-0 bg-gradient-to-b from-[var(--void)]/50 via-[var(--void)]/75 to-[var(--void)]/95',
     performance:

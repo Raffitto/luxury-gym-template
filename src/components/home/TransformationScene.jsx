@@ -6,7 +6,7 @@ import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
 import FilmFrame from '../cinematic/FilmFrame'
 import ParallaxLayer from '../cinematic/ParallaxLayer'
 import CinematicImage from '../ui/CinematicImage'
-import { transition, viewportOnce } from '../../motion/choreography'
+import { spring, variants, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 export default function TransformationScene() {
@@ -30,11 +30,12 @@ export default function TransformationScene() {
           {transformation.phases.map((phase, i) => (
             <motion.article
               key={phase.phase}
-              className={`journey-phase ${i % 2 === 1 ? 'journey-phase--reverse' : ''}`}
-              initial={reduced ? false : { opacity: 0, x: i % 2 ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className={`journey-phase gpu-layer ${i % 2 === 1 ? 'journey-phase--reverse' : ''}`}
+              variants={i % 2 ? variants.slideLeft : variants.slideRight}
+              initial={reduced ? false : 'hidden'}
+              whileInView={reduced ? undefined : 'visible'}
               viewport={viewportOnce()}
-              transition={transition.cinematic(0.85, i * 0.1)}
+              transition={{ ...spring.liquid, delay: i * 0.06 }}
             >
               <div className="journey-phase-copy">
                 <span className="journey-phase-num font-ritual">{phase.phase}</span>

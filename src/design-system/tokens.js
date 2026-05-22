@@ -28,6 +28,8 @@ export const tokens = {
     reveal: [0.22, 1, 0.36, 1],
     weight: [0.65, 0, 0.35, 1],
     magnetic: [0.33, 1, 0.68, 1],
+    liquid: [0.25, 0.8, 0.35, 1],
+    drift: [0.45, 0.05, 0.25, 1],
   },
   duration: {
     instant: 0.2,

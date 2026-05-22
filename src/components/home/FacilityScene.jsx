@@ -10,7 +10,7 @@ import ParallaxLayer from '../cinematic/ParallaxLayer'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import CinematicImage from '../ui/CinematicImage'
 import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
-import { transition, viewportOnce } from '../../motion/choreography'
+import { spring, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 function GallerySlide({ image, alt }) {
@@ -54,7 +54,7 @@ export default function FacilityScene() {
                   initial={reduced ? false : { opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewportOnce()}
-                  transition={transition.cinematic(0.65, i * 0.08)}
+                  transition={{ ...spring.liquid, delay: i * 0.05 }}
                 >
                   <span className="facility-feature-label font-display">{f.label}</span>
                   <span className="facility-feature-detail font-ritual">{f.detail}</span>

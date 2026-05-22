@@ -1,29 +1,106 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { motion, useMotionValue, useSpring, animate } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useIsMobile } from '../../hooks/useIsMobile'
+import { spring, drag } from '../../motion/choreography'
 
-export default function SwipeableSceneCards({ children, className = '' }) {
-  const reduced = useReducedMotion()
+const GAP = 16
+
+function SpringSwipeTrack({ items, index, setIndex, className }) {
   const trackRef = useRef(null)
-  const [index, setIndex] = useState(0)
-  const items = Array.isArray(children) ? children : [children]
-  const count = items.length
+  const [step, setStep] = useState(0)
+  const x = useMotionValue(0)
+  const springX = useSpring(x, spring.snap)
+
+  const measure = useCallback(() => {
+    const track = trackRef.current
+    if (!track) return
+    const card = track.querySelector('[data-scene-card]')
+    if (!card) return
+    const gap = parseFloat(getComputedStyle(track).gap) || GAP
+    setStep(card.getBoundingClientRect().width + gap)
+  }, [])
+
+  useEffect(() => {
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [measure, items.length])
+
+  const snapTo = useCallback(
+    (next) => {
+      const clamped = Math.max(0, Math.min(items.length - 1, next))
+      setIndex(clamped)
+      if (step) {
+        animate(x, -clamped * step, spring.snap)
+      }
+    },
+    [items.length, setIndex, step, x],
+  )
+
+  useEffect(() => {
+    if (step) animate(x, -index * step, spring.snap)
+  }, [index, step, x])
+
+  const minX = -(items.length - 1) * step
+
+  return (
+    <div className={`swipeable-scenes ${className}`.trim()}>
+      <motion.div
+        ref={trackRef}
+        className="swipeable-scenes-track swipeable-scenes-track--spring gpu-layer"
+        style={{ x: springX }}
+        drag="x"
+        dragConstraints={step ? { left: minX, right: 0 } : false}
+        dragElastic={drag.elastic}
+        dragMomentum
+        dragTransition={drag.transition}
+        onDragEnd={(_, info) => {
+          if (!step) return
+          const projected = x.get() + info.velocity.x * drag.momentum
+          const next = Math.round(-projected / step)
+          snapTo(next)
+        }}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Swipeable scenes"
+      >
+        {items.map((child, i) => (
+          <div
+            key={i}
+            data-scene-card
+            className={`scene-card-slot gpu-layer ${i === index ? 'scene-card-slot--active' : ''}`}
+          >
+            {child}
+          </div>
+        ))}
+      </motion.div>
+
+      {items.length > 1 ? (
+        <SwipeControls count={items.length} index={index} onSelect={snapTo} />
+      ) : null}
+    </div>
+  )
+}
+
+function ScrollSwipeTrack({ items, index, setIndex, className, reduced }) {
+  const trackRef = useRef(null)
 
   const getCardStep = useCallback(() => {
     const track = trackRef.current
     if (!track) return 0
     const card = track.querySelector('[data-scene-card]')
     if (!card) return 0
-    const gap = parseFloat(getComputedStyle(track).gap) || 16
+    const gap = parseFloat(getComputedStyle(track).gap) || GAP
     return card.getBoundingClientRect().width + gap
   }, [])
 
   const scrollToIndex = useCallback(
     (next) => {
-      const clamped = Math.max(0, Math.min(count - 1, next))
+      const clamped = Math.max(0, Math.min(items.length - 1, next))
       const track = trackRef.current
       if (!track) return
-
       const card = track.children[clamped]
       if (card) {
         card.scrollIntoView({
@@ -34,21 +111,21 @@ export default function SwipeableSceneCards({ children, className = '' }) {
       }
       setIndex(clamped)
     },
-    [count, reduced],
+    [items.length, reduced, setIndex],
   )
 
   useEffect(() => {
     const track = trackRef.current
-    if (!track || count <= 1) return undefined
+    if (!track || items.length <= 1) return undefined
 
     let raf = 0
     const onScroll = () => {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(() => {
-        const step = getCardStep()
-        if (!step) return
-        const next = Math.round(track.scrollLeft / step)
-        setIndex(Math.max(0, Math.min(count - 1, next)))
+        const stride = getCardStep()
+        if (!stride) return
+        const next = Math.round(track.scrollLeft / stride)
+        setIndex(Math.max(0, Math.min(items.length - 1, next)))
       })
     }
 
@@ -57,7 +134,77 @@ export default function SwipeableSceneCards({ children, className = '' }) {
       cancelAnimationFrame(raf)
       track.removeEventListener('scroll', onScroll)
     }
-  }, [count, getCardStep])
+  }, [items.length, getCardStep, setIndex])
+
+  return (
+    <div className={`swipeable-scenes ${className}`.trim()}>
+      <div
+        ref={trackRef}
+        className="swipeable-scenes-track swipeable-scenes-track--snap gpu-layer"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Swipeable scenes"
+      >
+        {items.map((child, i) => (
+          <div
+            key={i}
+            data-scene-card
+            className={`scene-card-slot gpu-layer ${i === index ? 'scene-card-slot--active' : ''}`}
+          >
+            {child}
+          </div>
+        ))}
+      </div>
+      {items.length > 1 ? (
+        <SwipeControls count={items.length} index={index} onSelect={scrollToIndex} />
+      ) : null}
+    </div>
+  )
+}
+
+function SwipeControls({ count, index, onSelect }) {
+  return (
+    <div className="swipeable-scenes-controls">
+      <button
+        type="button"
+        className="scene-nav-btn"
+        onClick={() => onSelect(index - 1)}
+        disabled={index === 0}
+        aria-label="Previous slide"
+      >
+        <ChevronLeft strokeWidth={1.25} className="h-4 w-4" />
+      </button>
+      <div className="scene-dots" role="tablist" aria-label="Slide navigation">
+        {Array.from({ length: count }).map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            role="tab"
+            aria-selected={i === index}
+            className={`scene-dot ${i === index ? 'scene-dot--active' : ''}`}
+            onClick={() => onSelect(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+      <button
+        type="button"
+        className="scene-nav-btn"
+        onClick={() => onSelect(index + 1)}
+        disabled={index >= count - 1}
+        aria-label="Next slide"
+      >
+        <ChevronRight strokeWidth={1.25} className="h-4 w-4" />
+      </button>
+    </div>
+  )
+}
+
+export default function SwipeableSceneCards({ children, className = '' }) {
+  const reduced = useReducedMotion()
+  const mobile = useIsMobile()
+  const [index, setIndex] = useState(0)
+  const items = Array.isArray(children) ? children : [children]
 
   if (reduced) {
     return (
@@ -71,62 +218,24 @@ export default function SwipeableSceneCards({ children, className = '' }) {
     )
   }
 
-  return (
-    <div className={`swipeable-scenes ${className}`.trim()}>
-      <div
-        ref={trackRef}
-        className="swipeable-scenes-track swipeable-scenes-track--snap"
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Swipeable scenes"
-      >
-        {items.map((child, i) => (
-          <div
-            key={i}
-            data-scene-card
-            className={`scene-card-slot ${i === index ? 'scene-card-slot--active' : ''}`}
-            aria-hidden={i !== index ? true : undefined}
-          >
-            {child}
-          </div>
-        ))}
-      </div>
+  if (mobile) {
+    return (
+      <SpringSwipeTrack
+        items={items}
+        index={index}
+        setIndex={setIndex}
+        className={className}
+      />
+    )
+  }
 
-      {count > 1 ? (
-        <div className="swipeable-scenes-controls">
-          <button
-            type="button"
-            className="scene-nav-btn"
-            onClick={() => scrollToIndex(index - 1)}
-            disabled={index === 0}
-            aria-label="Previous slide"
-          >
-            <ChevronLeft strokeWidth={1.25} className="h-4 w-4" />
-          </button>
-          <div className="scene-dots" role="tablist" aria-label="Slide navigation">
-            {items.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                aria-selected={i === index}
-                className={`scene-dot ${i === index ? 'scene-dot--active' : ''}`}
-                onClick={() => scrollToIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            className="scene-nav-btn"
-            onClick={() => scrollToIndex(index + 1)}
-            disabled={index >= count - 1}
-            aria-label="Next slide"
-          >
-            <ChevronRight strokeWidth={1.25} className="h-4 w-4" />
-          </button>
-        </div>
-      ) : null}
-    </div>
+  return (
+    <ScrollSwipeTrack
+      items={items}
+      index={index}
+      setIndex={setIndex}
+      className={className}
+      reduced={reduced}
+    />
   )
 }

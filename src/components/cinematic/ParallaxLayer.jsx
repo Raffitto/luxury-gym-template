@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
+import { useLiquidScroll } from '../../motion/choreography'
 
 export default function ParallaxLayer({
   children,
@@ -17,8 +18,9 @@ export default function ParallaxLayer({
     target: ref,
     offset,
   })
-  const y = useTransform(scrollYProgress, [0, 1], [speed * -40, speed * 40])
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.02, 1, 0.99])
+  const drift = speed * 28
+  const y = useLiquidScroll(scrollYProgress, [0, 1], [-drift, drift])
+  const scale = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [1.008, 1, 0.998])
 
   if (lite) {
     return (
@@ -30,7 +32,7 @@ export default function ParallaxLayer({
 
   return (
     <div ref={ref} className={`parallax-layer ${className}`.trim()}>
-      <motion.div className="parallax-layer-inner" style={{ y, scale }}>
+      <motion.div className="parallax-layer-inner gpu-layer" style={{ y, scale }}>
         {children}
       </motion.div>
     </div>
