@@ -22,14 +22,14 @@ function JourneyPhase({ phase, i, reduced, phone }) {
       </div>
       <FilmFrame aspect="cinematic" delay={reduced || phone ? 0 : i * 0.05}>
         <ParallaxLayer speed={0.1 + i * 0.02}>
-          <div className="journey-phase-visual">
-            <CinematicImage
-              image={phase.image}
-              alt={phase.image.alt}
-              preset="card"
-              fill
-              priority={phone && i < 2}
-            />
+                  <div className="journey-phase-visual journey-phase-visual--depth">
+                    <CinematicImage
+                      image={phase.image}
+                      alt={phase.image.alt}
+                      preset="card"
+                      fill
+                      priority={phone && i < 2}
+                    />
           </div>
         </ParallaxLayer>
       </FilmFrame>

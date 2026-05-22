@@ -20,9 +20,12 @@ export default function SceneCard({
   const phone = useIsPhone()
 
   const content = (
-    <article className="scene-card edge-lit">
-      <div className="scene-card-media">
+    <article className="scene-card scene-card--still edge-lit">
+      <div className="scene-card-media scene-card-media--depth">
         <CinematicImage image={image} alt={alt} preset="card" fill priority={priority} />
+        <div className="scene-card-dof" aria-hidden />
+        <div className="scene-card-specular" aria-hidden />
+        <div className="scene-card-reflection" aria-hidden />
         <div className="scene-card-scrim" aria-hidden />
         {index != null ? (
           <span className="scene-card-index font-ritual">{String(index).padStart(2, '0')}</span>

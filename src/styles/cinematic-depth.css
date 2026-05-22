@@ -1,0 +1,361 @@
+/* 10K immersive visual depth — perceived ultra-res via light, layer, composition */
+
+.cinematic-landing--depth {
+  --depth-void: #010100;
+  --depth-steel: rgba(196, 181, 154, 0.14);
+  --depth-rim: rgba(232, 226, 216, 0.08);
+  --render-sharp: contrast(1.08) saturate(1.06) brightness(1.04);
+  --render-soft: contrast(1.02) saturate(1.02) brightness(0.98);
+}
+
+/* ── Global render polish ── */
+.cinematic-landing--depth .cinematic-img--render {
+  filter: var(--render-sharp);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.cinematic-landing--depth .cinematic-img-wrap--priority .cinematic-img--render {
+  filter: contrast(1.1) saturate(1.08) brightness(1.06);
+}
+
+/* ── Hero: massive cinematic frame ── */
+.cinematic-landing--depth .hero-experience--film {
+  background: var(--depth-void);
+}
+
+.cinematic-landing--depth .hero-depth-stack::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 95% 70% at 50% 38%, transparent 42%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 28%, transparent 62%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.cinematic-landing--depth .hero-depth-stack::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: linear-gradient(
+    118deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.03) 49%,
+    transparent 58%
+  );
+  opacity: 0.65;
+}
+
+.cinematic-landing--depth .hero-experience--film .hero-backdrop-img {
+  opacity: 0.82;
+  filter: contrast(1.12) saturate(1.08) brightness(1.05);
+}
+
+.cinematic-landing--depth .hero-scrim {
+  background:
+    linear-gradient(180deg, rgba(1, 1, 0, 0.55) 0%, transparent 30%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.88), transparent 55%),
+    linear-gradient(0deg, rgba(1, 1, 0, 0.92) 0%, rgba(1, 1, 0, 0.35) 42%, transparent 72%);
+}
+
+.cinematic-landing--depth .hero-haze-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18%;
+  height: 28%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(196, 181, 154, 0.06), transparent);
+  opacity: 0.9;
+}
+
+.cinematic-landing--depth .hero-frame-panel {
+  position: relative;
+  border-radius: 0.125rem;
+  background: linear-gradient(
+    165deg,
+    rgba(12, 11, 10, 0.72) 0%,
+    rgba(6, 6, 5, 0.55) 100%
+  );
+  box-shadow:
+    0 0 0 1px var(--depth-rim),
+    0 24px 80px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.cinematic-landing--depth .hero-frame-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 42%);
+}
+
+.cinematic-landing--depth .hero-headline {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.8),
+    0 8px 32px rgba(0, 0, 0, 0.65);
+}
+
+/* ── Programs: premium film stills ── */
+.cinematic-landing--depth .landing-scene--programs .editorial-chapter-head::after {
+  width: clamp(3rem, 14vw, 5rem);
+  background: linear-gradient(90deg, rgba(196, 181, 154, 0.5), transparent);
+}
+
+.cinematic-landing--depth .scene-card--still {
+  box-shadow:
+    0 0 0 1px rgba(232, 226, 216, 0.06),
+    0 20px 56px rgba(0, 0, 0, 0.68),
+    0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+.cinematic-landing--depth .scene-card-media--depth {
+  isolation: isolate;
+}
+
+.cinematic-landing--depth .scene-card-media--depth .cinematic-img--render {
+  transform: scale(1.02);
+  transform-origin: center 35%;
+}
+
+.cinematic-landing--depth .scene-card-dof {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 85% 65% at 50% 35%, transparent 30%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, transparent 45%);
+}
+
+.cinematic-landing--depth .scene-card-specular {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    transparent 55%,
+    rgba(255, 255, 255, 0.07) 62%,
+    transparent 70%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.cinematic-landing--depth .scene-card-reflection {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28%;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(196, 181, 154, 0.08), transparent);
+  opacity: 0.85;
+}
+
+.cinematic-landing--depth .scene-card-scrim {
+  background: linear-gradient(
+    180deg,
+    transparent 32%,
+    rgba(2, 2, 2, 0.35) 58%,
+    rgba(1, 1, 0, 0.92) 100%
+  );
+}
+
+.cinematic-landing--depth .scene-card-body {
+  background: linear-gradient(180deg, rgba(8, 8, 7, 0.95), rgba(4, 4, 3, 1));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.cinematic-landing--depth .scene-card-index {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Journey: cinematic progression ── */
+.cinematic-landing--depth .landing-scene--journey {
+  background: radial-gradient(ellipse 120% 60% at 50% 0%, rgba(20, 18, 16, 0.4), transparent 55%);
+}
+
+.cinematic-landing--depth .journey-phase-visual--depth {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(0.75rem, 2vw, 1rem);
+  box-shadow:
+    0 0 0 1px rgba(232, 226, 216, 0.05),
+    0 28px 72px rgba(0, 0, 0, 0.62);
+}
+
+.cinematic-landing--depth .journey-phase-visual--depth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 35%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.cinematic-landing--depth .journey-phase-visual--depth::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+}
+
+.cinematic-landing--depth .journey-phase-num {
+  color: rgba(196, 181, 154, 0.9);
+  text-shadow: 0 0 24px rgba(196, 181, 154, 0.2);
+}
+
+/* ── Facility: luxury chamber ── */
+.cinematic-landing--depth .landing-scene--facility {
+  background: linear-gradient(180deg, var(--void) 0%, #030302 50%, var(--void) 100%);
+}
+
+.cinematic-landing--depth .landing-scene--facility .ambient-film--facility {
+  opacity: 0.32;
+}
+
+.cinematic-landing--depth .facility-scene-film + .pointer-events-none .cinematic-img--render,
+.cinematic-landing--depth .landing-scene--facility .cinematic-img--render {
+  filter: contrast(1.1) saturate(1.05) brightness(0.96);
+}
+
+.cinematic-landing--depth .facility-gallery-slide--depth {
+  position: relative;
+  overflow: hidden;
+  min-height: 14rem;
+  box-shadow:
+    0 0 0 1px rgba(232, 226, 216, 0.04),
+    0 18px 48px rgba(0, 0, 0, 0.58);
+}
+
+.cinematic-landing--depth .facility-gallery-slide--depth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.cinematic-landing--depth .facility-gallery-scrim {
+  background: linear-gradient(
+    180deg,
+    transparent 45%,
+    rgba(1, 1, 0, 0.88) 100%
+  );
+}
+
+.cinematic-landing--depth .facility-feature {
+  box-shadow: inset 0 -1px 0 rgba(232, 226, 216, 0.04);
+}
+
+/* ── Finale: private invitation ── */
+.cinematic-landing--depth .landing-scene--finale {
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, rgba(24, 22, 18, 0.35), var(--void) 70%);
+}
+
+.cinematic-landing--depth .finale-frame-content--myth {
+  position: relative;
+  padding: clamp(2rem, 6vw, 3rem);
+  border-radius: 0.125rem;
+  background: linear-gradient(180deg, rgba(8, 8, 7, 0.5), rgba(4, 4, 3, 0.35));
+  box-shadow:
+    0 0 0 1px rgba(232, 226, 216, 0.06),
+    0 32px 96px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.cinematic-landing--depth .finale-frame-content--myth::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196, 181, 154, 0.12), transparent 70%);
+  opacity: 0.8;
+}
+
+.cinematic-landing--depth .ambient-film--finale {
+  opacity: 0.26;
+}
+
+.cinematic-landing--depth .ambient-film-poster {
+  filter: contrast(1.08) saturate(1.05) brightness(1.02);
+}
+
+/* Film frames — glass edge */
+.cinematic-landing--depth .film-frame {
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 226, 216, 0.04),
+    0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.cinematic-landing--depth .film-frame-vignette {
+  opacity: 0.85;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+/* Editorial chapters — scene atmosphere */
+.cinematic-landing--depth .editorial-chapter:not(.landing-scene--hero)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196, 181, 154, 0.15), transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .cinematic-landing--depth .cinematic-img--render {
+    filter: contrast(1.06) saturate(1.04) brightness(1.02);
+  }
+
+  .cinematic-landing--depth .hero-depth-stack::after {
+    opacity: 0.35;
+  }
+
+  .cinematic-landing--depth .hero-experience--film .hero-backdrop-img {
+    opacity: 0.88;
+    filter: contrast(1.08) saturate(1.05) brightness(1.03);
+  }
+
+  .cinematic-landing--depth .scene-card-media--depth .cinematic-img--render {
+    transform: none;
+  }
+
+  .cinematic-landing--depth .scene-card-specular {
+    opacity: 0.5;
+  }
+
+  .cinematic-landing--depth .hero-frame-panel {
+    box-shadow:
+      0 0 0 1px rgba(232, 226, 216, 0.05),
+      0 12px 40px rgba(0, 0, 0, 0.55);
+  }
+
+  .cinematic-landing--depth .finale-frame-content--myth {
+    padding: 1.75rem 1.25rem;
+    box-shadow: 0 0 0 1px rgba(232, 226, 216, 0.05), 0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-landing--depth .hero-depth-stack::after {
+    display: none;
+  }
+}

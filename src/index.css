@@ -10,6 +10,7 @@
 @import './styles/cinematic-perception.css';
 @import './styles/cinematic-performance.css';
 @import './styles/cinematic-film.css';
+@import './styles/cinematic-depth.css';
 
 @theme {
   --font-sans: var(--font-body);

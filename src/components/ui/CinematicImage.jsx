@@ -108,7 +108,7 @@ export default function CinematicImage({
           fetchPriority={priority ? 'high' : 'auto'}
           onLoad={handleLoad}
           onError={handleError}
-          className={`cinematic-img ${revealed ? 'cinematic-img--revealed' : ''}`}
+          className={`cinematic-img cinematic-img--render ${revealed ? 'cinematic-img--revealed' : ''}`}
         />
       ) : null}
     </div>

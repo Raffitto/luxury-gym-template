@@ -37,7 +37,7 @@ export default function CinematicBackdrop({
         preset={preset}
         sizes="100vw"
         fill
-        className={imageClassName}
+        className={`cinematic-img--render ${imageClassName}`.trim()}
       />
       <div className={scrims[scrim] || scrims.default} />
     </div>

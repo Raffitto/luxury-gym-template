@@ -17,7 +17,7 @@ import { useIsPhone } from '../../hooks/useIsPhone'
 
 function GallerySlide({ image, alt, priority = false }) {
   return (
-    <div className="facility-gallery-slide">
+    <div className="facility-gallery-slide facility-gallery-slide--depth">
       <CinematicImage image={image} alt={alt} preset="section" fill priority={priority} />
       <div className="facility-gallery-scrim" aria-hidden />
     </div>
