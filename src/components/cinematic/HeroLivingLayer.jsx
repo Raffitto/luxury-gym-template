@@ -84,7 +84,7 @@ export function HeroHorizontalCue() {
           />
         ))}
       </div>
-      <span className="font-ritual hero-horizontal-label">Scroll the continuum</span>
+      <span className="font-ritual hero-horizontal-label">Scroll the house</span>
       <ChevronRight className="h-3.5 w-3.5 opacity-50" strokeWidth={1} />
     </motion.div>
   )

@@ -10,8 +10,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Doctrine"
-        headline="Beyond the old category."
+        ritual={aetherisConfig.pageCopy.about.ritual}
+        headline={aetherisConfig.pageCopy.about.headline}
         align="left"
         image={aetherisConfig.pageHero.about}
       />

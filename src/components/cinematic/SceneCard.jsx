@@ -12,7 +12,7 @@ export default function SceneCard({
   description,
   index,
   href,
-  ctaLabel = 'Explore',
+  ctaLabel = 'Enter',
   priority = false,
 }) {
   const reduced = useReducedMotion()

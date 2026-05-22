@@ -1,89 +1,87 @@
 import { photos } from '../utils/images'
 
-/** AETHERIS — fictional luxury performance continuum */
+/** AETHERIS — global private performance house */
 export const aetherisConfig = {
   brand: {
     name: 'AETHERIS',
-    descriptor: 'Performance Continuum',
-    mantra: 'Become the architecture of yourself.',
-    founding: 'Est. MMXXIV · Geneva Protocol',
+    descriptor: 'Private Performance House',
+    mantra: 'The body is architecture.',
+    founding: 'Geneva · MMXXIV',
   },
 
   seo: {
-    title: 'AETHERIS | The Performance Continuum',
+    title: 'AETHERIS',
     description:
-      'A private order for identity evolution, physical mastery, and controlled obsession. Beyond the category of gym.',
+      'A global private house for physical mastery, identity revision, and selective admission.',
   },
 
   contact: {
-    email: 'access@aetheris.continuum',
+    email: 'access@aetheris.house',
     phone: '+41 22 000 0000',
     whatsapp: '41220000000',
-    whatsappMessage:
-      'I am requesting access to the AETHERIS continuum. I understand admission is selective.',
+    whatsappMessage: 'Requesting admission to AETHERIS. I understand access is selective.',
   },
 
   nav: [
-    { label: 'Continuum', path: '/' },
-    { label: 'Kinetic', path: '/classes' },
+    { label: 'House', path: '/' },
+    { label: 'Disciplines', path: '/classes' },
     { label: 'Architects', path: '/trainers' },
-    { label: 'Access', path: '/membership' },
+    { label: 'Admission', path: '/membership' },
     { label: 'Chambers', path: '/locations' },
     { label: 'Doctrine', path: '/about' },
   ],
 
   hero: {
-    ritual: 'Sequence 01 · Initiation',
+    ritual: 'I · House',
     headline: ['You were', 'not built', 'to remain.'],
-    subline:
-      'A private order for those who treat the body as architecture and discipline as identity.',
+    subline: 'A private house for those who treat discipline as identity.',
     primaryCta: 'Request Access',
-    secondaryCta: 'Enter the Doctrine',
+    secondaryCta: 'The Doctrine',
     image: {
       id: photos.hero,
-      alt: 'Elite athlete training under dramatic light in a dark performance chamber',
+      alt: 'Athlete in controlled light — AETHERIS performance chamber',
     },
   },
 
   philosophy: {
-    ritual: 'Sequence 02 · Doctrine',
+    ritual: 'II · Doctrine',
     headline: 'Identity is engineered.',
     image: {
       id: photos.combat,
-      alt: 'Combat conditioning — controlled aggression in low light',
+      alt: 'Combat discipline — low lux performance chamber',
     },
     pillars: [
       {
         index: 'I',
-        title: 'Evolution',
-        body: 'You do not train. You undergo revision. Every session is a recalibration of who you are becoming.',
+        title: 'Revision',
+        body: 'Each session is a recalibration. You do not repeat effort — you revise who you are becoming.',
       },
       {
         index: 'II',
-        title: 'Discipline',
-        body: 'Obsession, when controlled, becomes precision. We architect ritual, not routine.',
+        title: 'Precision',
+        body: 'Obsession, when governed, becomes architecture. Ritual replaces noise.',
       },
       {
         index: 'III',
-        title: 'Presence',
-        body: 'The body is the only instrument that cannot be replaced. Mastery begins with reverence.',
+        title: 'Reverence',
+        body: 'The body is the only instrument that cannot be replaced. Mastery begins here.',
       },
     ],
   },
 
   performance: {
-    ritual: 'Sequence 03 · Kinetic',
-    headline: 'Controlled aggression.',
-    subline: 'Movement architecture engineered for momentum, power transfer, and neurological dominance.',
+    ritual: 'III · Kinetic',
+    headline: 'Controlled force.',
+    subline: 'Movement engineered for momentum, power transfer, and neural dominance.',
     disciplines: [
       { name: 'Structural Load', metric: 'Force vectoring' },
-      { name: 'Neural Drive', metric: 'CNS optimization' },
-      { name: 'Metabolic Edge', metric: 'Threshold expansion' },
+      { name: 'Neural Drive', metric: 'CNS priming' },
+      { name: 'Metabolic Edge', metric: 'Threshold design' },
       { name: 'Combat Flow', metric: 'Kinetic chains' },
     ],
     image: {
       id: photos.performance,
-      alt: 'Athlete under heavy structural load — barbell strength training',
+      alt: 'Structural load — barbell under editorial light',
     },
   },
 
@@ -91,16 +89,16 @@ export const aetherisConfig = {
     {
       name: 'Dr. Elias Venn',
       role: 'Neural Performance Architect',
-      specialty: 'CNS · Longevity · Load Periodization',
+      specialty: 'CNS · Longevity · Load periodization',
       image: {
         id: photos.architectCoach,
-        alt: 'Dr. Elias Venn — performance architect portrait',
+        alt: 'Dr. Elias Venn — AETHERIS architect',
       },
     },
     {
       name: 'Maren Okoye',
       role: 'Kinetic Systems Director',
-      specialty: 'Movement Architecture · Combat Flow',
+      specialty: 'Movement architecture · Combat flow',
       image: {
         id: photos.architectFemale,
         alt: 'Maren Okoye — kinetic systems director',
@@ -109,41 +107,42 @@ export const aetherisConfig = {
     {
       name: 'Lucien Ashford',
       role: 'Metabolic Continuum Lead',
-      specialty: 'Threshold Science · Body Recomposition',
+      specialty: 'Threshold science · Body recomposition',
       image: {
         id: photos.architectMale,
-        alt: 'Lucien Ashford — metabolic continuum lead',
+        alt: 'Lucien Ashford — metabolic lead',
       },
     },
   ],
 
   membership: {
-    ritual: 'Sequence 05 · Access',
+    ritual: 'V · Admission',
     headline: 'Admission is a threshold.',
+    subline: 'Access is granted — after assessment, alignment, and proof of discipline.',
     image: {
       id: photos.luxuryGym,
-      alt: 'Premium strength floor — dark luxury training environment',
+      alt: 'Strength chamber — dark luxury performance environment',
     },
     tiers: [
       {
         code: 'I',
         name: 'Continuum',
-        descriptor: 'Foundational access',
-        features: ['Chamber access · 12 sessions', 'Performance diagnostics', 'Digital OS — Core'],
+        descriptor: 'Foundational house access',
+        features: ['Chamber access · 12 sessions', 'Performance diagnostics', 'House OS — Core'],
         note: 'By application',
       },
       {
         code: 'II',
         name: 'Sovereign',
-        descriptor: 'Full continuum',
+        descriptor: 'Full house privileges',
         features: [
           'Unlimited chamber access',
           'Architect assignment',
           'Recovery suite · Longevity protocol',
-          'Digital OS — Complete',
+          'House OS — Complete',
         ],
         featured: true,
-        note: 'Invitation only',
+        note: 'By invitation',
       },
       {
         code: 'III',
@@ -153,37 +152,37 @@ export const aetherisConfig = {
           'Dedicated chamber',
           '24/7 access · Global chambers',
           'Bespoke programming',
-          'Concierge continuum',
+          'House concierge',
         ],
-        note: 'Referral required',
+        note: 'Referral only',
       },
     ],
   },
 
   recovery: {
-    ritual: 'Sequence 06 · Regeneration',
-    headline: 'Recovery is warfare.',
-    subline: 'Luxury wellness meets future health science. Optimization as elevated living.',
+    ritual: 'VI · Regeneration',
+    headline: 'Recovery as protocol.',
+    subline: 'Regeneration treated with the same gravity as load.',
     image: {
       id: photos.recovery,
-      alt: 'Athlete in regeneration protocol — mobility and recovery discipline',
+      alt: 'Regeneration protocol — mobility under controlled light',
     },
     modalities: [
-      { name: 'Cryo Continuum', desc: 'Neural reset · Inflammation protocol' },
-      { name: 'Hyperbaric Chamber', desc: 'Oxygen saturation · Cellular repair' },
+      { name: 'Cryo Suite', desc: 'Neural reset · Inflammation control' },
+      { name: 'Hyperbaric', desc: 'Oxygen saturation · Cellular repair' },
       { name: 'Thermal Contrast', desc: 'Vascular optimization' },
       { name: 'Sleep Architecture', desc: 'Circadian recalibration' },
     ],
   },
 
   digital: {
-    ritual: 'Sequence 07 · Interface',
+    ritual: 'VII · Interface',
     headline: 'Your operating system for becoming.',
     features: [
-      'Biometric continuum tracking',
+      'Biometric house telemetry',
       'Session choreography sync',
       'Recovery load balancing',
-      'Identity evolution metrics',
+      'Identity revision metrics',
     ],
   },
 
@@ -194,7 +193,7 @@ export const aetherisConfig = {
       descriptor: 'Strength & longevity chamber',
       image: {
         id: photos.luxuryGym,
-        alt: 'Geneva chamber — premium dark strength floor',
+        alt: 'Geneva chamber — editorial strength floor',
       },
     },
     {
@@ -203,7 +202,7 @@ export const aetherisConfig = {
       descriptor: 'Combat conditioning wing',
       image: {
         id: photos.chamberTokyo,
-        alt: 'Tokyo chamber — atmospheric training environment',
+        alt: 'Tokyo chamber — atmospheric performance space',
       },
     },
     {
@@ -212,24 +211,23 @@ export const aetherisConfig = {
       descriptor: 'Performance sovereignty suite',
       image: {
         id: photos.strengthFloor,
-        alt: 'Dubai chamber — elite free-weight performance floor',
+        alt: 'Dubai chamber — elite free-weight floor',
       },
     },
   ],
 
   proof: {
-    ritual: 'Sequence 09 · Witness',
+    ritual: 'VIII · Witness',
     headline: 'Those who crossed the threshold.',
     testimonials: [
       {
         quote:
-          'I did not enter a facility. I entered a system that reorganized how I perceive my own potential.',
+          'I did not enter a facility. I entered a house that reorganized how I perceive my own potential.',
         author: '— Sovereign Member, Geneva',
       },
       {
-        quote:
-          'The atmosphere alone recalibrates your psychology. Discipline becomes inevitable.',
-        author: '— Continuum Member, Tokyo',
+        quote: 'The atmosphere recalibrates psychology before the first rep. Discipline becomes inevitable.',
+        author: '— House Member, Tokyo',
       },
     ],
     metrics: [
@@ -243,10 +241,11 @@ export const aetherisConfig = {
     ritual: 'Threshold',
     headline: ['The future version', 'of you is waiting.'],
     subline: 'Private assessment. Selective admission.',
-    cta: 'Initiate Assessment',
+    cta: 'Begin Assessment',
+    secondaryCta: 'View Admission',
     image: {
       id: photos.sprint,
-      alt: 'Athlete in explosive sprint motion — neural drive training',
+      alt: 'Explosive drive — neural performance screening',
     },
   },
 
@@ -256,54 +255,54 @@ export const aetherisConfig = {
       duration: '75 min',
       intensity: 'Maximum load',
       desc: 'Force vectoring and compound architecture for elite strength development.',
-      image: { id: photos.performance, alt: 'Structural dominion — heavy barbell training' },
+      image: { id: photos.performance, alt: 'Structural dominion — editorial barbell work' },
     },
     {
       name: 'Neural Surge',
       duration: '60 min',
       intensity: 'CNS peak',
-      desc: 'Explosive power transfer and neurological drive optimization.',
+      desc: 'Explosive power transfer and neurological priming under architect supervision.',
       image: { id: photos.sprint, alt: 'Neural surge — explosive athletic drive' },
     },
     {
       name: 'Threshold Ritual',
       duration: '50 min',
       intensity: 'Metabolic edge',
-      desc: 'Controlled suffering. Threshold expansion through precision pacing.',
-      image: { id: photos.metabolic, alt: 'Threshold ritual — metabolic edge conditioning' },
+      desc: 'Controlled threshold expansion through precision pacing — no spectacle.',
+      image: { id: photos.metabolic, alt: 'Threshold ritual — metabolic edge work' },
     },
     {
       name: 'Combat Continuum',
       duration: '65 min',
       intensity: 'Kinetic flow',
-      desc: 'Movement chains borrowed from combat disciplines. Flow as architecture.',
-      image: { id: photos.combat, alt: 'Combat continuum — striking and flow work' },
+      desc: 'Movement chains from combat disciplines. Flow as architecture.',
+      image: { id: photos.combat, alt: 'Combat continuum — striking and flow' },
     },
     {
       name: 'Regeneration Protocol',
       duration: '45 min',
       intensity: 'Recovery',
       desc: 'Mobility, breath architecture, and parasympathetic recalibration.',
-      image: { id: photos.recovery, alt: 'Regeneration protocol — recovery and mobility' },
+      image: { id: photos.recovery, alt: 'Regeneration — recovery protocol' },
     },
   ],
 
   pageHero: {
     classes: {
       id: photos.combat,
-      alt: 'Kinetic rituals — combat conditioning chamber',
+      alt: 'Disciplines catalogue — performance chamber',
     },
     trainers: {
       id: photos.architectCoach,
-      alt: 'Performance architects — elite coaching',
+      alt: 'Performance architects — AETHERIS council',
     },
     membership: {
       id: photos.darkGym,
-      alt: 'Access protocol — dark luxury training chamber',
+      alt: 'Admission protocol — private performance chamber',
     },
     locations: {
       id: photos.luxuryGym,
-      alt: 'Global performance chambers',
+      alt: 'Global chambers — AETHERIS network',
     },
     about: {
       id: photos.hero,
@@ -311,26 +310,63 @@ export const aetherisConfig = {
     },
     trial: {
       id: photos.sprint,
-      alt: 'Private assessment — athletic performance screening',
+      alt: 'Private assessment — performance screening',
+    },
+  },
+
+  pageCopy: {
+    classes: {
+      ritual: 'II · Disciplines',
+      headline: 'The kinetic catalogue.',
+      subline: 'Each session is choreographed for a single physiological outcome. Selection is intentional.',
+    },
+    trainers: {
+      ritual: 'III · Architects',
+      headline: 'The council.',
+      subline: 'Architects are assigned — not booked. Alignment precedes programming.',
+    },
+    membership: {
+      ritual: 'V · Admission',
+      headline: 'Admission is a threshold.',
+      subline: 'Access is granted — after assessment, alignment, and proof of discipline.',
+    },
+    locations: {
+      ritual: 'IV · Chambers',
+      headline: 'Twelve chambers. One house.',
+      subline: 'Geneva, Tokyo, Dubai — unified atmosphere, local sovereignty.',
+    },
+    about: {
+      ritual: 'I · Doctrine',
+      headline: 'Beyond the old category.',
+      subline: null,
+    },
+    contact: {
+      ritual: 'Access Line',
+      headline: 'Direct chamber correspondence.',
+      subline: 'Inquiries are reviewed privately. Response within forty-eight hours.',
+    },
+    trial: {
+      ritual: 'Assessment',
+      headline: 'Private Assessment',
+      subline: 'Ninety minutes. Measurement, atmosphere, and truth — no presentation.',
     },
   },
 
   about: {
     origin:
-      'AETHERIS was founded on a single conviction: the category of "gym" has failed human potential. We built a continuum — a private order where transformation is engineered with the precision of luxury science and the gravity of belief.',
+      'AETHERIS was founded on one conviction: the category of “gym” has failed human potential. We built a private house — where transformation is engineered with the precision of luxury science and the gravity of belief.',
     principles: [
       'The body is architecture.',
       'Discipline is identity.',
-      'Recovery is not rest — it is warfare.',
-      'Access is earned, not purchased.',
+      'Recovery is protocol — not pause.',
+      'Access is earned.',
     ],
   },
 
   trial: {
     headline: 'Private Assessment',
-    subline:
-      'A 90-minute immersion into the continuum. No presentation. Only measurement, atmosphere, and truth.',
-    cta: 'Initiate Assessment',
+    subline: 'Ninety minutes. Measurement, atmosphere, and truth — no presentation.',
+    cta: 'Begin Assessment',
     steps: [
       'Biometric baseline & movement screen',
       'Chamber immersion · 45 min',

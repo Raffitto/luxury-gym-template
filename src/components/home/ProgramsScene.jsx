@@ -51,7 +51,7 @@ export default function ProgramsScene() {
         </div>
 
         <div className="mt-12 hidden lg:block">
-          <HorizontalSceneRail label="Move through the continuum →">
+          <HorizontalSceneRail label="Move through disciplines →">
             <div className="horizontal-scene-strip">
               {classes.map((program, i) => (
                 <div key={program.name} className="horizontal-scene-item">

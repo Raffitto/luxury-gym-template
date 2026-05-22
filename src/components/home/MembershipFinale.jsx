@@ -67,7 +67,7 @@ export default function MembershipFinale() {
                 <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                   <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
                   <MagneticButton to={routes.membership} variant="ghost">
-                    Enter the continuum
+                    {climax.secondaryCta}
                   </MagneticButton>
                 </div>
               ) : (
@@ -80,12 +80,12 @@ export default function MembershipFinale() {
                 >
                   <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
                   <MagneticButton to={routes.membership} variant="ghost">
-                    Enter the continuum
+                    {climax.secondaryCta}
                   </MagneticButton>
                 </motion.div>
               )}
 
-              <p className="font-ritual myth-whisper mt-10">Admission is selective · Transformation is inevitable</p>
+              <p className="font-ritual myth-whisper mt-10">Selective admission · Private assessment required</p>
             </div>
           </FilmFrame>
         </div>

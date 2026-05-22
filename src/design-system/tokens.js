@@ -1,8 +1,8 @@
-/** Centralized design tokens — AETHERIS performance continuum */
+/** Centralized design tokens — AETHERIS private performance house */
 export const tokens = {
   brand: {
     name: 'AETHERIS',
-    descriptor: 'Performance Continuum',
+    descriptor: 'Private Performance House',
     mantra: 'Become the architecture of yourself.',
   },
   color: {

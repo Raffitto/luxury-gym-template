@@ -46,39 +46,36 @@ export default function Navigation() {
         <div className="site-header-bar chamber-inner">
           <Link
             to={routes.home}
-            className="group flex min-w-0 flex-col"
+            className="brand-lockup group flex min-w-0 flex-col"
             aria-label="AETHERIS home"
           >
-            <span className="font-display text-lg tracking-[0.2em] text-[var(--platinum)] uppercase">
+            <span className="brand-mark font-display text-[var(--platinum)] uppercase">
               {aetherisConfig.brand.name}
             </span>
-            <span className="font-ritual text-[0.5rem] tracking-[0.32em] text-[var(--ash)] transition group-hover:text-[var(--silver)]">
+            <span className="brand-descriptor font-ritual">
               {aetherisConfig.brand.descriptor}
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-10 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-11 lg:flex" aria-label="Primary">
             {aetherisConfig.nav.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-ritual text-[0.625rem] tracking-[0.2em] transition duration-500 ${
-                  location.pathname === item.path
-                    ? 'text-[var(--platinum)]'
-                    : 'text-[var(--ash)] hover:text-[var(--silver)]'
-                }`}
+                className="site-nav-link"
+                aria-current={location.pathname === item.path ? 'page' : undefined}
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-7 lg:flex">
             <Link
               to={routes.contact}
-              className="font-ritual text-[0.625rem] tracking-[0.2em] text-[var(--ash)] transition hover:text-[var(--silver)]"
+              className="site-nav-utility font-ritual text-[0.625rem] tracking-[0.22em] text-[var(--ash)] hover:text-[var(--platinum)]"
             >
-              Contact
+              Correspondence
             </Link>
             <MagneticButton to={routes.trial}>{aetherisConfig.hero.primaryCta}</MagneticButton>
           </div>

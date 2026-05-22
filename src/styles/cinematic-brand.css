@@ -1,0 +1,281 @@
+/* AETHERIS — global luxury brand presence (authority, rhythm, cohesion) */
+
+:root {
+  --brand-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --brand-ease-hover: cubic-bezier(0.33, 0.68, 0.24, 1);
+  --brand-hover-ms: 0.42s;
+  --platinum-soft: rgba(232, 228, 220, 0.92);
+  --accent-rim: rgba(196, 181, 154, 0.22);
+  --accent-glow-brand: rgba(196, 181, 154, 0.06);
+}
+
+/* ── Typography authority ── */
+.font-display {
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.font-ritual {
+  letter-spacing: 0.26em;
+  font-weight: 400;
+}
+
+.body-measured {
+  line-height: 1.72;
+  letter-spacing: 0.012em;
+  color: var(--platinum-soft);
+}
+
+.copy-lead,
+.copy-cinematic,
+.editorial-copy-lead {
+  line-height: 1.68;
+  letter-spacing: 0.018em;
+}
+
+.headline-mythic,
+.headline-chamber,
+.headline-section {
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+/* ── Brand mark & navigation ── */
+.brand-mark {
+  font-size: 1.0625rem;
+  letter-spacing: 0.24em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.brand-descriptor {
+  margin-top: 0.2rem;
+  letter-spacing: 0.34em;
+  font-size: 0.46875rem;
+  color: var(--ash);
+  transition: color var(--brand-hover-ms) var(--brand-ease-hover);
+}
+
+.brand-lockup:hover .brand-descriptor,
+.brand-lockup:focus-visible .brand-descriptor {
+  color: var(--silver);
+}
+
+.site-header {
+  transition:
+    background 0.5s var(--brand-ease),
+    border-color 0.5s var(--brand-ease),
+    box-shadow 0.5s var(--brand-ease);
+}
+
+.site-header--solid {
+  background: rgba(1, 1, 1, 0.94);
+  border-bottom-color: rgba(232, 228, 220, 0.06);
+  box-shadow: 0 1px 0 rgba(196, 181, 154, 0.04);
+}
+
+.site-nav-link {
+  font-family: var(--font-ritual);
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-decoration: none;
+  transition: color var(--brand-hover-ms) var(--brand-ease-hover);
+}
+
+.site-nav-link:hover,
+.site-nav-link[aria-current='page'] {
+  color: var(--platinum);
+}
+
+.site-nav-link[aria-current='page'] {
+  letter-spacing: 0.24em;
+}
+
+.site-nav-utility {
+  transition: color var(--brand-hover-ms) var(--brand-ease-hover);
+}
+
+/* ── CTA & tactile controls ── */
+.btn-magnetic {
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  font-size: 0.65625rem;
+  min-height: 3.125rem;
+  padding-inline: 2.125rem;
+  transition:
+    box-shadow var(--brand-hover-ms) var(--brand-ease),
+    transform 0.38s var(--brand-ease),
+    background 0.38s ease,
+    border-color var(--brand-hover-ms) var(--brand-ease);
+}
+
+.btn-magnetic:hover {
+  box-shadow: 0 0 24px rgba(232, 228, 220, 0.09);
+  transform: translateY(-0.5px);
+}
+
+.btn-magnetic:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+
+.btn-magnetic-ghost {
+  border-color: rgba(232, 228, 220, 0.12);
+  letter-spacing: 0.22em;
+}
+
+.btn-magnetic-ghost:hover {
+  border-color: var(--accent-rim);
+  box-shadow: 0 0 20px var(--accent-glow-brand);
+}
+
+.mobile-sticky-access .btn-magnetic {
+  letter-spacing: 0.22em;
+  font-size: 0.6875rem;
+  box-shadow: 0 0 20px rgba(232, 228, 220, 0.08);
+}
+
+/* ── Editorial chapter rhythm ── */
+.editorial-chapter-index {
+  display: block;
+  margin-bottom: 0.875rem;
+  font-family: var(--font-ritual);
+  font-size: 0.5625rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(154, 150, 142, 0.72);
+}
+
+.editorial-chapter-head {
+  margin-bottom: clamp(2.5rem, 6vh, 3.5rem);
+}
+
+/* ── Inner pages — same universe as house ── */
+.page-hero .cinematic-img--render {
+  filter: contrast(1.06) saturate(1.04) brightness(1.08);
+  opacity: 0.92;
+}
+
+.page-hero .cinematic-img-wrap[data-revealed] .cinematic-img--render,
+.page-hero .cinematic-img-wrap--priority .cinematic-img--render {
+  opacity: 0.88;
+}
+
+.page-body {
+  position: relative;
+}
+
+.page-body a {
+  transition: color var(--brand-hover-ms) var(--brand-ease-hover);
+}
+
+/* ── Scene cards — editorial crop & light ── */
+.cinematic-landing--depth .scene-card-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(1, 1, 0, 0.08) 0%,
+    transparent 38%,
+    rgba(1, 1, 0, 0.72) 100%
+  );
+}
+
+.cinematic-landing--depth .scene-card-specular {
+  opacity: 0.42;
+}
+
+.cinematic-landing--depth .scene-card-media--depth .cinematic-img--render {
+  filter: contrast(1.1) saturate(1.05) brightness(1.06);
+}
+
+.scene-card-title {
+  letter-spacing: -0.02em;
+}
+
+.scene-card-desc {
+  line-height: 1.62;
+  letter-spacing: 0.01em;
+}
+
+/* ── Mobile — ultra-premium product feel ── */
+@media (max-width: 767px) {
+  :root {
+    --page-gutter: clamp(1.125rem, 4.2vw, 1.5rem);
+    --header-h: 3.75rem;
+  }
+
+  .brand-mark {
+    font-size: 1rem;
+    letter-spacing: 0.22em;
+  }
+
+  .brand-descriptor {
+    letter-spacing: 0.3em;
+  }
+
+  .mobile-nav-overlay {
+    background: #010101;
+    border-top: 1px solid rgba(232, 228, 220, 0.05);
+  }
+
+  .mobile-nav-header {
+    letter-spacing: 0.28em;
+  }
+
+  .mobile-nav-link {
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    line-height: 1.05;
+    transition: color 0.28s var(--brand-ease-hover);
+  }
+
+  .mobile-nav-link:active {
+    color: var(--accent);
+    transition-duration: 0.06s;
+  }
+
+  .mobile-menu-toggle {
+    border-color: rgba(232, 228, 220, 0.1);
+    background: rgba(1, 1, 1, 0.72);
+    transition:
+      border-color var(--brand-hover-ms) var(--brand-ease),
+      background var(--brand-hover-ms) var(--brand-ease);
+  }
+
+  .headline-mythic {
+    letter-spacing: -0.034em;
+  }
+
+  .copy-lead,
+  .editorial-copy-lead {
+    max-width: 26ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .editorial-chapter-head--center .copy-lead {
+    margin-inline: auto;
+  }
+
+  html.aetheris-native .page-with-sticky {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── Footer — established house ── */
+.env-depth footer .font-display {
+  letter-spacing: 0.18em;
+}
+
+footer a {
+  transition: color var(--brand-hover-ms) var(--brand-ease-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-magnetic,
+  .site-nav-link,
+  .mobile-nav-link,
+  footer a {
+    transition-duration: 0.01ms;
+  }
+}

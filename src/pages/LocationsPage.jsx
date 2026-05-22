@@ -11,9 +11,9 @@ export default function LocationsPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Global Registry"
-        headline="Performance chambers."
-        subline="Dark luxury training environments engineered for strength, combat, and regeneration."
+        ritual={aetherisConfig.pageCopy.locations.ritual}
+        headline={aetherisConfig.pageCopy.locations.headline}
+        subline={aetherisConfig.pageCopy.locations.subline}
         align="left"
         image={pageHero.locations}
       />

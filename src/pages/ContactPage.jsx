@@ -11,9 +11,9 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Continuum Line"
-        headline="Speak to the order."
-        subline="Inquiries are reviewed within 48 hours. Vague interest is filtered."
+        ritual={aetherisConfig.pageCopy.contact.ritual}
+        headline={aetherisConfig.pageCopy.contact.headline}
+        subline={aetherisConfig.pageCopy.contact.subline}
         align="center"
       />
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
             <MagneticButton
               href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`}
             >
-              Encrypted Continuum Line
+              Secure House Line
             </MagneticButton>
           </div>
         </motion.div>

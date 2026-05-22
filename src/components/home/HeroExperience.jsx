@@ -149,13 +149,13 @@ export default function HeroExperience() {
             }}
           >
             <ArrowDown className="h-4 w-4 shrink-0" strokeWidth={1} />
-            <span className="font-ritual hero-scroll-label">Enter the continuum</span>
+            <span className="font-ritual hero-scroll-label">Descend</span>
           </motion.div>
         ) : null}
         {!reduced && phone ? (
           <p className="hero-scroll-cue hero-scroll-cue--still mt-6 flex items-center gap-2.5 font-ritual">
             <ArrowDown className="h-3.5 w-3.5 shrink-0 opacity-50" strokeWidth={1} />
-            <span className="hero-scroll-label">Enter the continuum</span>
+            <span className="hero-scroll-label">Descend</span>
           </p>
         ) : null}
       </div>

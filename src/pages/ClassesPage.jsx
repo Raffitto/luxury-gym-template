@@ -14,9 +14,9 @@ export default function ClassesPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Kinetic Catalogue"
-        headline="Kinetic rituals."
-        subline="Each session is choreographed for a specific physiological outcome. Selection is intentional."
+        ritual={aetherisConfig.pageCopy.classes.ritual}
+        headline={aetherisConfig.pageCopy.classes.headline}
+        subline={aetherisConfig.pageCopy.classes.subline}
         align="left"
         image={pageHero.classes}
       />

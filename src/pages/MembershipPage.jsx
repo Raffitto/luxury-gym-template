@@ -14,9 +14,9 @@ export default function MembershipPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Access Protocol"
+        ritual={aetherisConfig.pageCopy.membership.ritual}
         headline={membership.headline}
-        subline="Access is not purchased. It is granted — after assessment, alignment, and proof of discipline."
+        subline={aetherisConfig.pageCopy.membership.subline}
         align="center"
         image={pageHero.membership}
       />

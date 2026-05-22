@@ -35,7 +35,7 @@ export default function MobileNavOverlay({ open, onClose }) {
       className="mobile-nav-overlay"
     >
       <div className="mobile-nav-header">
-        <span className="font-ritual text-[var(--ash)]">Navigation</span>
+          <span className="font-ritual text-[var(--ash)]">{aetherisConfig.brand.name}</span>
         <button
           type="button"
           className="mobile-nav-close"
@@ -69,7 +69,7 @@ export default function MobileNavOverlay({ open, onClose }) {
         </div>
 
         <div className="mobile-nav-footer">
-          <p className="font-ritual text-[var(--ash)]">Selective admission · Assessment required</p>
+              <p className="font-ritual text-[var(--ash)]">Selective admission · Private assessment</p>
           <MagneticButton to={routes.trial} fullWidth onClick={onNavigate}>
             {aetherisConfig.hero.primaryCta}
           </MagneticButton>

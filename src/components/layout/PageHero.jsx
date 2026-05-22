@@ -23,7 +23,7 @@ export default function PageHero({
           alt={image.alt}
           preset="section"
           scrim="lateral"
-          imageClassName="opacity-20"
+          imageClassName="page-hero-media"
         />
       ) : !mobile ? (
         <AtmosphericCanvas intensity="subtle" />

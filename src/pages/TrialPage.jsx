@@ -19,7 +19,7 @@ export default function TrialPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Threshold Assessment"
+        ritual={aetherisConfig.pageCopy.trial.ritual}
         headline={trial.headline}
         subline={trial.subline}
         align="left"

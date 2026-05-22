@@ -13,12 +13,15 @@ export default function Footer() {
             <p className="font-display text-3xl tracking-[0.15em] text-[var(--platinum)] uppercase">
               {aetherisConfig.brand.name}
             </p>
-            <p className="mt-3 max-w-sm body-measured">{aetherisConfig.brand.mantra}</p>
+            <p className="mt-4 max-w-sm body-measured">{aetherisConfig.brand.mantra}</p>
             <p className="mt-6 font-ritual text-[var(--ash)]">{aetherisConfig.brand.founding}</p>
+            <p className="mt-2 font-ritual text-[0.5rem] tracking-[0.28em] text-[var(--ash)]">
+              {aetherisConfig.brand.descriptor}
+            </p>
           </div>
 
           <div>
-            <p className="font-ritual mb-4">Chambers</p>
+            <p className="font-ritual mb-4">House</p>
             <ul className="space-y-2">
               {aetherisConfig.nav.slice(1).map((item) => (
                 <li key={item.path}>
@@ -34,16 +37,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="font-ritual mb-4">Access</p>
+            <p className="font-ritual mb-4">Admission</p>
             <ul className="space-y-2 text-sm text-[var(--silver)]">
               <li>
                 <Link to={routes.trial} className="transition hover:text-[var(--platinum)]">
-                  Private Assessment
+                  {aetherisConfig.trial.cta}
                 </Link>
               </li>
               <li>
                 <Link to={routes.contact} className="transition hover:text-[var(--platinum)]">
-                  Contact Continuum
+                  Correspondence
                 </Link>
               </li>
               <li>
@@ -60,7 +63,7 @@ export default function Footer() {
 
         <div className="ritual-divider mt-16 mb-6" />
         <p className="font-ritual text-[var(--ash)]">
-          © {year} {aetherisConfig.brand.name}. All rights reserved. Admission selective.
+          © {year} {aetherisConfig.brand.name}. All rights reserved. Selective admission.
         </p>
       </div>
     </footer>

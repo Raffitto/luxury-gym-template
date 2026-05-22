@@ -4,8 +4,8 @@
   --depth-void: #010100;
   --depth-steel: rgba(196, 181, 154, 0.14);
   --depth-rim: rgba(232, 226, 216, 0.08);
-  --render-sharp: contrast(1.08) saturate(1.06) brightness(1.04);
-  --render-soft: contrast(1.02) saturate(1.02) brightness(0.98);
+  --render-sharp: contrast(1.06) saturate(1.05) brightness(1.06);
+  --render-soft: contrast(1.03) saturate(1.03) brightness(1.02);
 }
 
 /* ── Global render polish ── */
@@ -56,9 +56,9 @@
 
 .cinematic-landing--depth .hero-scrim {
   background:
-    linear-gradient(180deg, rgba(1, 1, 0, 0.55) 0%, transparent 30%),
-    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.88), transparent 55%),
-    linear-gradient(0deg, rgba(1, 1, 0, 0.92) 0%, rgba(1, 1, 0, 0.35) 42%, transparent 72%);
+    linear-gradient(180deg, rgba(1, 1, 0, 0.42) 0%, transparent 32%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.78), transparent 58%),
+    linear-gradient(0deg, rgba(1, 1, 0, 0.82) 0%, rgba(1, 1, 0, 0.28) 44%, transparent 74%);
 }
 
 .cinematic-landing--depth .hero-haze-band {

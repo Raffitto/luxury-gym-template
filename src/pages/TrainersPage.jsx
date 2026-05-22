@@ -10,9 +10,9 @@ export default function TrainersPage() {
   return (
     <>
       <PageHero
-        ritual="Chamber · Architect Registry"
-        headline="Not trainers. Architects."
-        subline="Each practitioner is selected for mastery, precision, and the ability to engineer identity through load."
+        ritual={aetherisConfig.pageCopy.trainers.ritual}
+        headline={aetherisConfig.pageCopy.trainers.headline}
+        subline={aetherisConfig.pageCopy.trainers.subline}
         align="center"
         image={pageHero.trainers}
       />
@@ -47,7 +47,7 @@ export default function TrainersPage() {
               <p className="body-measured mt-6">{architect.specialty}</p>
               <div className="ritual-divider mt-10 w-24" />
               <p className="mt-6 text-sm text-[var(--ash)]">
-                Assignment by continuum assessment only. No walk-in sessions.
+                Assignment by house assessment only. No walk-in sessions.
               </p>
             </div>
           </motion.article>

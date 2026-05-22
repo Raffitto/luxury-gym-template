@@ -12,6 +12,7 @@
 @import './styles/cinematic-film.css';
 @import './styles/cinematic-depth.css';
 @import './styles/cinematic-motion.css';
+@import './styles/cinematic-brand.css';
 
 @theme {
   --font-sans: var(--font-body);
