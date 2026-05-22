@@ -3,11 +3,13 @@ import { motion, useMotionValue, useSpring, animate } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
+import { useCinematicOSOptional } from '../../context/CinematicOSContext'
 import { spring, drag } from '../../motion/choreography'
 
 const GAP = 16
 
 function SpringSwipeTrack({ items, index, setIndex, className }) {
+  const os = useCinematicOSOptional()
   const trackRef = useRef(null)
   const [step, setStep] = useState(0)
   const x = useMotionValue(0)
@@ -58,6 +60,7 @@ function SpringSwipeTrack({ items, index, setIndex, className }) {
         dragTransition={drag.transition}
         onDragEnd={(_, info) => {
           if (!step) return
+          os?.recordSwipe?.(info.velocity.x)
           const projected = x.get() + info.velocity.x * drag.momentum
           const next = Math.round(-projected / step)
           snapTo(next)

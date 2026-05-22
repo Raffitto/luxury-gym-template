@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
-import { camera } from '../../motion/camera'
+import { headlineVariants, ritualVariants } from '../../intelligence/emotionalMotion'
 import { spring, viewportOnce } from '../../motion/choreography'
 import { useCinematicOS } from '../../context/CinematicOSContext'
 
 export function KineticRitual({ children, className = '' }) {
-  const { reduced, energy } = useCinematicOS()
+  const { reduced, energy, memory } = useCinematicOS()
+  const bias = memory.transitionBias
 
   if (reduced) {
     return <p className={`font-ritual ${className}`}>{children}</p>
@@ -17,7 +18,7 @@ export function KineticRitual({ children, className = '' }) {
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce('-6%')}
-      variants={camera.typography.ritual}
+      variants={ritualVariants(bias)}
     >
       {children}
     </motion.p>
@@ -25,7 +26,8 @@ export function KineticRitual({ children, className = '' }) {
 }
 
 export function KineticHeadline({ children, className = '', lines }) {
-  const { reduced } = useCinematicOS()
+  const { reduced, memory } = useCinematicOS()
+  const bias = memory.transitionBias
 
   if (reduced) {
     return <h2 className={className}>{children}</h2>
@@ -41,8 +43,8 @@ export function KineticHeadline({ children, className = '', lines }) {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce('-5%')}
-            variants={camera.typography.headlineLine}
-            transition={{ ...spring.reveal, delay: i * 0.06 }}
+            variants={headlineVariants(bias)}
+            transition={{ ...spring.reveal, delay: i * (0.05 + bias * 0.02) }}
           >
             {line}
           </motion.span>
@@ -57,7 +59,7 @@ export function KineticHeadline({ children, className = '', lines }) {
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce('-5%')}
-      variants={camera.typography.headline}
+      variants={headlineVariants(bias)}
     >
       {children}
     </motion.h2>
@@ -65,7 +67,8 @@ export function KineticHeadline({ children, className = '', lines }) {
 }
 
 export function KineticCopy({ children, className = '', delay = 0.12 }) {
-  const { reduced } = useCinematicOS()
+  const { reduced, memory } = useCinematicOS()
+  const bias = memory.transitionBias
 
   if (reduced) {
     return <p className={className}>{children}</p>
@@ -77,8 +80,8 @@ export function KineticCopy({ children, className = '', delay = 0.12 }) {
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce('-4%')}
-      variants={camera.typography.copy}
-      transition={{ ...spring.liquid, delay }}
+      variants={headlineVariants(bias * 0.85)}
+      transition={{ ...spring.liquid, delay: delay * (1 - bias * 0.2) }}
     >
       {children}
     </motion.p>
@@ -86,7 +89,7 @@ export function KineticCopy({ children, className = '', delay = 0.12 }) {
 }
 
 export function KineticBlock({ children, className = '' }) {
-  const { reduced } = useCinematicOS()
+  const { reduced, memory } = useCinematicOS()
 
   if (reduced) {
     return <div className={className}>{children}</div>
@@ -98,7 +101,7 @@ export function KineticBlock({ children, className = '' }) {
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce()}
-      variants={camera.typography.copy}
+      variants={headlineVariants(memory.transitionBias * 0.75)}
     >
       {children}
     </motion.div>

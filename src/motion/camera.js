@@ -67,7 +67,12 @@ export const camera = {
 
   continuity: {
     ambientShift: ['0%', '35%', '68%', '100%'],
-    lightWash: [0.06, 0.1, 0.08, 0.12],
+    lightWash: [0, 0.35, 0.68, 1],
+  },
+
+  intelligence: {
+    idleBreathMs: 2200,
+    energyDecay: 0.88,
   },
 }
 

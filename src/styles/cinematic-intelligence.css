@@ -1,0 +1,77 @@
+/* Adaptive Cinematic Intelligence — living organism layer */
+
+.cinematic-os--intelligent {
+  --intel-breath: 1;
+}
+
+.cinematic-os--intelligent[data-breathing='true'] {
+  --intel-breath: 1.08;
+}
+
+.cinematic-os--intelligent[data-energy='high'] .environmental-field--intelligent .env-sweep {
+  filter: blur(10px);
+}
+
+.cinematic-os--intelligent[data-tier='essential'] .env-chroma,
+.cinematic-os--intelligent[data-tier='essential'] .env-depth {
+  display: none;
+}
+
+.cinematic-os--intelligent[data-tier='immersive'] .hero-experience--os {
+  filter: brightness(calc(1 + var(--hero-immersion, 0) * 0.03));
+}
+
+/* Temporal depth layer */
+.env-depth {
+  background: radial-gradient(
+    85% 60% at 50% 60%,
+    rgba(32, 36, 48, 0.22) 0%,
+    transparent 68%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.continuity-shadow-drift--alive {
+  animation: continuity-shadow-intel 18s ease-in-out infinite;
+  animation-duration: calc(18s * var(--intel-breath, 1));
+}
+
+@keyframes continuity-shadow-intel {
+  0%,
+  100% {
+    opacity: calc(0.5 + var(--env-immersion, 0) * 0.15);
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: calc(0.68 + var(--env-phase, 0) * 0.12);
+    transform: translate3d(0.8%, -0.4%, 0);
+  }
+}
+
+/* Kinetic type responds to session bias */
+.kinetic-headline,
+.kinetic-ritual {
+  transition: filter 0.5s ease;
+}
+
+.cinematic-os--intelligent[data-aggressive='true'] .kinetic-ritual {
+  letter-spacing: 0.2em;
+}
+
+/* Mobile intelligence — preserve fluidity */
+@media (max-width: 768px) {
+  .cinematic-os--intelligent[data-tier='essential'] .env-bloom {
+    filter: blur(14px);
+  }
+
+  .environmental-field--intelligent .env-sweep {
+    top: 14%;
+    height: 34%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continuity-shadow-drift--alive {
+    animation: none;
+  }
+}

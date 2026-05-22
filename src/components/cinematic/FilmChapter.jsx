@@ -16,7 +16,8 @@ const FilmChapter = forwardRef(function FilmChapter(
 ) {
   const innerRef = useRef(null)
   const ref = forwardedRef || innerRef
-  const { reduced } = useCinematicOS()
+  const { reduced, memory } = useCinematicOS()
+  const bias = memory.transitionBias
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
@@ -27,7 +28,8 @@ const FilmChapter = forwardRef(function FilmChapter(
     [0, 1],
     [camera.drift.chapterY[0], camera.drift.chapterY[2] * chapterDepth(depthIndex)],
   )
-  const opacity = useLiquidScroll(scrollYProgress, [0, 0.15, 0.85, 1], [0.72, 1, 1, 0.88])
+  const fadeEdge = 0.88 - bias * 0.04
+  const opacity = useLiquidScroll(scrollYProgress, [0, 0.15, 0.85, 1], [0.72 - bias * 0.03, 1, 1, fadeEdge])
 
   return (
     <section

@@ -4,6 +4,7 @@
 @import './styles/cinematic-immersion.css';
 @import './styles/cinematic-boot.css';
 @import './styles/cinematic-os.css';
+@import './styles/cinematic-intelligence.css';
 
 @theme {
   --font-sans: var(--font-body);

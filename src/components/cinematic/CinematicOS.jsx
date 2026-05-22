@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { CinematicOSProvider } from '../../context/CinematicOSContext'
+import { cinematicAudio } from '../../audio/CinematicAudioSystem'
 import ContinuityEngine from './ContinuityEngine'
 import EnvironmentalField from './EnvironmentalField'
 import CameraRig from './CameraRig'
@@ -35,6 +37,19 @@ function LandingFilm() {
 }
 
 export default function CinematicOS() {
+  useEffect(() => {
+    const unregister = cinematicAudio.registerAmbient({
+      id: 'void-atmosphere',
+      src: null,
+      baseVolume: 0.08,
+      reactive: true,
+    })
+    return () => {
+      unregister()
+      cinematicAudio.dispose()
+    }
+  }, [])
+
   return (
     <CinematicOSProvider>
       <LandingFilm />

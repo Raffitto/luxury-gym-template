@@ -22,6 +22,7 @@ export default function HeroExperience() {
   const mobile = useIsMobile()
   const os = useCinematicOSOptional()
   const heroEnergy = os?.energy ?? 0
+  const heroImmersion = os?.memory?.immersion ?? 0
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -42,7 +43,7 @@ export default function HeroExperience() {
     <section
       ref={ref}
       className="hero-experience hero-experience--os hero-warm-active landing-scene landing-scene--hero film-chapter relative min-h-[100svh] overflow-hidden"
-      style={{ '--hero-energy': heroEnergy }}
+      style={{ '--hero-energy': heroEnergy, '--hero-immersion': heroImmersion }}
     >
       <div className="hero-depth-stack">
         <CinematicAtmosphere intensity="hero" live />
