@@ -1,5 +1,8 @@
-/** Centralized design tokens — AETHERIS private performance house */
-export const tokens = {
+import { isGrindBrand } from '../data/brand'
+import { grindTokens } from './tokens.grind'
+
+/** AETHERIS tokens — default showcase */
+const aetherisTokens = {
   brand: {
     name: 'AETHERIS',
     descriptor: 'Private Performance House',
@@ -44,6 +47,8 @@ export const tokens = {
     chamberPadding: 'clamp(4rem, 12vh, 8rem)',
   },
 }
+
+export const tokens = isGrindBrand ? grindTokens : aetherisTokens
 
 export const routes = {
   home: '/',

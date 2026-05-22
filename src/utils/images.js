@@ -1,5 +1,7 @@
+import { isGrindBrand } from '../data/brand'
+
 /** Local static assets — production-safe, no remote CDN dependency */
-export const ASSET_ROOT = '/aetheris'
+export const ASSET_ROOT = isGrindBrand ? '/grind' : '/aetheris'
 
 export const imageAssets = {
   hero: `${ASSET_ROOT}/hero.jpg`,

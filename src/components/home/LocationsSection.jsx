@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import CinematicImage from '../ui/CinematicImage'
 import RitualLabel from '../ui/RitualLabel'
@@ -19,7 +19,7 @@ export default function LocationsSection() {
         </ChamberReveal>
 
         <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {aetherisConfig.locations.map((loc, i) => (
+          {activeConfig.locations.map((loc, i) => (
             <motion.div
               key={loc.code}
               className="group relative aspect-[4/5] overflow-hidden"

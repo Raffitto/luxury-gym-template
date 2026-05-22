@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import CinematicImage from '../ui/CinematicImage'
 import RitualLabel from '../ui/RitualLabel'
@@ -29,7 +29,7 @@ export default function ArchitectsSection() {
         </ChamberReveal>
 
         <StaggerChamber className="mt-16 grid gap-8 md:grid-cols-3">
-          {aetherisConfig.architects.map((architect) => (
+          {activeConfig.architects.map((architect) => (
             <motion.article
               key={architect.name}
               variants={variants.scalePresence}

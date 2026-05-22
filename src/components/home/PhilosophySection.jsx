@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import CinematicImage from '../ui/CinematicImage'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal, { StaggerChamber } from '../ui/ChamberReveal'
 import { variants, transition } from '../../motion/choreography'
 
 export default function PhilosophySection() {
-  const { philosophy } = aetherisConfig
+  const { philosophy } = activeConfig
 
   return (
     <section className="env-chamber env-depth relative">

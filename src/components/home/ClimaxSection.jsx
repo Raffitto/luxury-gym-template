@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import AtmosphericCanvas from '../atmosphere/AtmosphericCanvas'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
@@ -8,7 +8,7 @@ import MagneticButton from '../ui/MagneticButton'
 import { transition } from '../../motion/choreography'
 
 export default function ClimaxSection() {
-  const { climax } = aetherisConfig
+  const { climax } = activeConfig
 
   return (
     <section className="relative min-h-[80svh] overflow-hidden">

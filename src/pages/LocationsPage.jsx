@@ -2,18 +2,18 @@ import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import CinematicImage from '../components/ui/CinematicImage'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function LocationsPage() {
-  const { pageHero, locations } = aetherisConfig
+  const { pageHero, locations } = activeConfig
 
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.locations.ritual}
-        headline={aetherisConfig.pageCopy.locations.headline}
-        subline={aetherisConfig.pageCopy.locations.subline}
+        ritual={activeConfig.pageCopy.locations.ritual}
+        headline={activeConfig.pageCopy.locations.headline}
+        subline={activeConfig.pageCopy.locations.subline}
         align="left"
         image={pageHero.locations}
       />

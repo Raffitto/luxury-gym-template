@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import { X } from 'lucide-react'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import { prepareRouteChange } from '../../utils/preload'
 import MagneticButton from '../ui/MagneticButton'
@@ -35,7 +35,7 @@ export default function MobileNavOverlay({ open, onClose }) {
       className="mobile-nav-overlay"
     >
       <div className="mobile-nav-header">
-          <span className="font-ritual text-[var(--ash)]">{aetherisConfig.brand.name}</span>
+          <span className="font-ritual text-[var(--ash)]">{activeConfig.brand.name}</span>
         <button
           type="button"
           className="mobile-nav-close"
@@ -48,7 +48,7 @@ export default function MobileNavOverlay({ open, onClose }) {
 
       <nav className="mobile-nav-body" aria-label="Mobile">
         <div className="space-y-1">
-          {aetherisConfig.nav.map((item) => (
+          {activeConfig.nav.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -71,7 +71,7 @@ export default function MobileNavOverlay({ open, onClose }) {
         <div className="mobile-nav-footer">
               <p className="font-ritual text-[var(--ash)]">Selective admission · Private assessment</p>
           <MagneticButton to={routes.trial} fullWidth onClick={onNavigate}>
-            {aetherisConfig.hero.primaryCta}
+            {activeConfig.hero.primaryCta}
           </MagneticButton>
         </div>
       </nav>

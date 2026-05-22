@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect, useCallback } from 'react'
 import { prepareRouteChange } from '../../utils/preload'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import MagneticButton from '../ui/MagneticButton'
 import MobileNavOverlay from './MobileNavOverlay'
@@ -47,18 +47,18 @@ export default function Navigation() {
           <Link
             to={routes.home}
             className="brand-lockup group flex min-w-0 flex-col"
-            aria-label="AETHERIS home"
+            aria-label={`${activeConfig.brand.name} home`}
           >
             <span className="brand-mark font-display text-[var(--platinum)] uppercase">
-              {aetherisConfig.brand.name}
+              {activeConfig.brand.name}
             </span>
             <span className="brand-descriptor font-ritual">
-              {aetherisConfig.brand.descriptor}
+              {activeConfig.brand.descriptor}
             </span>
           </Link>
 
           <nav className="hidden items-center gap-11 lg:flex" aria-label="Primary">
-            {aetherisConfig.nav.map((item) => (
+            {activeConfig.nav.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -77,7 +77,7 @@ export default function Navigation() {
             >
               Correspondence
             </Link>
-            <MagneticButton to={routes.trial}>{aetherisConfig.hero.primaryCta}</MagneticButton>
+            <MagneticButton to={routes.trial}>{activeConfig.hero.primaryCta}</MagneticButton>
           </div>
 
           <button

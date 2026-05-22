@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "dev:grind": "npm run dev --prefix grind-gym-lb",
+    "build:grind": "npm run build --prefix grind-gym-lb",
     "lint": "eslint .",
     "preview": "vite preview"
   },

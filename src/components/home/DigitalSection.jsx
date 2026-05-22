@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Cpu, Activity, Moon, TrendingUp } from 'lucide-react'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
+import { isGrindBrand } from '../../data/brand'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal from '../ui/ChamberReveal'
 import { transition, viewportOnce } from '../../motion/choreography'
@@ -9,7 +10,7 @@ import { useReducedMotion } from '../../hooks/useReducedMotion'
 const icons = [Activity, Cpu, Moon, TrendingUp]
 
 export default function DigitalSection() {
-  const { digital } = aetherisConfig
+  const { digital } = activeConfig
   const reduced = useReducedMotion()
 
   return (
@@ -47,7 +48,9 @@ export default function DigitalSection() {
               }
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <p className="absolute bottom-8 left-8 font-ritual">AETHERIS OS · v4.2</p>
+            <p className="absolute bottom-8 left-8 font-ritual">
+              {isGrindBrand ? 'GRIND App · Member OS' : 'AETHERIS OS · v4.2'}
+            </p>
           </motion.div>
 
           <div className="space-y-4">

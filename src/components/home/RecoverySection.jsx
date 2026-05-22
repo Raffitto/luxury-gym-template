@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import CinematicImage from '../ui/CinematicImage'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal from '../ui/ChamberReveal'
 import { transition, viewportOnce } from '../../motion/choreography'
 
 export default function RecoverySection() {
-  const { recovery } = aetherisConfig
+  const { recovery } = activeConfig
 
   return (
     <section className="relative overflow-hidden">

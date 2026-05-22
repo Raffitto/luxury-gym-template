@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal, { StaggerChamber } from '../ui/ChamberReveal'
@@ -7,7 +7,7 @@ import MagneticButton from '../ui/MagneticButton'
 import { variants, transition } from '../../motion/choreography'
 
 export default function MembershipSection() {
-  const { membership } = aetherisConfig
+  const { membership } = activeConfig
 
   return (
     <section className="env-depth relative">

@@ -1,0 +1,50 @@
+/* GRIND GYM LB — aggressive urban brand layer */
+
+html.brand-grind {
+  --brand-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --brand-ease-hover: cubic-bezier(0.33, 1, 0.68, 1);
+  --brand-hover-ms: 0.32s;
+  --platinum-soft: rgba(242, 242, 242, 0.94);
+  --accent-rim: rgba(225, 6, 0, 0.35);
+  --accent-glow-brand: rgba(225, 6, 0, 0.1);
+}
+
+html.brand-grind .site-header--solid {
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom-color: rgba(225, 6, 0, 0.12);
+  box-shadow: 0 1px 0 rgba(225, 6, 0, 0.08);
+}
+
+html.brand-grind .site-nav-link:hover,
+html.brand-grind .site-nav-link[aria-current='page'] {
+  color: var(--platinum);
+  text-shadow: 0 0 24px rgba(225, 6, 0, 0.25);
+}
+
+html.brand-grind .brand-mark {
+  letter-spacing: 0.12em;
+  font-weight: 400;
+}
+
+html.brand-grind .brand-descriptor {
+  color: var(--accent);
+  letter-spacing: 0.28em;
+}
+
+html.brand-grind .magnetic-btn--primary {
+  background: linear-gradient(135deg, #e10600 0%, #9b0000 100%);
+  border-color: rgba(255, 80, 60, 0.4);
+  box-shadow: 0 8px 32px rgba(225, 6, 0, 0.25);
+}
+
+html.brand-grind .hero-headline {
+  text-shadow: 0 4px 80px rgba(0, 0, 0, 0.8);
+}
+
+html.brand-grind .scene-card--featured {
+  border-color: rgba(225, 6, 0, 0.2);
+}
+
+html.brand-grind .velocity-glow {
+  background: radial-gradient(ellipse at center, rgba(225, 6, 0, 0.06) 0%, transparent 70%);
+}

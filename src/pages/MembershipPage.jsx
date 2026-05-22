@@ -2,21 +2,21 @@ import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import CinematicBackdrop from '../components/ui/CinematicBackdrop'
 import MagneticButton from '../components/ui/MagneticButton'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { routes } from '../design-system/tokens'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function MembershipPage() {
-  const { membership, pageHero } = aetherisConfig
+  const { membership, pageHero } = activeConfig
   const sovereign = membership.tiers.find((t) => t.featured)
   const others = membership.tiers.filter((t) => !t.featured)
 
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.membership.ritual}
+        ritual={activeConfig.pageCopy.membership.ritual}
         headline={membership.headline}
-        subline={aetherisConfig.pageCopy.membership.subline}
+        subline={activeConfig.pageCopy.membership.subline}
         align="center"
         image={pageHero.membership}
       />

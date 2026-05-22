@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { aetherisConfig } from './data/aetherisConfig'
+import { activeConfig } from './data/activeConfig'
 import { routes } from './design-system/tokens'
 import Shell from './components/layout/Shell'
 import HomePage from './pages/HomePage'
@@ -14,9 +14,9 @@ import TrialPage from './pages/TrialPage'
 
 export default function App() {
   useEffect(() => {
-    document.title = aetherisConfig.seo.title
+    document.title = activeConfig.seo.title
     const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', aetherisConfig.seo.description)
+    if (meta) meta.setAttribute('content', activeConfig.seo.description)
   }, [])
 
   return (

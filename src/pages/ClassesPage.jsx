@@ -4,19 +4,19 @@ import PageHero from '../components/layout/PageHero'
 import CinematicImage from '../components/ui/CinematicImage'
 import ChamberReveal from '../components/ui/ChamberReveal'
 import MagneticButton from '../components/ui/MagneticButton'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { routes } from '../design-system/tokens'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function ClassesPage() {
-  const { pageHero, classes, climax } = aetherisConfig
+  const { pageHero, classes, climax } = activeConfig
 
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.classes.ritual}
-        headline={aetherisConfig.pageCopy.classes.headline}
-        subline={aetherisConfig.pageCopy.classes.subline}
+        ritual={activeConfig.pageCopy.classes.ritual}
+        headline={activeConfig.pageCopy.classes.headline}
+        subline={activeConfig.pageCopy.classes.subline}
         align="left"
         image={pageHero.classes}
       />

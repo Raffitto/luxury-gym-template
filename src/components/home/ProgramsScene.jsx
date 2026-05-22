@@ -1,4 +1,4 @@
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { landingConfig } from '../../data/landingConfig'
 import { routes } from '../../design-system/tokens'
 import { useIsPhone } from '../../hooks/useIsPhone'
@@ -13,7 +13,7 @@ import HorizontalSceneRail from '../cinematic/HorizontalSceneRail'
 
 export default function ProgramsScene() {
   const { programs } = landingConfig
-  const { classes } = aetherisConfig
+  const { classes } = activeConfig
   const phone = useIsPhone()
 
   return (

@@ -2,18 +2,18 @@ import { motion } from 'framer-motion'
 import { Mail, Phone } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import MagneticButton from '../components/ui/MagneticButton'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { transition } from '../motion/choreography'
 
 export default function ContactPage() {
-  const { contact } = aetherisConfig
+  const { contact } = activeConfig
 
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.contact.ritual}
-        headline={aetherisConfig.pageCopy.contact.headline}
-        subline={aetherisConfig.pageCopy.contact.subline}
+        ritual={activeConfig.pageCopy.contact.ritual}
+        headline={activeConfig.pageCopy.contact.headline}
+        subline={activeConfig.pageCopy.contact.subline}
         align="center"
       />
 

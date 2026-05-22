@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useIsPhone } from '../../hooks/useIsPhone'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import AmbientFilmLayer from '../cinematic/AmbientFilmLayer'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
@@ -14,7 +14,7 @@ import { spring } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 export default function MembershipFinale() {
-  const { climax } = aetherisConfig
+  const { climax } = activeConfig
   const reduced = useReducedMotion()
   const phone = useIsPhone()
   const ref = useRef(null)

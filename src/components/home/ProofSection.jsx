@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal, { StaggerChamber } from '../ui/ChamberReveal'
 import { variants, transition } from '../../motion/choreography'
 
 export default function ProofSection() {
-  const { proof } = aetherisConfig
+  const { proof } = activeConfig
 
   return (
     <section className="env-depth">

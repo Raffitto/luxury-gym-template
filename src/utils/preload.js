@@ -1,4 +1,4 @@
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { landingConfig } from '../data/landingConfig'
 import { imageAssets, resolveImageSrc } from './images'
 
@@ -64,12 +64,12 @@ function collectImagesFromConfig() {
     if (src) keys.add(src)
   }
 
-  add(aetherisConfig.hero.image)
-  aetherisConfig.classes?.forEach((c) => add(c.image))
+  add(activeConfig.hero.image)
+  activeConfig.classes?.forEach((c) => add(c.image))
   landingConfig.transformation.phases.forEach((p) => add(p.image))
   add(landingConfig.facility.image)
   landingConfig.facility.gallery.forEach(add)
-  add(aetherisConfig.climax.image)
+  add(activeConfig.climax.image)
 
   return [...keys]
 }
@@ -99,13 +99,13 @@ export function getCriticalPreloadUrls() {
 /** Scene-id → URLs for progressive preload */
 export function getScenePreloadMap() {
   return {
-    programs: aetherisConfig.classes.map((c) => resolveImageSrc(c.image)).filter(Boolean),
+    programs: activeConfig.classes.map((c) => resolveImageSrc(c.image)).filter(Boolean),
     journey: landingConfig.transformation.phases.map((p) => resolveImageSrc(p.image)).filter(Boolean),
     facility: [
       resolveImageSrc(landingConfig.facility.image),
       ...landingConfig.facility.gallery.map((g) => resolveImageSrc(g)),
     ].filter(Boolean),
-    access: [resolveImageSrc(aetherisConfig.climax.image)].filter(Boolean),
+    access: [resolveImageSrc(activeConfig.climax.image)].filter(Boolean),
   }
 }
 

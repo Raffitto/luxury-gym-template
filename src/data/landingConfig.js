@@ -1,6 +1,8 @@
+import { isGrindBrand } from './brand'
 import { photos } from '../utils/images'
+import { grindLandingConfig } from './clients/grindLandingConfig'
 
-export const landingConfig = {
+const aetherisLandingConfig = {
   programs: {
     ritual: 'II · Disciplines',
     headline: 'Signature disciplines.',
@@ -57,3 +59,5 @@ export const landingConfig = {
     ],
   },
 }
+
+export const landingConfig = isGrindBrand ? grindLandingConfig : aetherisLandingConfig

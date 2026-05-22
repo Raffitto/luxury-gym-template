@@ -1,19 +1,19 @@
 import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import ChamberReveal from '../components/ui/ChamberReveal'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function AboutPage() {
-  const { about } = aetherisConfig
+  const { about } = activeConfig
 
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.about.ritual}
-        headline={aetherisConfig.pageCopy.about.headline}
+        ritual={activeConfig.pageCopy.about.ritual}
+        headline={activeConfig.pageCopy.about.headline}
         align="left"
-        image={aetherisConfig.pageHero.about}
+        image={activeConfig.pageHero.about}
       />
 
       <section className="page-body chamber-inner">
@@ -49,7 +49,7 @@ export default function AboutPage() {
           transition={transition.cinematic(1)}
         >
           <p className="headline-section font-display text-[var(--platinum)]">
-            {aetherisConfig.brand.mantra}
+            {activeConfig.brand.mantra}
           </p>
         </motion.div>
       </section>

@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
 import DepthField from '../cinematic/DepthField'
@@ -18,7 +18,7 @@ import { useIsPhone } from '../../hooks/useIsPhone'
 import { useCinematicOSOptional } from '../../context/CinematicOSContext'
 
 export default function HeroExperience() {
-  const { hero } = aetherisConfig
+  const { hero } = activeConfig
   const reduced = useReducedMotion()
   const phone = useIsPhone()
   const os = useCinematicOSOptional()

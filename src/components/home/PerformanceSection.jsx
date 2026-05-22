@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import RitualLabel from '../ui/RitualLabel'
 import ChamberReveal from '../ui/ChamberReveal'
 import { transition, viewportOnce } from '../../motion/choreography'
 
 export default function PerformanceSection() {
-  const { performance } = aetherisConfig
+  const { performance } = activeConfig
 
   return (
     <section className="relative overflow-hidden">

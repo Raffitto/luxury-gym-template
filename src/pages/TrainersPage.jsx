@@ -1,18 +1,18 @@
 import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import CinematicImage from '../components/ui/CinematicImage'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function TrainersPage() {
-  const { pageHero, architects } = aetherisConfig
+  const { pageHero, architects } = activeConfig
 
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.trainers.ritual}
-        headline={aetherisConfig.pageCopy.trainers.headline}
-        subline={aetherisConfig.pageCopy.trainers.subline}
+        ritual={activeConfig.pageCopy.trainers.ritual}
+        headline={activeConfig.pageCopy.trainers.headline}
+        subline={activeConfig.pageCopy.trainers.subline}
         align="center"
         image={pageHero.trainers}
       />

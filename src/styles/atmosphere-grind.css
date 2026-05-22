@@ -1,0 +1,40 @@
+/* GRIND GYM LB — urban elite atmosphere overrides */
+
+html.brand-grind {
+  --void: #000000;
+  --void-deep: #000000;
+  --abyss: #080808;
+  --depth: #0a0a0a;
+  --surface: #141414;
+  --elevated: #1c1c1c;
+  --platinum: #f2f2f2;
+  --silver: #a3a3a3;
+  --ash: #6b6b6b;
+  --accent: #e10600;
+  --accent-glow: rgba(225, 6, 0, 0.12);
+  --edge: rgba(242, 242, 242, 0.08);
+  --edge-bright: rgba(242, 242, 242, 0.16);
+
+  --font-display: "Bebas Neue", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+  --font-ritual: "Barlow Condensed", system-ui, sans-serif;
+
+  --shadow-glow: 0 0 100px rgba(225, 6, 0, 0.08);
+}
+
+html.brand-grind .font-display {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+html.brand-grind .font-ritual {
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+html.brand-grind .headline-mythic,
+html.brand-grind .headline-chamber {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}

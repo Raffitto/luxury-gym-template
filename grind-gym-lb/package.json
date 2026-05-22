@@ -1,0 +1,12 @@
+{
+  "name": "grind-gym-lb",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "GRIND GYM LB — cinematic mobile experience (AETHERIS engine)",
+  "scripts": {
+    "dev": "vite --config vite.config.js",
+    "build": "vite build --config vite.config.js",
+    "preview": "vite preview --config vite.config.js"
+  }
+}

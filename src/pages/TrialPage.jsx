@@ -3,11 +3,11 @@ import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import MagneticButton from '../components/ui/MagneticButton'
 import RitualField from '../components/ui/RitualField'
-import { aetherisConfig } from '../data/aetherisConfig'
+import { activeConfig } from '../data/activeConfig'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function TrialPage() {
-  const { trial, locations, proof, climax } = aetherisConfig
+  const { trial, locations, proof, climax } = activeConfig
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e) => {
@@ -19,11 +19,11 @@ export default function TrialPage() {
   return (
     <>
       <PageHero
-        ritual={aetherisConfig.pageCopy.trial.ritual}
+        ritual={activeConfig.pageCopy.trial.ritual}
         headline={trial.headline}
         subline={trial.subline}
         align="left"
-        image={aetherisConfig.pageHero.trial}
+        image={activeConfig.pageHero.trial}
       />
 
       <section className="page-body chamber-inner">

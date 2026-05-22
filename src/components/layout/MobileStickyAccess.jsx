@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { aetherisConfig } from '../../data/aetherisConfig'
+import { activeConfig } from '../../data/activeConfig'
 import { routes } from '../../design-system/tokens'
 import { useIsMobile } from '../../hooks/useIsMobile'
 
@@ -46,7 +46,7 @@ export default function MobileStickyAccess() {
       aria-hidden={!visible}
     >
       <Link to={routes.trial} className="btn-magnetic w-full justify-center">
-        {aetherisConfig.hero.primaryCta}
+        {activeConfig.hero.primaryCta}
       </Link>
     </div>
   )
