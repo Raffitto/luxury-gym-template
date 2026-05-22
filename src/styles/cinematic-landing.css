@@ -521,6 +521,51 @@
   display: none;
 }
 
+/* Native touch rail — 1:1 finger tracking (Signature Programs) */
+.swipeable-scenes--native-touch {
+  overflow: visible;
+}
+
+.swipeable-scenes-track--native {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  scroll-padding-inline: var(--page-gutter);
+  padding-bottom: 0.125rem;
+}
+
+.swipeable-scenes-track--native::-webkit-scrollbar {
+  display: none;
+}
+
+.swipeable-scenes--programs .scene-card-slot {
+  flex: 0 0 min(86vw, 21rem);
+  max-width: min(86vw, 21rem);
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
+  transition: none;
+  transform: none;
+  opacity: 1;
+}
+
+.swipeable-scenes--programs .scene-card-slot:not(.scene-card-slot--active) {
+  transform: none;
+  opacity: 1;
+}
+
+.swipeable-scenes--programs .scene-card-slot--active .scene-card {
+  box-shadow:
+    0 0 0 1px rgba(196, 181, 154, 0.1),
+    0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
 .scene-card-slot {
   flex: 0 0 calc(100% - var(--page-gutter) * 2);
   max-width: 22rem;

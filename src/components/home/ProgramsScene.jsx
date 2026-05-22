@@ -39,7 +39,7 @@ export default function ProgramsScene() {
         </KineticBlock>
 
         <div className="swipeable-scenes-bleed mt-10 lg:hidden">
-          <SwipeableSceneCards>
+          <SwipeableSceneCards nativeTouch className="swipeable-scenes--programs">
             {classes.map((program, i) => (
               <SceneCard
                 key={program.name}

@@ -39,8 +39,14 @@
     display: none;
   }
 
-  .landing-scene--programs-fast .swipeable-scenes-track {
-    will-change: transform;
+  .landing-scene--programs-fast .swipeable-scenes-track--native {
+    will-change: auto;
+  }
+
+  .landing-scene--programs-fast .scene-card-slot {
+    transition: none;
+    transform: none !important;
+    opacity: 1 !important;
   }
 
   .landing-scene--programs-fast .scene-card {
