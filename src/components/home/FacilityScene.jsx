@@ -1,0 +1,106 @@
+import { motion } from 'framer-motion'
+import { landingConfig } from '../../data/landingConfig'
+import { routes } from '../../design-system/tokens'
+import RitualLabel from '../ui/RitualLabel'
+import ChamberReveal from '../ui/ChamberReveal'
+import MagneticButton from '../ui/MagneticButton'
+import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
+import FilmFrame from '../cinematic/FilmFrame'
+import ParallaxLayer from '../cinematic/ParallaxLayer'
+import CinematicBackdrop from '../ui/CinematicBackdrop'
+import CinematicImage from '../ui/CinematicImage'
+import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
+import { transition, viewportOnce } from '../../motion/choreography'
+import { useReducedMotion } from '../../hooks/useReducedMotion'
+
+function GallerySlide({ image, alt }) {
+  return (
+    <div className="facility-gallery-slide">
+      <CinematicImage image={image} alt={alt} preset="section" fill />
+      <div className="facility-gallery-scrim" aria-hidden />
+    </div>
+  )
+}
+
+export default function FacilityScene() {
+  const { facility } = landingConfig
+  const reduced = useReducedMotion()
+
+  return (
+    <section id="facility" className="landing-scene landing-scene--facility relative overflow-hidden">
+      <CinematicAtmosphere intensity="hero" />
+      <CinematicBackdrop
+        image={facility.image}
+        alt={facility.image.alt}
+        preset="section"
+        scrim="lateral"
+        imageClassName="opacity-25 md:opacity-20"
+      />
+
+      <div className="relative z-10 landing-scene-inner chamber">
+        <div className="facility-grid">
+          <ChamberReveal className="facility-copy max-w-xl">
+            <RitualLabel>{facility.ritual}</RitualLabel>
+            <h2 className="headline-chamber font-display mt-5 text-[var(--platinum)]">
+              {facility.headline}
+            </h2>
+            <p className="body-measured mt-5">{facility.subline}</p>
+
+            <ul className="facility-features mt-10">
+              {facility.features.map((f, i) => (
+                <motion.li
+                  key={f.label}
+                  className="facility-feature"
+                  initial={reduced ? false : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={viewportOnce()}
+                  transition={transition.cinematic(0.65, i * 0.08)}
+                >
+                  <span className="facility-feature-label font-display">{f.label}</span>
+                  <span className="facility-feature-detail font-ritual">{f.detail}</span>
+                </motion.li>
+              ))}
+            </ul>
+
+            <div className="mt-10 hidden md:block">
+              <MagneticButton to={routes.locations} variant="ghost">
+                Tour the chambers
+              </MagneticButton>
+            </div>
+          </ChamberReveal>
+
+          <FilmFrame aspect="cinematic" bleed className="facility-hero-frame hidden md:block">
+            <ParallaxLayer speed={0.18}>
+              <div className="facility-hero-visual">
+                <CinematicImage
+                  image={facility.image}
+                  alt={facility.image.alt}
+                  preset="section"
+                  fill
+                />
+              </div>
+            </ParallaxLayer>
+          </FilmFrame>
+        </div>
+
+        <div className="swipeable-scenes-bleed mt-10 lg:hidden">
+          <SwipeableSceneCards>
+            {facility.gallery.map((img) => (
+              <GallerySlide key={img.id} image={img} alt={img.alt} />
+            ))}
+          </SwipeableSceneCards>
+        </div>
+
+        <div className="facility-gallery-desktop mt-16 hidden gap-4 lg:grid lg:grid-cols-3">
+          {facility.gallery.map((img, i) => (
+            <FilmFrame key={img.id} aspect="cinematic" delay={i * 0.08}>
+              <div className="facility-gallery-slide">
+                <CinematicImage image={img} alt={img.alt} preset="card" fill />
+              </div>
+            </FilmFrame>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

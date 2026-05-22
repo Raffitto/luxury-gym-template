@@ -69,7 +69,7 @@ body {
 
 /* Cinematic headline scale */
 .headline-mythic {
-  font-size: clamp(2.25rem, 9vw, 7.5rem);
+  font-size: clamp(2.35rem, 9.5vw, 7.5rem);
   line-height: 0.9;
   letter-spacing: -0.03em;
 }
@@ -272,10 +272,23 @@ a.btn-magnetic {
   bottom: 0;
   z-index: 45;
   display: flex;
-  padding: 0.625rem var(--page-gutter);
-  padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0px));
-  background: linear-gradient(180deg, transparent 0%, var(--void) 35%, var(--void) 100%);
-  border-top: 1px solid var(--edge);
+  padding: 0.75rem var(--page-gutter);
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(2, 2, 2, 0.88) 22%,
+    var(--void) 100%
+  );
+  border-top: 1px solid var(--edge-bright);
+  box-shadow: 0 -20px 48px rgba(0, 0, 0, 0.55);
+}
+
+.mobile-sticky-access .btn-magnetic {
+  min-height: 3.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  box-shadow: 0 0 32px rgba(232, 228, 220, 0.12);
 }
 
 @media (max-width: 1023px) {

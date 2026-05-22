@@ -22,8 +22,8 @@ export default function Shell() {
 
   return (
     <div className="env-void min-h-screen">
-      {!mobile ? <FilmGrain /> : null}
-      {!mobile ? <ScrollProgress /> : null}
+      {!mobile && !reduced ? <FilmGrain /> : null}
+      {!reduced ? <ScrollProgress /> : null}
       <Navigation />
       <AnimatePresence mode="wait">
         <motion.main

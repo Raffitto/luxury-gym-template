@@ -1,17 +1,24 @@
 import { motion, useScroll } from 'framer-motion'
-import { useIsMobile } from '../../hooks/useIsMobile'
+import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 export default function ScrollProgress() {
-  const mobile = useIsMobile()
+  const reduced = useReducedMotion()
   const { scrollYProgress } = useScroll()
 
-  if (mobile) return null
+  if (reduced) return null
 
   return (
-    <motion.div
-      className="fixed top-0 right-0 left-0 z-[60] h-px origin-left bg-[var(--accent)]"
-      style={{ scaleX: scrollYProgress }}
-      aria-hidden
-    />
+    <>
+      <motion.div
+        className="scroll-progress scroll-progress--bar"
+        style={{ scaleX: scrollYProgress }}
+        aria-hidden
+      />
+      <motion.div
+        className="scroll-progress scroll-progress--glow"
+        style={{ scaleX: scrollYProgress, opacity: 0.35 }}
+        aria-hidden
+      />
+    </>
   )
 }
