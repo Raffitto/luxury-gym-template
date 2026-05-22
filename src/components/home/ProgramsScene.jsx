@@ -1,6 +1,7 @@
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { landingConfig } from '../../data/landingConfig'
 import { routes } from '../../design-system/tokens'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
 import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
@@ -12,10 +13,15 @@ import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../ci
 export default function ProgramsScene() {
   const { programs } = landingConfig
   const { classes } = aetherisConfig
+  const phone = useIsPhone()
 
   return (
-    <FilmChapter id="programs" className="landing-scene--programs env-chamber" depthIndex={2}>
-      <CinematicAtmosphere intensity="section" />
+    <FilmChapter
+      id="programs"
+      className="landing-scene--programs landing-scene--programs-fast"
+      depthIndex={2}
+    >
+      {!phone ? <CinematicAtmosphere intensity="section" /> : null}
       <div className="landing-scene-inner chamber-tight">
         <KineticBlock className="max-w-2xl" sceneId="programs">
           <KineticRitual className="section-ritual-gap" sceneId="programs">
@@ -54,7 +60,7 @@ export default function ProgramsScene() {
             <div className="horizontal-scene-strip">
               {classes.map((program, i) => (
                 <div key={program.name} className="horizontal-scene-item">
-                  <FilmFrame aspect="cinematic" delay={i * 0.06}>
+                  <FilmFrame aspect="cinematic">
                     <SceneCard
                       index={i + 1}
                       image={program.image}

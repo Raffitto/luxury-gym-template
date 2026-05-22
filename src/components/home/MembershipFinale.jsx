@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
@@ -8,19 +9,20 @@ import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
 import MagneticButton from '../ui/MagneticButton'
 import { KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
-import { spring, useLiquidScroll } from '../../motion/choreography'
+import { spring } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 export default function MembershipFinale() {
   const { climax } = aetherisConfig
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end end'],
   })
-  const headlineY = useLiquidScroll(scrollYProgress, [0, 1], [6, -2])
-  const glowOpacity = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [0.06, 0.1, 0.14])
+  const headlineY = useTransform(scrollYProgress, [0, 1], phone ? [0, 0] : [4, -2])
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.05, 0.08, 0.1])
 
   return (
     <FilmChapter

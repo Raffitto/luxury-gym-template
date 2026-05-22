@@ -1,12 +1,10 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import Navigation from './Navigation'
 import Footer from './Footer'
 import MobileStickyAccess from './MobileStickyAccess'
 import FilmGrain from '../atmosphere/FilmGrain'
 import ScrollProgress from '../atmosphere/ScrollProgress'
-import { spring } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
 
@@ -24,18 +22,9 @@ export default function Shell() {
       {!mobile && !reduced ? <FilmGrain /> : null}
       {!reduced ? <ScrollProgress /> : null}
       <Navigation />
-      <AnimatePresence mode="wait">
-        <motion.main
-          key={location.pathname}
-          initial={{ opacity: 1, y: 0 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, transition: spring.liquid }}
-          transition={spring.liquid}
-          className="page-with-sticky min-h-screen"
-        >
-          <Outlet />
-        </motion.main>
-      </AnimatePresence>
+      <main key={location.pathname} className="page-with-sticky min-h-screen page-instant">
+        <Outlet />
+      </main>
       <Footer />
       <MobileStickyAccess />
     </div>

@@ -29,10 +29,13 @@ export default function HeroExperience() {
   })
 
   const parallaxActive = !reduced && !phone
-  const imageScale = useLiquidScroll(scrollYProgress, [0, 1], [1, phone ? 1.01 : 1.04])
-  const imageY = useLiquidScroll(scrollYProgress, [0, 1], [0, phone ? -8 : -40])
-  const contentY = useLiquidScroll(scrollYProgress, [0, 1], [0, phone ? 8 : 32])
-  const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.94])
+  const imageScaleSmooth = useLiquidScroll(scrollYProgress, [0, 1], [1, 1.04])
+  const imageYSmooth = useLiquidScroll(scrollYProgress, [0, 1], [0, -40])
+  const contentYSmooth = useLiquidScroll(scrollYProgress, [0, 1], [0, 32])
+  const imageScale = phone ? useTransform(scrollYProgress, [0, 1], [1, 1]) : imageScaleSmooth
+  const imageY = phone ? useTransform(scrollYProgress, [0, 1], [0, 0]) : imageYSmooth
+  const contentY = phone ? useTransform(scrollYProgress, [0, 1], [0, 0]) : contentYSmooth
+  const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, phone ? 1 : 0.94])
 
   useEffect(() => {
     const el = ref.current
@@ -92,7 +95,7 @@ export default function HeroExperience() {
                 className="font-ritual hero-ritual-label"
                 initial={reduced ? false : { opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...spring.glide, delay: phone ? 0.16 : 0.12 }}
+                transition={{ ...spring.glide, delay: phone ? 0.06 : 0.1 }}
               >
                 {hero.ritual}
               </motion.p>
@@ -104,7 +107,7 @@ export default function HeroExperience() {
                     className="hero-headline-line block"
                     initial={reduced ? false : { opacity: 0, y: phone ? 6 : 14 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ ...spring.glide, delay: (phone ? 0.2 : 0.14) + i * (phone ? 0.1 : 0.08) }}
+                    transition={{ ...spring.glide, delay: (phone ? 0.08 : 0.12) + i * (phone ? 0.04 : 0.06) }}
                   >
                     {line}
                   </motion.span>
@@ -115,7 +118,7 @@ export default function HeroExperience() {
                 className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg"
                 initial={reduced ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ ...spring.glide, delay: phone ? 0.34 : 0.28 }}
+                transition={{ ...spring.glide, delay: phone ? 0.14 : 0.22 }}
               >
                 {hero.subline}
               </motion.p>
@@ -125,7 +128,7 @@ export default function HeroExperience() {
                 className="hero-cta-row mt-7 sm:mt-9"
                 initial={reduced ? false : { opacity: 0, y: phone ? 6 : 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...spring.glide, delay: phone ? 0.44 : 0.38 }}
+                transition={{ ...spring.glide, delay: phone ? 0.2 : 0.3 }}
               >
                 <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
                   {hero.primaryCta}

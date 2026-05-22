@@ -24,7 +24,7 @@ export const camera = {
   energy: {
     calm: 0.22,
     active: 0.85,
-    ramp: { stiffness: 42, damping: 20, mass: 0.9 },
+    ramp: { stiffness: 180, damping: 32, mass: 0.75 },
   },
 
   typography: {

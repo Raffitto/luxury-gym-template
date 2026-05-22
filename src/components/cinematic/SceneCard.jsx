@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import CinematicImage from '../ui/CinematicImage'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
-import { spring, viewportOnce } from '../../motion/choreography'
+import { useIsPhone } from '../../hooks/useIsPhone'
+import { spring, viewportOnce, transition } from '../../motion/choreography'
 
 export default function SceneCard({
   image,
@@ -15,6 +16,7 @@ export default function SceneCard({
   ctaLabel = 'Explore',
 }) {
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
 
   const content = (
     <article className="scene-card edge-lit">
@@ -36,24 +38,25 @@ export default function SceneCard({
     </article>
   )
 
-  if (reduced) {
-    return href ? (
-      <Link to={href} className="scene-card-link">
+  if (reduced || phone) {
+    const inner = href ? (
+      <Link to={href} className="scene-card-link scene-card-link--instant">
         {content}
       </Link>
     ) : (
       content
     )
+    return inner
   }
 
   const wrapped = (
     <motion.div
-      className="scene-card-motion gpu-layer"
-      whileTap={{ scale: 0.992, transition: spring.tap }}
-      initial={{ opacity: 0, y: 12, scale: 0.992 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={viewportOnce('-3%')}
-      transition={spring.liquid}
+      className="scene-card-motion"
+      whileTap={{ scale: 0.994, transition: spring.tap }}
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewportOnce('-4%')}
+      transition={transition.instant}
     >
       {content}
     </motion.div>

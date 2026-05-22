@@ -10,43 +10,43 @@ export const ease = {
   magnetic: easing.magnetic,
   liquid: [0.25, 0.8, 0.35, 1],
   drift: [0.45, 0.05, 0.25, 1],
-  inevitable: [0.33, 0.68, 0.24, 1],
+  instant: [0.22, 1, 0.32, 1],
 }
 
-/** Spring presets — liquid inevitability */
+/** Responsive first — snappy defaults */
 export const spring = {
-  liquid: { type: 'spring', stiffness: 68, damping: 26, mass: 1.1 },
-  reveal: { type: 'spring', stiffness: 54, damping: 24, mass: 1.12 },
-  glide: { type: 'spring', stiffness: 46, damping: 22, mass: 1.14 },
-  drift: { type: 'spring', stiffness: 36, damping: 20, mass: 1.16 },
-  scroll: { type: 'spring', stiffness: 34, damping: 24, mass: 1.2 },
-  snap: { type: 'spring', stiffness: 180, damping: 36, mass: 1 },
-  tap: { type: 'spring', stiffness: 240, damping: 32, mass: 0.82 },
-  sticky: { type: 'spring', stiffness: 150, damping: 30, mass: 1 },
+  liquid: { type: 'spring', stiffness: 120, damping: 28, mass: 0.85 },
+  reveal: { type: 'spring', stiffness: 100, damping: 26, mass: 0.9 },
+  glide: { type: 'spring', stiffness: 88, damping: 24, mass: 0.92 },
+  drift: { type: 'spring', stiffness: 72, damping: 22, mass: 0.95 },
+  /** Scroll-linked — follows thumb immediately */
+  scroll: { type: 'spring', stiffness: 520, damping: 48, mass: 0.55 },
+  snap: { type: 'spring', stiffness: 280, damping: 32, mass: 0.88 },
+  tap: { type: 'spring', stiffness: 380, damping: 30, mass: 0.7 },
+  sticky: { type: 'spring', stiffness: 220, damping: 30, mass: 0.88 },
 }
 
 export const drag = {
-  elastic: 0.1,
-  momentum: 0.2,
-  transition: { power: 0.14, timeConstant: 420 },
+  elastic: 0.12,
+  momentum: 0.24,
+  transition: { power: 0.2, timeConstant: 280 },
 }
 
-/** Thumb swipe — soft resistance, weighted settle */
 export const dragThumb = {
-  elastic: 0.04,
-  momentum: 0.09,
-  transition: { power: 0.07, timeConstant: 620 },
+  elastic: 0.08,
+  momentum: 0.18,
+  transition: { power: 0.16, timeConstant: 320 },
 }
 
 export const springThumb = {
-  snap: { type: 'spring', stiffness: 112, damping: 38, mass: 1.1 },
-  tap: { type: 'spring', stiffness: 200, damping: 34, mass: 0.9 },
+  snap: { type: 'spring', stiffness: 240, damping: 34, mass: 0.9 },
+  tap: { type: 'spring', stiffness: 320, damping: 30, mass: 0.75 },
 }
 
 export function magneticThumb(reduced) {
   if (reduced) return {}
   return {
-    whileTap: { scale: 0.997 },
+    whileTap: { scale: 0.996 },
     transition: springThumb.tap,
   }
 }
@@ -69,6 +69,7 @@ export const transition = {
   }),
   liquid: (delay = 0) => ({ ...spring.liquid, delay }),
   glide: (delay = 0) => ({ ...spring.glide, delay }),
+  instant: { duration: 0.18, ease: ease.instant },
 }
 
 export const variants = {
@@ -76,29 +77,27 @@ export const variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: spring.liquid,
+      transition: { duration: 0.22, ease: ease.instant },
     },
   },
   rise: {
-    hidden: { opacity: 0, y: 32, scale: 0.988 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: spring.reveal,
     },
   },
   riseSubtle: {
-    hidden: { opacity: 0, y: 14, scale: 0.994 },
+    hidden: { opacity: 0, y: 8 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: spring.liquid,
+      transition: spring.glide,
     },
   },
   scalePresence: {
-    hidden: { opacity: 0, scale: 0.982 },
+    hidden: { opacity: 0, scale: 0.994 },
     visible: {
       opacity: 1,
       scale: 1,
@@ -106,22 +105,22 @@ export const variants = {
     },
   },
   slideLeft: {
-    hidden: { opacity: 0, x: 24 },
+    hidden: { opacity: 0, x: 12 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: spring.liquid,
+      transition: spring.glide,
     },
   },
   slideRight: {
-    hidden: { opacity: 0, x: -24 },
+    hidden: { opacity: 0, x: -12 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: spring.liquid,
+      transition: spring.glide,
     },
   },
-  staggerContainer: (stagger = 0.07, delayChildren = 0.04) => ({
+  staggerContainer: (stagger = 0.05, delayChildren = 0.02) => ({
     hidden: {},
     visible: {
       transition: { staggerChildren: stagger, delayChildren },
@@ -137,28 +136,28 @@ export const variants = {
   },
 }
 
-export function viewportOnce(margin = '-8%') {
-  return { once: true, margin, amount: 0.15 }
+export function viewportOnce(margin = '-6%') {
+  return { once: true, margin, amount: 0.12 }
 }
 
 export function viewportHandheld() {
-  return { once: true, margin: '-14%', amount: 0.1 }
+  return { once: true, margin: '-4%', amount: 0.08 }
 }
 
 export function magneticHover(reduced) {
   if (reduced) return {}
   return {
-    whileHover: { scale: 1.004, y: -0.5 },
-    whileTap: { scale: 0.994, y: 0 },
+    whileHover: { scale: 1.003, y: -0.5 },
+    whileTap: { scale: 0.995, y: 0 },
     transition: spring.tap,
   }
 }
 
-/** Smooth scroll-linked values — camera drift, not snapping elements */
 export function useLiquidTransform(motionValue, config = spring.drift) {
   return useSpring(motionValue, config)
 }
 
+/** Scroll-linked — high-stiffness spring tracks thumb immediately */
 export function useLiquidScroll(scrollProgress, inputRange, outputRange, config = spring.scroll) {
   const raw = useTransform(scrollProgress, inputRange, outputRange)
   return useSpring(raw, config)

@@ -1,0 +1,101 @@
+/* Performance rebalance — instant, lightweight, responsive */
+
+.page-instant {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body.aetheris-handheld {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Kill scroll lag from smooth interpolation */
+  .cinematic-os--handheld .camera-rig-body,
+  .cinematic-os--handheld .camera-rig-gyro,
+  .cinematic-os--handheld .film-chapter-camera {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .cinematic-landing--fast .environmental-field {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .cinematic-landing--fast .env-bloom {
+    display: none;
+  }
+
+  .cinematic-landing--fast .env-grain {
+    display: none;
+  }
+
+  /* Programs — GPU-light */
+  .landing-scene--programs-fast .film-chapter-carry {
+    display: none;
+  }
+
+  .landing-scene--programs-fast .swipeable-scenes-track {
+    will-change: transform;
+  }
+
+  .landing-scene--programs-fast .scene-card {
+    box-shadow: 0 0 0 1px rgba(232, 226, 216, 0.04), 0 10px 32px rgba(0, 0, 0, 0.45);
+    transition: none;
+  }
+
+  .landing-scene--programs-fast .scene-card-slot--active .scene-card {
+    box-shadow: 0 0 0 1px rgba(196, 181, 154, 0.1), 0 12px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  .scene-card-link--instant:active .scene-card {
+    opacity: 0.92;
+    transition: opacity 0.12s ease;
+  }
+
+  /* Faster reveals */
+  .cinematic-os--handheld .kinetic-headline,
+  .cinematic-os--handheld .kinetic-copy,
+  .cinematic-os--handheld .kinetic-ritual {
+    will-change: auto;
+  }
+
+  .cinematic-img {
+    transition-duration: 0.22s;
+  }
+
+  .cinematic-img-wrap--priority .cinematic-img {
+    transition: none;
+    opacity: 1;
+  }
+
+  /* Hero — instant entrance */
+  .hero-experience--handheld .hero-frame-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Reduce fixed layer cost */
+  .continuity-engine {
+    display: none;
+  }
+
+  .gpu-layer {
+    will-change: auto;
+  }
+
+  .swipeable-scenes--handheld .scene-card-motion {
+    will-change: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-img {
+    opacity: 1;
+    transition: none;
+  }
+}

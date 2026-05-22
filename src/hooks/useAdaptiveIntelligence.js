@@ -79,8 +79,16 @@ export function useAdaptiveIntelligence(scrollYProgress) {
   useEffect(() => {
     let raf = 0
     let lastY = window.scrollY
+    let frame = 0
+    const phone =
+      typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
 
     const tick = () => {
+      frame += 1
+      if (phone && frame % 3 !== 0) {
+        raf = requestAnimationFrame(tick)
+        return
+      }
       const now = performance.now()
       setIdleMs(now - lastActivityRef.current)
 

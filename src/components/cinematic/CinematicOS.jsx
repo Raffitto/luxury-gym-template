@@ -19,11 +19,11 @@ function LandingFilm() {
 
   return (
     <div className="landing-immersion">
-      {!reduced ? <ContinuityEngine /> : null}
+      {!reduced && !phone ? <ContinuityEngine /> : null}
       {!reduced ? <EnvironmentalField /> : null}
       <CameraRig>
         <div
-          className={`cinematic-landing cinematic-landing--alive cinematic-landing--os ${phone ? 'cinematic-landing--handheld' : ''}`.trim()}
+          className={`cinematic-landing cinematic-landing--alive cinematic-landing--os ${phone ? 'cinematic-landing--handheld cinematic-landing--fast' : ''}`.trim()}
         >
           <HeroExperience />
           <SceneBridge variant="hero-exit" />
