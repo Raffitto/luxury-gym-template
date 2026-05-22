@@ -12,7 +12,7 @@ import { camera } from '../motion/camera'
 import { useScrollVelocity } from './useScrollVelocity'
 import { useDeviceCinematicTier } from './useDeviceCinematicTier'
 
-const IDLE_BREATH_MS = 2200
+const IDLE_BREATH_MS = 2800
 
 export function useAdaptiveIntelligence(scrollYProgress) {
   const velocity = useScrollVelocity()

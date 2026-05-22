@@ -14,19 +14,19 @@ export const ease = {
 
 /** Spring presets — soft, continuous, iOS-adjacent */
 export const spring = {
-  liquid: { type: 'spring', stiffness: 110, damping: 22, mass: 0.95 },
-  reveal: { type: 'spring', stiffness: 90, damping: 20, mass: 1 },
-  glide: { type: 'spring', stiffness: 70, damping: 18, mass: 1.05 },
-  drift: { type: 'spring', stiffness: 55, damping: 16, mass: 1.1 },
-  snap: { type: 'spring', stiffness: 260, damping: 32, mass: 0.88 },
-  tap: { type: 'spring', stiffness: 400, damping: 28, mass: 0.6 },
-  sticky: { type: 'spring', stiffness: 220, damping: 26, mass: 0.9 },
+  liquid: { type: 'spring', stiffness: 78, damping: 24, mass: 1.05 },
+  reveal: { type: 'spring', stiffness: 62, damping: 22, mass: 1.08 },
+  glide: { type: 'spring', stiffness: 52, damping: 20, mass: 1.12 },
+  drift: { type: 'spring', stiffness: 42, damping: 18, mass: 1.15 },
+  snap: { type: 'spring', stiffness: 200, damping: 34, mass: 0.95 },
+  tap: { type: 'spring', stiffness: 280, damping: 30, mass: 0.75 },
+  sticky: { type: 'spring', stiffness: 180, damping: 28, mass: 0.95 },
 }
 
 export const drag = {
-  elastic: 0.18,
-  momentum: 0.28,
-  transition: { power: 0.18, timeConstant: 380 },
+  elastic: 0.1,
+  momentum: 0.2,
+  transition: { power: 0.14, timeConstant: 420 },
 }
 
 export const transition = {
@@ -122,8 +122,8 @@ export function viewportOnce(margin = '-8%') {
 export function magneticHover(reduced) {
   if (reduced) return {}
   return {
-    whileHover: { scale: 1.012, y: -1 },
-    whileTap: { scale: 0.988, y: 0 },
+    whileHover: { scale: 1.004, y: -0.5 },
+    whileTap: { scale: 0.994, y: 0 },
     transition: spring.tap,
   }
 }

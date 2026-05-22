@@ -10,15 +10,15 @@ export const camera = {
   },
 
   drift: {
-    pageX: ['0%', '0.28%', '-0.22%', '0.1%'],
-    pageY: ['0%', '-0.35%', '-0.55%'],
-    chapterY: [0, -12, -24],
-    depthScale: [1.002, 1, 0.998],
+    pageX: ['0%', '0.1%', '-0.06%', '0.04%'],
+    pageY: ['0%', '-0.14%', '-0.2%'],
+    chapterY: [0, -5, -10],
+    depthScale: [1.001, 1, 0.999],
   },
 
   breathing: {
-    duration: 7.5,
-    ease: [0.45, 0.05, 0.25, 1],
+    duration: 12,
+    ease: [0.42, 0, 0.2, 1],
   },
 
   energy: {

@@ -1,0 +1,285 @@
+/* AETHERIS — cinematic taste & luxury restraint */
+
+:root {
+  --void-deep: #010101;
+  --abyss: #040404;
+  --shadow-ink: #0a0a0a;
+  --platinum-muted: rgba(232, 228, 220, 0.88);
+  --accent-glow: rgba(196, 181, 154, 0.08);
+  --edge: rgba(232, 228, 220, 0.05);
+}
+
+html,
+body {
+  background: var(--void-deep);
+  background-image:
+    radial-gradient(120% 80% at 50% -20%, rgba(18, 18, 20, 0.35) 0%, transparent 55%),
+    linear-gradient(180deg, var(--void-deep) 0%, var(--abyss) 40%, var(--void) 100%);
+}
+
+.cinematic-landing--os {
+  background: linear-gradient(180deg, var(--void-deep) 0%, var(--abyss) 8%, var(--void) 100%);
+}
+
+/* ── Premium darkness — dimensional void ── */
+.cinematic-os--taste .continuity-veil {
+  background: linear-gradient(
+    180deg,
+    rgba(1, 1, 1, 0.15) 0%,
+    rgba(6, 7, 9, 0.12) 45%,
+    rgba(1, 1, 1, 0.2) 100%
+  );
+}
+
+.cinematic-os--taste .continuity-spectrum {
+  opacity: 0.7;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(14, 15, 18, 0.18) 35%,
+    rgba(8, 9, 11, 0.22) 55%,
+    transparent 100%
+  );
+}
+
+.cinematic-os--taste .continuity-shadow-drift {
+  animation: none;
+  opacity: 0.62;
+  background: radial-gradient(
+    90% 45% at 50% 100%,
+    rgba(0, 0, 0, 0.55) 0%,
+    transparent 72%
+  );
+}
+
+/* ── Lighting restraint ── */
+.cinematic-os--taste .env-bloom {
+  filter: blur(22px);
+  background: radial-gradient(
+    85% 55% at 50% 0%,
+    rgba(196, 181, 154, 0.06) 0%,
+    transparent 68%
+  );
+}
+
+.cinematic-os--taste .env-sweep {
+  opacity: 0.45;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(210, 200, 180, 0.02) 48%,
+    rgba(230, 222, 205, 0.035) 50%,
+    transparent 58%
+  );
+  filter: blur(16px);
+}
+
+.cinematic-os--taste .env-fog {
+  mix-blend-mode: normal;
+  opacity: 0.85;
+}
+
+.cinematic-os--taste .env-grain--static {
+  mix-blend-mode: soft-light;
+  opacity: 0.014;
+}
+
+.cinematic-os--taste[data-energy='high'] .env-sweep {
+  filter: blur(14px);
+}
+
+/* ── Scene emotional atmosphere ── */
+.film-chapter--mystery .film-chapter-atmo--hero,
+.hero-experience.film-chapter--mystery {
+  --scene-light: rgba(20, 22, 28, 0.22);
+}
+
+.film-chapter--power .film-chapter-atmo--section {
+  background: radial-gradient(88% 48% at 50% 0%, rgba(16, 18, 22, 0.28), transparent 72%);
+}
+
+.film-chapter--aspiration .film-chapter-atmo--section {
+  background: radial-gradient(92% 52% at 50% 10%, rgba(22, 24, 30, 0.2), transparent 70%);
+}
+
+.film-chapter--exclusivity .film-chapter-atmo--hero,
+.film-chapter--exclusivity .film-chapter-atmo--section {
+  background: radial-gradient(80% 50% at 30% 0%, rgba(14, 14, 16, 0.32), transparent 75%);
+}
+
+.film-chapter--transcendence .film-chapter-atmo--climax {
+  background: radial-gradient(75% 50% at 50% 35%, rgba(28, 26, 22, 0.14), transparent 74%);
+}
+
+.film-chapter-carry {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(2, 2, 3, 0.5) 90%,
+    var(--void-deep) 100%
+  );
+}
+
+/* ── Typographic cinema ── */
+.cinematic-os--taste .headline-emotional {
+  font-size: clamp(2.5rem, 11vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.032em;
+  font-weight: 600;
+}
+
+.cinematic-os--taste .headline-chapter {
+  font-size: clamp(2rem, 6.8vw, 4.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.028em;
+  font-weight: 600;
+}
+
+.cinematic-os--taste .copy-cinematic,
+.cinematic-os--taste .copy-lead {
+  line-height: 1.7;
+  letter-spacing: 0.015em;
+  color: var(--platinum-muted);
+  max-width: 32ch;
+}
+
+.cinematic-os--taste .kinetic-headline-line {
+  transform-origin: left center;
+  perspective: none;
+}
+
+.cinematic-os--taste .kinetic-ritual {
+  letter-spacing: 0.24em;
+  color: var(--silver);
+}
+
+.cinematic-os--taste .hero-headline-line {
+  letter-spacing: -0.034em;
+}
+
+.cinematic-os--taste .section-headline-gap {
+  margin-top: clamp(0.75rem, 2vh, 1.25rem);
+}
+
+.cinematic-os--taste .section-ritual-gap {
+  margin-bottom: clamp(1rem, 2.5vh, 1.5rem);
+}
+
+/* ── Hero restraint ── */
+.cinematic-os--taste .hero-experience--os .hero-haze-band {
+  opacity: 0.22;
+}
+
+.cinematic-os--taste .hero-experience--os .hero-parallax-bg {
+  filter: none;
+}
+
+.cinematic-os--taste .hero-frame-panel {
+  background: linear-gradient(
+    160deg,
+    rgba(18, 17, 15, 0.88) 0%,
+    rgba(10, 10, 10, 0.82) 55%,
+    rgba(6, 6, 6, 0.78) 100%
+  );
+  border-color: rgba(196, 181, 154, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(232, 228, 220, 0.03) inset,
+    0 24px 64px rgba(0, 0, 0, 0.65);
+}
+
+.cinematic-os--taste .hero-reflection-floor {
+  opacity: 0.35;
+  background: linear-gradient(0deg, rgba(196, 181, 154, 0.04) 0%, transparent 50%);
+}
+
+.cinematic-os--taste .finale-glow-pulse {
+  filter: blur(48px);
+  background: radial-gradient(
+    60% 50% at 50% 50%,
+    rgba(196, 181, 154, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+/* ── Micro-interactions — inevitable, soft ── */
+.cinematic-os--taste .btn-magnetic {
+  transition:
+    box-shadow 0.65s var(--ease-cinematic),
+    transform 0.55s var(--ease-cinematic),
+    background 0.45s ease;
+}
+
+.cinematic-os--taste .btn-magnetic:hover {
+  box-shadow: 0 0 28px rgba(232, 228, 220, 0.1);
+  transform: translateY(-0.5px);
+}
+
+.cinematic-os--taste .btn-magnetic-ghost:hover {
+  box-shadow: 0 0 24px var(--accent-glow);
+  border-color: rgba(196, 181, 154, 0.35);
+}
+
+.cinematic-os--taste .scene-nav-btn {
+  transition: opacity 0.4s ease, border-color 0.4s ease;
+}
+
+.cinematic-os--taste .scene-dot {
+  transition: transform 0.45s var(--ease-cinematic), opacity 0.4s ease;
+}
+
+.cinematic-os--taste .scene-dot--active {
+  transform: scale(1.15);
+}
+
+/* ── Breathing room between scenes ── */
+.cinematic-os--taste .film-chapter:not(.landing-scene--hero) {
+  margin-top: clamp(-3.5rem, -7vh, -2rem);
+  padding-top: clamp(5rem, 12vh, 8rem);
+}
+
+.cinematic-os--taste .landing-scene--programs,
+.cinematic-os--taste .landing-scene--journey,
+.cinematic-os--taste .landing-scene--facility,
+.cinematic-os--taste .landing-scene--finale {
+  padding-bottom: clamp(4.5rem, 11vh, 7rem);
+}
+
+.cinematic-os--taste .scene-bridge {
+  height: clamp(4rem, 10vh, 7rem);
+  margin-top: clamp(-5rem, -10vh, -3.5rem);
+}
+
+.cinematic-os--taste .scene-bridge--hero-exit {
+  height: clamp(5rem, 12vh, 8rem);
+}
+
+/* ── Remove tech-demo signals ── */
+.cinematic-os--taste .kinetic-ritual[style*='--type-energy'],
+.cinematic-os--taste[data-aggressive='true'] .kinetic-ritual {
+  filter: none;
+  letter-spacing: 0.24em;
+}
+
+.cinematic-os--taste[data-tier='immersive'] .hero-experience--os {
+  filter: none;
+}
+
+.continuity-shadow-drift--alive {
+  animation: none;
+}
+
+@media (max-width: 768px) {
+  .cinematic-os--taste .headline-emotional {
+    font-size: clamp(2.35rem, 12vw, 3.15rem);
+    line-height: 0.92;
+  }
+
+  .cinematic-os--taste .headline-chapter {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
+
+  .cinematic-os--taste .copy-lead,
+  .cinematic-os--taste .copy-cinematic {
+    max-width: 28ch;
+  }
+}

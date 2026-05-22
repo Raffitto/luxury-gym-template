@@ -19,8 +19,8 @@ export default function MembershipFinale() {
     target: ref,
     offset: ['start end', 'end end'],
   })
-  const headlineY = useLiquidScroll(scrollYProgress, [0, 1], [14, -6])
-  const glowOpacity = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [0.28, 0.55, 0.75])
+  const headlineY = useLiquidScroll(scrollYProgress, [0, 1], [8, -3])
+  const glowOpacity = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [0.1, 0.18, 0.26])
 
   return (
     <FilmChapter
@@ -51,25 +51,26 @@ export default function MembershipFinale() {
         <div className="chamber-inner mx-auto w-full max-w-4xl text-center">
           <FilmFrame aspect="auto">
             <div className="finale-frame-content finale-frame-content--myth">
-              <KineticRitual>{climax.ritual}</KineticRitual>
+              <KineticRitual sceneId="access">{climax.ritual}</KineticRitual>
 
               <motion.div style={reduced ? undefined : { y: headlineY }}>
                 <KineticHeadline
+                  sceneId="access"
                   className="headline-emotional font-display mt-8 text-[var(--platinum)]"
                   lines={climax.headline}
                 />
               </motion.div>
 
-              <KineticCopy className="copy-cinematic mx-auto mt-8 max-w-lg text-center" delay={0.2}>
+              <KineticCopy sceneId="access" className="copy-cinematic mx-auto mt-8 max-w-lg text-center">
                 {climax.subline}
               </KineticCopy>
 
               <motion.div
                 className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-                initial={reduced ? false : { opacity: 0, y: 12 }}
+                initial={reduced ? false : { opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ ...spring.liquid, delay: 0.35 }}
+                transition={{ ...spring.glide, delay: 0.42 }}
               >
                 <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
                 <MagneticButton to={routes.membership} variant="ghost">

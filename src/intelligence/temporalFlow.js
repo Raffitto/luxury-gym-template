@@ -1,16 +1,14 @@
-/**
- * Slow, non-repeating environmental cycles — phase evolves with session + immersion.
- */
+/** Slow living cycles — never frantic, never identical loops */
 export function getTemporalState(elapsedMs, energy, immersion = 0) {
-  const basePeriod = 95000
-  const period = basePeriod + immersion * 55000 + energy * 12000
+  const basePeriod = 165000
+  const period = basePeriod + immersion * 40000
   const epoch = Math.floor(elapsedMs / period)
   const phase = (elapsedMs - epoch * period) / period
 
-  const lightShift = 0.42 + 0.58 * (0.5 + 0.5 * Math.sin(phase * Math.PI * 2 + epoch * 0.4))
-  const fogPhase = 0.5 + 0.5 * Math.sin(phase * Math.PI * 2 + 1.2)
-  const breathDuration = 6.5 + immersion * 2.8 + (1 - energy) * 1.5
-  const sweepBias = 0.85 + energy * 0.35 + Math.sin(phase * Math.PI) * 0.12
+  const lightShift = 0.48 + 0.22 * Math.sin(phase * Math.PI * 2 + epoch * 0.25)
+  const fogPhase = 0.5 + 0.18 * Math.sin(phase * Math.PI * 2 + 0.8)
+  const breathDuration = 11 + immersion * 2.5 + (1 - energy) * 2
+  const sweepBias = 1.15
 
   return {
     phase,

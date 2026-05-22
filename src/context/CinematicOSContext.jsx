@@ -48,18 +48,11 @@ export function CinematicOSProvider({ children }) {
     [reduced, gyro, scrollYProgress, intelligence],
   )
 
-  const dataAttrs = {
-    'data-energy': intelligence.energy > 0.45 ? 'high' : intelligence.energy > 0.2 ? 'mid' : 'calm',
-    'data-tier': intelligence.deviceTier,
-    'data-breathing': intelligence.breathing ? 'true' : undefined,
-    'data-aggressive': intelligence.aggressive ? 'true' : undefined,
-  }
-
   return (
     <CinematicOSContext.Provider value={value}>
       <div
         ref={rootRef}
-        className="cinematic-os cinematic-os--intelligent"
+        className="cinematic-os cinematic-os--intelligent cinematic-os--taste"
         style={{
           '--env-energy': intelligence.energy,
           '--env-immersion': intelligence.memory.immersion,
@@ -67,7 +60,12 @@ export function CinematicOSProvider({ children }) {
           '--env-light': intelligence.temporal.lightShift,
           '--transition-bias': intelligence.memory.transitionBias,
         }}
-        {...dataAttrs}
+        data-energy={
+          intelligence.energy > 0.32 ? 'high' : intelligence.energy > 0.12 ? 'mid' : 'calm'
+        }
+        data-tier={intelligence.deviceTier}
+        data-breathing={intelligence.breathing ? 'true' : undefined}
+        data-aggressive={intelligence.aggressive ? 'true' : undefined}
       >
         {children}
       </div>

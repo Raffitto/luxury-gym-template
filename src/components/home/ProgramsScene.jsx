@@ -17,12 +17,19 @@ export default function ProgramsScene() {
     <FilmChapter id="programs" className="landing-scene--programs env-chamber" depthIndex={2}>
       <CinematicAtmosphere intensity="section" />
       <div className="landing-scene-inner chamber-tight">
-        <KineticBlock className="max-w-2xl">
-          <KineticRitual className="section-ritual-gap">{programs.ritual}</KineticRitual>
-          <KineticHeadline className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
+        <KineticBlock className="max-w-2xl" sceneId="programs">
+          <KineticRitual className="section-ritual-gap" sceneId="programs">
+            {programs.ritual}
+          </KineticRitual>
+          <KineticHeadline
+            sceneId="programs"
+            className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]"
+          >
             {programs.headline}
           </KineticHeadline>
-          <KineticCopy className="copy-lead mt-6 max-w-xl">{programs.subline}</KineticCopy>
+          <KineticCopy sceneId="programs" className="copy-lead mt-6 max-w-xl">
+            {programs.subline}
+          </KineticCopy>
         </KineticBlock>
 
         <div className="swipeable-scenes-bleed mt-10 lg:hidden">

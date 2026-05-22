@@ -39,22 +39,29 @@ export default function FacilityScene() {
 
       <div className="relative z-10 landing-scene-inner chamber">
         <div className="facility-grid">
-          <KineticBlock className="facility-copy max-w-xl">
-            <KineticRitual className="section-ritual-gap">{facility.ritual}</KineticRitual>
-            <KineticHeadline className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
+          <KineticBlock className="facility-copy max-w-xl" sceneId="facility">
+            <KineticRitual className="section-ritual-gap" sceneId="facility">
+              {facility.ritual}
+            </KineticRitual>
+            <KineticHeadline
+              sceneId="facility"
+              className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]"
+            >
               {facility.headline}
             </KineticHeadline>
-            <KineticCopy className="copy-lead mt-6">{facility.subline}</KineticCopy>
+            <KineticCopy sceneId="facility" className="copy-lead mt-6">
+              {facility.subline}
+            </KineticCopy>
 
             <ul className="facility-features mt-10">
               {facility.features.map((f, i) => (
                 <motion.li
                   key={f.label}
                   className="facility-feature"
-                  initial={reduced ? false : { opacity: 0, y: 14 }}
+                  initial={reduced ? false : { opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewportOnce()}
-                  transition={{ ...spring.liquid, delay: i * 0.05 }}
+                  transition={{ ...spring.glide, delay: 0.12 + i * 0.06 }}
                 >
                   <span className="facility-feature-label font-display">{f.label}</span>
                   <span className="facility-feature-detail font-ritual">{f.detail}</span>

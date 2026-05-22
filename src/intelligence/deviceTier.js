@@ -2,37 +2,37 @@ export const CINEMATIC_TIERS = ['essential', 'refined', 'immersive']
 
 const TIER_CONFIG = {
   essential: {
-    maxLayers: 3,
-    bloom: 0.55,
-    fog: 0.7,
-    grain: 0.45,
-    sweep: 0.6,
+    maxLayers: 2,
+    bloom: 0.4,
+    fog: 0.55,
+    grain: 0.35,
+    sweep: 0,
     chroma: 0,
     gyro: false,
-    cameraDrift: 0.65,
+    cameraDrift: 0.5,
     shadowDrift: false,
   },
   refined: {
-    maxLayers: 5,
-    bloom: 0.85,
-    fog: 0.9,
-    grain: 0.75,
-    sweep: 0.85,
-    chroma: 0.7,
+    maxLayers: 3,
+    bloom: 0.5,
+    fog: 0.65,
+    grain: 0.45,
+    sweep: 0,
+    chroma: 0,
     gyro: true,
-    cameraDrift: 1,
-    shadowDrift: true,
+    cameraDrift: 0.62,
+    shadowDrift: false,
   },
   immersive: {
-    maxLayers: 6,
-    bloom: 1,
-    fog: 1,
-    grain: 1,
-    sweep: 1,
-    chroma: 1,
+    maxLayers: 4,
+    bloom: 0.62,
+    fog: 0.75,
+    grain: 0.5,
+    sweep: 0.25,
+    chroma: 0,
     gyro: true,
-    cameraDrift: 1.12,
-    shadowDrift: true,
+    cameraDrift: 0.72,
+    shadowDrift: false,
   },
 }
 
@@ -52,8 +52,7 @@ export function detectDeviceCinematicTier() {
 
   if (saveData || slowNet || (mobile && memory <= 3)) return 'essential'
   if (!mobile && memory >= 8 && cores >= 8) return 'immersive'
-  if (mobile && memory >= 6) return 'refined'
-  return mobile ? 'essential' : 'refined'
+  return 'refined'
 }
 
 export function getTierConfig(tier) {

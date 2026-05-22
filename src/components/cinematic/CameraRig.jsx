@@ -4,26 +4,22 @@ import { camera } from '../../motion/camera'
 import { useLiquidScroll } from '../../motion/choreography'
 
 export default function CameraRig({ children }) {
-  const { reduced, gyro, scrollYProgress, tierConfig, energy, memory } = useCinematicOS()
+  const { reduced, gyro, scrollYProgress, tierConfig } = useCinematicOS()
 
-  const driftScale = tierConfig.cameraDrift
+  const driftScale = tierConfig.cameraDrift * 0.85
   const driftX = useLiquidScroll(scrollYProgress, [0, 0.35, 0.7, 1], camera.drift.pageX)
   const driftY = useLiquidScroll(scrollYProgress, [0, 1], camera.drift.pageY)
-  const depthScale = useLiquidScroll(
-    scrollYProgress,
-    [0, 0.5, 1],
-    camera.drift.depthScale.map((s) => 1 + (s - 1) * driftScale * (1 + memory.transitionBias * 0.08)),
-  )
+  const depthScale = useLiquidScroll(scrollYProgress, [0, 0.5, 1], camera.drift.depthScale)
 
   if (reduced) {
     return <div className="camera-rig">{children}</div>
   }
 
   const gyroEnabled = tierConfig.gyro && gyro
-  const gyroSpring = energy > 0.4 ? camera.spring.drift : camera.spring.glide
+  const gyroScale = 0.45 * driftScale
 
   return (
-    <div className="camera-rig camera-rig--intelligent">
+    <div className="camera-rig camera-rig--restrained">
       <motion.div
         className="camera-rig-body gpu-layer"
         style={{ x: driftX, y: driftY, scale: depthScale }}
@@ -31,10 +27,10 @@ export default function CameraRig({ children }) {
         <motion.div
           className="camera-rig-gyro gpu-layer"
           animate={{
-            x: gyroEnabled ? (gyro?.x ?? 0) * driftScale : 0,
-            y: gyroEnabled ? (gyro?.y ?? 0) * driftScale : 0,
+            x: gyroEnabled ? (gyro?.x ?? 0) * gyroScale : 0,
+            y: gyroEnabled ? (gyro?.y ?? 0) * gyroScale : 0,
           }}
-          transition={gyroSpring}
+          transition={camera.spring.glide}
         >
           {children}
         </motion.div>

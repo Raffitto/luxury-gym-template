@@ -18,12 +18,19 @@ export default function TransformationScene() {
       <CinematicAtmosphere intensity="section" />
 
       <div className="landing-scene-inner chamber">
-        <KineticBlock className="max-w-2xl">
-          <KineticRitual className="section-ritual-gap">{transformation.ritual}</KineticRitual>
-          <KineticHeadline className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
+        <KineticBlock className="max-w-2xl" sceneId="journey">
+          <KineticRitual className="section-ritual-gap" sceneId="journey">
+            {transformation.ritual}
+          </KineticRitual>
+          <KineticHeadline
+            sceneId="journey"
+            className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]"
+          >
             {transformation.headline}
           </KineticHeadline>
-          <KineticCopy className="copy-lead mt-6">{transformation.subline}</KineticCopy>
+          <KineticCopy sceneId="journey" className="copy-lead mt-6">
+            {transformation.subline}
+          </KineticCopy>
         </KineticBlock>
 
         <div className="journey-timeline mt-14">
@@ -35,7 +42,7 @@ export default function TransformationScene() {
               initial={reduced ? false : 'hidden'}
               whileInView={reduced ? undefined : 'visible'}
               viewport={viewportOnce()}
-              transition={{ ...spring.liquid, delay: i * 0.06 }}
+              transition={{ ...spring.glide, delay: 0.1 + i * 0.07 }}
             >
               <div className="journey-phase-copy">
                 <span className="journey-phase-num font-ritual">{phase.phase}</span>

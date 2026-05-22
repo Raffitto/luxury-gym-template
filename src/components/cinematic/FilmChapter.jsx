@@ -2,6 +2,7 @@ import { forwardRef, useRef } from 'react'
 import { motion, useScroll } from 'framer-motion'
 import { useCinematicOS } from '../../context/CinematicOSContext'
 import { camera, chapterDepth } from '../../motion/camera'
+import { pacingForScene } from '../../intelligence/scenePacing'
 import { useLiquidScroll } from '../../motion/choreography'
 
 const FilmChapter = forwardRef(function FilmChapter(
@@ -11,32 +12,30 @@ const FilmChapter = forwardRef(function FilmChapter(
     className = '',
     depthIndex = 1,
     atmosphere = 'section',
+    sceneId,
   },
   forwardedRef,
 ) {
   const innerRef = useRef(null)
   const ref = forwardedRef || innerRef
-  const { reduced, memory } = useCinematicOS()
-  const bias = memory.transitionBias
+  const { reduced } = useCinematicOS()
+  const pacing = pacingForScene(sceneId ?? id)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
 
-  const y = useLiquidScroll(
-    scrollYProgress,
-    [0, 1],
-    [camera.drift.chapterY[0], camera.drift.chapterY[2] * chapterDepth(depthIndex)],
-  )
-  const fadeEdge = 0.88 - bias * 0.04
-  const opacity = useLiquidScroll(scrollYProgress, [0, 0.15, 0.85, 1], [0.72 - bias * 0.03, 1, 1, fadeEdge])
+  const driftEnd = camera.drift.chapterY[2] * chapterDepth(depthIndex) * pacing.chapterDrift
+  const y = useLiquidScroll(scrollYProgress, [0, 1], [0, -driftEnd])
+  const opacity = useLiquidScroll(scrollYProgress, [0, 0.12, 0.88, 1], [0.82, 1, 1, 0.94])
 
   return (
     <section
       id={id}
       ref={ref}
       data-chapter={id}
-      className={`film-chapter landing-scene relative overflow-hidden ${className}`.trim()}
+      data-scene-emotion={pacing.emotion}
+      className={`film-chapter film-chapter--${pacing.emotion} landing-scene relative overflow-hidden ${className}`.trim()}
     >
       <div className="film-chapter-carry" aria-hidden />
       <div className={`film-chapter-atmo film-chapter-atmo--${atmosphere}`} aria-hidden />

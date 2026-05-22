@@ -1,8 +1,6 @@
 const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v))
 
-/**
- * Fuse scroll, idle, interaction, swipe, depth, rhythm, and memory into one living energy signal.
- */
+/** Restrained energy — calm by default, subtle response only when needed */
 export function fuseAdaptiveEnergy({
   velocity = 0,
   idleMs = 0,
@@ -13,28 +11,28 @@ export function fuseAdaptiveEnergy({
   memoryImmersion = 0,
   breathingMode = false,
 }) {
-  const scrollDrive = velocity * 0.48
-  const interactionDrive = interactionIntensity * 0.32
-  const swipeDrive = swipeIntensity * 0.26
-  const depthDrive = sceneDepth * 0.22
-  const rhythmDrive = rhythm * 0.14
-  const memoryDrive = memoryImmersion * 0.1
+  const scrollDrive = velocity * 0.28
+  const interactionDrive = interactionIntensity * 0.14
+  const swipeDrive = swipeIntensity * 0.12
+  const depthDrive = sceneDepth * 0.1
+  const rhythmDrive = rhythm * 0.06
+  const memoryDrive = memoryImmersion * 0.05
 
   const raw =
     scrollDrive + interactionDrive + swipeDrive + depthDrive + rhythmDrive + memoryDrive
 
   const idleBreath =
-    breathingMode || (idleMs > 2200 && velocity < 0.1)
-      ? clamp(0.28 - velocity * 0.35 + memoryImmersion * 0.08, 0.1, 0.42)
+    breathingMode || (idleMs > 2800 && velocity < 0.08)
+      ? clamp(0.14 - velocity * 0.2 + memoryImmersion * 0.04, 0.06, 0.22)
       : 0
 
-  const energy = clamp(raw + idleBreath * 0.35, 0, 1)
+  const energy = clamp(raw + idleBreath * 0.2, 0, 0.72)
 
   return {
     energy,
-    breathing: breathingMode || (idleMs > 2200 && velocity < 0.12),
-    calm: velocity < 0.14 && idleMs > 600 && swipeIntensity < 0.2,
-    aggressive: velocity > 0.55 || swipeIntensity > 0.65 || interactionIntensity > 0.7,
+    breathing: breathingMode || (idleMs > 2800 && velocity < 0.1),
+    calm: velocity < 0.12 && idleMs > 800,
+    aggressive: velocity > 0.62 || swipeIntensity > 0.75,
     idleMs,
   }
 }
