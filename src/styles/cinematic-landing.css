@@ -860,7 +860,6 @@
   .cinematic-gradient-drift,
   .cinematic-particle,
   .cinematic-glow,
-  .hero-accent-orb,
   .hero-parallax-bg--alive .cinematic-img {
     animation: none !important;
   }
