@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import { X } from 'lucide-react'
 import { activeConfig } from '../../data/activeConfig'
+import { isGrindBrand } from '../../data/brand'
 import { routes } from '../../design-system/tokens'
 import { prepareRouteChange } from '../../utils/preload'
 import MagneticButton from '../ui/MagneticButton'
@@ -69,10 +70,18 @@ export default function MobileNavOverlay({ open, onClose }) {
         </div>
 
         <div className="mobile-nav-footer">
-              <p className="font-ritual text-[var(--ash)]">Selective admission · Private assessment</p>
-          <MagneticButton to={routes.trial} fullWidth onClick={onNavigate}>
-            {activeConfig.hero.primaryCta}
-          </MagneticButton>
+              <p className="font-ritual text-[var(--ash)]">
+            {isGrindBrand ? '4.8★ · Mtaileb, Lebanon' : 'Selective admission · Private assessment'}
+          </p>
+          {activeConfig.hero.primaryHref ? (
+            <MagneticButton href={activeConfig.hero.primaryHref} fullWidth onClick={onNavigate}>
+              {activeConfig.hero.primaryCta}
+            </MagneticButton>
+          ) : (
+            <MagneticButton to={routes.trial} fullWidth onClick={onNavigate}>
+              {activeConfig.hero.primaryCta}
+            </MagneticButton>
+          )}
         </div>
       </nav>
     </div>,

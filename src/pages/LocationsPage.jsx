@@ -3,10 +3,12 @@ import { MapPin } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import CinematicImage from '../components/ui/CinematicImage'
 import { activeConfig } from '../data/activeConfig'
+import { isGrindBrand } from '../data/brand'
+import MagneticButton from '../components/ui/MagneticButton'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function LocationsPage() {
-  const { pageHero, locations } = activeConfig
+  const { pageHero, locations, location: primaryLocation } = activeConfig
 
   return (
     <>
@@ -44,10 +46,26 @@ export default function LocationsPage() {
                   {loc.city}
                 </h2>
                 <p className="mt-3 text-lg text-[var(--silver)]">{loc.descriptor}</p>
-                <p className="mt-6 inline-flex items-center gap-2 font-ritual text-[var(--ash)]">
-                  <MapPin className="h-3.5 w-3.5" strokeWidth={1} />
-                  By appointment · Members only
-                </p>
+                {isGrindBrand && primaryLocation ? (
+                  <div className="mt-6 space-y-3">
+                    <p className="font-ritual text-[var(--silver)]">
+                      {primaryLocation.plusCode}, {primaryLocation.city}, {primaryLocation.country}
+                    </p>
+                    {primaryLocation.addressAr ? (
+                      <p className="font-ritual text-[var(--ash)]" dir="rtl" lang="ar">
+                        {primaryLocation.addressAr}
+                      </p>
+                    ) : null}
+                    <MagneticButton href={primaryLocation.googleMapsUrl}>
+                      {primaryLocation.directionsLabel}
+                    </MagneticButton>
+                  </div>
+                ) : (
+                  <p className="mt-6 inline-flex items-center gap-2 font-ritual text-[var(--ash)]">
+                    <MapPin className="h-3.5 w-3.5" strokeWidth={1} />
+                    By appointment · Members only
+                  </p>
+                )}
               </div>
             </motion.article>
           ))}

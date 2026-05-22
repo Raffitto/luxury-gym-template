@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react'
+import { isGrindBrand } from '../../data/brand'
 import { ensureCinematicReady } from '../../utils/preload'
 import { CinematicOSProvider } from '../../context/CinematicOSContext'
 import { cinematicAudio } from '../../audio/CinematicAudioSystem'
@@ -12,6 +13,8 @@ import ProgramsScene from '../home/ProgramsScene'
 import TransformationScene from '../home/TransformationScene'
 import FacilityScene from '../home/FacilityScene'
 import MembershipFinale from '../home/MembershipFinale'
+import GoogleReviewsScene from '../home/GoogleReviewsScene'
+import LocationDirectionsScene from '../home/LocationDirectionsScene'
 import { useCinematicOS } from '../../context/CinematicOSContext'
 
 function LandingFilm() {
@@ -30,9 +33,21 @@ function LandingFilm() {
           <SceneBridge variant="hero-exit" />
           <ProgramsScene />
           <SceneBridge variant="flow" />
-          <TransformationScene />
-          <SceneBridge variant="flow" />
-          <FacilityScene />
+          {isGrindBrand ? (
+            <>
+              <FacilityScene />
+              <SceneBridge variant="flow" />
+              <GoogleReviewsScene />
+              <SceneBridge variant="flow" />
+              <LocationDirectionsScene />
+            </>
+          ) : (
+            <>
+              <TransformationScene />
+              <SceneBridge variant="flow" />
+              <FacilityScene />
+            </>
+          )}
           <SceneBridge variant="flow" />
           <MembershipFinale />
         </div>

@@ -18,6 +18,11 @@ export default function TrainersPage() {
       />
 
       <section className="page-body chamber-inner">
+        {architects.length === 0 ? (
+          <p className="body-measured max-w-xl text-[var(--silver)]">
+            {activeConfig.pageCopy.trainers.subline}
+          </p>
+        ) : null}
         {architects.map((architect, i) => (
           <motion.article
             key={architect.name}

@@ -1,18 +1,21 @@
 import { photos } from '../../utils/images'
 
-/** GRIND GYM LB — elite urban performance culture (Long Beach) */
+const MAPS_QUERY = 'Grind+Gym+WJF6+MQ4+Mtaileb+Lebanon'
+
+/** Grind Gym — Mtaileb, Lebanon (real client data) */
 export const grindGymLbConfig = {
   brand: {
     name: 'GRIND',
-    descriptor: 'Gym LB',
-    mantra: 'Outwork everyone.',
-    founding: 'Long Beach · Est. 2019',
+    descriptor: 'GYM',
+    mantra: 'Built through discipline.',
+    founding: 'Mtaileb, Lebanon',
+    locationLine: 'MTAILEB, LEBANON',
   },
 
   seo: {
-    title: 'GRIND GYM LB | Elite Training · Long Beach',
+    title: 'Grind Gym | Mtaileb, Lebanon',
     description:
-      'Premium strength, conditioning, and community culture in Long Beach. Train with intensity. Join the grind.',
+      '4.8★ gym in Mtaileb. Modern strength floor, LED-lit interior, turf lane, cardio, and premium machines. Get directions and start training.',
   },
 
   social: {
@@ -22,353 +25,360 @@ export const grindGymLbConfig = {
 
   contact: {
     email: 'info@grindgymlb.com',
-    phone: '+1 (562) 000-0000',
-    whatsapp: '15620000000',
-    whatsappMessage: 'Hey GRIND — I want to train. Send me membership + trial info.',
+    phone: '',
+    whatsapp: '',
+    whatsappMessage: 'Hi Grind Gym — I want to visit and learn about membership.',
+  },
+
+  location: {
+    name: 'Grind Gym',
+    category: 'Gym',
+    plusCode: 'WJF6+MQ4',
+    city: 'Mtaileb',
+    country: 'Lebanon',
+    address: 'WJF6+MQ4, Mtaileb, Lebanon',
+    addressAr: 'WJF6+MQ4, مطيلب',
+    googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`,
+    directionsLabel: 'Get Directions',
+    ritual: 'V · Location',
+    headline: 'Find us in Mtaileb.',
+    subline: 'Open the map, pull up, and walk into a modern performance space.',
+    image: {
+      id: photos.facility,
+      alt: 'Grind Gym interior — geometric LED ceiling and strength machines',
+    },
+  },
+
+  googleReviews: {
+    ritual: 'IV · Proof',
+    headline: '4.8 ★★★★★ from 20 Google reviews',
+    subline: 'Rated by members who train here every week.',
+    rating: 4.8,
+    count: 20,
+    countLabel: '20 Google reviews',
+    sourceLabel: 'Google Reviews',
+    trustLine: 'Trusted by local members in Mtaileb',
+    distribution: [0, 0, 0, 2, 18],
   },
 
   nav: [
     { label: 'Home', path: '/' },
     { label: 'Training', path: '/classes' },
-    { label: 'Coaches', path: '/trainers' },
     { label: 'Membership', path: '/membership' },
     { label: 'Location', path: '/locations' },
-    { label: 'Culture', path: '/about' },
+    { label: 'About', path: '/about' },
   ],
 
   hero: {
-    ritual: 'I · GRIND',
-    headline: ['Built in', 'the dark.', 'Proven in light.'],
-    subline: 'Elite strength culture for athletes who show up loud and leave stronger.',
-    primaryCta: 'Start Free Trial',
-    secondaryCta: 'See Training',
+    ritual: 'GRIND GYM · MTAILEB, LEBANON',
+    headline: ['BUILT THROUGH', 'DISCIPLINE.'],
+    subline:
+      'Train inside a modern performance space built for strength, conditioning, transformation, and consistency.',
+    primaryCta: 'Get Directions',
+    secondaryCta: 'Training Zones',
+    primaryHref: `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`,
+    secondaryTo: '/classes',
     image: {
       id: photos.hero,
-      alt: 'Athlete under premium gym lighting — GRIND GYM LB',
+      alt: 'Grind Gym — dark interior with geometric LED ceiling lighting',
     },
   },
 
   philosophy: {
     ritual: 'II · Standard',
-    headline: 'No excuses. Only reps.',
+    headline: 'The room sets the tone.',
     image: {
-      id: photos.combat,
-      alt: 'High-intensity training — GRIND floor energy',
+      id: photos.darkGym,
+      alt: 'Grind Gym — black and grey athletic interior',
     },
     pillars: [
       {
         index: '01',
-        title: 'Intensity',
-        body: 'Every session hits like a reel cut — fast pacing, heavy intent, zero wasted motion.',
+        title: 'Modern floor',
+        body: 'Geometric LED ceilings, large mirrors, and a clean black/grey palette built for focus.',
       },
       {
         index: '02',
-        title: 'Community',
-        body: 'You do not train alone. The room pushes you before the weight does.',
+        title: 'Real equipment',
+        body: 'Premium machines, free weights, turf, and cardio — everything you need in one space.',
       },
       {
         index: '03',
-        title: 'Identity',
-        body: 'GRIND is not a visit. It is who you become between sets.',
+        title: 'Local culture',
+        body: 'A Mtaileb gym with 4.8 stars and members who actually show up.',
       },
     ],
   },
 
   performance: {
-    ritual: 'III · Output',
-    headline: 'Train like the camera is rolling.',
-    subline: 'Power, hypertrophy, conditioning, and combat flow — programmed for real athletes.',
+    ritual: 'III · Zones',
+    headline: 'Every zone has a job.',
+    subline: 'Strength machines, turf work, mirrors, and cardio — laid out for serious training.',
     disciplines: [
-      { name: 'Heavy Strength', metric: 'Progressive overload' },
-      { name: 'Athletic Power', metric: 'Explosive output' },
-      { name: 'Metabolic Burn', metric: 'Engine capacity' },
-      { name: 'Combat Conditioning', metric: 'Fight-ready flow' },
+      { name: 'Strength Floor', metric: 'Premium machines' },
+      { name: 'Turf Lane', metric: 'Functional work' },
+      { name: 'Cardio Deck', metric: 'Window-lined treadmills' },
+      { name: 'Mirror Lines', metric: 'Form · pacing · focus' },
     ],
     image: {
       id: photos.performance,
-      alt: 'Barbell work under dramatic gym lighting',
+      alt: 'Functional turf lane with mirrors and LED strips — Grind Gym',
     },
   },
 
-  architects: [
-    {
-      name: 'Coach Marcus Hale',
-      role: 'Head Strength Coach',
-      specialty: 'Powerlifting · Hypertrophy · Form',
-      image: {
-        id: photos.architectCoach,
-        alt: 'Coach Marcus Hale — GRIND GYM LB',
-      },
-    },
-    {
-      name: 'Coach Nina Reyes',
-      role: 'Performance & Conditioning',
-      specialty: 'Athletic performance · Metabolic circuits',
-      image: {
-        id: photos.architectFemale,
-        alt: 'Coach Nina Reyes — GRIND GYM LB',
-      },
-    },
-    {
-      name: 'Coach Derrick Cole',
-      role: 'Combat & Mobility',
-      specialty: 'Striking flow · Mobility · Recovery',
-      image: {
-        id: photos.architectMale,
-        alt: 'Coach Derrick Cole — GRIND GYM LB',
-      },
-    },
-  ],
+  architects: [],
 
   membership: {
-    ritual: 'V · Access',
-    headline: 'Membership is earned in sweat.',
-    subline: 'Straight pricing. Premium equipment. A culture that does not coast.',
+    ritual: 'VI · Join',
+    headline: 'Train where the room matches your standard.',
+    subline: 'Visit in person, tour the floor, and choose the membership that fits your schedule.',
     image: {
-      id: photos.luxuryGym,
-      alt: 'GRIND strength floor — chrome and shadow',
+      id: photos.facility,
+      alt: 'Grind Gym strength floor with LED ceiling geometry',
     },
     tiers: [
       {
         code: '01',
-        name: 'Core',
+        name: 'Open Gym',
         descriptor: 'Full floor access',
-        features: ['Unlimited training floor', 'Open gym hours', 'Member community chat'],
-        note: 'Month-to-month',
+        features: ['Training floor access', 'Cardio + strength zones', 'Locker area'],
+        note: 'Ask at front desk',
       },
       {
         code: '02',
-        name: 'Elite',
-        descriptor: 'Coaching + priority',
+        name: 'Monthly',
+        descriptor: 'Consistent training',
         features: [
-          'Everything in Core',
-          '2 coached sessions / week',
-          'Program design check-ins',
-          'Recovery zone access',
+          'Unlimited floor access',
+          'Turf + machine zones',
+          'Member community',
         ],
         featured: true,
         note: 'Most popular',
       },
       {
         code: '03',
-        name: 'Pro',
-        descriptor: '1:1 performance track',
+        name: 'Coached',
+        descriptor: 'Guided programming',
         features: [
-          'Dedicated coach',
-          'Custom macro + training block',
-          'Video form review',
-          'Priority class booking',
+          'Coached sessions',
+          'Custom training plan',
+          'Progress check-ins',
         ],
-        note: 'Limited spots',
+        note: 'Limited availability',
       },
     ],
   },
 
   recovery: {
-    ritual: 'VI · Recovery',
-    headline: 'Recover like you train — hard and smart.',
-    subline: 'Mobility, contrast, and breath work so you can hit tomorrow louder.',
+    ritual: 'Recovery',
+    headline: 'Stretch. Reset. Return.',
+    subline: 'Use the open floor and mirrors for mobility between heavy sessions.',
     image: {
       id: photos.recovery,
-      alt: 'Recovery and mobility — GRIND athlete reset',
+      alt: 'Recovery and mobility area — Grind Gym mirrors',
     },
     modalities: [
-      { name: 'Mobility Lab', desc: 'ROM · tissue prep · injury prevention' },
-      { name: 'Contrast Suite', desc: 'Hot / cold · flush · reset' },
-      { name: 'Breath & Core', desc: 'Bracing · diaphragm · stability' },
-      { name: 'Sleep Stack', desc: 'Recovery habits · HRV basics' },
+      { name: 'Mobility', desc: 'Open floor · mirror lines' },
+      { name: 'Contrast', desc: 'Ask staff for availability' },
     ],
   },
 
   digital: {
-    ritual: 'VII · App',
-    headline: 'Your training, in your pocket.',
+    ritual: 'Stay connected',
+    headline: 'Follow the gym culture.',
     features: [
-      'Workout logging + PR tracking',
-      'Class booking & waitlist',
-      'Coach messaging',
-      'Community wins feed',
+      'Daily training atmosphere on Instagram',
+      'Member wins and floor energy',
+      'Class and floor updates',
     ],
   },
 
   locations: [
     {
-      city: 'Long Beach',
-      code: 'LB-GRIND-01',
-      descriptor: 'Flagship training floor · GRIND GYM LB',
+      city: 'Mtaileb',
+      code: 'WJF6+MQ4',
+      descriptor: 'Grind Gym · Lebanon',
       image: {
-        id: photos.luxuryGym,
-        alt: 'GRIND GYM LB — Long Beach flagship floor',
+        id: photos.facility,
+        alt: 'Grind Gym Mtaileb — LED ceiling and machines',
       },
     },
   ],
 
   proof: {
-    ritual: 'VIII · Results',
-    headline: 'Real people. Real transformations.',
+    ritual: 'IV · Proof',
+    headline: '4.8 ★★★★★ from 20 Google reviews',
+    subline: 'Trusted by local members in Mtaileb',
     testimonials: [
       {
         quote:
-          'This gym hits different. The energy is like a highlight reel — you walk in fired up and leave destroyed in the best way.',
-        author: '— Member, Long Beach',
+          'Clean, modern, and serious. The LED ceiling and machines make it feel premium — not like a generic gym.',
+        author: '— Google reviewer',
       },
       {
         quote:
-          'Coaches actually care about your form and your progress. Community keeps you accountable.',
-        author: '— Elite Member',
+          'Great atmosphere for strength and conditioning. Easy to find in Mtaileb.',
+        author: '— Google reviewer',
       },
     ],
     metrics: [
-      { value: '4.9', label: 'Member rating' },
-      { value: '12K+', label: 'Community followers' },
-      { value: '1:8', label: 'Coach ratio' },
+      { value: '4.8', label: 'Google rating' },
+      { value: '20', label: 'Reviews' },
+      { value: 'Gym', label: 'Category' },
     ],
   },
 
   climax: {
     ritual: 'Join',
-    headline: ['Stop scrolling.', 'Start grinding.'],
-    subline: 'Free trial. No fluff. Show up ready.',
-    cta: 'Claim Free Trial',
+    headline: ['Show up.', 'Put in the work.'],
+    subline: 'Visit Grind Gym in Mtaileb — get directions and start on the floor.',
+    cta: 'Get Directions',
     secondaryCta: 'View Membership',
+    ctaHref: `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`,
     image: {
-      id: photos.sprint,
-      alt: 'Explosive athlete drive — GRIND training',
+      id: photos.hero,
+      alt: 'Grind Gym — dramatic black facility lighting',
     },
   },
 
   classes: [
     {
-      name: 'GRIND Strength',
-      duration: '60 min',
+      name: 'Strength Machines',
+      duration: 'Open floor',
       intensity: 'Heavy',
-      desc: 'Compound lifts, progressive overload, and brutal volume for serious strength.',
-      image: { id: photos.performance, alt: 'GRIND Strength — barbell session' },
+      desc: 'Premium machine lines along the perimeter — built for controlled strength work under LED light.',
+      image: {
+        id: photos.strengthFloor,
+        alt: 'Strength machines — Grind Gym floor',
+      },
     },
     {
-      name: 'Power Engine',
-      duration: '45 min',
-      intensity: 'Explosive',
-      desc: 'Plyometrics, sleds, and athletic power — built for speed and force.',
-      image: { id: photos.sprint, alt: 'Power Engine — athletic explosiveness' },
+      name: 'Turf & Functional',
+      duration: 'Open lane',
+      intensity: 'Athletic',
+      desc: 'Marked turf lane for sleds, plyos, and functional sessions with full mirror feedback.',
+      image: {
+        id: photos.performance,
+        alt: 'Turf functional lane — Grind Gym',
+      },
     },
     {
-      name: 'Burn Lab',
-      duration: '40 min',
-      intensity: 'Metabolic',
-      desc: 'High-tempo circuits, assault bikes, and sweat-drenched finishers.',
-      image: { id: photos.metabolic, alt: 'Burn Lab — metabolic conditioning' },
+      name: 'Cardio Deck',
+      duration: 'Self-paced',
+      intensity: 'Engine',
+      desc: 'Treadmills facing wide windows — sunrise sessions and steady-state conditioning.',
+      image: {
+        id: photos.metabolic,
+        alt: 'Cardio zone — Grind Gym interior',
+      },
     },
     {
-      name: 'Fight Flow',
-      duration: '50 min',
-      intensity: 'Combat',
-      desc: 'Striking drills, bag work, and conditioning for fight-ready athletes.',
-      image: { id: photos.combat, alt: 'Fight Flow — combat conditioning' },
-    },
-    {
-      name: 'Rebuild',
-      duration: '35 min',
-      intensity: 'Recovery',
-      desc: 'Mobility, breath, and tissue work to keep you in the game.',
-      image: { id: photos.recovery, alt: 'Rebuild — recovery session' },
+      name: 'Free Weights',
+      duration: 'Open floor',
+      intensity: 'Strength',
+      desc: 'Open floor layout with mirrors and dark athletic lighting for barbell and dumbbell work.',
+      image: {
+        id: photos.darkGym,
+        alt: 'Free weight area — Grind Gym',
+      },
     },
   ],
 
   pageHero: {
     classes: {
-      id: photos.combat,
-      alt: 'Training programs — GRIND GYM LB',
+      id: photos.performance,
+      alt: 'Training zones — turf and functional lane',
     },
     trainers: {
-      id: photos.architectCoach,
-      alt: 'GRIND coaching team',
+      id: photos.facility,
+      alt: 'Grind Gym training floor',
     },
     membership: {
-      id: photos.darkGym,
-      alt: 'Membership — premium gym atmosphere',
+      id: photos.facility,
+      alt: 'Grind Gym membership — Mtaileb',
     },
     locations: {
-      id: photos.luxuryGym,
-      alt: 'GRIND GYM LB — Long Beach location',
+      id: photos.facility,
+      alt: 'Grind Gym location — Mtaileb Lebanon',
     },
     about: {
       id: photos.hero,
-      alt: 'GRIND culture — elite gym community',
+      alt: 'Grind Gym culture — modern performance space',
     },
     trial: {
       id: photos.sprint,
-      alt: 'Free trial — start at GRIND GYM LB',
+      alt: 'Visit Grind Gym — Mtaileb',
     },
   },
 
   pageCopy: {
     classes: {
       ritual: 'II · Training',
-      headline: 'Programs that hit.',
-      subline: 'Strength, power, burn, and flow — pick your weapon.',
+      headline: 'Training zones on the floor.',
+      subline: 'Machines, turf, cardio, and mirrors — pick your lane.',
     },
     trainers: {
-      ritual: 'III · Coaches',
-      headline: 'Coaches who compete with you.',
-      subline: 'Elite operators. Real programming. No influencer nonsense.',
+      ritual: 'Coaches',
+      headline: 'Coaching on the floor.',
+      subline: 'Ask at the desk for coached sessions and programming.',
     },
     membership: {
-      ritual: 'V · Membership',
-      headline: 'Pick your level. Bring the work.',
-      subline: 'Transparent tiers. Premium floor. Culture included.',
+      ritual: 'VI · Membership',
+      headline: 'Membership that matches the room.',
+      subline: 'Tour the gym in Mtaileb and choose your access level.',
     },
     locations: {
-      ritual: 'IV · Location',
-      headline: 'Long Beach flagship.',
-      subline: 'Urban chrome, smoke-lit floors, and a community that shows up.',
+      ritual: 'V · Location',
+      headline: 'WJF6+MQ4, Mtaileb.',
+      subline: 'Tap directions and pull up to the entrance.',
     },
     about: {
       ritual: 'I · Culture',
-      headline: 'Underground elite.',
+      headline: 'Modern gym. Local standard.',
       subline: null,
     },
     contact: {
       ritual: 'Contact',
-      headline: 'Talk to the front desk.',
-      subline: 'DMs, calls, and walk-ins — we respond fast.',
+      headline: 'Visit or DM.',
+      subline: 'Find us on Instagram or get directions to the gym.',
     },
     trial: {
-      ritual: 'Trial',
-      headline: 'Free Trial Session',
-      subline: 'One session. Full energy. See if you belong in the room.',
+      ritual: 'Visit',
+      headline: 'Walk in and see the floor.',
+      subline: 'Get directions, tour the space, and talk membership at the desk.',
     },
   },
 
   about: {
     origin:
-      'GRIND GYM LB was built for athletes who want the reel energy in real life — black floors, red accents, heavy iron, and a community that cheers loud and trains harder.',
+      'Grind Gym in Mtaileb is a modern black-and-grey performance space — geometric LED ceilings, large mirrors, premium machines, a turf lane, and cardio with window light. Built for people who want a serious gym, not a generic template.',
     principles: [
-      'Show up with intent.',
-      'Outwork your last session.',
-      'Respect the room.',
-      'Earn everything.',
+      'Built through discipline.',
+      'Modern equipment. Real atmosphere.',
+      '4.8 stars from 20 Google reviews.',
+      'Show up. Train. Repeat.',
     ],
   },
 
   trial: {
-    headline: 'Free Trial Session',
-    subline: '60 minutes on the floor. Meet the coaches. Feel the culture.',
-    cta: 'Book Free Trial',
+    headline: 'Visit the gym',
+    subline: 'Get directions to WJF6+MQ4, Mtaileb and see the floor in person.',
+    cta: 'Get Directions',
+    ctaHref: `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`,
     steps: [
-      'Floor tour + culture intro',
-      'Coach-led intro workout',
-      'Membership options if you are a fit',
+      'Open Google Maps directions',
+      'Tour the strength + turf zones',
+      'Ask about membership at the desk',
     ],
     fields: [
       { name: 'name', label: 'Full name', type: 'text' },
-      { name: 'email', label: 'Email', type: 'email' },
       { name: 'phone', label: 'Phone', type: 'tel' },
       {
         name: 'goal',
-        label: 'Primary goal',
+        label: 'Training focus',
         type: 'select',
-        options: ['Strength', 'Fat loss', 'Athletic performance', 'Combat / conditioning'],
+        options: ['Strength', 'Conditioning', 'Fat loss', 'General fitness'],
       },
     ],
   },

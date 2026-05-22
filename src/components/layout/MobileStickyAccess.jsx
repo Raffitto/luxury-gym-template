@@ -45,9 +45,20 @@ export default function MobileStickyAccess() {
       aria-label="Request access"
       aria-hidden={!visible}
     >
-      <Link to={routes.trial} className="btn-magnetic w-full justify-center">
-        {activeConfig.hero.primaryCta}
-      </Link>
+      {activeConfig.hero.primaryHref ? (
+        <a
+          href={activeConfig.hero.primaryHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-magnetic w-full justify-center"
+        >
+          {activeConfig.hero.primaryCta}
+        </a>
+      ) : (
+        <Link to={routes.trial} className="btn-magnetic w-full justify-center">
+          {activeConfig.hero.primaryCta}
+        </Link>
+      )}
     </div>
   )
 }

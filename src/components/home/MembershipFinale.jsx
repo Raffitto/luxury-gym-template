@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import { activeConfig } from '../../data/activeConfig'
+import { isGrindBrand } from '../../data/brand'
 import { routes } from '../../design-system/tokens'
 import AmbientFilmLayer from '../cinematic/AmbientFilmLayer'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
@@ -15,6 +16,9 @@ import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 export default function MembershipFinale() {
   const { climax } = activeConfig
+  const primaryCta = climax.ctaHref
+    ? { href: climax.ctaHref }
+    : { to: routes.trial }
   const reduced = useReducedMotion()
   const phone = useIsPhone()
   const ref = useRef(null)
@@ -65,7 +69,7 @@ export default function MembershipFinale() {
 
               {reduced || phone ? (
                 <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                  <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
+                  <MagneticButton {...primaryCta}>{climax.cta}</MagneticButton>
                   <MagneticButton to={routes.membership} variant="ghost">
                     {climax.secondaryCta}
                   </MagneticButton>
@@ -78,14 +82,18 @@ export default function MembershipFinale() {
                   viewport={{ once: true }}
                   transition={{ ...spring.glide, delay: 0.12 }}
                 >
-                  <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
+                  <MagneticButton {...primaryCta}>{climax.cta}</MagneticButton>
                   <MagneticButton to={routes.membership} variant="ghost">
                     {climax.secondaryCta}
                   </MagneticButton>
                 </motion.div>
               )}
 
-              <p className="font-ritual myth-whisper mt-10">Selective admission · Private assessment required</p>
+              <p className="font-ritual myth-whisper mt-10">
+                {isGrindBrand
+                  ? 'WJF6+MQ4 · Mtaileb, Lebanon · 4.8★ on Google'
+                  : 'Selective admission · Private assessment required'}
+              </p>
             </div>
           </FilmFrame>
         </div>

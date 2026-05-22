@@ -2,58 +2,73 @@ import { photos } from '../../utils/images'
 
 export const grindLandingConfig = {
   programs: {
-    ritual: 'II · Training',
-    headline: 'Training that hits like a reel.',
-    subline: 'Five programs. One standard — elite output.',
+    ritual: 'II · Training Zones',
+    headline: 'Four zones. One serious floor.',
+    subline: 'Machines, turf, cardio, and open weight — swipe to explore.',
   },
 
   transformation: {
-    ritual: 'III · Results',
-    headline: 'Proof on the floor.',
-    subline: 'From first rep to transformation — documented, real, loud.',
+    ritual: 'III · Atmosphere',
+    headline: 'Train in a cinematic room.',
+    subline: 'Mirrors, LED geometry, and dark athletic light — the vibe members rate 4.8★.',
     phases: [
       {
         phase: '01',
-        title: 'Ignite',
-        body: 'Baseline testing. Movement screen. You meet the coaches and the room.',
-        image: { id: photos.sprint, alt: 'Ignite — athletic assessment under gym light' },
+        title: 'LED Ceiling',
+        body: 'Geometric white LED strips on matte concrete — high contrast, modern, focused.',
+        image: {
+          id: photos.facility,
+          alt: 'Geometric LED ceiling — Grind Gym Mtaileb',
+        },
       },
       {
         phase: '02',
-        title: 'Build',
-        body: 'Custom blocks for strength, engine, and composition — tracked every week.',
-        image: { id: photos.performance, alt: 'Build — progressive strength work' },
+        title: 'Turf Lane',
+        body: 'Marked functional lane with mirrors for sled work, plyos, and athletic drills.',
+        image: {
+          id: photos.performance,
+          alt: 'Turf functional training lane',
+        },
       },
       {
         phase: '03',
-        title: 'Surge',
-        body: 'Intensity peaks. Community accountability. PRs start stacking.',
-        image: { id: photos.combat, alt: 'Surge — combat conditioning intensity' },
+        title: 'Strength Lines',
+        body: 'Premium machine rows and open floor layout along mirrored walls.',
+        image: {
+          id: photos.strengthFloor,
+          alt: 'Strength machines and gym floor',
+        },
       },
       {
         phase: '04',
-        title: 'Elite',
-        body: 'You become the athlete your feed pretends to be — consistent, visible, undeniable.',
-        image: { id: photos.luxuryGym, alt: 'Elite — transformation on the GRIND floor' },
+        title: 'Cardio Light',
+        body: 'Window-lined cardio with sunset views — conditioning with atmosphere.',
+        image: {
+          id: photos.metabolic,
+          alt: 'Cardio and interior lighting — Grind Gym',
+        },
       },
     ],
   },
 
   facility: {
-    ritual: 'IV · Culture',
-    headline: 'The room is the brand.',
-    subline: 'Smoke, chrome, red light, and a community that moves together.',
+    ritual: 'III · Facility',
+    headline: 'Facility built for performance.',
+    subline: 'Black/grey interior, geometric LEDs, mirrors, turf, and premium machines.',
     features: [
-      { label: 'Premium iron', detail: 'Rogue · elite free weights' },
-      { label: 'Cinematic lighting', detail: 'Contrast · shadow · focus' },
-      { label: 'Combat zone', detail: 'Bags · mats · flow lanes' },
-      { label: 'Community wall', detail: 'Wins · PRs · member spotlight' },
+      { label: 'LED geometry', detail: 'Ceiling light architecture' },
+      { label: 'Mirror walls', detail: 'Form · pacing · focus' },
+      { label: 'Turf lane', detail: 'Functional · athletic work' },
+      { label: 'Premium machines', detail: 'Strength + cardio zones' },
     ],
-    image: { id: photos.darkGym, alt: 'GRIND floor — dark chrome gym atmosphere' },
+    image: {
+      id: photos.facility,
+      alt: 'Grind Gym — geometric LED ceiling and strength floor',
+    },
     gallery: [
-      { id: photos.luxuryGym, alt: 'Strength floor — GRIND GYM LB' },
-      { id: photos.strengthFloor, alt: 'Free-weight zone under dramatic light' },
-      { id: photos.combat, alt: 'Combat conditioning — athlete focus' },
+      { id: photos.facility, alt: 'Main floor — LED ceiling and machines' },
+      { id: photos.performance, alt: 'Turf lane with mirrors' },
+      { id: photos.darkGym, alt: 'Dark athletic gym lighting' },
     ],
   },
 }

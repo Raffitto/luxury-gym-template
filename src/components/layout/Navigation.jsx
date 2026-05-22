@@ -77,7 +77,13 @@ export default function Navigation() {
             >
               Correspondence
             </Link>
-            <MagneticButton to={routes.trial}>{activeConfig.hero.primaryCta}</MagneticButton>
+            {activeConfig.hero.primaryHref ? (
+              <MagneticButton href={activeConfig.hero.primaryHref}>
+                {activeConfig.hero.primaryCta}
+              </MagneticButton>
+            ) : (
+              <MagneticButton to={routes.trial}>{activeConfig.hero.primaryCta}</MagneticButton>
+            )}
           </div>
 
           <button

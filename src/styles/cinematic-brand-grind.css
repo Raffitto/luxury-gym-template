@@ -48,3 +48,111 @@ html.brand-grind .scene-card--featured {
 html.brand-grind .velocity-glow {
   background: radial-gradient(ellipse at center, rgba(225, 6, 0, 0.06) 0%, transparent 70%);
 }
+
+/* Google reviews module */
+html.brand-grind .grind-reviews-card {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: var(--surface);
+  border: 1px solid var(--edge);
+}
+
+@media (min-width: 768px) {
+  html.brand-grind .grind-reviews-card {
+    grid-template-columns: minmax(0, 11rem) 1fr;
+    align-items: center;
+    gap: 2.5rem;
+  }
+}
+
+html.brand-grind .grind-reviews-rating {
+  font-size: clamp(3rem, 12vw, 4.5rem);
+  line-height: 1;
+  color: var(--platinum);
+}
+
+html.brand-grind .grind-stars {
+  display: inline-flex;
+  gap: 0.12rem;
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+html.brand-grind .grind-star {
+  color: var(--ash);
+}
+
+html.brand-grind .grind-star--on {
+  color: var(--accent);
+}
+
+html.brand-grind .grind-reviews-count,
+html.brand-grind .grind-reviews-source {
+  margin-top: 0.35rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+html.brand-grind .grind-review-bar-row {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+html.brand-grind .grind-review-bar-label {
+  font-size: 0.5625rem;
+  color: var(--silver);
+}
+
+html.brand-grind .grind-review-bar-track {
+  height: 0.35rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+html.brand-grind .grind-review-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #9b0000, var(--accent));
+  border-radius: 1px;
+  transition: width 0.35s var(--brand-ease);
+}
+
+html.brand-grind .grind-reviews-trust {
+  grid-column: 1 / -1;
+  margin-top: 0.25rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+/* Location / directions */
+html.brand-grind .grind-location-card {
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--edge);
+}
+
+html.brand-grind .grind-location-pin {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+html.brand-grind .grind-location-address {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+html.brand-grind .grind-directions-btn {
+  min-height: 2.75rem;
+  padding-inline: 1.25rem;
+}

@@ -17,6 +17,30 @@ import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import { useCinematicOSOptional } from '../../context/CinematicOSContext'
 
+function HeroCtas({ hero, className = '' }) {
+  const primaryProps = hero.primaryHref
+    ? { href: hero.primaryHref }
+    : { to: routes.trial }
+  const secondaryProps = hero.secondaryTo
+    ? { to: hero.secondaryTo }
+    : { to: routes.about }
+
+  return (
+    <div id="hero-primary-cta" className={`hero-cta-row mt-7 sm:mt-9 ${className}`.trim()}>
+      <MagneticButton {...primaryProps} className="hero-cta-primary w-full sm:w-auto">
+        {hero.primaryCta}
+      </MagneticButton>
+      <MagneticButton
+        {...secondaryProps}
+        variant="ghost"
+        className="hero-cta-secondary hidden sm:inline-flex"
+      >
+        {hero.secondaryCta}
+      </MagneticButton>
+    </div>
+  )
+}
+
 export default function HeroExperience() {
   const { hero } = activeConfig
   const reduced = useReducedMotion()
@@ -67,18 +91,7 @@ export default function HeroExperience() {
                 <p className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg">
                   {hero.subline}
                 </p>
-                <div id="hero-primary-cta" className="hero-cta-row mt-7 sm:mt-9">
-                  <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
-                    {hero.primaryCta}
-                  </MagneticButton>
-                  <MagneticButton
-                    to={routes.about}
-                    variant="ghost"
-                    className="hero-cta-secondary hidden sm:inline-flex"
-                  >
-                    {hero.secondaryCta}
-                  </MagneticButton>
-                </div>
+                <HeroCtas hero={hero} />
               </>
             ) : (
               <>
@@ -112,22 +125,11 @@ export default function HeroExperience() {
                   {hero.subline}
                 </motion.p>
                 <motion.div
-                  id="hero-primary-cta"
-                  className="hero-cta-row mt-7 sm:mt-9"
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ ...heroEnter, delay: heroDelay(0.12) }}
                 >
-                  <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
-                    {hero.primaryCta}
-                  </MagneticButton>
-                  <MagneticButton
-                    to={routes.about}
-                    variant="ghost"
-                    className="hero-cta-secondary hidden sm:inline-flex"
-                  >
-                    {hero.secondaryCta}
-                  </MagneticButton>
+                  <HeroCtas hero={hero} />
                 </motion.div>
               </>
             )}

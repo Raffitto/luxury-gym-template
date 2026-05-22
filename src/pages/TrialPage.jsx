@@ -4,6 +4,7 @@ import PageHero from '../components/layout/PageHero'
 import MagneticButton from '../components/ui/MagneticButton'
 import RitualField from '../components/ui/RitualField'
 import { activeConfig } from '../data/activeConfig'
+import { isGrindBrand } from '../data/brand'
 import { transition, viewportOnce } from '../motion/choreography'
 
 export default function TrialPage() {
@@ -42,6 +43,48 @@ export default function TrialPage() {
               If aligned, chamber coordinates arrive within 72 hours. Prepare for immersion.
             </p>
           </motion.div>
+        ) : isGrindBrand && trial.ctaHref ? (
+          <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
+            <motion.div
+              className="glass-layer edge-lit p-10 md:p-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={transition.cinematic(0.7, 0.1)}
+            >
+              <p className="font-ritual text-[var(--accent)]">Visit the floor</p>
+              <ol className="mt-8 space-y-5">
+                {trial.steps.map((step, i) => (
+                  <li key={step} className="flex gap-4">
+                    <span className="font-ritual shrink-0 text-[var(--ash)]">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <p className="font-display text-lg text-[var(--platinum)]">{step}</p>
+                  </li>
+                ))}
+              </ol>
+              <MagneticButton href={trial.ctaHref} className="mt-10">
+                {trial.cta}
+              </MagneticButton>
+            </motion.div>
+            <motion.aside
+              className="lg:pt-4"
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={viewportOnce()}
+              transition={transition.cinematic(0.85, 0.15)}
+            >
+              <p className="font-ritual text-[var(--accent)]">{proof.headline}</p>
+              <p className="body-measured mt-4">{proof.subline}</p>
+              <div className="mt-10 grid grid-cols-3 gap-4">
+                {proof.metrics.map((m) => (
+                  <div key={m.label} className="border border-[var(--edge)] p-4">
+                    <p className="font-display text-2xl text-[var(--accent)]">{m.value}</p>
+                    <p className="mt-1 font-ritual text-[0.5rem] text-[var(--ash)]">{m.label}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.aside>
+          </div>
         ) : (
           <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
             <motion.form
