@@ -20,7 +20,7 @@ export function useScenePreload() {
           if (urls?.length) preloadImages(urls)
         })
       },
-      { rootMargin: '140% 0px 80% 0px', threshold: 0 },
+      { rootMargin: '180% 0px 100% 0px', threshold: 0 },
     )
 
     SECTION_IDS.forEach((id) => {

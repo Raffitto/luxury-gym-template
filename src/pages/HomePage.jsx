@@ -1,5 +1,5 @@
-import LandingImmersion from '../components/cinematic/LandingImmersion'
+import CinematicOS from '../components/cinematic/CinematicOS'
 
 export default function HomePage() {
-  return <LandingImmersion />
+  return <CinematicOS />
 }

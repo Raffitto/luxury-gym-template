@@ -94,14 +94,45 @@ export function preloadSecondaryAssets() {
   return preloadImages(secondary)
 }
 
+let lastScrollY = 0
+
+export function attachScrollPrefetch() {
+  if (typeof window === 'undefined') return () => {}
+
+  const map = getScenePreloadMap()
+  const order = ['programs', 'journey', 'facility', 'access']
+  let prefetchIndex = 0
+
+  const onScroll = () => {
+    const y = window.scrollY
+    const down = y >= lastScrollY
+    lastScrollY = y
+
+    if (!down) return
+
+    const nextId = order[prefetchIndex]
+    if (nextId && map[nextId]) {
+      preloadImages(map[nextId])
+      prefetchIndex = Math.min(prefetchIndex + 1, order.length - 1)
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true })
+  return () => window.removeEventListener('scroll', onScroll)
+}
+
 export function warmStart() {
   if (typeof document === 'undefined') return
   document.documentElement.classList.add('boot-warm')
   preloadCriticalAssets().then(() => {
     document.documentElement.classList.add('cinematic-ready')
     document.documentElement.classList.remove('boot-warm')
+    preloadImages(getScenePreloadMap().programs)
   })
 
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 800))
-  idle(() => preloadSecondaryAssets())
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 600))
+  idle(() => {
+    preloadSecondaryAssets()
+    attachScrollPrefetch()
+  })
 }

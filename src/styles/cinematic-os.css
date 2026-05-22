@@ -1,0 +1,287 @@
+/* AETHERIS Cinematic Operating System — unified film environment */
+
+.cinematic-os {
+  position: relative;
+  isolation: isolate;
+  --env-energy: 0;
+  --camera-drift-x: 0;
+  --camera-drift-y: 0;
+}
+
+.cinematic-landing--os {
+  position: relative;
+  overflow-x: clip;
+}
+
+/* ── Camera rig ── */
+.camera-rig {
+  width: 100%;
+  will-change: transform;
+}
+
+.camera-rig-body,
+.camera-rig-gyro {
+  width: 100%;
+  transform-origin: 50% 20%;
+}
+
+/* ── Environmental field (fixed, energy-reactive) ── */
+.environmental-field {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.env-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.env-fog {
+  background: radial-gradient(
+    120% 80% at 50% 30%,
+    rgba(12, 14, 18, 0.35) 0%,
+    transparent 55%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.env-bloom {
+  background: radial-gradient(
+    90% 60% at 50% 0%,
+    rgba(180, 160, 120, 0.12) 0%,
+    transparent 62%
+  );
+  filter: blur(28px);
+  opacity: 0.08;
+}
+
+.env-sweep {
+  top: 18%;
+  height: 42%;
+  width: 55%;
+  left: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(220, 210, 190, 0.04) 42%,
+    rgba(255, 248, 235, 0.07) 50%,
+    rgba(220, 210, 190, 0.03) 58%,
+    transparent 100%
+  );
+  filter: blur(12px);
+}
+
+.env-wash {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(6, 8, 10, 0.25) 40%,
+    rgba(2, 2, 2, 0.45) 100%
+  );
+}
+
+.env-grain {
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+.env-chroma {
+  background: linear-gradient(
+    90deg,
+    rgba(80, 100, 140, 0.03) 0%,
+    transparent 48%,
+    rgba(140, 110, 80, 0.03) 100%
+  );
+}
+
+.env-breathe {
+  background: radial-gradient(
+    70% 50% at 50% 50%,
+    rgba(30, 32, 38, 0.2) 0%,
+    transparent 70%
+  );
+}
+
+/* Energy CSS hook — set on root via inline style in provider if needed */
+.cinematic-os[data-energy='high'] .env-sweep {
+  filter: blur(10px);
+}
+
+/* ── Continuity engine ── */
+.continuity-engine {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.continuity-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 2, 2, 0.02) 0%,
+    rgba(8, 10, 12, 0.08) 45%,
+    rgba(2, 2, 2, 0.12) 100%
+  );
+}
+
+.continuity-spectrum {
+  position: absolute;
+  inset: -20% 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(24, 26, 32, 0.15) 30%,
+    rgba(12, 14, 18, 0.2) 55%,
+    transparent 100%
+  );
+}
+
+.continuity-shadow-drift {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    80% 40% at 50% 100%,
+    rgba(0, 0, 0, 0.35) 0%,
+    transparent 70%
+  );
+  animation: continuity-shadow 14s ease-in-out infinite;
+}
+
+@keyframes continuity-shadow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.75;
+    transform: translate3d(1%, -0.5%, 0);
+  }
+}
+
+/* ── Film chapters — scene blending ── */
+.film-chapter-carry {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(4, 4, 6, 0.4) 88%,
+    var(--void) 100%
+  );
+}
+
+.film-chapter-atmo {
+  position: absolute;
+  inset: -8% 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.film-chapter-atmo--section {
+  background: radial-gradient(90% 50% at 50% 0%, rgba(18, 20, 26, 0.25), transparent 70%);
+}
+
+.film-chapter-atmo--hero {
+  background: radial-gradient(100% 60% at 50% 20%, rgba(28, 30, 36, 0.2), transparent 65%);
+}
+
+.film-chapter-atmo--climax {
+  background: radial-gradient(80% 55% at 50% 40%, rgba(40, 36, 28, 0.18), transparent 72%);
+}
+
+.film-chapter-camera {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* ── Kinetic typography ── */
+.kinetic-ritual {
+  letter-spacing: 0.22em;
+  transition: letter-spacing 0.6s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+
+.kinetic-ritual[style*='--type-energy'] {
+  filter: brightness(calc(1 + var(--type-energy, 0) * 0.08));
+}
+
+.kinetic-headline,
+.kinetic-headline-line {
+  transform-origin: left center;
+  perspective: 800px;
+}
+
+.kinetic-copy {
+  transform-origin: left top;
+}
+
+/* ── Hero OS reactivity ── */
+.hero-experience--os .hero-haze-band {
+  opacity: calc(0.35 + var(--hero-energy, 0) * 0.25);
+}
+
+.hero-experience--os .hero-parallax-bg {
+  transition: filter 0.4s ease;
+  filter: brightness(calc(1 + var(--hero-energy, 0) * 0.04));
+}
+
+/* ── Myth identity ── */
+.myth-whisper {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(200, 195, 185, 0.45);
+}
+
+.finale-frame-content--myth {
+  position: relative;
+}
+
+/* ── Mobile immersion ── */
+@supports (padding: max(0px)) {
+  .cinematic-landing--os {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 768px) {
+  .environmental-field .env-bloom {
+    filter: blur(18px);
+  }
+
+  .env-sweep {
+    top: 12%;
+    height: 36%;
+  }
+
+  .film-chapter:not(.landing-scene--hero) {
+    margin-top: clamp(-4rem, -9vh, -2.5rem);
+  }
+
+  .kinetic-headline-line {
+    transform-origin: center top;
+  }
+
+  .scene-bridge--flow {
+    height: clamp(4rem, 11vh, 7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continuity-shadow-drift,
+  .env-sweep {
+    animation: none !important;
+  }
+}

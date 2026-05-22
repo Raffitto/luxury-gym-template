@@ -14,11 +14,14 @@ import MagneticButton from '../ui/MagneticButton'
 import { spring, useLiquidScroll } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
+import { useCinematicOSOptional } from '../../context/CinematicOSContext'
 
 export default function HeroExperience() {
   const { hero } = aetherisConfig
   const reduced = useReducedMotion()
   const mobile = useIsMobile()
+  const os = useCinematicOSOptional()
+  const heroEnergy = os?.energy ?? 0
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -38,7 +41,8 @@ export default function HeroExperience() {
   return (
     <section
       ref={ref}
-      className="hero-experience hero-warm-active landing-scene landing-scene--hero film-chapter relative min-h-[100svh] overflow-hidden"
+      className="hero-experience hero-experience--os hero-warm-active landing-scene landing-scene--hero film-chapter relative min-h-[100svh] overflow-hidden"
+      style={{ '--hero-energy': heroEnergy }}
     >
       <div className="hero-depth-stack">
         <CinematicAtmosphere intensity="hero" live />

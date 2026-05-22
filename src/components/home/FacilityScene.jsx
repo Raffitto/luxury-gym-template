@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion'
 import { landingConfig } from '../../data/landingConfig'
 import { routes } from '../../design-system/tokens'
-import RitualLabel from '../ui/RitualLabel'
-import ChamberReveal from '../ui/ChamberReveal'
 import MagneticButton from '../ui/MagneticButton'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
+import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
 import ParallaxLayer from '../cinematic/ParallaxLayer'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import CinematicImage from '../ui/CinematicImage'
 import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
+import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
 import { spring, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
@@ -27,7 +27,7 @@ export default function FacilityScene() {
   const reduced = useReducedMotion()
 
   return (
-    <section id="facility" className="landing-scene landing-scene--facility film-chapter relative overflow-hidden">
+    <FilmChapter id="facility" className="landing-scene--facility" depthIndex={4} atmosphere="hero">
       <CinematicAtmosphere intensity="hero" />
       <CinematicBackdrop
         image={facility.image}
@@ -39,19 +39,19 @@ export default function FacilityScene() {
 
       <div className="relative z-10 landing-scene-inner chamber">
         <div className="facility-grid">
-          <ChamberReveal className="facility-copy max-w-xl">
-            <RitualLabel className="section-ritual-gap">{facility.ritual}</RitualLabel>
-            <h2 className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
+          <KineticBlock className="facility-copy max-w-xl">
+            <KineticRitual className="section-ritual-gap">{facility.ritual}</KineticRitual>
+            <KineticHeadline className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]">
               {facility.headline}
-            </h2>
-            <p className="copy-lead mt-6">{facility.subline}</p>
+            </KineticHeadline>
+            <KineticCopy className="copy-lead mt-6">{facility.subline}</KineticCopy>
 
             <ul className="facility-features mt-10">
               {facility.features.map((f, i) => (
                 <motion.li
                   key={f.label}
                   className="facility-feature"
-                  initial={reduced ? false : { opacity: 0, y: 16 }}
+                  initial={reduced ? false : { opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewportOnce()}
                   transition={{ ...spring.liquid, delay: i * 0.05 }}
@@ -67,10 +67,10 @@ export default function FacilityScene() {
                 Tour the chambers
               </MagneticButton>
             </div>
-          </ChamberReveal>
+          </KineticBlock>
 
           <FilmFrame aspect="cinematic" bleed className="facility-hero-frame hidden md:block">
-            <ParallaxLayer speed={0.18}>
+            <ParallaxLayer speed={0.14}>
               <div className="facility-hero-visual">
                 <CinematicImage
                   image={facility.image}
@@ -101,6 +101,6 @@ export default function FacilityScene() {
           ))}
         </div>
       </div>
-    </section>
+    </FilmChapter>
   )
 }

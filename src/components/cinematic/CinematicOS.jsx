@@ -1,0 +1,43 @@
+import { CinematicOSProvider } from '../../context/CinematicOSContext'
+import ContinuityEngine from './ContinuityEngine'
+import EnvironmentalField from './EnvironmentalField'
+import CameraRig from './CameraRig'
+import SceneBridge from './SceneBridge'
+import HeroExperience from '../home/HeroExperience'
+import ProgramsScene from '../home/ProgramsScene'
+import TransformationScene from '../home/TransformationScene'
+import FacilityScene from '../home/FacilityScene'
+import MembershipFinale from '../home/MembershipFinale'
+import { useCinematicOS } from '../../context/CinematicOSContext'
+
+function LandingFilm() {
+  const { reduced } = useCinematicOS()
+
+  return (
+    <div className="landing-immersion">
+      {!reduced ? <ContinuityEngine /> : null}
+      {!reduced ? <EnvironmentalField /> : null}
+      <CameraRig>
+        <div className="cinematic-landing cinematic-landing--alive cinematic-landing--os">
+          <HeroExperience />
+          <SceneBridge variant="hero-exit" />
+          <ProgramsScene />
+          <SceneBridge variant="flow" />
+          <TransformationScene />
+          <SceneBridge variant="flow" />
+          <FacilityScene />
+          <SceneBridge variant="flow" />
+          <MembershipFinale />
+        </div>
+      </CameraRig>
+    </div>
+  )
+}
+
+export default function CinematicOS() {
+  return (
+    <CinematicOSProvider>
+      <LandingFilm />
+    </CinematicOSProvider>
+  )
+}
