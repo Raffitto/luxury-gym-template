@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
+import { useIsPhone } from '../../hooks/useIsPhone'
 
 const INTENSITY = {
   hero: { fog: 0.22, glow: 0.28, particles: 14, mobileParticles: 8 },
@@ -18,6 +19,7 @@ export default function CinematicAtmosphere({
 }) {
   const reduced = useReducedMotion()
   const mobile = useIsMobile()
+  const phone = useIsPhone()
   const isHero = intensity === 'hero' || live
   const level = INTENSITY[intensity] || INTENSITY.section
   const particleCount = mobile && !isHero ? level.mobileParticles : isHero ? level.mobileParticles : level.particles
@@ -33,6 +35,18 @@ export default function CinematicAtmosphere({
         style={{
           background:
             'radial-gradient(ellipse 90% 55% at 50% 0%, rgba(196,181,154,0.12), transparent 70%)',
+        }}
+      />
+    )
+  }
+
+  if (phone && !isHero) {
+    return (
+      <div
+        className={`cinematic-atmosphere cinematic-atmosphere--static pointer-events-none absolute inset-0 ${className}`}
+        aria-hidden
+        style={{
+          background: `radial-gradient(ellipse 85% 50% at 50% 0%, rgba(196,181,154,${fogOpacity * 0.35}), transparent 72%)`,
         }}
       />
     )

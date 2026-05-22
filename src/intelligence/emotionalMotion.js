@@ -1,6 +1,11 @@
 import { scenePacing, pacingForScene } from './scenePacing'
 
-function springFromPacing(pacing) {
+const HANDHELD_EASE = [0.22, 1, 0.32, 1]
+
+function transitionFromPacing(pacing, handheld = false) {
+  if (handheld) {
+    return { duration: 0.14, ease: HANDHELD_EASE }
+  }
   return {
     type: 'spring',
     stiffness: pacing.stiffness,
@@ -16,13 +21,13 @@ function resolvePacing(emotion, sceneId, handheld) {
 
 export function headlineVariants(emotion = 'exclusivity', bias = 0.15, sceneId, handheld = false) {
   const pacing = resolvePacing(emotion, sceneId, handheld)
-  const y = pacing.revealY + bias * 2
+  const y = pacing.revealY + (handheld ? bias : bias * 2)
   return {
     hidden: { opacity: 0, y },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { ...springFromPacing(pacing), delay: pacing.delay },
+      transition: { ...transitionFromPacing(pacing, handheld), delay: pacing.delay },
     },
   }
 }
@@ -35,7 +40,7 @@ export function ritualVariants(emotion = 'exclusivity', sceneId, handheld = fals
       opacity: 1,
       y: 0,
       letterSpacing: '0.22em',
-      transition: { ...springFromPacing(pacing), delay: pacing.delay * 0.4 },
+      transition: { ...transitionFromPacing(pacing, handheld), delay: pacing.delay * 0.4 },
     },
   }
 }
@@ -47,7 +52,7 @@ export function copyVariants(emotion = 'exclusivity', bias = 0.1, sceneId, handh
     visible: {
       opacity: 1,
       y: 0,
-      transition: { ...springFromPacing(pacing), delay: pacing.copyDelay },
+      transition: { ...transitionFromPacing(pacing, handheld), delay: pacing.copyDelay },
     },
   }
 }

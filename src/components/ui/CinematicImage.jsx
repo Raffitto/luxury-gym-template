@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useLayoutEffect } from 'react'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import {
   resolveImageSrc,
   resolveAlt,
@@ -28,15 +29,17 @@ export default function CinematicImage({
   const { src, srcSet } = buildSrcSet(image, preset)
   const displayPrimary = src || primarySrc
   const imgRef = useRef(null)
+  const phone = useIsPhone()
+  const cached = cachedForSrcs(displayPrimary, primarySrc, src)
 
   const [currentSrc, setCurrentSrc] = useState(displayPrimary)
   const [errored, setErrored] = useState(false)
   const [revealed, setRevealed] = useState(
     () =>
-      priority &&
-      (cachedForSrcs(displayPrimary, primarySrc, src) ||
-        (typeof document !== 'undefined' &&
-          document.documentElement.classList.contains('cinematic-ready'))),
+      cached ||
+      (priority &&
+        typeof document !== 'undefined' &&
+        document.documentElement.classList.contains('cinematic-ready')),
   )
 
   const label = alt || resolveAlt(image, '')
@@ -52,14 +55,16 @@ export default function CinematicImage({
   useLayoutEffect(() => {
     const el = imgRef.current
     if (!el) return
-    if (cachedForSrcs(displayPrimary, primarySrc, src) || el.complete) {
+    if (cached || el.complete) {
       if (el.decode) {
         el.decode().then(revealNow).catch(revealNow)
       } else {
         revealNow()
       }
+      return
     }
-  }, [displayPrimary, primarySrc, src, revealNow])
+    if (phone && priority) revealNow()
+  }, [displayPrimary, primarySrc, src, revealNow, cached, phone, priority])
 
   const handleLoad = useCallback(
     (e) => {

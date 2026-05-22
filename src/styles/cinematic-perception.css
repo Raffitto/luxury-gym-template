@@ -26,8 +26,7 @@
   }
 
   .cinematic-os--handheld .env-bloom {
-    opacity: 0.38;
-    filter: blur(22px);
+    display: none;
   }
 
   .cinematic-os--handheld .env-fog {
@@ -44,7 +43,7 @@
 
   /* Hero — directed pause */
   .hero-experience--handheld .hero-backdrop-img {
-    opacity: 0.54;
+    opacity: 1;
   }
 
   .hero-experience--handheld .hero-frame-panel {
@@ -90,18 +89,15 @@
 
   /* Hand feel */
   .swipeable-scenes--handheld .scene-card {
-    transition: box-shadow 0.75s var(--ease-inevitable);
+    transition: none;
   }
 
   .mobile-sticky-access {
-    transition:
-      transform 0.72s var(--ease-inevitable),
-      opacity 0.65s var(--ease-inevitable);
+    transition: opacity 0.14s ease-out, transform 0.14s ease-out;
   }
 
   .cinematic-os--handheld .finale-glow-pulse {
-    opacity: 0.45;
-    filter: blur(36px);
+    display: none;
   }
 
   .cinematic-os--handheld .journey-timeline {

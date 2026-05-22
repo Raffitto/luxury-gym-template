@@ -32,7 +32,7 @@ export default function MobileNavOverlay({ open, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.14, ease: [0.22, 1, 0.32, 1] }}
           className="mobile-nav-overlay"
         >
           <div className="mobile-nav-header">

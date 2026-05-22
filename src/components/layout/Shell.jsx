@@ -20,7 +20,7 @@ export default function Shell() {
   return (
     <div className="env-void min-h-screen">
       {!mobile && !reduced ? <FilmGrain /> : null}
-      {!reduced ? <ScrollProgress /> : null}
+      {!reduced && !mobile ? <ScrollProgress /> : null}
       <Navigation />
       <main key={location.pathname} className="page-with-sticky min-h-screen page-instant">
         <Outlet />

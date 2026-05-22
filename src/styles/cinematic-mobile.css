@@ -416,7 +416,7 @@
     );
     border-top: 1px solid rgba(232, 226, 216, 0.05);
     box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
-    transition: transform 0.6s var(--ease-touch), opacity 0.55s var(--ease-touch);
+    transition: transform 0.14s ease-out, opacity 0.14s ease-out;
   }
 
   .mobile-sticky-access .btn-magnetic {
@@ -425,9 +425,9 @@
     letter-spacing: 0.24em;
     -webkit-tap-highlight-color: transparent;
     transition:
-      box-shadow 0.6s var(--ease-touch),
-      transform 0.55s var(--ease-touch),
-      background 0.45s ease;
+      box-shadow 0.14s ease,
+      transform 0.12s ease,
+      background 0.14s ease;
   }
 
   .mobile-sticky-access .btn-magnetic:active {
@@ -437,7 +437,7 @@
 
   body.has-sticky-cta .page-with-sticky {
     padding-bottom: calc(var(--mobile-sticky-h) + env(safe-area-inset-bottom, 0px) + 0.875rem);
-    transition: padding-bottom 0.65s var(--ease-touch);
+    transition: padding-bottom 0.14s ease-out;
   }
 
   /* ── Luxury stillness — no restless motion ── */
@@ -462,9 +462,9 @@
 
   .cinematic-os--handheld .btn-magnetic {
     transition:
-      box-shadow 0.6s var(--ease-touch),
-      transform 0.55s var(--ease-touch),
-      background 0.45s ease;
+      box-shadow 0.14s ease,
+      transform 0.12s ease,
+      background 0.14s ease;
   }
 
   .cinematic-os--handheld .btn-magnetic:active {

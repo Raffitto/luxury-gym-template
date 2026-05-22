@@ -9,7 +9,56 @@ import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../ci
 import { spring, variants, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
-import { transition } from '../../motion/choreography'
+
+function JourneyPhase({ phase, i, reduced, phone }) {
+  const body = (
+    <>
+      <div className="journey-phase-copy">
+        <span className="journey-phase-num font-ritual">{phase.phase}</span>
+        <h3 className="journey-phase-title font-display mt-3 text-[var(--platinum)] md:text-3xl">
+          {phase.title}
+        </h3>
+        <p className="copy-cinematic mt-4">{phase.body}</p>
+      </div>
+      <FilmFrame aspect="cinematic" delay={reduced || phone ? 0 : i * 0.05}>
+        <ParallaxLayer speed={0.1 + i * 0.02}>
+          <div className="journey-phase-visual">
+            <CinematicImage
+              image={phase.image}
+              alt={phase.image.alt}
+              preset="card"
+              fill
+              priority={phone && i < 2}
+            />
+          </div>
+        </ParallaxLayer>
+      </FilmFrame>
+    </>
+  )
+
+  if (reduced || phone) {
+    return (
+      <article
+        className={`journey-phase ${i % 2 === 1 ? 'journey-phase--reverse' : ''}`}
+      >
+        {body}
+      </article>
+    )
+  }
+
+  return (
+    <motion.article
+      className={`journey-phase gpu-layer ${i % 2 === 1 ? 'journey-phase--reverse' : ''}`}
+      variants={i % 2 ? variants.slideLeft : variants.slideRight}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce()}
+      transition={{ ...spring.glide, delay: 0.06 + i * 0.05 }}
+    >
+      {body}
+    </motion.article>
+  )
+}
 
 export default function TransformationScene() {
   const { transformation } = landingConfig
@@ -18,7 +67,7 @@ export default function TransformationScene() {
 
   return (
     <FilmChapter id="journey" className="landing-scene--journey" depthIndex={3}>
-      <CinematicAtmosphere intensity="section" />
+      {!phone ? <CinematicAtmosphere intensity="section" /> : null}
 
       <div className="landing-scene-inner chamber">
         <KineticBlock className="max-w-2xl" sceneId="journey">
@@ -38,40 +87,7 @@ export default function TransformationScene() {
 
         <div className="journey-timeline mt-14">
           {transformation.phases.map((phase, i) => (
-            <motion.article
-              key={phase.phase}
-              className={`journey-phase gpu-layer ${i % 2 === 1 ? 'journey-phase--reverse' : ''}`}
-              variants={i % 2 ? variants.slideLeft : variants.slideRight}
-              initial={reduced ? false : 'hidden'}
-              whileInView={reduced ? undefined : 'visible'}
-              viewport={viewportOnce()}
-              transition={
-                phone
-                  ? { ...transition.instant, delay: i * 0.02 }
-                  : { ...spring.glide, delay: 0.06 + i * 0.05 }
-              }
-            >
-              <div className="journey-phase-copy">
-                <span className="journey-phase-num font-ritual">{phase.phase}</span>
-                <h3 className="journey-phase-title font-display mt-3 text-[var(--platinum)] md:text-3xl">
-                  {phase.title}
-                </h3>
-                <p className="copy-cinematic mt-4">{phase.body}</p>
-              </div>
-              <FilmFrame aspect="cinematic" delay={i * 0.05}>
-                <ParallaxLayer speed={0.1 + i * 0.02}>
-                  <div className="journey-phase-visual">
-                    <CinematicImage
-                      image={phase.image}
-                      alt={phase.image.alt}
-                      preset="card"
-                      fill
-                      priority={phone && i < 2}
-                    />
-                  </div>
-                </ParallaxLayer>
-              </FilmFrame>
-            </motion.article>
+            <JourneyPhase key={phase.phase} phase={phase} i={i} reduced={reduced} phone={phone} />
           ))}
         </div>
       </div>

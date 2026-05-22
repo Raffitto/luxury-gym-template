@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
 import { useIsMobile } from '../../hooks/useIsMobile'
-import { spring } from '../../motion/choreography'
+import { transition } from '../../motion/choreography'
 
 export default function MobileStickyAccess() {
   const { pathname } = useLocation()
@@ -46,10 +46,10 @@ export default function MobileStickyAccess() {
           className="mobile-sticky-access lg:hidden"
           role="complementary"
           aria-label="Request access"
-          initial={{ opacity: 0, y: 6 }}
+          initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 5 }}
-          transition={{ type: 'spring', stiffness: 98, damping: 36, mass: 1.08 }}
+          exit={{ opacity: 0, y: 3 }}
+          transition={transition.instant}
         >
           <Link to={routes.trial} className="btn-magnetic w-full justify-center">
             {aetherisConfig.hero.primaryCta}

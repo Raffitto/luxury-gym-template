@@ -59,7 +59,7 @@ html.boot-warm body::after {
 html.cinematic-ready.boot-warm body::before,
 html.cinematic-ready.boot-warm body::after {
   opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.35, 1);
+  transition: opacity 0.2s ease-out;
 }
 
 html.cinematic-ready body::before,

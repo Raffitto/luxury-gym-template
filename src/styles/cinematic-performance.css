@@ -22,19 +22,44 @@
   }
 
   .cinematic-landing--fast .environmental-field {
-    opacity: 0.45;
+    opacity: 0.38;
     pointer-events: none;
   }
 
-  .cinematic-landing--fast .env-bloom {
-    display: none;
-  }
-
+  .cinematic-landing--fast .env-bloom,
   .cinematic-landing--fast .env-grain {
     display: none;
   }
 
-  /* Programs — GPU-light */
+  .cinematic-os--handheld .environmental-field--handheld-static .env-bloom {
+    display: none;
+  }
+
+  .cinematic-os--handheld .env-wash--static {
+    transform: none !important;
+    opacity: 0.35;
+    filter: none;
+  }
+
+  /* Offscreen scenes — skip paint until near viewport */
+  .cinematic-landing--handheld .film-chapter {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100vh;
+  }
+
+  .cinematic-landing--handheld .landing-scene--hero {
+    content-visibility: visible;
+  }
+
+  /* Static atmosphere — no motion cost */
+  .cinematic-atmosphere--static,
+  .cinematic-atmosphere--lite .cinematic-fog,
+  .cinematic-atmosphere--lite .cinematic-glow,
+  .cinematic-atmosphere--lite .cinematic-particle {
+    animation: none !important;
+  }
+
+  /* Programs — GPU-light, instant swipe */
   .landing-scene--programs-fast .film-chapter-carry {
     display: none;
   }
@@ -43,15 +68,18 @@
     will-change: auto;
   }
 
-  .landing-scene--programs-fast .scene-card-slot {
-    transition: none;
+  .landing-scene--programs-fast .scene-card-slot,
+  .cinematic-os--handheld .scene-card-slot {
+    transition: none !important;
     transform: none !important;
     opacity: 1 !important;
   }
 
-  .landing-scene--programs-fast .scene-card {
+  .landing-scene--programs-fast .scene-card,
+  .cinematic-os--handheld .swipeable-scenes--programs .scene-card {
     box-shadow: 0 0 0 1px rgba(232, 226, 216, 0.04), 0 10px 32px rgba(0, 0, 0, 0.45);
     transition: none;
+    filter: none;
   }
 
   .landing-scene--programs-fast .scene-card-slot--active .scene-card {
@@ -60,7 +88,7 @@
 
   .scene-card-link--instant:active .scene-card {
     opacity: 0.92;
-    transition: opacity 0.12s ease;
+    transition: opacity 0.1s ease;
   }
 
   /* Faster reveals */
@@ -71,12 +99,12 @@
   }
 
   .cinematic-img {
-    transition-duration: 0.12s;
+    transition-duration: 0.1s;
   }
 
   .cinematic-img-wrap--priority .cinematic-img,
   .cinematic-img-wrap[data-revealed] .cinematic-img {
-    transition-duration: 0.12s;
+    transition-duration: 0.1s;
     opacity: 1;
   }
 
@@ -84,10 +112,35 @@
     transition: none;
   }
 
+  .cinematic-img-wrap[data-revealed] .cinematic-img {
+    transition: opacity 0.1s ease-out;
+  }
+
   /* Hero — instant entrance */
   .hero-experience--handheld .hero-frame-panel {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+
+  .hero-experience--handheld .hero-backdrop-img {
+    opacity: 1;
+  }
+
+  /* Sticky CTA + nav — instant */
+  .mobile-sticky-access,
+  body.has-sticky-cta .page-with-sticky {
+    transition-duration: 0.14s;
+  }
+
+  .cinematic-os--handheld .btn-magnetic {
+    transition:
+      box-shadow 0.14s ease,
+      transform 0.12s ease,
+      background 0.14s ease;
+  }
+
+  .cinematic-os--handheld .finale-glow-pulse {
+    display: none;
   }
 
   /* Reduce fixed layer cost */
@@ -101,6 +154,13 @@
 
   .swipeable-scenes--handheld .scene-card-motion {
     will-change: auto;
+  }
+
+  .cinematic-os--handheld .cinematic-fog,
+  .cinematic-os--handheld .cinematic-light-leak,
+  .cinematic-os--handheld .cinematic-gradient-drift,
+  .cinematic-os--handheld .cinematic-particle {
+    animation: none !important;
   }
 }
 

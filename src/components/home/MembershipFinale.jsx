@@ -32,16 +32,17 @@ export default function MembershipFinale() {
       depthIndex={5}
       atmosphere="climax"
     >
-      <CinematicAtmosphere intensity="climax" />
+      {!phone ? <CinematicAtmosphere intensity="climax" /> : null}
       <CinematicBackdrop
         image={climax.image}
         alt={climax.image.alt}
+        priority={phone}
         preset="section"
         scrim="default"
         imageClassName="opacity-30"
       />
 
-      {!reduced ? (
+      {!reduced && !phone ? (
         <motion.div
           className="finale-glow-pulse gpu-layer"
           style={{ opacity: glowOpacity }}
@@ -55,7 +56,7 @@ export default function MembershipFinale() {
             <div className="finale-frame-content finale-frame-content--myth">
               <KineticRitual sceneId="access">{climax.ritual}</KineticRitual>
 
-              <motion.div style={reduced ? undefined : { y: headlineY }}>
+              <motion.div style={reduced || phone ? undefined : { y: headlineY }}>
                 <KineticHeadline
                   sceneId="access"
                   className="headline-emotional font-display mt-8 text-[var(--platinum)]"
@@ -67,18 +68,27 @@ export default function MembershipFinale() {
                 {climax.subline}
               </KineticCopy>
 
-              <motion.div
-                className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-                initial={reduced ? false : { opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...spring.glide, delay: 0.42 }}
-              >
-                <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
-                <MagneticButton to={routes.membership} variant="ghost">
-                  Enter the continuum
-                </MagneticButton>
-              </motion.div>
+              {reduced || phone ? (
+                <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+                  <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
+                  <MagneticButton to={routes.membership} variant="ghost">
+                    Enter the continuum
+                  </MagneticButton>
+                </div>
+              ) : (
+                <motion.div
+                  className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ ...spring.glide, delay: 0.12 }}
+                >
+                  <MagneticButton to={routes.trial}>{climax.cta}</MagneticButton>
+                  <MagneticButton to={routes.membership} variant="ghost">
+                    Enter the continuum
+                  </MagneticButton>
+                </motion.div>
+              )}
 
               <p className="font-ritual myth-whisper mt-10">Admission is selective · Transformation is inevitable</p>
             </div>

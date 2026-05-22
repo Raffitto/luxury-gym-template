@@ -184,14 +184,16 @@ export function warmStart() {
   document.documentElement.classList.add('boot-warm')
   const phone = isHandheld()
 
-  preloadCriticalAssets().then(() => {
+  const critical = preloadCriticalAssets()
+  const programsWarm = preloadProgramsAfterHero()
+  preloadScenesAhead(0, phone ? 2 : 1)
+
+  Promise.all([critical, programsWarm]).then(() => {
     document.documentElement.classList.add('cinematic-ready')
     document.documentElement.classList.remove('boot-warm')
-    preloadProgramsAfterHero()
-    preloadScenesAhead(0, phone ? 2 : 1)
   })
 
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 280 : 500))
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 200 : 450))
   idle(() => {
     preloadScenesAhead(1, 2)
     preloadSecondaryAssets()

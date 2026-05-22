@@ -11,7 +11,7 @@ import { HeroHorizontalCue } from '../cinematic/HeroLivingLayer'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import FilmFrame from '../cinematic/FilmFrame'
 import MagneticButton from '../ui/MagneticButton'
-import { spring, useLiquidScroll } from '../../motion/choreography'
+import { spring, transition, useLiquidScroll } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import { useCinematicOSOptional } from '../../context/CinematicOSContext'
@@ -36,6 +36,8 @@ export default function HeroExperience() {
   const imageY = phone ? useTransform(scrollYProgress, [0, 1], [0, 0]) : imageYSmooth
   const contentY = phone ? useTransform(scrollYProgress, [0, 1], [0, 0]) : contentYSmooth
   const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, phone ? 1 : 0.94])
+  const heroEnter = phone ? transition.instant : spring.glide
+  const heroDelay = (d) => (phone ? Math.min(d, 0.08) : d)
 
   useEffect(() => {
     const el = ref.current
@@ -95,7 +97,7 @@ export default function HeroExperience() {
                 className="font-ritual hero-ritual-label"
                 initial={reduced ? false : { opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...spring.glide, delay: phone ? 0.06 : 0.1 }}
+                transition={{ ...heroEnter, delay: heroDelay(0.06) }}
               >
                 {hero.ritual}
               </motion.p>
@@ -107,7 +109,7 @@ export default function HeroExperience() {
                     className="hero-headline-line block"
                     initial={reduced ? false : { opacity: 0, y: phone ? 6 : 14 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ ...spring.glide, delay: (phone ? 0.08 : 0.12) + i * (phone ? 0.04 : 0.06) }}
+                    transition={{ ...heroEnter, delay: heroDelay(0.08 + i * 0.04) }}
                   >
                     {line}
                   </motion.span>
@@ -118,7 +120,7 @@ export default function HeroExperience() {
                 className="hero-subline copy-cinematic mt-5 max-w-md md:mt-7 md:max-w-lg"
                 initial={reduced ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ ...spring.glide, delay: phone ? 0.14 : 0.22 }}
+                transition={{ ...heroEnter, delay: heroDelay(0.1) }}
               >
                 {hero.subline}
               </motion.p>
@@ -128,7 +130,7 @@ export default function HeroExperience() {
                 className="hero-cta-row mt-7 sm:mt-9"
                 initial={reduced ? false : { opacity: 0, y: phone ? 6 : 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...spring.glide, delay: phone ? 0.2 : 0.3 }}
+                transition={{ ...heroEnter, delay: heroDelay(0.12) }}
               >
                 <MagneticButton to={routes.trial} className="hero-cta-primary w-full sm:w-auto">
                   {hero.primaryCta}

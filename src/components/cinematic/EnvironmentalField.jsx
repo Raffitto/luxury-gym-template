@@ -7,7 +7,6 @@ import { camera } from '../../motion/camera'
 export default function EnvironmentalField() {
   const { energy, reduced, scrollYProgress, tierConfig, temporal, breathing } = useCinematicOS()
   const phone = useIsPhone()
-
   const washY = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '24%', '52%'])
 
   if (reduced) return null
@@ -23,12 +22,8 @@ export default function EnvironmentalField() {
     return (
       <div className="environmental-field environmental-field--handheld-static" aria-hidden>
         <div className="env-layer env-fog" style={{ opacity: fog }} />
-        <div className="env-layer env-bloom" style={{ opacity: bloom * 0.85 }} />
-        <motion.div className="env-layer env-wash" style={{ y: washY }} />
-        {tier.grain > 0.2 ? (
-          <div className="env-layer env-grain env-grain--static" style={{ opacity: grain }} />
-        ) : null}
-        <div className="env-layer env-breathe env-breathe--still" style={{ opacity: 0.12 }} />
+        <div className="env-layer env-wash env-wash--static" />
+        <div className="env-layer env-breathe env-breathe--still" style={{ opacity: 0.1 }} />
       </div>
     )
   }

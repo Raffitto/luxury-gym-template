@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useCinematicOS } from '../../context/CinematicOSContext'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import { pacingForScene } from '../../intelligence/scenePacing'
@@ -20,11 +20,6 @@ const FilmChapter = forwardRef(function FilmChapter(
   const { reduced } = useCinematicOS()
   const phone = useIsPhone()
   const pacing = pacingForScene(sceneId ?? id, { handheld: phone })
-
-  useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
 
   const staticChapter = reduced || phone
 

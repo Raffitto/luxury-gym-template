@@ -30,10 +30,11 @@ export default function FacilityScene() {
 
   return (
     <FilmChapter id="facility" className="landing-scene--facility" depthIndex={4} atmosphere="hero">
-      <CinematicAtmosphere intensity="hero" />
+      {!phone ? <CinematicAtmosphere intensity="hero" /> : null}
       <CinematicBackdrop
         image={facility.image}
         alt={facility.image.alt}
+        priority={phone}
         preset="section"
         scrim="lateral"
         imageClassName="opacity-25 md:opacity-20"
@@ -57,10 +58,16 @@ export default function FacilityScene() {
 
             <ul className="facility-features mt-10">
               {facility.features.map((f, i) => (
+                reduced || phone ? (
+                  <li key={f.label} className="facility-feature">
+                    <span className="facility-feature-label font-display">{f.label}</span>
+                    <span className="facility-feature-detail font-ritual">{f.detail}</span>
+                  </li>
+                ) : (
                 <motion.li
                   key={f.label}
                   className="facility-feature"
-                  initial={reduced ? false : { opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewportOnce()}
                   transition={{ ...spring.glide, delay: 0.12 + i * 0.06 }}
@@ -68,6 +75,7 @@ export default function FacilityScene() {
                   <span className="facility-feature-label font-display">{f.label}</span>
                   <span className="facility-feature-detail font-ritual">{f.detail}</span>
                 </motion.li>
+                )
               ))}
             </ul>
 
