@@ -14,15 +14,6 @@ export function CinematicOSProvider({ children }) {
   const rootRef = useRef(null)
   const gyro = useGyroDrift()
 
-  useEffect(() => {
-    document.body.classList.toggle('aetheris-handheld', phone)
-    document.documentElement.classList.toggle('aetheris-native', phone)
-    return () => {
-      document.body.classList.remove('aetheris-handheld')
-      document.documentElement.classList.remove('aetheris-native')
-    }
-  }, [phone])
-
   const { scrollYProgress } = useScroll({
     target: rootRef,
     offset: ['start start', 'end end'],

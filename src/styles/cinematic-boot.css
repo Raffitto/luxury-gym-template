@@ -105,6 +105,7 @@ html.cinematic-ready body::after {
 }
 
 @media (max-width: 767px) {
+  .landing-immersion .cinematic-img,
   .cinematic-img-wrap--priority .cinematic-img,
   .hero-warm-active .cinematic-img,
   .cinematic-img-wrap[data-revealed] .cinematic-img {

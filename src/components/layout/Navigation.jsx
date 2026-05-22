@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useLayoutEffect, useCallback } from 'react'
+import { prepareRouteChange } from '../../utils/preload'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { aetherisConfig } from '../../data/aetherisConfig'
@@ -17,10 +18,18 @@ export default function Navigation() {
     setOpen(false)
   }, [location.pathname])
 
-  useEffect(() => {
-    document.body.classList.toggle('nav-locked', open)
+  useLayoutEffect(() => {
+    if (!open) {
+      document.body.classList.remove('nav-locked')
+      return undefined
+    }
+    document.body.classList.add('nav-locked')
     return () => document.body.classList.remove('nav-locked')
   }, [open])
+
+  useLayoutEffect(() => {
+    prepareRouteChange()
+  }, [location.pathname])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)

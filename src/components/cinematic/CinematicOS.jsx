@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
+import { ensureCinematicReady } from '../../utils/preload'
 import { CinematicOSProvider } from '../../context/CinematicOSContext'
 import { cinematicAudio } from '../../audio/CinematicAudioSystem'
 import { useIsPhone } from '../../hooks/useIsPhone'
@@ -41,6 +42,10 @@ function LandingFilm() {
 }
 
 export default function CinematicOS() {
+  useLayoutEffect(() => {
+    ensureCinematicReady()
+  }, [])
+
   useEffect(() => {
     const unregister = cinematicAudio.registerAmbient({
       id: 'void-atmosphere',

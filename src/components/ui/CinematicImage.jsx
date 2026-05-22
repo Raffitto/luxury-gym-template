@@ -34,14 +34,11 @@ export default function CinematicImage({
 
   const [currentSrc, setCurrentSrc] = useState(displayPrimary)
   const [errored, setErrored] = useState(false)
-  const [revealed, setRevealed] = useState(
-    () =>
-      cached ||
-      phone ||
-      (priority &&
-        typeof document !== 'undefined' &&
-        document.documentElement.classList.contains('cinematic-ready')),
-  )
+  const [revealed, setRevealed] = useState(() => {
+    if (cached || phone || priority) return true
+    if (typeof document === 'undefined') return false
+    return document.documentElement.classList.contains('cinematic-ready')
+  })
 
   const label = alt || resolveAlt(image, '')
   const widths = getWidths(preset)

@@ -422,8 +422,8 @@ a.btn-magnetic {
 
 body.nav-locked {
   overflow: hidden;
-  position: fixed;
-  width: 100%;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 /* Inner page hero — editorial, not oversized */

@@ -179,6 +179,20 @@ export function attachScrollPrefetch() {
   return () => window.removeEventListener('scroll', onScroll)
 }
 
+/** Idempotent — home revisit must never wait on boot overlays again */
+export function ensureCinematicReady() {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.add('cinematic-ready')
+  document.documentElement.classList.remove('boot-warm')
+}
+
+export function prepareRouteChange() {
+  if (typeof document === 'undefined') return
+  document.body.classList.remove('nav-locked')
+  ensureCinematicReady()
+  window.scrollTo(0, 0)
+}
+
 export function warmStart() {
   if (typeof document === 'undefined') return
   document.documentElement.classList.add('boot-warm')
