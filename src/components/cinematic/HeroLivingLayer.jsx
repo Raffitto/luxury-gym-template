@@ -1,17 +1,28 @@
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { spring } from '../../motion/choreography'
 
-const AMBIENT = { duration: 5.5, repeat: Infinity, ease: [0.45, 0.05, 0.25, 1] }
-const BEAM = { duration: 5, repeat: Infinity, ease: [0.45, 0.05, 0.25, 1] }
+const AMBIENT = { duration: 8, repeat: Infinity, ease: [0.42, 0, 0.2, 1] }
+const BEAM = { duration: 7, repeat: Infinity, ease: [0.42, 0, 0.2, 1] }
 
 export default function HeroLivingLayer() {
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
 
   if (reduced) {
     return (
       <div className="hero-living-layer" aria-hidden>
+        <div className="hero-living-glow" />
+      </div>
+    )
+  }
+
+  if (phone) {
+    return (
+      <div className="hero-living-layer hero-living-layer--handheld" aria-hidden>
+        <div className="hero-fog-breathe hero-fog-breathe--static" />
         <div className="hero-living-glow" />
       </div>
     )
@@ -22,27 +33,22 @@ export default function HeroLivingLayer() {
       <motion.div
         className="hero-fog-breathe"
         initial={false}
-        animate={{ opacity: [0.38, 0.62, 0.42] }}
+        animate={{ opacity: [0.32, 0.48, 0.35] }}
         transition={AMBIENT}
       />
       <motion.div
         className="hero-light-beam hero-light-beam--a"
-        animate={{ opacity: [0.12, 0.48, 0.18], x: ['-42%', '128%'] }}
-        transition={{ ...BEAM, repeatDelay: 1.8 }}
+        animate={{ opacity: [0.08, 0.28, 0.1], x: ['-42%', '128%'] }}
+        transition={{ ...BEAM, repeatDelay: 2.4 }}
       />
       <motion.div
         className="hero-light-beam hero-light-beam--b"
-        animate={{ opacity: [0.08, 0.38, 0.12], x: ['102%', '-38%'] }}
-        transition={{ ...BEAM, delay: 0.8, repeatDelay: 2 }}
-      />
-      <motion.div
-        className="hero-light-beam hero-light-beam--c"
-        animate={{ opacity: [0.18, 0.32, 0.2] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: [0.45, 0.05, 0.25, 1] }}
+        animate={{ opacity: [0.05, 0.22, 0.08], x: ['102%', '-38%'] }}
+        transition={{ ...BEAM, delay: 1, repeatDelay: 2.8 }}
       />
       <motion.div
         className="hero-living-glow"
-        animate={{ scale: [1, 1.04, 1], opacity: [0.5, 0.68, 0.52] }}
+        animate={{ scale: [1, 1.02, 1], opacity: [0.42, 0.52, 0.44] }}
         transition={AMBIENT}
       />
     </div>
@@ -51,21 +57,16 @@ export default function HeroLivingLayer() {
 
 export function HeroHorizontalCue() {
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
 
-  if (reduced) {
-    return (
-      <p className="hero-horizontal-cue font-ritual" aria-hidden>
-        Horizontal cinematic experience
-      </p>
-    )
-  }
+  if (reduced || phone) return null
 
   return (
     <motion.div
       className="hero-horizontal-cue gpu-layer"
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ ...spring.liquid, delay: 0.2 }}
+      transition={{ ...spring.glide, delay: 0.2 }}
       aria-hidden
     >
       <div className="hero-horizontal-rail">
@@ -78,27 +79,13 @@ export function HeroHorizontalCue() {
               duration: 1.8,
               repeat: Infinity,
               delay: i * 0.12,
-              ease: [0.45, 0.05, 0.25, 1],
+              ease: [0.42, 0, 0.2, 1],
             }}
           />
         ))}
-        <motion.span
-          className="hero-horizontal-scan"
-          animate={{ x: ['0%', '210%'] }}
-          transition={{ duration: 3.2, repeat: Infinity, ease: [0.45, 0.05, 0.25, 1] }}
-        />
       </div>
-      <span className="hero-horizontal-label font-ritual">
-        Horizontal cinematic experience
-      </span>
-      <motion.span
-        className="hero-horizontal-arrow"
-        animate={{ x: [0, 5, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: [0.45, 0.05, 0.25, 1] }}
-      >
-        <ChevronRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-        <ChevronRight className="h-3.5 w-3.5 -ml-2" strokeWidth={1.5} />
-      </motion.span>
+      <span className="font-ritual hero-horizontal-label">Scroll the continuum</span>
+      <ChevronRight className="h-3.5 w-3.5 opacity-50" strokeWidth={1} />
     </motion.div>
   )
 }

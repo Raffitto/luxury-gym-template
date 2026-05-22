@@ -43,6 +43,10 @@ export function preloadImages(srcs) {
   return Promise.all(unique.map(preloadImage))
 }
 
+function isHandheld() {
+  return typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
+}
+
 function collectImagesFromConfig() {
   const keys = new Set()
 
@@ -61,9 +65,14 @@ function collectImagesFromConfig() {
   return [...keys]
 }
 
-/** Hero + first visible scene — highest priority */
+/** Hero + first scene — mobile prioritizes smallest hero first */
 export function getCriticalPreloadUrls() {
+  const phone = isHandheld()
   const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+
+  if (phone) {
+    return [imageAssets.hero640, imageAssets.hero960, imageAssets.performance]
+  }
 
   return mobile
     ? [imageAssets.hero640, imageAssets.hero960, imageAssets.performance, imageAssets.combat]
@@ -124,13 +133,19 @@ export function attachScrollPrefetch() {
 export function warmStart() {
   if (typeof document === 'undefined') return
   document.documentElement.classList.add('boot-warm')
+  const phone = isHandheld()
+  const map = getScenePreloadMap()
+
   preloadCriticalAssets().then(() => {
     document.documentElement.classList.add('cinematic-ready')
     document.documentElement.classList.remove('boot-warm')
-    preloadImages(getScenePreloadMap().programs)
+    preloadImages(map.programs?.slice(0, phone ? 2 : 4) ?? [])
+    if (phone) {
+      preloadImages(map.journey?.slice(0, 1) ?? [])
+    }
   })
 
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 600))
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 400 : 600))
   idle(() => {
     preloadSecondaryAssets()
     attachScrollPrefetch()

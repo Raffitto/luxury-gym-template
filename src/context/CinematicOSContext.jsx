@@ -1,16 +1,23 @@
-import { createContext, useContext, useMemo, useRef } from 'react'
+import { createContext, useContext, useEffect, useMemo, useRef } from 'react'
 import { useScroll } from 'framer-motion'
 import { useGyroDrift } from '../hooks/useGyroDrift'
 import { useScenePreload } from '../hooks/useScenePreload'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useIsPhone } from '../hooks/useIsPhone'
 import { useAdaptiveIntelligence } from '../hooks/useAdaptiveIntelligence'
 
 const CinematicOSContext = createContext(null)
 
 export function CinematicOSProvider({ children }) {
   const reduced = useReducedMotion()
+  const phone = useIsPhone()
   const rootRef = useRef(null)
   const gyro = useGyroDrift()
+
+  useEffect(() => {
+    document.body.classList.toggle('aetheris-handheld', phone)
+    return () => document.body.classList.remove('aetheris-handheld')
+  }, [phone])
 
   const { scrollYProgress } = useScroll({
     target: rootRef,
@@ -52,7 +59,7 @@ export function CinematicOSProvider({ children }) {
     <CinematicOSContext.Provider value={value}>
       <div
         ref={rootRef}
-        className="cinematic-os cinematic-os--intelligent cinematic-os--taste"
+        className={`cinematic-os cinematic-os--intelligent cinematic-os--taste ${phone ? 'cinematic-os--handheld' : ''}`.trim()}
         style={{
           '--env-energy': intelligence.energy,
           '--env-immersion': intelligence.memory.immersion,

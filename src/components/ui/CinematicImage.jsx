@@ -15,7 +15,7 @@ export default function CinematicImage({
   image,
   alt = '',
   preset = 'section',
-  sizes = '(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1200px',
+  sizes = '(max-width: 767px) 100vw, (max-width: 1280px) 80vw, 1200px',
   priority = false,
   className = '',
   fill = false,
@@ -28,7 +28,7 @@ export default function CinematicImage({
   const [currentSrc, setCurrentSrc] = useState(displayPrimary)
   const [errored, setErrored] = useState(false)
   const [revealed, setRevealed] = useState(
-    priority && (isImageCached(displayPrimary) || isImageCached(primarySrc)),
+    priority && (isImageCached(displayPrimary) || isImageCached(primarySrc) || isImageCached(src)),
   )
 
   const label = alt || resolveAlt(image, '')

@@ -29,6 +29,17 @@ export const drag = {
   transition: { power: 0.14, timeConstant: 420 },
 }
 
+/** Thumb swipe — more resistance, liquid settle */
+export const dragThumb = {
+  elastic: 0.06,
+  momentum: 0.14,
+  transition: { power: 0.11, timeConstant: 500 },
+}
+
+export const springThumb = {
+  snap: { type: 'spring', stiffness: 165, damping: 32, mass: 1 },
+}
+
 export const transition = {
   cinematic: (d = duration.measured, delay = 0) => ({
     duration: d,

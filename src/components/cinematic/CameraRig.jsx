@@ -1,22 +1,24 @@
 import { motion } from 'framer-motion'
 import { useCinematicOS } from '../../context/CinematicOSContext'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { camera } from '../../motion/camera'
 import { useLiquidScroll } from '../../motion/choreography'
 
 export default function CameraRig({ children }) {
   const { reduced, gyro, scrollYProgress, tierConfig } = useCinematicOS()
+  const phone = useIsPhone()
 
   const driftScale = tierConfig.cameraDrift * 0.85
   const driftX = useLiquidScroll(scrollYProgress, [0, 0.35, 0.7, 1], camera.drift.pageX)
   const driftY = useLiquidScroll(scrollYProgress, [0, 1], camera.drift.pageY)
   const depthScale = useLiquidScroll(scrollYProgress, [0, 0.5, 1], camera.drift.depthScale)
 
-  if (reduced) {
-    return <div className="camera-rig">{children}</div>
+  if (reduced || phone) {
+    return <div className="camera-rig camera-rig--handheld">{children}</div>
   }
 
   const gyroEnabled = tierConfig.gyro && gyro
-  const gyroScale = 0.45 * driftScale
+  const gyroScale = 0.35 * driftScale
 
   return (
     <div className="camera-rig camera-rig--restrained">

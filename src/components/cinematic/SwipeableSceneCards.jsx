@@ -4,16 +4,19 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
 import { useCinematicOSOptional } from '../../context/CinematicOSContext'
-import { spring, drag } from '../../motion/choreography'
+import { spring, drag, dragThumb, springThumb } from '../../motion/choreography'
+import { useIsPhone } from '../../hooks/useIsPhone'
 
 const GAP = 16
 
-function SpringSwipeTrack({ items, index, setIndex, className }) {
+function SpringSwipeTrack({ items, index, setIndex, className, phone }) {
   const os = useCinematicOSOptional()
   const trackRef = useRef(null)
   const [step, setStep] = useState(0)
   const x = useMotionValue(0)
-  const springX = useSpring(x, spring.snap)
+  const snapSpring = phone ? springThumb.snap : spring.snap
+  const thumbDrag = phone ? dragThumb : drag
+  const springX = useSpring(x, snapSpring)
 
   const measure = useCallback(() => {
     const track = trackRef.current
@@ -35,33 +38,33 @@ function SpringSwipeTrack({ items, index, setIndex, className }) {
       const clamped = Math.max(0, Math.min(items.length - 1, next))
       setIndex(clamped)
       if (step) {
-        animate(x, -clamped * step, spring.snap)
+        animate(x, -clamped * step, snapSpring)
       }
     },
-    [items.length, setIndex, step, x],
+    [items.length, setIndex, step, x, snapSpring],
   )
 
   useEffect(() => {
-    if (step) animate(x, -index * step, spring.snap)
-  }, [index, step, x])
+    if (step) animate(x, -index * step, snapSpring)
+  }, [index, step, x, snapSpring])
 
   const minX = -(items.length - 1) * step
 
   return (
-    <div className={`swipeable-scenes ${className}`.trim()}>
+    <div className={`swipeable-scenes ${phone ? 'swipeable-scenes--handheld' : ''} ${className}`.trim()}>
       <motion.div
         ref={trackRef}
         className="swipeable-scenes-track swipeable-scenes-track--spring gpu-layer"
         style={{ x: springX }}
         drag="x"
         dragConstraints={step ? { left: minX, right: 0 } : false}
-        dragElastic={drag.elastic}
+        dragElastic={thumbDrag.elastic}
         dragMomentum
-        dragTransition={drag.transition}
+        dragTransition={thumbDrag.transition}
         onDragEnd={(_, info) => {
           if (!step) return
           os?.recordSwipe?.(info.velocity.x)
-          const projected = x.get() + info.velocity.x * drag.momentum
+          const projected = x.get() + info.velocity.x * thumbDrag.momentum
           const next = Math.round(-projected / step)
           snapTo(next)
         }}
@@ -206,6 +209,7 @@ function SwipeControls({ count, index, onSelect }) {
 export default function SwipeableSceneCards({ children, className = '' }) {
   const reduced = useReducedMotion()
   const mobile = useIsMobile()
+  const phone = useIsPhone()
   const [index, setIndex] = useState(0)
   const items = Array.isArray(children) ? children : [children]
 
@@ -228,6 +232,7 @@ export default function SwipeableSceneCards({ children, className = '' }) {
         index={index}
         setIndex={setIndex}
         className={className}
+        phone={phone}
       />
     )
   }

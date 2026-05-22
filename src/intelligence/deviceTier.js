@@ -50,8 +50,11 @@ export function detectDeviceCinematicTier() {
   const slowNet = conn === 'slow-2g' || conn === '2g' || conn === '3g'
   const saveData = navigator.connection?.saveData === true
 
-  if (saveData || slowNet || (mobile && memory <= 3)) return 'essential'
-  if (!mobile && memory >= 8 && cores >= 8) return 'immersive'
+  const phone = window.matchMedia('(max-width: 767px)').matches
+
+  if (saveData || slowNet || (phone && memory <= 4)) return 'essential'
+  if (!phone && memory >= 8 && cores >= 8) return 'immersive'
+  if (phone) return 'essential'
   return 'refined'
 }
 

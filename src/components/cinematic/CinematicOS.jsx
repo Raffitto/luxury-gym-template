@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { CinematicOSProvider } from '../../context/CinematicOSContext'
 import { cinematicAudio } from '../../audio/CinematicAudioSystem'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import ContinuityEngine from './ContinuityEngine'
 import EnvironmentalField from './EnvironmentalField'
 import CameraRig from './CameraRig'
@@ -14,13 +15,16 @@ import { useCinematicOS } from '../../context/CinematicOSContext'
 
 function LandingFilm() {
   const { reduced } = useCinematicOS()
+  const phone = useIsPhone()
 
   return (
     <div className="landing-immersion">
       {!reduced ? <ContinuityEngine /> : null}
       {!reduced ? <EnvironmentalField /> : null}
       <CameraRig>
-        <div className="cinematic-landing cinematic-landing--alive cinematic-landing--os">
+        <div
+          className={`cinematic-landing cinematic-landing--alive cinematic-landing--os ${phone ? 'cinematic-landing--handheld' : ''}`.trim()}
+        >
           <HeroExperience />
           <SceneBridge variant="hero-exit" />
           <ProgramsScene />
