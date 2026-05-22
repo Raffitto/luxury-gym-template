@@ -3,12 +3,12 @@ import { landingConfig } from '../../data/landingConfig'
 import { routes } from '../../design-system/tokens'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
+import EditorialChapterHead from '../cinematic/EditorialChapterHead'
 import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
 import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
 import SceneCard from '../cinematic/SceneCard'
 import HorizontalSceneRail from '../cinematic/HorizontalSceneRail'
-import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
 
 export default function ProgramsScene() {
   const { programs } = landingConfig
@@ -22,21 +22,13 @@ export default function ProgramsScene() {
       depthIndex={2}
     >
       {!phone ? <CinematicAtmosphere intensity="section" /> : null}
-      <div className="landing-scene-inner chamber-tight">
-        <KineticBlock className="max-w-2xl" sceneId="programs">
-          <KineticRitual className="section-ritual-gap" sceneId="programs">
-            {programs.ritual}
-          </KineticRitual>
-          <KineticHeadline
-            sceneId="programs"
-            className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]"
-          >
-            {programs.headline}
-          </KineticHeadline>
-          <KineticCopy sceneId="programs" className="copy-lead mt-6 max-w-xl">
-            {programs.subline}
-          </KineticCopy>
-        </KineticBlock>
+      <div className="landing-scene-inner landing-scene-inner--editorial chamber-tight">
+        <EditorialChapterHead
+          sceneId="programs"
+          ritual={programs.ritual}
+          headline={programs.headline}
+          subline={programs.subline}
+        />
 
         <div className="swipeable-scenes-bleed mt-10 lg:hidden">
           <SwipeableSceneCards nativeTouch className="swipeable-scenes--programs">

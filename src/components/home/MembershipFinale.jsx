@@ -3,12 +3,13 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import { aetherisConfig } from '../../data/aetherisConfig'
 import { routes } from '../../design-system/tokens'
+import AmbientFilmLayer from '../cinematic/AmbientFilmLayer'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
+import EditorialChapterHead from '../cinematic/EditorialChapterHead'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
 import MagneticButton from '../ui/MagneticButton'
-import { KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
 import { spring } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
@@ -21,7 +22,6 @@ export default function MembershipFinale() {
     target: ref,
     offset: ['start end', 'end end'],
   })
-  const headlineY = useTransform(scrollYProgress, [0, 1], phone ? [0, 0] : [4, -2])
   const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.05, 0.08, 0.1])
 
   return (
@@ -32,6 +32,7 @@ export default function MembershipFinale() {
       depthIndex={5}
       atmosphere="climax"
     >
+      <AmbientFilmLayer slot="finale" intensity="low" />
       {!phone ? <CinematicAtmosphere intensity="climax" /> : null}
       <CinematicBackdrop
         image={climax.image}
@@ -53,20 +54,14 @@ export default function MembershipFinale() {
       <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-[var(--page-gutter)] py-[var(--chamber-pad)]">
         <div className="chamber-inner mx-auto w-full max-w-4xl text-center">
           <FilmFrame aspect="auto">
-            <div className="finale-frame-content finale-frame-content--myth">
-              <KineticRitual sceneId="access">{climax.ritual}</KineticRitual>
-
-              <motion.div style={reduced || phone ? undefined : { y: headlineY }}>
-                <KineticHeadline
-                  sceneId="access"
-                  className="headline-emotional font-display mt-8 text-[var(--platinum)]"
-                  lines={climax.headline}
-                />
-              </motion.div>
-
-              <KineticCopy sceneId="access" className="copy-cinematic mx-auto mt-8 max-w-lg text-center">
-                {climax.subline}
-              </KineticCopy>
+            <div className="finale-frame-content finale-frame-content--myth editorial-chapter-head editorial-chapter-head--center">
+              <EditorialChapterHead
+                sceneId="access"
+                ritual={climax.ritual}
+                lines={climax.headline}
+                subline={climax.subline}
+                className="mx-auto text-center"
+              />
 
               {reduced || phone ? (
                 <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

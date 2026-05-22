@@ -231,6 +231,24 @@
   body.has-sticky-cta .page-with-sticky {
     transition: padding-bottom 0.14s ease-out;
   }
+
+  /* Native immersion — thumb-first */
+  .cinematic-landing--film .scene-card-link--instant,
+  .cinematic-landing--film .btn-magnetic,
+  .mobile-nav-link,
+  .mobile-menu-toggle {
+    touch-action: manipulation;
+  }
+
+  .swipeable-scenes-track--native {
+    scroll-snap-type: x proximity;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ambient-film {
+    contain: strict;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

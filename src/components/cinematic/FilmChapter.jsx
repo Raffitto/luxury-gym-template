@@ -29,7 +29,7 @@ const FilmChapter = forwardRef(function FilmChapter(
       ref={ref}
       data-chapter={id}
       data-scene-emotion={pacing.emotion}
-      className={`film-chapter film-chapter--${pacing.emotion} landing-scene relative overflow-hidden ${className}`.trim()}
+      className={`film-chapter film-chapter--${pacing.emotion} editorial-chapter landing-scene relative overflow-hidden ${className}`.trim()}
     >
       <div className="film-chapter-carry" aria-hidden />
       {!phone ? (

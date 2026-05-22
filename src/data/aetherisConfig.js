@@ -240,9 +240,9 @@ export const aetherisConfig = {
   },
 
   climax: {
-    ritual: 'Sequence 10 · Threshold',
+    ritual: 'Threshold',
     headline: ['The future version', 'of you is waiting.'],
-    subline: 'Request a private assessment. Admission is selective. Transformation is not.',
+    subline: 'Private assessment. Selective admission.',
     cta: 'Initiate Assessment',
     image: {
       id: photos.sprint,

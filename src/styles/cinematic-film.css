@@ -1,0 +1,323 @@
+/* Trinity pass — ambient film language + editorial chapters + native touch */
+
+/* ── Ambient film layer (CSS-first; video overlays when available) ── */
+.ambient-film {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: var(--void);
+}
+
+.ambient-film-posters {
+  position: absolute;
+  inset: -4%;
+}
+
+.ambient-film-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  opacity: 1;
+  transform: scale(1.02);
+  will-change: auto;
+}
+
+.ambient-film--kenburns .ambient-film-poster--primary {
+  animation: film-kenburns 22s cubic-bezier(0.45, 0.05, 0.25, 1) infinite alternate;
+}
+
+.ambient-film--crossfade .ambient-film-poster--primary {
+  animation: film-cross-a 16s ease-in-out infinite;
+}
+
+.ambient-film--crossfade .ambient-film-poster--secondary {
+  opacity: 0;
+  animation: film-cross-b 16s ease-in-out infinite;
+}
+
+.ambient-film-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0;
+  transition: opacity 0.35s ease-out;
+}
+
+.ambient-film-video--live {
+  opacity: 0.42;
+}
+
+.ambient-film-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 2, 2, 0.2) 0%,
+    transparent 38%,
+    rgba(2, 2, 2, 0.55) 100%
+  );
+  animation: film-shade-drift 14s ease-in-out infinite alternate;
+}
+
+.ambient-film-sweep {
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(196, 181, 154, 0.04) 50%,
+    transparent 58%
+  );
+  animation: film-light-sweep 11s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
+  opacity: 0.7;
+}
+
+.ambient-film-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.65);
+}
+
+.ambient-film--hero {
+  opacity: 0.88;
+}
+
+.ambient-film--facility {
+  opacity: 0.35;
+}
+
+.ambient-film--finale {
+  opacity: 0.28;
+}
+
+.ambient-film--bridge {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  opacity: 1;
+}
+
+.ambient-film--bridge .ambient-film-sweep {
+  animation-duration: 9s;
+  opacity: 0.45;
+}
+
+.ambient-film--bridge .ambient-film-shade {
+  animation: none;
+  background: linear-gradient(180deg, transparent, rgba(2, 2, 2, 0.4));
+}
+
+@keyframes film-kenburns {
+  0% {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(-1.2%, -0.8%, 0);
+  }
+}
+
+@keyframes film-cross-a {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes film-cross-b {
+  0%,
+  45% {
+    opacity: 0;
+  }
+  55%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes film-shade-drift {
+  0% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes film-light-sweep {
+  0% {
+    transform: translate3d(-18%, 0, 0);
+  }
+  100% {
+    transform: translate3d(18%, 0, 0);
+  }
+}
+
+/* ── Editorial chapters ── */
+.cinematic-landing--editorial .film-chapter {
+  isolation: isolate;
+}
+
+.editorial-chapter-head {
+  position: relative;
+  padding-bottom: clamp(1.25rem, 4vh, 2rem);
+}
+
+.editorial-chapter-head::after {
+  content: '';
+  display: block;
+  width: clamp(2.5rem, 12vw, 4rem);
+  height: 1px;
+  margin-top: clamp(1.25rem, 3vh, 1.75rem);
+  background: linear-gradient(90deg, rgba(196, 181, 154, 0.35), transparent);
+}
+
+.editorial-chapter-index {
+  display: block;
+  font-family: var(--font-ritual, inherit);
+  font-size: 0.5625rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(168, 162, 152, 0.72);
+  margin-bottom: 0.875rem;
+}
+
+.editorial-chapter .headline-chapter {
+  max-width: 11ch;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+
+.editorial-chapter .copy-lead,
+.editorial-copy-lead {
+  max-width: 22ch;
+  margin-top: clamp(1rem, 3vh, 1.5rem);
+  color: rgba(186, 180, 170, 0.86);
+  line-height: 1.72;
+}
+
+.editorial-chapter-head--center {
+  text-align: center;
+}
+
+.editorial-chapter-head--center .editorial-chapter-index,
+.editorial-chapter-head--center::after {
+  margin-inline: auto;
+}
+
+.editorial-chapter-head--center .copy-lead,
+.editorial-chapter-head--center .editorial-copy-lead {
+  margin-inline: auto;
+}
+
+.landing-scene-inner--editorial {
+  padding-top: clamp(0.5rem, 2vh, 1rem);
+}
+
+.scene-bridge-film {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 40% at 50% 50%, rgba(196, 181, 154, 0.06), transparent 70%);
+  animation: bridge-breathe 8s ease-in-out infinite;
+}
+
+@keyframes bridge-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+/* Hero film stack */
+.hero-depth-stack .ambient-film {
+  z-index: 0;
+}
+
+.hero-parallax-bg {
+  z-index: 1;
+}
+
+.hero-experience--film .hero-backdrop-img {
+  opacity: 0.72;
+}
+
+.facility-scene-film {
+  z-index: 0;
+}
+
+.landing-scene--facility .cinematic-backdrop-wrap,
+.landing-scene--facility > .pointer-events-none {
+  z-index: 1;
+}
+
+.finale-film-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .ambient-film--kenburns .ambient-film-poster--primary,
+  .ambient-film--crossfade .ambient-film-poster--primary,
+  .ambient-film--crossfade .ambient-film-poster--secondary {
+    animation-duration: 26s;
+  }
+
+  .ambient-film-sweep {
+    animation: none;
+    opacity: 0.35;
+  }
+
+  .ambient-film--hero {
+    opacity: 0.72;
+  }
+
+  .ambient-film--facility {
+    opacity: 0.22;
+  }
+
+  .ambient-film--finale {
+    opacity: 0.2;
+  }
+
+  .editorial-chapter .headline-chapter {
+    max-width: 10ch;
+  }
+
+  .cinematic-landing--editorial .film-chapter:not(.landing-scene--hero) {
+    padding-top: clamp(4.5rem, 11vh, 7rem);
+  }
+
+  .scene-bridge-film {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-film-poster,
+  .ambient-film-shade,
+  .ambient-film-sweep,
+  .scene-bridge-film {
+    animation: none !important;
+  }
+
+  .ambient-film-video {
+    display: none;
+  }
+}

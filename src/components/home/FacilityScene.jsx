@@ -2,14 +2,15 @@ import { motion } from 'framer-motion'
 import { landingConfig } from '../../data/landingConfig'
 import { routes } from '../../design-system/tokens'
 import MagneticButton from '../ui/MagneticButton'
+import AmbientFilmLayer from '../cinematic/AmbientFilmLayer'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
+import EditorialChapterHead from '../cinematic/EditorialChapterHead'
 import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
 import ParallaxLayer from '../cinematic/ParallaxLayer'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import CinematicImage from '../ui/CinematicImage'
 import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
-import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
 import { spring, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
@@ -30,6 +31,7 @@ export default function FacilityScene() {
 
   return (
     <FilmChapter id="facility" className="landing-scene--facility" depthIndex={4} atmosphere="hero">
+      <AmbientFilmLayer slot="facility" className="facility-scene-film" intensity="low" />
       {!phone ? <CinematicAtmosphere intensity="hero" /> : null}
       <CinematicBackdrop
         image={facility.image}
@@ -40,21 +42,15 @@ export default function FacilityScene() {
         imageClassName="opacity-25 md:opacity-20"
       />
 
-      <div className="relative z-10 landing-scene-inner chamber">
+      <div className="relative z-10 landing-scene-inner landing-scene-inner--editorial chamber">
         <div className="facility-grid">
-          <KineticBlock className="facility-copy max-w-xl" sceneId="facility">
-            <KineticRitual className="section-ritual-gap" sceneId="facility">
-              {facility.ritual}
-            </KineticRitual>
-            <KineticHeadline
+          <div className="facility-copy max-w-xl">
+            <EditorialChapterHead
               sceneId="facility"
-              className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]"
-            >
-              {facility.headline}
-            </KineticHeadline>
-            <KineticCopy sceneId="facility" className="copy-lead mt-6">
-              {facility.subline}
-            </KineticCopy>
+              ritual={facility.ritual}
+              headline={facility.headline}
+              subline={facility.subline}
+            />
 
             <ul className="facility-features mt-10">
               {facility.features.map((f, i) => (
@@ -84,7 +80,7 @@ export default function FacilityScene() {
                 Tour the chambers
               </MagneticButton>
             </div>
-          </KineticBlock>
+          </div>
 
           <FilmFrame aspect="cinematic" bleed className="facility-hero-frame hidden md:block">
             <ParallaxLayer speed={0.14}>

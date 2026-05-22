@@ -5,7 +5,7 @@ import FilmChapter from '../cinematic/FilmChapter'
 import FilmFrame from '../cinematic/FilmFrame'
 import ParallaxLayer from '../cinematic/ParallaxLayer'
 import CinematicImage from '../ui/CinematicImage'
-import { KineticBlock, KineticCopy, KineticHeadline, KineticRitual } from '../cinematic/TypographyKinetic'
+import EditorialChapterHead from '../cinematic/EditorialChapterHead'
 import { spring, variants, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
@@ -69,21 +69,13 @@ export default function TransformationScene() {
     <FilmChapter id="journey" className="landing-scene--journey" depthIndex={3}>
       {!phone ? <CinematicAtmosphere intensity="section" /> : null}
 
-      <div className="landing-scene-inner chamber">
-        <KineticBlock className="max-w-2xl" sceneId="journey">
-          <KineticRitual className="section-ritual-gap" sceneId="journey">
-            {transformation.ritual}
-          </KineticRitual>
-          <KineticHeadline
-            sceneId="journey"
-            className="headline-chapter headline-emotional font-display section-headline-gap text-[var(--platinum)]"
-          >
-            {transformation.headline}
-          </KineticHeadline>
-          <KineticCopy sceneId="journey" className="copy-lead mt-6">
-            {transformation.subline}
-          </KineticCopy>
-        </KineticBlock>
+      <div className="landing-scene-inner landing-scene-inner--editorial chamber">
+        <EditorialChapterHead
+          sceneId="journey"
+          ritual={transformation.ritual}
+          headline={transformation.headline}
+          subline={transformation.subline}
+        />
 
         <div className="journey-timeline mt-14">
           {transformation.phases.map((phase, i) => (

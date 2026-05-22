@@ -9,6 +9,7 @@
 @import './styles/cinematic-mobile.css';
 @import './styles/cinematic-perception.css';
 @import './styles/cinematic-performance.css';
+@import './styles/cinematic-film.css';
 
 @theme {
   --font-sans: var(--font-body);

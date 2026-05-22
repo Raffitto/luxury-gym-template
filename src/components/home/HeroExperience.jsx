@@ -8,6 +8,7 @@ import DepthField from '../cinematic/DepthField'
 import HeroLivingLayer from '../cinematic/HeroLivingLayer'
 import HeroReflection from '../cinematic/HeroReflection'
 import { HeroHorizontalCue } from '../cinematic/HeroLivingLayer'
+import AmbientFilmLayer from '../cinematic/AmbientFilmLayer'
 import CinematicBackdrop from '../ui/CinematicBackdrop'
 import FilmFrame from '../cinematic/FilmFrame'
 import MagneticButton from '../ui/MagneticButton'
@@ -165,10 +166,11 @@ export default function HeroExperience() {
     <section
       ref={ref}
       data-scene-emotion="mystery"
-      className={`hero-experience hero-experience--os hero-warm-active landing-scene landing-scene--hero film-chapter film-chapter--mystery relative min-h-[100svh] overflow-hidden ${phone ? 'hero-experience--handheld' : ''}`.trim()}
+      className={`hero-experience hero-experience--os hero-experience--film hero-warm-active landing-scene landing-scene--hero film-chapter film-chapter--mystery relative min-h-[100svh] overflow-hidden ${phone ? 'hero-experience--handheld' : ''}`.trim()}
       style={{ '--hero-energy': heroEnergy }}
     >
       <div className="hero-depth-stack">
+        <AmbientFilmLayer slot="hero" intensity="high" />
         <CinematicAtmosphere intensity="hero" live />
         <DepthField scrollProgress={scrollYProgress} hero />
 

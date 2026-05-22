@@ -2,15 +2,15 @@ import { photos } from '../utils/images'
 
 export const landingConfig = {
   programs: {
-    ritual: 'Sequence 02 · Kinetic Architecture',
-    headline: 'Signature training programs.',
-    subline: 'Five engineered disciplines. One continuum. Swipe the ritual.',
+    ritual: 'Kinetic Architecture',
+    headline: 'Signature programs.',
+    subline: 'Five disciplines. One continuum.',
   },
 
   transformation: {
-    ritual: 'Sequence 03 · Evolution Protocol',
-    headline: 'The transformation journey.',
-    subline: 'From threshold to sovereignty — each phase recalibrates identity.',
+    ritual: 'Evolution Protocol',
+    headline: 'The journey inward.',
+    subline: 'Threshold to sovereignty — each phase a recalibration.',
     phases: [
       {
         phase: '01',
@@ -40,9 +40,9 @@ export const landingConfig = {
   },
 
   facility: {
-    ritual: 'Sequence 04 · Chamber Immersion',
-    headline: 'Where atmosphere becomes discipline.',
-    subline: 'Dark luxury interiors engineered for psychological recalibration.',
+    ritual: 'Chamber Immersion',
+    headline: 'Atmosphere as discipline.',
+    subline: 'Dark luxury. Neural focus. Controlled obsession.',
     features: [
       { label: 'Volumetric lighting', detail: 'Low lux · high contrast' },
       { label: 'Acoustic isolation', detail: 'Neural focus chambers' },
