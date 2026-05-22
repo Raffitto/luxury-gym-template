@@ -23,7 +23,7 @@ function LandingFilm() {
       {!reduced ? <EnvironmentalField /> : null}
       <CameraRig>
         <div
-          className={`cinematic-landing cinematic-landing--alive cinematic-landing--os cinematic-landing--editorial cinematic-landing--film cinematic-landing--depth ${phone ? 'cinematic-landing--handheld cinematic-landing--fast' : ''}`.trim()}
+          className={`cinematic-landing cinematic-landing--alive cinematic-landing--os cinematic-landing--editorial cinematic-landing--film cinematic-landing--depth cinematic-landing--motion ${phone ? 'cinematic-landing--handheld cinematic-landing--fast' : ''}`.trim()}
         >
           <HeroExperience />
           <SceneBridge variant="hero-exit" />

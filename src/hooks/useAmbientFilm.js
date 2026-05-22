@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useReducedMotion } from './useReducedMotion'
 import { useIsPhone } from './useIsPhone'
+import { useOffscreenPause } from './useOffscreenPause'
+import { requestAmbientPlay, releaseAmbientPlay } from '../utils/ambientVideoBus'
 
 function prefersReducedData() {
   if (typeof navigator === 'undefined') return false
@@ -10,50 +12,71 @@ function prefersReducedData() {
   return effective === 'slow-2g' || effective === '2g' || effective === '3g'
 }
 
-/** Viewport-gated ambient playback — video only when allowed and available */
-export function useAmbientFilm({ enabled = true, allowVideo = false }) {
+/** Viewport-gated ambient playback — one video at a time, poster always visible */
+export function useAmbientFilm({
+  enabled = true,
+  allowVideo = false,
+  slot = 'hero',
+  preload = 'metadata',
+}) {
   const reduced = useReducedMotion()
   const phone = useIsPhone()
-  const containerRef = useRef(null)
   const videoRef = useRef(null)
   const [videoReady, setVideoReady] = useState(false)
   const [videoFailed, setVideoFailed] = useState(false)
 
+  const { ref: containerRef, className: visibilityClass } = useOffscreenPause({
+    rootMargin: '15% 0px',
+    enabled: enabled && !reduced,
+  })
+
   const canUseVideo =
     enabled && allowVideo && !reduced && !videoFailed && !(phone && prefersReducedData())
 
-  const play = useCallback(() => {
+  const pauseVideo = useCallback(() => {
+    const v = videoRef.current
+    if (v) {
+      v.pause()
+      try {
+        v.currentTime = 0
+      } catch {
+        /* ignore */
+      }
+    }
+    releaseAmbientPlay(slot)
+  }, [slot])
+
+  const playVideo = useCallback(() => {
     const v = videoRef.current
     if (!v || !canUseVideo) return
-    v.play().catch(() => setVideoFailed(true))
-  }, [canUseVideo])
-
-  const pause = useCallback(() => {
-    const v = videoRef.current
-    if (!v) return
-    v.pause()
-  }, [])
+    requestAmbientPlay(slot, () => {
+      v.play().catch(() => setVideoFailed(true))
+    }, pauseVideo)
+  }, [canUseVideo, slot, pauseVideo])
 
   useEffect(() => {
-    if (!canUseVideo) return undefined
+    if (!canUseVideo) {
+      pauseVideo()
+      return undefined
+    }
+
     const root = containerRef.current
     if (!root) return undefined
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) play()
-        else pause()
+        if (entry.isIntersecting) playVideo()
+        else pauseVideo()
       },
-      { threshold: 0.08, rootMargin: '12% 0px' },
+      { threshold: 0.12, rootMargin: '10% 0px' },
     )
 
     observer.observe(root)
-    return () => observer.disconnect()
-  }, [canUseVideo, play, pause])
-
-  useEffect(() => {
-    if (!canUseVideo) pause()
-  }, [canUseVideo, pause])
+    return () => {
+      observer.disconnect()
+      pauseVideo()
+    }
+  }, [canUseVideo, playVideo, pauseVideo])
 
   return {
     containerRef,
@@ -62,8 +85,11 @@ export function useAmbientFilm({ enabled = true, allowVideo = false }) {
     videoFailed,
     canUseVideo,
     showVideo: canUseVideo && videoReady,
+    visibilityClass,
+    dormant: visibilityClass === 'is-offscreen',
     onVideoReady: () => setVideoReady(true),
     onVideoError: () => setVideoFailed(true),
     filmOnly: reduced || !canUseVideo,
+    preload: slot === 'hero' ? preload : 'none',
   }
 }

@@ -23,10 +23,18 @@ export default function AmbientFilmLayer({
     videoRef,
     showVideo,
     filmOnly,
+    visibilityClass,
+    dormant,
     onVideoReady,
     onVideoError,
     canUseVideo,
-  } = useAmbientFilm({ enabled: Boolean(config.poster), allowVideo: videoAllowed })
+    preload,
+  } = useAmbientFilm({
+    enabled: Boolean(config.poster) || slot === 'bridge',
+    allowVideo: videoAllowed,
+    slot,
+    preload: config.preload ?? (slot === 'hero' ? 'metadata' : 'none'),
+  })
 
   if (!config.poster && slot !== 'bridge') return null
 
@@ -42,7 +50,7 @@ export default function AmbientFilmLayer({
   return (
     <div
       ref={containerRef}
-      className={`ambient-film ambient-film--${slot} ambient-film--${intensity} ${motionClass} ${filmOnly ? 'ambient-film--css' : ''} ${className}`.trim()}
+      className={`ambient-film ambient-film--${slot} ambient-film--${intensity} ${motionClass} ${filmOnly ? 'ambient-film--css' : ''} ${dormant ? 'ambient-film--dormant' : ''} ${visibilityClass} ${className}`.trim()}
       aria-hidden
     >
       {config.poster && !bridgeOnly ? (
@@ -52,15 +60,22 @@ export default function AmbientFilmLayer({
             alt=""
             className="ambient-film-poster ambient-film-poster--primary"
             decoding="async"
+            loading={slot === 'hero' ? 'eager' : 'lazy'}
             fetchPriority={slot === 'hero' ? 'high' : 'auto'}
           />
           {config.secondary ? (
-            <img src={config.secondary} alt="" className="ambient-film-poster ambient-film-poster--secondary" decoding="async" />
+            <img
+              src={config.secondary}
+              alt=""
+              className="ambient-film-poster ambient-film-poster--secondary"
+              decoding="async"
+              loading="lazy"
+            />
           ) : null}
         </div>
       ) : null}
 
-      {canUseVideo && config.webm ? (
+      {canUseVideo && (config.webm || config.mp4) ? (
         <video
           ref={videoRef}
           className={`ambient-film-video ${showVideo ? 'ambient-film-video--live' : ''}`}
@@ -68,8 +83,8 @@ export default function AmbientFilmLayer({
           playsInline
           loop
           autoPlay={false}
-          preload="metadata"
-          poster={config.poster}
+          preload={preload}
+          poster={config.poster || undefined}
           onLoadedData={onVideoReady}
           onCanPlay={onVideoReady}
           onError={onVideoError}
@@ -84,6 +99,7 @@ export default function AmbientFilmLayer({
           <div className="ambient-film-shade" />
           <div className="ambient-film-sweep" />
           <div className="ambient-film-vignette" />
+          <div className="ambient-film-grain" />
         </>
       ) : null}
     </div>

@@ -9,8 +9,14 @@ import EditorialChapterHead from '../cinematic/EditorialChapterHead'
 import { spring, variants, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
+import { useOffscreenPause } from '../../hooks/useOffscreenPause'
 
 function JourneyPhase({ phase, i, reduced, phone }) {
+  const { ref: visualRef, className: visualVisibility } = useOffscreenPause({
+    enabled: !reduced,
+    rootMargin: '25% 0px',
+  })
+
   const body = (
     <>
       <div className="journey-phase-copy">
@@ -22,7 +28,10 @@ function JourneyPhase({ phase, i, reduced, phone }) {
       </div>
       <FilmFrame aspect="cinematic" delay={reduced || phone ? 0 : i * 0.05}>
         <ParallaxLayer speed={0.1 + i * 0.02}>
-                  <div className="journey-phase-visual journey-phase-visual--depth">
+                  <div
+                    ref={visualRef}
+                    className={`journey-phase-visual journey-phase-visual--depth ${visualVisibility}`.trim()}
+                  >
                     <CinematicImage
                       image={phase.image}
                       alt={phase.image.alt}

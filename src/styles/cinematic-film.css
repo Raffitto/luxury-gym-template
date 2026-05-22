@@ -50,10 +50,11 @@
   object-position: center 30%;
   opacity: 0;
   transition: opacity 0.35s ease-out;
+  background: var(--void);
 }
 
 .ambient-film-video--live {
-  opacity: 0.42;
+  opacity: 0.38;
 }
 
 .ambient-film-shade {

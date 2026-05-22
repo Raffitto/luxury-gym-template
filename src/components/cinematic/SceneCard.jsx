@@ -1,9 +1,8 @@
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import CinematicImage from '../ui/CinematicImage'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
-import { spring, viewportOnce, transition } from '../../motion/choreography'
+import { useOffscreenPause } from '../../hooks/useOffscreenPause'
 
 export default function SceneCard({
   image,
@@ -18,11 +17,33 @@ export default function SceneCard({
 }) {
   const reduced = useReducedMotion()
   const phone = useIsPhone()
+  const living = !reduced
+  const { ref: mediaRef, className: visibilityClass } = useOffscreenPause({
+    rootMargin: '30% 0px',
+    enabled: living,
+  })
 
   const content = (
-    <article className="scene-card scene-card--still edge-lit">
-      <div className="scene-card-media scene-card-media--depth">
-        <CinematicImage image={image} alt={alt} preset="card" fill priority={priority} />
+    <article className="scene-card scene-card--still scene-card--poster edge-lit">
+      <div
+        ref={mediaRef}
+        className={`scene-card-media scene-card-media--depth ${living ? 'scene-card-media--living' : ''} ${visibilityClass}`.trim()}
+      >
+        <div className="scene-card-media-inner">
+          <CinematicImage image={image} alt={alt} preset="card" fill priority={priority} />
+        </div>
+        {living ? (
+          <>
+            <div className="scene-card-live-sweep" aria-hidden />
+            <div className="scene-card-live-breathe" aria-hidden />
+            <div className="scene-card-live-grain" aria-hidden />
+            <div className="scene-card-live-particles" aria-hidden>
+              <span />
+              <span />
+              <span />
+            </div>
+          </>
+        ) : null}
         <div className="scene-card-dof" aria-hidden />
         <div className="scene-card-specular" aria-hidden />
         <div className="scene-card-reflection" aria-hidden />
@@ -42,35 +63,13 @@ export default function SceneCard({
     </article>
   )
 
-  if (reduced || phone) {
-    const inner = href ? (
+  if (href) {
+    return (
       <Link to={href} className="scene-card-link scene-card-link--instant">
         {content}
       </Link>
-    ) : (
-      content
     )
-    return inner
   }
 
-  const wrapped = (
-    <motion.div
-      className="scene-card-motion"
-      whileTap={{ scale: 0.994, transition: spring.tap }}
-      initial={{ opacity: 0, y: 8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportOnce('-4%')}
-      transition={transition.instant}
-    >
-      {content}
-    </motion.div>
-  )
-
-  return href ? (
-    <Link to={href} className="scene-card-link">
-      {wrapped}
-    </Link>
-  ) : (
-    wrapped
-  )
+  return content
 }

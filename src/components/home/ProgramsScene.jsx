@@ -2,6 +2,7 @@ import { aetherisConfig } from '../../data/aetherisConfig'
 import { landingConfig } from '../../data/landingConfig'
 import { routes } from '../../design-system/tokens'
 import { useIsPhone } from '../../hooks/useIsPhone'
+import AmbientFilmLayer from '../cinematic/AmbientFilmLayer'
 import CinematicAtmosphere from '../cinematic/CinematicAtmosphere'
 import EditorialChapterHead from '../cinematic/EditorialChapterHead'
 import FilmChapter from '../cinematic/FilmChapter'
@@ -21,6 +22,7 @@ export default function ProgramsScene() {
       className="landing-scene--programs landing-scene--programs-fast"
       depthIndex={2}
     >
+      <AmbientFilmLayer slot="programs" className="programs-scene-film" intensity="low" />
       {!phone ? <CinematicAtmosphere intensity="section" /> : null}
       <div className="landing-scene-inner landing-scene-inner--editorial chamber-tight">
         <EditorialChapterHead

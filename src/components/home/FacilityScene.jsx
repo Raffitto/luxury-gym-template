@@ -14,10 +14,16 @@ import SwipeableSceneCards from '../cinematic/SwipeableSceneCards'
 import { spring, viewportOnce } from '../../motion/choreography'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsPhone } from '../../hooks/useIsPhone'
+import { useOffscreenPause } from '../../hooks/useOffscreenPause'
 
 function GallerySlide({ image, alt, priority = false }) {
+  const { ref, className: visibilityClass } = useOffscreenPause({ rootMargin: '25% 0px' })
+
   return (
-    <div className="facility-gallery-slide facility-gallery-slide--depth">
+    <div
+      ref={ref}
+      className={`facility-gallery-slide facility-gallery-slide--depth ${visibilityClass}`.trim()}
+    >
       <CinematicImage image={image} alt={alt} preset="section" fill priority={priority} />
       <div className="facility-gallery-scrim" aria-hidden />
     </div>

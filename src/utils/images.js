@@ -44,7 +44,10 @@ const PRESET_WIDTHS = {
     { w: 1920, src: imageAssets.hero },
   ],
   section: [{ w: 1280, src: null }],
-  card: [{ w: 800, src: null }],
+  card: [
+    { w: 480, src: null },
+    { w: 800, src: null },
+  ],
   portrait: [{ w: 800, src: null }],
 }
 
@@ -87,10 +90,14 @@ export function buildSrcSet(image, preset = 'section') {
     return { src: imageAssets.hero, srcSet: parts.join(', ') }
   }
 
+  if (preset === 'card') {
+    return { src: primary, srcSet: `${primary} 480w, ${primary} 800w` }
+  }
+
   return { src: primary, srcSet: undefined }
 }
 
 export function getWidths(preset = 'section') {
-  const map = { hero: [640, 960, 1920], section: [1280], card: [800], portrait: [800] }
+  const map = { hero: [640, 960, 1920], section: [1280], card: [480, 800], portrait: [800] }
   return map[preset] || map.section
 }

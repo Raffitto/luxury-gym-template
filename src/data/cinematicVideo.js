@@ -1,6 +1,6 @@
 import { imageAssets } from '../utils/images'
 
-/** Optional ambient loops — null src = CSS film language only (poster + motion) */
+/** Ambient slots — null video = CSS living stills only */
 export const cinematicVideo = {
   hero: {
     poster: imageAssets.hero640,
@@ -8,6 +8,15 @@ export const cinematicVideo = {
     webm: null,
     mp4: null,
     mobileVideo: false,
+    preload: 'metadata',
+  },
+  programs: {
+    poster: imageAssets.combat,
+    secondary: imageAssets.performance,
+    webm: null,
+    mp4: null,
+    mobileVideo: false,
+    preload: 'none',
   },
   facility: {
     poster: imageAssets.darkGym,
@@ -15,6 +24,7 @@ export const cinematicVideo = {
     webm: null,
     mp4: null,
     mobileVideo: false,
+    preload: 'none',
   },
   finale: {
     poster: imageAssets.sprint,
@@ -22,12 +32,14 @@ export const cinematicVideo = {
     webm: null,
     mp4: null,
     mobileVideo: false,
+    preload: 'none',
   },
   bridge: {
     poster: null,
     secondary: null,
     webm: null,
     mp4: null,
+    preload: 'none',
   },
 }
 
