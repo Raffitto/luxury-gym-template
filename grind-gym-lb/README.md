@@ -13,11 +13,22 @@ From this directory:
 
 ```bash
 npm run dev      # http://localhost:5173 — GRIND brand
-npm run build    # output → grind-gym-lb/dist/
+npm run build    # output → dist/ (flat, Netlify-ready)
 npm run preview
 ```
 
 Uses parent `node_modules` (run `npm install` at repo root if needed).
+
+## Netlify
+
+| Setting | Value |
+|---------|--------|
+| **Base directory** | `grind-gym-lb` |
+| **Build command** | `npm run build` |
+| **Publish directory** | `dist` |
+| **Env** | `VITE_BRAND=grind` (set in `netlify.toml`) |
+
+Publish folder must contain `index.html`, `assets/`, `grind/`, and `_redirects` at the same level.
 
 ## Config
 

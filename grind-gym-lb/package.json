@@ -6,7 +6,7 @@
   "description": "GRIND GYM LB — cinematic mobile experience (AETHERIS engine)",
   "scripts": {
     "dev": "vite --config vite.config.js",
-    "build": "vite build --config vite.config.js",
-    "preview": "vite preview --config vite.config.js"
+    "build": "VITE_BRAND=grind vite build --config vite.config.js",
+    "preview": "vite preview --config vite.config.js --outDir dist"
   }
 }

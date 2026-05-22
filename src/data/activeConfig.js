@@ -7,7 +7,17 @@ import { isGrindBrand } from './brand'
 import { aetherisConfig } from './aetherisConfig'
 import { grindGymLbConfig } from './clients/grindGymLbConfig'
 
-export const activeConfig = isGrindBrand ? grindGymLbConfig : aetherisConfig
+function resolveActiveConfig() {
+  try {
+    if (isGrindBrand) return grindGymLbConfig
+    return aetherisConfig
+  } catch (err) {
+    console.warn('[activeConfig] fallback to Grind Gym config', err)
+    return grindGymLbConfig
+  }
+}
+
+export const activeConfig = resolveActiveConfig()
 
 // Legacy gym template:
 // export { ufgConfig as activeConfig } from './clients/ufgConfig'

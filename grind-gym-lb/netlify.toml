@@ -1,0 +1,12 @@
+[build]
+  command = "cd .. && npm install && cd grind-gym-lb && npm run build"
+  publish = "dist"
+
+[build.environment]
+  VITE_BRAND = "grind"
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
