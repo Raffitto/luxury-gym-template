@@ -2,6 +2,7 @@
 @import './styles/atmosphere.css';
 @import './styles/cinematic-landing.css';
 @import './styles/cinematic-immersion.css';
+@import './styles/cinematic-boot.css';
 
 @theme {
   --font-sans: var(--font-body);

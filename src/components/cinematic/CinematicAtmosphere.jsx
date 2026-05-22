@@ -46,6 +46,7 @@ export default function CinematicAtmosphere({
       <motion.div
         className="cinematic-fog gpu-layer"
         style={{ opacity: fogOpacity }}
+        initial={false}
         animate={
           heroLive
             ? { opacity: [fogOpacity * 0.88, fogOpacity * 1.08, fogOpacity * 0.92] }

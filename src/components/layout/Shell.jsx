@@ -14,7 +14,6 @@ export default function Shell() {
   const location = useLocation()
   const reduced = useReducedMotion()
   const mobile = useIsMobile()
-  const lite = reduced || mobile
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -28,7 +27,7 @@ export default function Shell() {
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}
-          initial={{ opacity: 0, y: lite ? 0 : 6 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, transition: spring.liquid }}
           transition={spring.liquid}

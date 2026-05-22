@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import {
   resolveImageSrc,
   resolveAlt,
@@ -6,6 +6,7 @@ import {
   FALLBACK_SRC,
   getWidths,
 } from '../../utils/images'
+import { isImageCached, markImageLoaded } from '../../utils/preload'
 
 /**
  * Local static imagery with gradient fallback — never shows broken icon.
@@ -22,13 +23,26 @@ export default function CinematicImage({
   const primarySrc = resolveImageSrc(image) || FALLBACK_SRC
   const { src, srcSet } = buildSrcSet(image, preset)
   const displayPrimary = src || primarySrc
+  const imgRef = useRef(null)
 
   const [currentSrc, setCurrentSrc] = useState(displayPrimary)
   const [errored, setErrored] = useState(false)
+  const [revealed, setRevealed] = useState(
+    priority && (isImageCached(displayPrimary) || isImageCached(primarySrc)),
+  )
 
   const label = alt || resolveAlt(image, '')
   const widths = getWidths(preset)
   const maxW = widths[widths.length - 1]
+
+  useEffect(() => {
+    if (priority && imgRef.current?.complete) setRevealed(true)
+  }, [priority, displayPrimary])
+
+  const handleLoad = useCallback(() => {
+    setRevealed(true)
+    markImageLoaded(displayPrimary)
+  }, [displayPrimary])
 
   const handleError = useCallback(() => {
     if (currentSrc !== FALLBACK_SRC) {
@@ -40,12 +54,14 @@ export default function CinematicImage({
 
   return (
     <div
-      className={`cinematic-img-wrap ${fill ? 'absolute inset-0' : 'h-full w-full'} ${className}`.trim()}
+      className={`cinematic-img-wrap ${fill ? 'absolute inset-0' : 'h-full w-full'} ${priority ? 'cinematic-img-wrap--priority' : ''} ${className}`.trim()}
       data-errored={errored || undefined}
+      data-revealed={revealed || undefined}
     >
       <div className="cinematic-img-fallback-bg" aria-hidden />
       {!errored ? (
         <img
+          ref={imgRef}
           src={currentSrc}
           srcSet={srcSet}
           sizes={srcSet ? sizes : undefined}
@@ -53,10 +69,11 @@ export default function CinematicImage({
           width={maxW}
           height={Math.round(maxW * 0.625)}
           loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
+          decoding={priority ? 'sync' : 'async'}
           fetchPriority={priority ? 'high' : 'auto'}
+          onLoad={handleLoad}
           onError={handleError}
-          className="cinematic-img"
+          className={`cinematic-img ${revealed ? 'cinematic-img--revealed' : ''}`}
         />
       ) : null}
     </div>

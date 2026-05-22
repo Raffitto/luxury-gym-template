@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { aetherisConfig } from '../../data/aetherisConfig'
@@ -30,10 +30,15 @@ export default function HeroExperience() {
   const contentY = useLiquidScroll(scrollYProgress, [0, 1], [0, mobile ? 28 : 56])
   const panelOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.92])
 
+  useEffect(() => {
+    const el = ref.current
+    if (el) el.classList.add('hero-warm-active')
+  }, [])
+
   return (
     <section
       ref={ref}
-      className="hero-experience landing-scene landing-scene--hero film-chapter relative min-h-[100svh] overflow-hidden"
+      className="hero-experience hero-warm-active landing-scene landing-scene--hero film-chapter relative min-h-[100svh] overflow-hidden"
     >
       <div className="hero-depth-stack">
         <CinematicAtmosphere intensity="hero" live />

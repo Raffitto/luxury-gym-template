@@ -21,6 +21,7 @@ export default function HeroLivingLayer() {
     <div className="hero-living-layer gpu-layer" aria-hidden>
       <motion.div
         className="hero-fog-breathe"
+        initial={false}
         animate={{ opacity: [0.38, 0.62, 0.42] }}
         transition={AMBIENT}
       />

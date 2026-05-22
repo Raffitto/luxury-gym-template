@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="boot-warm">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -12,13 +12,27 @@
       content="AETHERIS — A private order for identity evolution, physical mastery, and controlled obsession. Beyond the category of gym."
     />
     <meta name="theme-color" content="#020202" />
+    <meta name="color-scheme" content="dark" />
     <title>AETHERIS | The Performance Continuum</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400&family=Syne:wght@600;700;800&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400&family=Syne:wght@600;700;800&display=swap"
+    />
+    <link rel="preload" as="image" href="/aetheris/hero-640.jpg" media="(max-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/aetheris/hero-960.jpg" media="(max-width: 1024px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/aetheris/hero.jpg" media="(min-width: 1025px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/aetheris/performance.jpg" />
+    <style>
+      html, body { background: #020202; margin: 0; }
+      #root { min-height: 100svh; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
