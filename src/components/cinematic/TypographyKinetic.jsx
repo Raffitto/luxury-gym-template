@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 import { headlineVariants, ritualVariants, copyVariants } from '../../intelligence/emotionalMotion'
 import { SCENE_EMOTION } from '../../intelligence/scenePacing'
-import { viewportOnce } from '../../motion/choreography'
+import { viewportOnce, viewportHandheld } from '../../motion/choreography'
 import { useCinematicOS } from '../../context/CinematicOSContext'
+import { useIsPhone } from '../../hooks/useIsPhone'
 
 function resolveEmotion(sceneId, emotion) {
   if (emotion) return emotion
@@ -12,7 +13,9 @@ function resolveEmotion(sceneId, emotion) {
 
 export function KineticRitual({ children, className = '', sceneId, emotion }) {
   const { reduced } = useCinematicOS()
+  const phone = useIsPhone()
   const e = resolveEmotion(sceneId, emotion)
+  const viewport = phone ? viewportHandheld() : viewportOnce('-8%')
 
   if (reduced) {
     return <p className={`font-ritual ${className}`}>{children}</p>
@@ -23,7 +26,7 @@ export function KineticRitual({ children, className = '', sceneId, emotion }) {
       className={`font-ritual kinetic-ritual ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce('-8%')}
+      viewport={viewport}
       variants={ritualVariants(e)}
     >
       {children}
@@ -33,8 +36,10 @@ export function KineticRitual({ children, className = '', sceneId, emotion }) {
 
 export function KineticHeadline({ children, className = '', lines, sceneId, emotion }) {
   const { reduced, memory } = useCinematicOS()
+  const phone = useIsPhone()
   const e = resolveEmotion(sceneId, emotion)
-  const bias = memory.transitionBias * 0.5
+  const bias = memory.transitionBias * 0.35
+  const viewport = phone ? viewportHandheld() : viewportOnce('-6%')
 
   if (reduced) {
     return <h2 className={className}>{children}</h2>
@@ -42,6 +47,7 @@ export function KineticHeadline({ children, className = '', lines, sceneId, emot
 
   if (lines) {
     const pacing = headlineVariants(e, bias)
+    const lineStagger = phone ? 0.11 : 0.07
     return (
       <h2 className={className}>
         {lines.map((line, i) => (
@@ -50,9 +56,12 @@ export function KineticHeadline({ children, className = '', lines, sceneId, emot
             className="kinetic-headline-line block"
             initial="hidden"
             whileInView="visible"
-            viewport={viewportOnce('-6%')}
+            viewport={viewport}
             variants={pacing}
-            transition={{ ...pacing.visible.transition, delay: pacing.visible.transition.delay + i * 0.07 }}
+            transition={{
+              ...pacing.visible.transition,
+              delay: pacing.visible.transition.delay + i * lineStagger,
+            }}
           >
             {line}
           </motion.span>
@@ -66,7 +75,7 @@ export function KineticHeadline({ children, className = '', lines, sceneId, emot
       className={`kinetic-headline ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce('-6%')}
+      viewport={viewport}
       variants={headlineVariants(e, bias)}
     >
       {children}
@@ -76,13 +85,15 @@ export function KineticHeadline({ children, className = '', lines, sceneId, emot
 
 export function KineticCopy({ children, className = '', delay, sceneId, emotion }) {
   const { reduced, memory } = useCinematicOS()
+  const phone = useIsPhone()
   const e = resolveEmotion(sceneId, emotion)
+  const viewport = phone ? viewportHandheld() : viewportOnce('-5%')
 
   if (reduced) {
     return <p className={className}>{children}</p>
   }
 
-  const variants = copyVariants(e, memory.transitionBias * 0.35)
+  const variants = copyVariants(e, memory.transitionBias * 0.25)
   const extraDelay = delay ?? 0
 
   return (
@@ -90,7 +101,7 @@ export function KineticCopy({ children, className = '', delay, sceneId, emotion 
       className={`kinetic-copy ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce('-5%')}
+      viewport={viewport}
       variants={variants}
       transition={{
         ...variants.visible.transition,
@@ -104,7 +115,9 @@ export function KineticCopy({ children, className = '', delay, sceneId, emotion 
 
 export function KineticBlock({ children, className = '', sceneId, emotion }) {
   const { reduced } = useCinematicOS()
+  const phone = useIsPhone()
   const e = resolveEmotion(sceneId, emotion)
+  const viewport = phone ? viewportHandheld() : viewportOnce()
 
   if (reduced) {
     return <div className={className}>{children}</div>
@@ -115,8 +128,8 @@ export function KineticBlock({ children, className = '', sceneId, emotion }) {
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce('-6%')}
-      variants={copyVariants(e, 0.1)}
+      viewport={viewport}
+      variants={copyVariants(e, 0.08)}
     >
       {children}
     </motion.div>

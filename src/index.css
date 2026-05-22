@@ -7,6 +7,7 @@
 @import './styles/cinematic-intelligence.css';
 @import './styles/cinematic-taste.css';
 @import './styles/cinematic-mobile.css';
+@import './styles/cinematic-perception.css';
 
 @theme {
   --font-sans: var(--font-body);

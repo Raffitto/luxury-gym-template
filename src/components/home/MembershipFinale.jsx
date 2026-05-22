@@ -19,8 +19,8 @@ export default function MembershipFinale() {
     target: ref,
     offset: ['start end', 'end end'],
   })
-  const headlineY = useLiquidScroll(scrollYProgress, [0, 1], [8, -3])
-  const glowOpacity = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [0.1, 0.18, 0.26])
+  const headlineY = useLiquidScroll(scrollYProgress, [0, 1], [6, -2])
+  const glowOpacity = useLiquidScroll(scrollYProgress, [0, 0.5, 1], [0.06, 0.1, 0.14])
 
   return (
     <FilmChapter

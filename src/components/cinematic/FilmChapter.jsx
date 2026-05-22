@@ -29,8 +29,12 @@ const FilmChapter = forwardRef(function FilmChapter(
 
   const driftEnd = camera.drift.chapterY[2] * chapterDepth(depthIndex) * pacing.chapterDrift
   const y = useLiquidScroll(scrollYProgress, [0, 1], [0, -driftEnd])
-  const fadeIn = phone ? 0.88 : 0.82
-  const opacity = useLiquidScroll(scrollYProgress, [0, 0.14, 0.86, 1], [fadeIn, 1, 1, 0.96])
+  const fadeIn = phone ? 0.92 : 0.86
+  const opacity = useLiquidScroll(
+    scrollYProgress,
+    [0, 0.18, 0.82, 1],
+    [fadeIn, 1, 1, phone ? 0.98 : 0.96],
+  )
 
   return (
     <section

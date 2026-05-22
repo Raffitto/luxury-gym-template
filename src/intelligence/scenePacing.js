@@ -67,13 +67,13 @@ export function pacingForScene(sceneId, { handheld = false } = {}) {
   return {
     emotion,
     ...base,
-    revealY: base.revealY * 0.7,
-    ritualY: base.ritualY * 0.75,
-    delay: base.delay * 1.3,
-    copyDelay: base.copyDelay * 1.25,
-    stiffness: Math.round(base.stiffness * 0.82),
-    damping: Math.round(base.damping * 1.1),
-    mass: base.mass * 1.08,
-    chapterDrift: base.chapterDrift * 0.55,
+    revealY: base.revealY * 0.55,
+    ritualY: base.ritualY * 0.65,
+    delay: base.delay * 1.45,
+    copyDelay: base.copyDelay * 1.4,
+    stiffness: Math.round(base.stiffness * 0.72),
+    damping: Math.round(base.damping * 1.18),
+    mass: base.mass * 1.12,
+    chapterDrift: base.chapterDrift * 0.42,
   }
 }

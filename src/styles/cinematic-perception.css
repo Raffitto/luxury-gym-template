@@ -1,0 +1,119 @@
+/* Final cinematic perception — inevitability, not design */
+
+@media (max-width: 767px) {
+  :root {
+    --ease-inevitable: cubic-bezier(0.33, 0.68, 0.24, 1);
+    --glow-warm: rgba(186, 172, 148, 0.04);
+  }
+
+  /* Scroll cadence — hypnotic, unhurried */
+  .cinematic-landing--handheld .scene-bridge--flow {
+    height: clamp(7rem, 19vh, 11rem);
+  }
+
+  .cinematic-landing--handheld .film-chapter:not(.landing-scene--hero) {
+    padding-top: clamp(6.5rem, 16vh, 10rem);
+  }
+
+  .cinematic-landing--handheld .landing-scene-inner > * + * {
+    margin-top: 0;
+  }
+
+  /* Light — barely there */
+  .cinematic-os--handheld .environmental-field,
+  .cinematic-os--handheld .environmental-field--handheld-static {
+    opacity: 0.58;
+  }
+
+  .cinematic-os--handheld .env-bloom {
+    opacity: 0.38;
+    filter: blur(22px);
+  }
+
+  .cinematic-os--handheld .env-fog {
+    opacity: 0.85;
+  }
+
+  .cinematic-os--handheld .continuity-spectrum {
+    opacity: 0.42;
+  }
+
+  .cinematic-os--handheld .continuity-shadow-drift {
+    opacity: 0.48;
+  }
+
+  /* Hero — directed pause */
+  .hero-experience--handheld .hero-backdrop-img {
+    opacity: 0.54;
+  }
+
+  .hero-experience--handheld .hero-frame-panel {
+    box-shadow:
+      0 0 0 1px rgba(232, 226, 216, 0.025) inset,
+      0 16px 48px rgba(0, 0, 0, 0.58);
+  }
+
+  .hero-scroll-cue--still {
+    opacity: 0.32;
+    margin-top: 1.75rem;
+  }
+
+  .hero-scroll-cue--still .hero-scroll-label {
+    font-size: 0.53125rem;
+    letter-spacing: 0.28em;
+  }
+
+  /* Typography — timeless rhythm */
+  .cinematic-os--handheld .headline-chapter {
+    font-size: clamp(1.8rem, 7.8vw, 2.25rem);
+    line-height: 0.96;
+    letter-spacing: -0.027em;
+    max-width: 10ch;
+  }
+
+  .cinematic-os--handheld .headline-emotional {
+    font-size: clamp(2rem, 10vw, 2.65rem);
+    max-width: 10.5ch;
+  }
+
+  .cinematic-os--handheld .copy-lead,
+  .cinematic-os--handheld .copy-cinematic {
+    font-size: 1rem;
+    line-height: 1.76;
+    max-width: 23ch;
+    color: rgba(190, 184, 174, 0.88);
+  }
+
+  .cinematic-os--handheld .kinetic-ritual {
+    opacity: 0.92;
+  }
+
+  /* Hand feel */
+  .swipeable-scenes--handheld .scene-card {
+    transition: box-shadow 0.75s var(--ease-inevitable);
+  }
+
+  .mobile-sticky-access {
+    transition:
+      transform 0.72s var(--ease-inevitable),
+      opacity 0.65s var(--ease-inevitable);
+  }
+
+  .cinematic-os--handheld .finale-glow-pulse {
+    opacity: 0.45;
+    filter: blur(36px);
+  }
+
+  .cinematic-os--handheld .journey-timeline {
+    gap: 2.5rem;
+  }
+
+  /* Remove attention-seeking cues */
+  .cinematic-os--handheld .scroll-progress--bar {
+    opacity: 0.14;
+  }
+
+  .cinematic-img-wrap:not([data-revealed]) .cinematic-img {
+    transition-duration: 0.55s;
+  }
+}

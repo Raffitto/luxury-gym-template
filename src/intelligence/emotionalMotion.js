@@ -11,13 +11,13 @@ function springFromPacing(pacing) {
 
 export function headlineVariants(emotion = 'exclusivity', bias = 0.15) {
   const pacing = scenePacing[emotion] ?? scenePacing.exclusivity
-  const y = pacing.revealY + bias * 4
+  const y = pacing.revealY + bias * 2
   return {
     hidden: { opacity: 0, y },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { ...springFromPacing(pacing), delay: pacing.delay },
+      transition: { ...springFromPacing(pacing), delay: pacing.delay, opacity: { duration: 0.7 } },
     },
   }
 }
@@ -38,11 +38,15 @@ export function ritualVariants(emotion = 'exclusivity') {
 export function copyVariants(emotion = 'exclusivity', bias = 0.1) {
   const pacing = scenePacing[emotion] ?? scenePacing.exclusivity
   return {
-    hidden: { opacity: 0, y: 8 + bias * 3 },
+    hidden: { opacity: 0, y: 6 + bias * 2 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { ...springFromPacing(pacing), delay: pacing.copyDelay },
+      transition: {
+        ...springFromPacing(pacing),
+        delay: pacing.copyDelay,
+        opacity: { duration: 0.75 },
+      },
     },
   }
 }
