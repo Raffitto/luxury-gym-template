@@ -75,7 +75,7 @@ export const grindGymLbConfig = {
     subline:
       'Train inside a modern performance space built for strength, conditioning, transformation, and consistency.',
     primaryCta: 'Get Directions',
-    secondaryCta: 'Training Zones',
+    secondaryCta: 'Explore Training',
     primaryHref: `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`,
     secondaryTo: '/classes',
     image: {

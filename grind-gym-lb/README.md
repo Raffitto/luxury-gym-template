@@ -1,6 +1,8 @@
 # GRIND GYM LB
 
-Client cinematic site built on the **AETHERIS engine** (shared `src/` at repo root). AETHERIS remains the default brand; this folder is the GRIND build target only.
+Premium athletic site for Grind Gym (Mtaileb, Lebanon). Uses a **dedicated GRIND UI** (`src/components/grind/`, `src/styles/grind-site.css`) — not the AETHERIS cinematic OS.
+
+Entry: `src/main.grind.jsx` → `src/App.grind.jsx`
 
 ## Brand
 
