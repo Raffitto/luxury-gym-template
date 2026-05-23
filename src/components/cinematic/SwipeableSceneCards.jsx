@@ -29,17 +29,24 @@ function NativeTouchTrack({ items, index, setIndex, className }) {
       const clamped = Math.max(0, Math.min(items.length - 1, next))
       const track = trackRef.current
       if (!track) return
-      const stride = getCardStep()
-      if (stride) {
-        track.scrollTo({ left: clamped * stride, behavior: 'auto' })
+      const card = track.children[clamped]
+      if (card) {
+        card.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' })
       } else {
-        const card = track.children[clamped]
-        card?.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' })
+        const stride = getCardStep()
+        if (stride) track.scrollTo({ left: clamped * stride, behavior: 'auto' })
       }
       setIndex(clamped)
     },
     [items.length, getCardStep, setIndex],
   )
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return undefined
+    const init = requestAnimationFrame(() => scrollToIndex(0))
+    return () => cancelAnimationFrame(init)
+  }, [scrollToIndex, items.length])
 
   useEffect(() => {
     const track = trackRef.current
@@ -49,10 +56,22 @@ function NativeTouchTrack({ items, index, setIndex, className }) {
     const onScroll = () => {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(() => {
-        const stride = getCardStep()
-        if (!stride) return
-        const next = Math.round(track.scrollLeft / stride)
-        setIndex(Math.max(0, Math.min(items.length - 1, next)))
+        const trackRect = track.getBoundingClientRect()
+        const centerX = trackRect.left + trackRect.width / 2
+        let nearest = 0
+        let best = Infinity
+
+        Array.from(track.children).forEach((child, i) => {
+          const rect = child.getBoundingClientRect()
+          const cardCenter = rect.left + rect.width / 2
+          const dist = Math.abs(cardCenter - centerX)
+          if (dist < best) {
+            best = dist
+            nearest = i
+          }
+        })
+
+        setIndex(nearest)
 
         const now = performance.now()
         const dt = Math.max(now - lastScrollT.current, 1)
@@ -68,7 +87,7 @@ function NativeTouchTrack({ items, index, setIndex, className }) {
       cancelAnimationFrame(raf)
       track.removeEventListener('scroll', onScroll)
     }
-  }, [items.length, getCardStep, setIndex, os])
+  }, [items.length, setIndex, os])
 
   return (
     <div className={`swipeable-scenes swipeable-scenes--native-touch ${className}`.trim()}>

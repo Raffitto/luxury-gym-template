@@ -17,7 +17,7 @@ export default function SceneCard({
 }) {
   const reduced = useReducedMotion()
   const phone = useIsPhone()
-  const living = !reduced
+  const living = !reduced && !phone
   const { ref: mediaRef, className: visibilityClass } = useOffscreenPause({
     rootMargin: '30% 0px',
     enabled: living,

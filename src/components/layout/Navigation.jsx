@@ -3,6 +3,7 @@ import { prepareRouteChange } from '../../utils/preload'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { activeConfig } from '../../data/activeConfig'
+import { isGrindBrand } from '../../data/brand'
 import { routes } from '../../design-system/tokens'
 import MagneticButton from '../ui/MagneticButton'
 import MobileNavOverlay from './MobileNavOverlay'
@@ -38,15 +39,19 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const primaryCta = activeConfig.hero.primaryHref
+    ? { href: activeConfig.hero.primaryHref }
+    : { to: routes.trial }
+
   return (
     <>
       <header
-        className={`site-header ${scrolled || open ? 'site-header--solid' : ''}`}
+        className={`site-header ${scrolled || open ? 'site-header--solid' : ''} ${open ? 'site-header--menu-open' : ''}`}
       >
         <div className="site-header-bar chamber-inner">
           <Link
             to={routes.home}
-            className="brand-lockup group flex min-w-0 flex-col"
+            className="brand-lockup site-header-brand group flex min-w-0 flex-col"
             aria-label={`${activeConfig.brand.name} home`}
           >
             <span className="brand-mark font-display text-[var(--platinum)] uppercase">
@@ -57,7 +62,7 @@ export default function Navigation() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-11 lg:flex" aria-label="Primary">
+          <nav className="site-header-nav-desktop hidden items-center gap-11 lg:flex" aria-label="Primary">
             {activeConfig.nav.map((item) => (
               <Link
                 key={item.path}
@@ -70,32 +75,31 @@ export default function Navigation() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-7 lg:flex">
+          <div className="site-header-desktop-cta hidden items-center gap-7 lg:flex">
             <Link
               to={routes.contact}
               className="site-nav-utility font-ritual text-[0.625rem] tracking-[0.22em] text-[var(--ash)] hover:text-[var(--platinum)]"
             >
-              Correspondence
+              {isGrindBrand ? 'Contact' : 'Correspondence'}
             </Link>
-            {activeConfig.hero.primaryHref ? (
-              <MagneticButton href={activeConfig.hero.primaryHref}>
-                {activeConfig.hero.primaryCta}
-              </MagneticButton>
-            ) : (
-              <MagneticButton to={routes.trial}>{activeConfig.hero.primaryCta}</MagneticButton>
-            )}
+            <MagneticButton {...primaryCta}>{activeConfig.hero.primaryCta}</MagneticButton>
           </div>
 
-          <button
-            type="button"
-            className="mobile-menu-toggle lg:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? 'Close navigation' : 'Open navigation'}
-            aria-expanded={open}
-            aria-controls="mobile-nav-dialog"
-          >
-            {open ? <X className="h-5 w-5" strokeWidth={1} /> : <Menu className="h-5 w-5" strokeWidth={1} />}
-          </button>
+          <div className="site-header-actions lg:hidden">
+            <MagneticButton {...primaryCta} className="site-header-cta">
+              {activeConfig.hero.primaryCta}
+            </MagneticButton>
+            <button
+              type="button"
+              className="mobile-menu-toggle"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={open}
+              aria-controls="mobile-nav-dialog"
+            >
+              {open ? <X className="h-5 w-5" strokeWidth={1} /> : <Menu className="h-5 w-5" strokeWidth={1} />}
+            </button>
+          </div>
         </div>
       </header>
 

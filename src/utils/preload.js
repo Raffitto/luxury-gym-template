@@ -66,9 +66,9 @@ function collectImagesFromConfig() {
 
   add(activeConfig.hero.image)
   activeConfig.classes?.forEach((c) => add(c.image))
-  landingConfig.transformation.phases.forEach((p) => add(p.image))
-  add(landingConfig.facility.image)
-  landingConfig.facility.gallery.forEach(add)
+  landingConfig.transformation?.phases?.forEach((p) => add(p.image))
+  add(landingConfig.facility?.image)
+  landingConfig.facility?.gallery?.forEach(add)
   add(activeConfig.climax.image)
 
   return [...keys]
@@ -77,39 +77,36 @@ function collectImagesFromConfig() {
 /** Hero + first visible scene assets */
 export function getCriticalPreloadUrls() {
   const phone = isHandheld()
-  const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+
+  if (phone) {
+    return [imageAssets.hero640Webp, imageAssets.hero640, imageAssets.hero].filter(Boolean)
+  }
+
+  const mobile =
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
   const programs = getScenePreloadMap().programs ?? []
-  const journey = getScenePreloadMap().journey ?? []
 
-  const heroStack = phone
+  const heroStack = mobile
     ? [imageAssets.hero640, imageAssets.hero960]
-    : mobile
-      ? [imageAssets.hero640, imageAssets.hero960, imageAssets.hero]
-      : [imageAssets.hero960, imageAssets.hero]
+    : [imageAssets.hero960, imageAssets.hero]
 
-  return [
-    ...heroStack,
-    programs[0],
-    programs[1],
-    journey[0],
-    journey[1],
-  ].filter(Boolean)
+  return [...heroStack, programs[0]].filter(Boolean)
 }
 
 /** Scene-id → URLs for progressive preload */
 export function getScenePreloadMap() {
   return {
     programs: activeConfig.classes.map((c) => resolveImageSrc(c.image)).filter(Boolean),
-    journey: landingConfig.transformation.phases.map((p) => resolveImageSrc(p.image)).filter(Boolean),
+    journey: landingConfig.transformation?.phases?.map((p) => resolveImageSrc(p.image)).filter(Boolean) ?? [],
     facility: [
-      resolveImageSrc(landingConfig.facility.image),
-      ...landingConfig.facility.gallery.map((g) => resolveImageSrc(g)),
+      resolveImageSrc(landingConfig.facility?.image),
+      ...(landingConfig.facility?.gallery?.map((g) => resolveImageSrc(g)) ?? []),
     ].filter(Boolean),
     access: [resolveImageSrc(activeConfig.climax.image)].filter(Boolean),
   }
 }
 
-/** Preload programs immediately after hero critical path */
+/** Preload programs after hero is painted */
 export function preloadProgramsAfterHero() {
   return preloadImages(getScenePreloadMap().programs)
 }
@@ -199,17 +196,35 @@ export function warmStart() {
   const phone = isHandheld()
 
   const critical = preloadCriticalAssets()
+
+  if (phone) {
+    critical.then(() => {
+      document.documentElement.classList.add('cinematic-ready')
+      document.documentElement.classList.remove('boot-warm')
+    })
+
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 900))
+    idle(() => {
+      preloadProgramsAfterHero()
+      preloadScenesAhead(0, 1)
+      preloadSecondaryAssets()
+      attachScrollPrefetch()
+    })
+
+    return
+  }
+
   const programsWarm = preloadProgramsAfterHero()
-  preloadScenesAhead(0, phone ? 2 : 1)
+  preloadScenesAhead(0, 1)
 
   Promise.all([critical, programsWarm]).then(() => {
     document.documentElement.classList.add('cinematic-ready')
     document.documentElement.classList.remove('boot-warm')
   })
 
-  preloadScenesAhead(1, phone ? 2 : 1)
+  preloadScenesAhead(1, 2)
 
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, phone ? 80 : 350))
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 350))
   idle(() => {
     preloadScenesAhead(0, 3)
     preloadSecondaryAssets()

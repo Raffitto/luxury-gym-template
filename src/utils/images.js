@@ -3,10 +3,24 @@ import { isGrindBrand } from '../data/brand'
 /** Local static assets — production-safe, no remote CDN dependency */
 export const ASSET_ROOT = isGrindBrand ? '/grind' : '/aetheris'
 
+function assetPair(base) {
+  return {
+    jpg: `${ASSET_ROOT}/${base}.jpg`,
+    webp: `${ASSET_ROOT}/${base}.webp`,
+  }
+}
+
+const heroAssets = assetPair('hero')
+const hero960Assets = assetPair('hero-960')
+const hero640Assets = assetPair('hero-640')
+
 export const imageAssets = {
-  hero: `${ASSET_ROOT}/hero.jpg`,
-  hero960: `${ASSET_ROOT}/hero-960.jpg`,
-  hero640: `${ASSET_ROOT}/hero-640.jpg`,
+  hero: heroAssets.jpg,
+  heroWebp: heroAssets.webp,
+  hero960: hero960Assets.jpg,
+  hero960Webp: hero960Assets.webp,
+  hero640: hero640Assets.jpg,
+  hero640Webp: hero640Assets.webp,
   performance: `${ASSET_ROOT}/performance.jpg`,
   combat: `${ASSET_ROOT}/combat.jpg`,
   recovery: `${ASSET_ROOT}/recovery.jpg`,
@@ -41,11 +55,17 @@ export const photos = {
   chamberTokyo: 'chamberTokyo',
 }
 
+export function webpFromSrc(src) {
+  if (!src || typeof src !== 'string') return null
+  if (!src.endsWith('.jpg')) return null
+  return src.replace(/\.jpg$/, '.webp')
+}
+
 const PRESET_WIDTHS = {
   hero: [
-    { w: 640, src: imageAssets.hero640 },
-    { w: 960, src: imageAssets.hero960 },
-    { w: 1920, src: imageAssets.hero },
+    { w: 640, src: imageAssets.hero640, webp: imageAssets.hero640Webp },
+    { w: 960, src: imageAssets.hero960, webp: imageAssets.hero960Webp },
+    { w: 1920, src: imageAssets.hero, webp: imageAssets.heroWebp },
   ],
   section: [{ w: 1280, src: null }],
   card: [
@@ -91,7 +111,15 @@ export function buildSrcSet(image, preset = 'section') {
 
   if (preset === 'hero') {
     const parts = PRESET_WIDTHS.hero.map(({ w, src }) => `${src} ${w}w`)
-    return { src: imageAssets.hero, srcSet: parts.join(', ') }
+    const webpParts = PRESET_WIDTHS.hero
+      .filter(({ webp }) => webp)
+      .map(({ w, webp }) => `${webp} ${w}w`)
+    return {
+      src: imageAssets.hero640 || imageAssets.hero,
+      srcSet: parts.join(', '),
+      webpSrc: imageAssets.hero640Webp || imageAssets.heroWebp,
+      webpSrcSet: webpParts.length ? webpParts.join(', ') : undefined,
+    }
   }
 
   if (preset === 'card') {

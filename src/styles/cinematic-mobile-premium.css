@@ -1,0 +1,266 @@
+/* Premium mobile UX — header, carousel, spacing (1024px and below) */
+
+@media (max-width: 1023px) {
+  .brand-descriptor {
+    display: none;
+  }
+
+  .site-header-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header-brand {
+    min-width: 0;
+  }
+
+  .brand-mark {
+    font-size: 1.125rem;
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+
+  .site-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .site-header-cta.btn-magnetic {
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+    box-shadow: none;
+  }
+
+  html.brand-grind .site-header-cta.btn-magnetic {
+    background: linear-gradient(135deg, #e10600 0%, #8a0000 100%);
+    border-color: rgba(225, 6, 0, 0.35);
+  }
+
+  .mobile-menu-toggle {
+    height: 2.5rem;
+    width: 2.5rem;
+    flex-shrink: 0;
+  }
+}
+
+/* Atmospheric fullscreen menu */
+.mobile-nav-overlay {
+  background: transparent;
+}
+
+.mobile-nav-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(225, 6, 0, 0.08) 0%, transparent 55%),
+    linear-gradient(165deg, rgba(8, 8, 8, 0.97) 0%, rgba(0, 0, 0, 0.99) 48%, #000 100%);
+  backdrop-filter: blur(28px) saturate(1.1);
+  -webkit-backdrop-filter: blur(28px) saturate(1.1);
+}
+
+.mobile-nav-overlay-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100dvh;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.mobile-nav-link {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  padding: 0.65rem 0;
+}
+
+html.brand-grind .mobile-nav-backdrop {
+  background:
+    radial-gradient(100% 70% at 80% 10%, rgba(225, 6, 0, 0.12) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(6, 6, 6, 0.98) 0%, #000 100%);
+}
+
+/* Centered rail carousel — Apple TV / Netflix peek */
+@media (max-width: 1023px) {
+  .swipeable-scenes--programs,
+  .swipeable-scenes--programs.swipeable-scenes--native-touch {
+    --rail-card-w: min(78vw, 19.25rem);
+    --rail-peek: calc((100% - var(--rail-card-w)) / 2);
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: hidden;
+  }
+
+  .swipeable-scenes--programs .swipeable-scenes-track--native,
+  .swipeable-scenes--programs .swipeable-scenes-track--snap {
+    --rail-card-w: min(78vw, 19.25rem);
+    --rail-peek: calc((100% - var(--rail-card-w)) / 2);
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--rail-peek);
+    padding-inline: var(--rail-peek);
+    gap: 0.875rem;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+  }
+
+  .swipeable-scenes--programs .scene-card-slot {
+    width: var(--rail-card-w);
+    flex: 0 0 var(--rail-card-w);
+    max-width: var(--rail-card-w);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .swipeable-scenes--programs .scene-card-slot:not(.scene-card-slot--active) {
+    opacity: 0.82;
+    transform: scale(0.965);
+  }
+
+  .swipeable-scenes--programs .scene-card-slot--active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .swipeable-scenes--programs .scene-card {
+    min-height: 22rem;
+    border-radius: 1rem;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 20px 48px rgba(0, 0, 0, 0.55);
+    background: rgba(10, 10, 10, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  html.brand-grind .swipeable-scenes--programs .scene-card-slot--active .scene-card {
+    box-shadow:
+      0 0 0 1px rgba(225, 6, 0, 0.18),
+      0 24px 56px rgba(0, 0, 0, 0.6);
+  }
+
+  .swipeable-scenes--programs .scene-card-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.35) 42%,
+      rgba(0, 0, 0, 0.94) 100%
+    );
+  }
+
+  .swipeable-scenes--programs .scene-card-body {
+    padding: 1.125rem 1.125rem 1.25rem;
+  }
+
+  .swipeable-scenes--programs .scene-card-title {
+    font-size: 1.375rem;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .swipeable-scenes--programs .scene-card-desc {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    margin-top: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .swipeable-scenes--programs .scene-card-meta {
+    font-size: 0.5625rem;
+    letter-spacing: 0.2em;
+    opacity: 0.9;
+  }
+
+  .swipeable-scenes--programs .swipeable-scenes-controls {
+    margin-top: 1.75rem;
+    padding-inline: var(--page-gutter);
+  }
+}
+
+/* GRIND mobile typography + rhythm */
+@media (max-width: 767px) {
+  html.brand-grind {
+    --chamber-pad: clamp(3.25rem, 10vh, 5.5rem);
+    --chamber-pad-tight: clamp(2.75rem, 8vh, 4rem);
+  }
+
+  html.brand-grind .hero-experience--handheld .hero-ritual-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.22em;
+    line-height: 1.4;
+    max-width: 28ch;
+  }
+
+  html.brand-grind .hero-experience--handheld .hero-headline {
+    font-size: clamp(2.35rem, 11.5vw, 3rem);
+    letter-spacing: 0.02em;
+    line-height: 0.92;
+  }
+
+  html.brand-grind .hero-experience--handheld .hero-subline {
+    max-width: 24ch;
+    margin-top: 1.125rem;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  html.brand-grind .hero-experience--handheld .hero-frame-panel {
+    padding: 1.375rem 1.25rem 1.5rem;
+    margin-top: 0;
+  }
+
+  html.brand-grind .hero-experience--handheld .hero-cta-row {
+    margin-top: 1.625rem;
+    gap: 0.625rem;
+  }
+
+  html.brand-grind .landing-scene-inner--editorial {
+    padding-top: clamp(2.5rem, 8vh, 4rem);
+  }
+
+  html.brand-grind .editorial-chapter-head {
+    margin-bottom: 0.25rem;
+  }
+
+  html.brand-grind .cinematic-img--render {
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.brand-grind .cinematic-img--revealed {
+    opacity: 1;
+  }
+
+  html.brand-grind .film-grain-deferred {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.brand-grind .film-grain-deferred[data-ready] {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipeable-scenes--programs .scene-card-slot {
+    transition: none;
+  }
+}

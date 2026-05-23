@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navigation from './Navigation'
 import Footer from './Footer'
 import MobileStickyAccess from './MobileStickyAccess'
-import FilmGrain from '../atmosphere/FilmGrain'
+import DelayedFilmGrain from '../atmosphere/DelayedFilmGrain'
 import ScrollProgress from '../atmosphere/ScrollProgress'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useIsMobile } from '../../hooks/useIsMobile'
@@ -30,7 +30,7 @@ export default function Shell() {
 
   return (
     <div className="env-void min-h-screen">
-      {!mobile && !reduced ? <FilmGrain /> : null}
+      {!reduced ? <DelayedFilmGrain /> : null}
       {!reduced && !mobile ? <ScrollProgress /> : null}
       <Navigation />
       <main

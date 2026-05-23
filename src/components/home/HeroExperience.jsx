@@ -172,9 +172,9 @@ export default function HeroExperience() {
       style={{ '--hero-energy': heroEnergy }}
     >
       <div className="hero-depth-stack">
-        <AmbientFilmLayer slot="hero" intensity="high" />
-        <CinematicAtmosphere intensity="hero" live />
-        <DepthField scrollProgress={scrollYProgress} hero />
+        {!phone ? <AmbientFilmLayer slot="hero" intensity="high" /> : null}
+        {!phone ? <CinematicAtmosphere intensity="hero" live /> : null}
+        {!phone ? <DepthField scrollProgress={scrollYProgress} hero /> : null}
 
         <motion.div
           className={`hero-parallax-bg hero-layer--far ${parallaxActive ? 'gpu-layer' : ''}`}

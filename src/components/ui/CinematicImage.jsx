@@ -4,9 +4,23 @@ import {
   resolveImageSrc,
   resolveAlt,
   buildSrcSet,
+  webpFromSrc,
   FALLBACK_SRC,
   getWidths,
 } from '../../utils/images'
+
+function buildWebpSrcSet(jpgSrcSet) {
+  return jpgSrcSet
+    .split(',')
+    .map((part) => part.trim())
+    .map((entry) => {
+      const [url, w] = entry.split(/\s+/)
+      const webp = webpFromSrc(url)
+      return webp ? `${webp} ${w}` : ''
+    })
+    .filter(Boolean)
+    .join(', ')
+}
 import { isImageCached, markImageLoaded } from '../../utils/preload'
 
 function cachedForSrcs(...srcs) {
@@ -26,8 +40,10 @@ export default function CinematicImage({
   fill = false,
 }) {
   const primarySrc = resolveImageSrc(image) || FALLBACK_SRC
-  const { src, srcSet } = buildSrcSet(image, preset)
+  const { src, srcSet, webpSrc, webpSrcSet } = buildSrcSet(image, preset)
   const displayPrimary = src || primarySrc
+  const displayWebp = webpSrc || (preset !== 'hero' ? webpFromSrc(displayPrimary) : null)
+  const webpSet = webpSrcSet || (displayWebp && srcSet ? buildWebpSrcSet(srcSet) : undefined)
   const imgRef = useRef(null)
   const phone = useIsPhone()
   const cached = cachedForSrcs(displayPrimary, primarySrc, src)
@@ -92,21 +108,30 @@ export default function CinematicImage({
     >
       <div className="cinematic-img-fallback-bg" aria-hidden />
       {!errored ? (
-        <img
-          ref={imgRef}
-          src={currentSrc}
-          srcSet={srcSet}
-          sizes={srcSet ? sizes : undefined}
-          alt={label}
-          width={maxW}
-          height={Math.round(maxW * 0.625)}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding={priority ? 'sync' : 'async'}
-          fetchPriority={priority ? 'high' : 'auto'}
-          onLoad={handleLoad}
-          onError={handleError}
-          className={`cinematic-img cinematic-img--render ${revealed ? 'cinematic-img--revealed' : ''}`}
-        />
+        <picture>
+          {displayWebp ? (
+            <source
+              type="image/webp"
+              srcSet={webpSet || displayWebp}
+              sizes={srcSet ? sizes : undefined}
+            />
+          ) : null}
+          <img
+            ref={imgRef}
+            src={currentSrc}
+            srcSet={srcSet}
+            sizes={srcSet ? sizes : undefined}
+            alt={label}
+            width={maxW}
+            height={Math.round(maxW * 0.625)}
+            loading={priority ? 'eager' : 'lazy'}
+            decoding={priority ? 'sync' : 'async'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            onLoad={handleLoad}
+            onError={handleError}
+            className={`cinematic-img cinematic-img--render ${revealed ? 'cinematic-img--revealed' : ''}`}
+          />
+        </picture>
       ) : null}
     </div>
   )

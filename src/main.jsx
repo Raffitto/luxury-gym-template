@@ -10,6 +10,7 @@ if (import.meta.env.VITE_BRAND === 'grind') {
   import('./styles/cinematic-brand-grind.css')
   document.documentElement.classList.add('brand-grind')
 }
+document.documentElement.classList.add('cinematic-mobile')
 
 try {
   warmStart()
